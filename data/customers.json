@@ -1,0 +1,100 @@
+[
+  {
+    "policy_id": "VER-1001",
+    "holder_name": "Claire Martin",
+    "vehicle": "Peugeot 208 (2021)",
+    "market_value": 14000,
+    "licence_date": "2012-05-14",
+    "coverages": [
+      "C1",
+      "C2",
+      "C3",
+      "C4"
+    ]
+  },
+  {
+    "policy_id": "VER-1002",
+    "holder_name": "Lucas Bernard",
+    "vehicle": "Renault Clio (2023)",
+    "market_value": 16500,
+    "licence_date": "2024-09-02",
+    "coverages": [
+      "C1",
+      "C2",
+      "C3"
+    ]
+  },
+  {
+    "policy_id": "VER-1003",
+    "holder_name": "Ines Haddad",
+    "vehicle": "Toyota Yaris (2019)",
+    "market_value": 9000,
+    "licence_date": "2015-03-20",
+    "coverages": [
+      "C1",
+      "C2",
+      "C3",
+      "C4"
+    ]
+  },
+  {
+    "policy_id": "VER-1004",
+    "holder_name": "Thomas Petit",
+    "vehicle": "Volkswagen Golf (2020)",
+    "market_value": 15500,
+    "licence_date": "2008-11-01",
+    "coverages": [
+      "C1",
+      "C2"
+    ]
+  },
+  {
+    "policy_id": "VER-1005",
+    "holder_name": "Sarah Lefebvre",
+    "vehicle": "Citroen C3 (2014)",
+    "market_value": 2200,
+    "licence_date": "2010-06-30",
+    "coverages": [
+      "C1",
+      "C2",
+      "C3",
+      "C4"
+    ]
+  },
+  {
+    "policy_id": "VER-1006",
+    "holder_name": "Yanis Moreau",
+    "vehicle": "Dacia Sandero (2022)",
+    "market_value": 11000,
+    "licence_date": "2025-01-15",
+    "coverages": [
+      "C1",
+      "C2",
+      "C4"
+    ]
+  },
+  {
+    "policy_id": "VER-1007",
+    "holder_name": "Emma Rousseau",
+    "vehicle": "Tesla Model 3 (2023)",
+    "market_value": 32000,
+    "licence_date": "2011-04-08",
+    "coverages": [
+      "C1",
+      "C2",
+      "C3",
+      "C4"
+    ]
+  },
+  {
+    "policy_id": "VER-1008",
+    "holder_name": "Hugo Garcia",
+    "vehicle": "Fiat 500 (2018)",
+    "market_value": 6500,
+    "licence_date": "2019-07-22",
+    "coverages": [
+      "C1",
+      "C3"
+    ]
+  }
+]

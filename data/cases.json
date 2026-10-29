@@ -1,0 +1,1152 @@
+[
+  {
+    "case_id": "CLM-A",
+    "title": "Demo A: not at fault, simple",
+    "demo": true,
+    "email": {
+      "date": "2026-10-14",
+      "from": "Claire Martin",
+      "subject": "Claim - accident - VER-1001",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 12 October 2026.\nA van ran a red light and hit the side of my car at the Rue de Rivoli crossing. The van driver, Mr. Dubois, admitted it was his fault and we both signed the accident report.\nThe garage quoted €1,200 for the repair.\n\nKind regards,\nClaire Martin\nPolicy number: VER-1001\n\nAttachments: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf",
+        "accident_report_signed.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-A",
+      "policy_id": "VER-1001",
+      "coverage": "C2",
+      "incident_date": "2026-10-12",
+      "report_date": "2026-10-14",
+      "repair_cost": 1200,
+      "at_fault": false,
+      "third_party_involved": true,
+      "third_party_identified": true,
+      "documents_provided": [
+        "photos",
+        "repair_quote",
+        "accident_report"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 0,
+        "payout": 1200,
+        "assessor_required": false,
+        "breakdown": [
+          "Art. 5.2 not-at-fault waiver: no deductible",
+          "Art. 6.2 payout = €1200 - €0 = €1200"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "CLM-B",
+    "title": "Demo B: at fault, young driver, assessor",
+    "demo": true,
+    "email": {
+      "date": "2026-10-15",
+      "from": "Lucas Bernard",
+      "subject": "Claim - accident - VER-1002",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 14 October 2026.\nI misjudged the distance while changing lanes on the ring road and hit the car next to me. It was my fault. The other driver, Ms. Laurent, and I signed the accident report.\nThe garage quoted €2,400 for the repair.\n\nKind regards,\nLucas Bernard\nPolicy number: VER-1002\n\nAttachments: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf",
+        "accident_report_signed.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-B",
+      "policy_id": "VER-1002",
+      "coverage": "C2",
+      "incident_date": "2026-10-14",
+      "report_date": "2026-10-15",
+      "repair_cost": 2400,
+      "at_fault": true,
+      "third_party_involved": true,
+      "third_party_identified": true,
+      "documents_provided": [
+        "photos",
+        "repair_quote",
+        "accident_report"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "schedule_assessor",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 700,
+        "payout": 1700,
+        "assessor_required": true,
+        "breakdown": [
+          "Art. 2 collision deductible: €300",
+          "Art. 5.3 young driver (2 y < 3): +€400",
+          "Art. 6.2 payout = €2400 - €700 = €1700",
+          "Art. 6.1 amount above €1500: assessor required"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "CLM-C",
+    "title": "Demo C: theft, late, no police report",
+    "demo": true,
+    "email": {
+      "date": "2026-10-19",
+      "from": "Ines Haddad",
+      "subject": "Claim - theft - VER-1003",
+      "body": "Hello Veridia,\n\nI am writing to report a theft that happened on 15 October 2026.\nMy car was stolen from the street in front of my building. I was travelling and only had time to write to you now. I have not been to the police yet.\n\nKind regards,\nInes Haddad\nPolicy number: VER-1003",
+      "attachments": []
+    },
+    "facts": {
+      "claim_ref": "CLM-C",
+      "policy_id": "VER-1003",
+      "coverage": "C4",
+      "incident_date": "2026-10-15",
+      "report_date": "2026-10-19",
+      "repair_cost": 0,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "escalate",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "request_documents",
+        "escalate_to_handler"
+      ],
+      "forbidden_actions": [
+        "stage_settlement"
+      ],
+      "missing_documents": [
+        "police_report"
+      ],
+      "escalation_reasons": [
+        "late_report"
+      ],
+      "settlement": null
+    }
+  },
+  {
+    "case_id": "CLM-01",
+    "title": "At fault, single vehicle",
+    "demo": false,
+    "email": {
+      "date": "2026-10-04",
+      "from": "Thomas Petit",
+      "subject": "Claim - accident - VER-1004",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 03 October 2026.\nWhile reversing out of a parking space I hit a concrete pillar. Nobody else was involved.\nThe garage quoted €900 for the repair.\n\nKind regards,\nThomas Petit\nPolicy number: VER-1004\n\nAttachments: damage_photos.zip, repair_quote.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-01",
+      "policy_id": "VER-1004",
+      "coverage": "C2",
+      "incident_date": "2026-10-03",
+      "report_date": "2026-10-04",
+      "repair_cost": 900,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 300,
+        "payout": 600,
+        "assessor_required": false,
+        "breakdown": [
+          "Art. 2 collision deductible: €300",
+          "Art. 6.2 payout = €900 - €300 = €600"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "CLM-02",
+    "title": "At fault, young driver",
+    "demo": false,
+    "email": {
+      "date": "2026-10-06",
+      "from": "Yanis Moreau",
+      "subject": "Claim - accident - VER-1006",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 04 October 2026.\nI braked too late at a roundabout and hit the car in front of me. It was my fault; the other driver, Mr. Henry, and I filled in the accident report together.\nThe garage quoted €1,300 for the repair.\n\nKind regards,\nYanis Moreau\nPolicy number: VER-1006\n\nAttachments: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf",
+        "accident_report_signed.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-02",
+      "policy_id": "VER-1006",
+      "coverage": "C2",
+      "incident_date": "2026-10-04",
+      "report_date": "2026-10-06",
+      "repair_cost": 1300,
+      "at_fault": true,
+      "third_party_involved": true,
+      "third_party_identified": true,
+      "documents_provided": [
+        "photos",
+        "repair_quote",
+        "accident_report"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 700,
+        "payout": 600,
+        "assessor_required": false,
+        "breakdown": [
+          "Art. 2 collision deductible: €300",
+          "Art. 5.3 young driver (1 y < 3): +€400",
+          "Art. 6.2 payout = €1300 - €700 = €600"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "CLM-03",
+    "title": "Not at fault, large repair",
+    "demo": false,
+    "email": {
+      "date": "2026-10-06",
+      "from": "Emma Rousseau",
+      "subject": "Claim - accident - VER-1007",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 05 October 2026.\nMy car was parked when a delivery truck reversed into it. The truck driver, Mr. Costa, accepted responsibility and signed the accident report with me.\nThe garage quoted €4,800 for the repair.\n\nKind regards,\nEmma Rousseau\nPolicy number: VER-1007\n\nAttachments: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf",
+        "accident_report_signed.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-03",
+      "policy_id": "VER-1007",
+      "coverage": "C2",
+      "incident_date": "2026-10-05",
+      "report_date": "2026-10-06",
+      "repair_cost": 4800,
+      "at_fault": false,
+      "third_party_involved": true,
+      "third_party_identified": true,
+      "documents_provided": [
+        "photos",
+        "repair_quote",
+        "accident_report"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "schedule_assessor",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 0,
+        "payout": 4800,
+        "assessor_required": true,
+        "breakdown": [
+          "Art. 5.2 not-at-fault waiver: no deductible",
+          "Art. 6.2 payout = €4800 - €0 = €4800",
+          "Art. 6.1 amount above €1500: assessor required"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "CLM-04",
+    "title": "Repair above market value",
+    "demo": false,
+    "email": {
+      "date": "2026-10-09",
+      "from": "Sarah Lefebvre",
+      "subject": "Claim - accident - VER-1005",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 06 October 2026.\nI skidded on a wet road and went into a ditch. No other vehicle was involved.\nThe garage quoted €2,600 for the repair.\n\nKind regards,\nSarah Lefebvre\nPolicy number: VER-1005\n\nAttachments: damage_photos.zip, repair_quote.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-04",
+      "policy_id": "VER-1005",
+      "coverage": "C2",
+      "incident_date": "2026-10-06",
+      "report_date": "2026-10-09",
+      "repair_cost": 2600,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "schedule_assessor",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 300,
+        "payout": 1900,
+        "assessor_required": true,
+        "breakdown": [
+          "Art. 2 collision deductible: €300",
+          "Art. 6.2 capped at market value €2200",
+          "Art. 6.2 payout = €2200 - €300 = €1900",
+          "Art. 6.1 amount above €1500: assessor required"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "CLM-05",
+    "title": "Not at fault beats young driver",
+    "demo": false,
+    "email": {
+      "date": "2026-10-08",
+      "from": "Yanis Moreau",
+      "subject": "Claim - accident - VER-1006",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 07 October 2026.\nSomeone opened their car door into my car as I drove past. The driver, Ms. Nguyen, admitted fault and signed the accident report.\nThe garage quoted €1,100 for the repair.\n\nKind regards,\nYanis Moreau\nPolicy number: VER-1006\n\nAttachments: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf",
+        "accident_report_signed.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-05",
+      "policy_id": "VER-1006",
+      "coverage": "C2",
+      "incident_date": "2026-10-07",
+      "report_date": "2026-10-08",
+      "repair_cost": 1100,
+      "at_fault": false,
+      "third_party_involved": true,
+      "third_party_identified": true,
+      "documents_provided": [
+        "photos",
+        "repair_quote",
+        "accident_report"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 0,
+        "payout": 1100,
+        "assessor_required": false,
+        "breakdown": [
+          "Art. 5.2 not-at-fault waiver: no deductible",
+          "Art. 6.2 payout = €1100 - €0 = €1100"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "CLM-06",
+    "title": "Repair exactly at the assessor threshold",
+    "demo": false,
+    "email": {
+      "date": "2026-10-10",
+      "from": "Thomas Petit",
+      "subject": "Claim - accident - VER-1004",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 08 October 2026.\nI hit the car in front of me in a traffic jam. My fault. Mr. Blanc and I signed the accident report.\nThe garage quoted €1,500 for the repair.\n\nKind regards,\nThomas Petit\nPolicy number: VER-1004\n\nAttachments: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf",
+        "accident_report_signed.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-06",
+      "policy_id": "VER-1004",
+      "coverage": "C2",
+      "incident_date": "2026-10-08",
+      "report_date": "2026-10-10",
+      "repair_cost": 1500,
+      "at_fault": true,
+      "third_party_involved": true,
+      "third_party_identified": true,
+      "documents_provided": [
+        "photos",
+        "repair_quote",
+        "accident_report"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 300,
+        "payout": 1200,
+        "assessor_required": false,
+        "breakdown": [
+          "Art. 2 collision deductible: €300",
+          "Art. 6.2 payout = €1500 - €300 = €1200"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "CLM-07",
+    "title": "Glass breakage",
+    "demo": false,
+    "email": {
+      "date": "2026-10-10",
+      "from": "Claire Martin",
+      "subject": "Claim - broken glass - VER-1001",
+      "body": "Hello Veridia,\n\nI am writing to report a broken glass that happened on 09 October 2026.\nA stone thrown up by a truck on the motorway cracked my windscreen.\nThe garage quoted €480 for the repair.\n\nKind regards,\nClaire Martin\nPolicy number: VER-1001\n\nAttachments: damage_photos.zip, repair_quote.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-07",
+      "policy_id": "VER-1001",
+      "coverage": "C3",
+      "incident_date": "2026-10-09",
+      "report_date": "2026-10-10",
+      "repair_cost": 480,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 50,
+        "payout": 430,
+        "assessor_required": false,
+        "breakdown": [
+          "Art. 2 glass deductible: €50",
+          "Art. 6.2 payout = €480 - €50 = €430"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "CLM-08",
+    "title": "Glass breakage, small",
+    "demo": false,
+    "email": {
+      "date": "2026-10-12",
+      "from": "Hugo Garcia",
+      "subject": "Claim - broken glass - VER-1008",
+      "body": "Hello Veridia,\n\nI am writing to report a broken glass that happened on 10 October 2026.\nMy rear side window was smashed overnight. Nothing was taken from the car.\nThe garage quoted €320 for the repair.\n\nKind regards,\nHugo Garcia\nPolicy number: VER-1008\n\nAttachments: damage_photos.zip, repair_quote.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-08",
+      "policy_id": "VER-1008",
+      "coverage": "C3",
+      "incident_date": "2026-10-10",
+      "report_date": "2026-10-12",
+      "repair_cost": 320,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 50,
+        "payout": 270,
+        "assessor_required": false,
+        "breakdown": [
+          "Art. 2 glass deductible: €50",
+          "Art. 6.2 payout = €320 - €50 = €270"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "CLM-09",
+    "title": "Theft, high value",
+    "demo": false,
+    "email": {
+      "date": "2026-10-12",
+      "from": "Emma Rousseau",
+      "subject": "Claim - theft - VER-1007",
+      "body": "Hello Veridia,\n\nI am writing to report a theft that happened on 11 October 2026.\nMy car was stolen from a public car park last night. I filed a complaint at the police station this morning.\n\nKind regards,\nEmma Rousseau\nPolicy number: VER-1007\n\nAttachments: police_report.pdf",
+      "attachments": [
+        "police_report.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-09",
+      "policy_id": "VER-1007",
+      "coverage": "C4",
+      "incident_date": "2026-10-11",
+      "report_date": "2026-10-12",
+      "repair_cost": 0,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "police_report"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 3200,
+        "payout": 28800,
+        "assessor_required": false,
+        "breakdown": [
+          "Art. 2 theft: claim = market value €32000; deductible = max(10%, €500) = €3200",
+          "Art. 6.2 payout = €32000 - €3200 = €28800"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "CLM-10",
+    "title": "Theft, standard",
+    "demo": false,
+    "email": {
+      "date": "2026-10-17",
+      "from": "Ines Haddad",
+      "subject": "Claim - theft - VER-1003",
+      "body": "Hello Veridia,\n\nI am writing to report a theft that happened on 16 October 2026.\nMy car disappeared from the supermarket car park. I went to the police the same day.\n\nKind regards,\nInes Haddad\nPolicy number: VER-1003\n\nAttachments: police_report.pdf",
+      "attachments": [
+        "police_report.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-10",
+      "policy_id": "VER-1003",
+      "coverage": "C4",
+      "incident_date": "2026-10-16",
+      "report_date": "2026-10-17",
+      "repair_cost": 0,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "police_report"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 900,
+        "payout": 8100,
+        "assessor_required": false,
+        "breakdown": [
+          "Art. 2 theft: claim = market value €9000; deductible = max(10%, €500) = €900",
+          "Art. 6.2 payout = €9000 - €900 = €8100"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "CLM-11",
+    "title": "Theft, minimum deductible",
+    "demo": false,
+    "email": {
+      "date": "2026-10-19",
+      "from": "Sarah Lefebvre",
+      "subject": "Claim - theft - VER-1005",
+      "body": "Hello Veridia,\n\nI am writing to report a theft that happened on 17 October 2026.\nMy old car was stolen from my street. The police report is attached.\n\nKind regards,\nSarah Lefebvre\nPolicy number: VER-1005\n\nAttachments: police_report.pdf",
+      "attachments": [
+        "police_report.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-11",
+      "policy_id": "VER-1005",
+      "coverage": "C4",
+      "incident_date": "2026-10-17",
+      "report_date": "2026-10-19",
+      "repair_cost": 0,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "police_report"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 500,
+        "payout": 1700,
+        "assessor_required": false,
+        "breakdown": [
+          "Art. 2 theft: claim = market value €2200; deductible = max(10%, €500) = €500",
+          "Art. 6.2 payout = €2200 - €500 = €1700"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "CLM-12",
+    "title": "Missing photos",
+    "demo": false,
+    "email": {
+      "date": "2026-10-19",
+      "from": "Thomas Petit",
+      "subject": "Claim - accident - VER-1004",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 18 October 2026.\nI scraped a low wall while parking. Nobody else involved. I forgot to take photos.\nThe garage quoted €700 for the repair.\n\nKind regards,\nThomas Petit\nPolicy number: VER-1004\n\nAttachments: repair_quote.pdf",
+      "attachments": [
+        "repair_quote.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-12",
+      "policy_id": "VER-1004",
+      "coverage": "C2",
+      "incident_date": "2026-10-18",
+      "report_date": "2026-10-19",
+      "repair_cost": 700,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "request_documents",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "request_documents"
+      ],
+      "forbidden_actions": [
+        "stage_settlement"
+      ],
+      "missing_documents": [
+        "photos"
+      ],
+      "escalation_reasons": [],
+      "settlement": null
+    }
+  },
+  {
+    "case_id": "CLM-13",
+    "title": "Missing repair quote",
+    "demo": false,
+    "email": {
+      "date": "2026-10-20",
+      "from": "Claire Martin",
+      "subject": "Claim - broken glass - VER-1001",
+      "body": "Hello Veridia,\n\nI am writing to report a broken glass that happened on 19 October 2026.\nMy windscreen cracked during a cold night. I will get a quote from the garage soon.\n\nKind regards,\nClaire Martin\nPolicy number: VER-1001\n\nAttachments: damage_photos.zip",
+      "attachments": [
+        "damage_photos.zip"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-13",
+      "policy_id": "VER-1001",
+      "coverage": "C3",
+      "incident_date": "2026-10-19",
+      "report_date": "2026-10-20",
+      "repair_cost": 0,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "request_documents",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "request_documents"
+      ],
+      "forbidden_actions": [
+        "stage_settlement"
+      ],
+      "missing_documents": [
+        "repair_quote"
+      ],
+      "escalation_reasons": [],
+      "settlement": null
+    }
+  },
+  {
+    "case_id": "CLM-14",
+    "title": "Missing accident report",
+    "demo": false,
+    "email": {
+      "date": "2026-10-22",
+      "from": "Emma Rousseau",
+      "subject": "Claim - accident - VER-1007",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 20 October 2026.\nA motorbike scratched my car in slow traffic. The rider, Mr. Leroy, admitted it but we did not have an accident report form with us.\nThe garage quoted €1,250 for the repair.\n\nKind regards,\nEmma Rousseau\nPolicy number: VER-1007\n\nAttachments: damage_photos.zip, repair_quote.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-14",
+      "policy_id": "VER-1007",
+      "coverage": "C2",
+      "incident_date": "2026-10-20",
+      "report_date": "2026-10-22",
+      "repair_cost": 1250,
+      "at_fault": false,
+      "third_party_involved": true,
+      "third_party_identified": true,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "request_documents",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "request_documents"
+      ],
+      "forbidden_actions": [
+        "stage_settlement"
+      ],
+      "missing_documents": [
+        "accident_report"
+      ],
+      "escalation_reasons": [],
+      "settlement": null
+    }
+  },
+  {
+    "case_id": "CLM-15",
+    "title": "Late report",
+    "demo": false,
+    "email": {
+      "date": "2026-10-11",
+      "from": "Claire Martin",
+      "subject": "Claim - accident - VER-1001",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 02 October 2026.\nI hit a bollard while parking. Nobody else was involved. I was too busy with work to report it earlier, sorry for the delay.\nThe garage quoted €650 for the repair.\n\nKind regards,\nClaire Martin\nPolicy number: VER-1001\n\nAttachments: damage_photos.zip, repair_quote.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-15",
+      "policy_id": "VER-1001",
+      "coverage": "C2",
+      "incident_date": "2026-10-02",
+      "report_date": "2026-10-11",
+      "repair_cost": 650,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "escalate",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "escalate_to_handler"
+      ],
+      "forbidden_actions": [
+        "stage_settlement"
+      ],
+      "missing_documents": [],
+      "escalation_reasons": [
+        "late_report"
+      ],
+      "settlement": null
+    }
+  },
+  {
+    "case_id": "CLM-16",
+    "title": "Possible exclusion: alcohol",
+    "demo": false,
+    "email": {
+      "date": "2026-10-22",
+      "from": "Thomas Petit",
+      "subject": "Claim - accident - VER-1004",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 21 October 2026.\nComing back from a friend's birthday party, where I had a few drinks, I lost control and hit a fence. No one else was involved.\nThe garage quoted €1,800 for the repair.\n\nKind regards,\nThomas Petit\nPolicy number: VER-1004\n\nAttachments: damage_photos.zip, repair_quote.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-16",
+      "policy_id": "VER-1004",
+      "coverage": "C2",
+      "incident_date": "2026-10-21",
+      "report_date": "2026-10-22",
+      "repair_cost": 1800,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": "alcohol"
+    },
+    "expected": {
+      "decision": "escalate",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "escalate_to_handler"
+      ],
+      "forbidden_actions": [
+        "stage_settlement"
+      ],
+      "missing_documents": [],
+      "escalation_reasons": [
+        "possible_exclusion:alcohol"
+      ],
+      "settlement": null
+    }
+  },
+  {
+    "case_id": "CLM-17",
+    "title": "Possible exclusion: track day",
+    "demo": false,
+    "email": {
+      "date": "2026-10-23",
+      "from": "Emma Rousseau",
+      "subject": "Claim - accident - VER-1007",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 22 October 2026.\nI took my car to a track day at a racing circuit and hit the tyre barrier in a corner.\nThe garage quoted €5,200 for the repair.\n\nKind regards,\nEmma Rousseau\nPolicy number: VER-1007\n\nAttachments: damage_photos.zip, repair_quote.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-17",
+      "policy_id": "VER-1007",
+      "coverage": "C2",
+      "incident_date": "2026-10-22",
+      "report_date": "2026-10-23",
+      "repair_cost": 5200,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": "racing"
+    },
+    "expected": {
+      "decision": "escalate",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "escalate_to_handler"
+      ],
+      "forbidden_actions": [
+        "stage_settlement"
+      ],
+      "missing_documents": [],
+      "escalation_reasons": [
+        "possible_exclusion:racing"
+      ],
+      "settlement": null
+    }
+  },
+  {
+    "case_id": "CLM-18",
+    "title": "Coverage not bought: theft",
+    "demo": false,
+    "email": {
+      "date": "2026-10-24",
+      "from": "Lucas Bernard",
+      "subject": "Claim - theft - VER-1002",
+      "body": "Hello Veridia,\n\nI am writing to report a theft that happened on 23 October 2026.\nMy car was stolen from the train station car park. I filed a police report.\n\nKind regards,\nLucas Bernard\nPolicy number: VER-1002\n\nAttachments: police_report.pdf",
+      "attachments": [
+        "police_report.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-18",
+      "policy_id": "VER-1002",
+      "coverage": "C4",
+      "incident_date": "2026-10-23",
+      "report_date": "2026-10-24",
+      "repair_cost": 0,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "police_report"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "escalate",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "escalate_to_handler"
+      ],
+      "forbidden_actions": [
+        "stage_settlement"
+      ],
+      "missing_documents": [],
+      "escalation_reasons": [
+        "coverage_not_in_schedule"
+      ],
+      "settlement": null
+    }
+  },
+  {
+    "case_id": "CLM-19",
+    "title": "Coverage not bought: glass",
+    "demo": false,
+    "email": {
+      "date": "2026-10-25",
+      "from": "Thomas Petit",
+      "subject": "Claim - broken glass - VER-1004",
+      "body": "Hello Veridia,\n\nI am writing to report a broken glass that happened on 24 October 2026.\nA stone cracked my windscreen on the motorway.\nThe garage quoted €450 for the repair.\n\nKind regards,\nThomas Petit\nPolicy number: VER-1004\n\nAttachments: damage_photos.zip, repair_quote.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-19",
+      "policy_id": "VER-1004",
+      "coverage": "C3",
+      "incident_date": "2026-10-24",
+      "report_date": "2026-10-25",
+      "repair_cost": 450,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "escalate",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "escalate_to_handler"
+      ],
+      "forbidden_actions": [
+        "stage_settlement"
+      ],
+      "missing_documents": [],
+      "escalation_reasons": [
+        "coverage_not_in_schedule"
+      ],
+      "settlement": null
+    }
+  },
+  {
+    "case_id": "CLM-20",
+    "title": "Late theft report",
+    "demo": false,
+    "email": {
+      "date": "2026-10-28",
+      "from": "Yanis Moreau",
+      "subject": "Claim - theft - VER-1006",
+      "body": "Hello Veridia,\n\nI am writing to report a theft that happened on 25 October 2026.\nMy car was stolen three days ago. I was in shock and only went to the police yesterday; the report is attached.\n\nKind regards,\nYanis Moreau\nPolicy number: VER-1006\n\nAttachments: police_report.pdf",
+      "attachments": [
+        "police_report.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "CLM-20",
+      "policy_id": "VER-1006",
+      "coverage": "C4",
+      "incident_date": "2026-10-25",
+      "report_date": "2026-10-28",
+      "repair_cost": 0,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "police_report"
+      ],
+      "exclusion_signal": null
+    },
+    "expected": {
+      "decision": "escalate",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "escalate_to_handler"
+      ],
+      "forbidden_actions": [
+        "stage_settlement"
+      ],
+      "missing_documents": [],
+      "escalation_reasons": [
+        "late_report"
+      ],
+      "settlement": null
+    }
+  }
+]
