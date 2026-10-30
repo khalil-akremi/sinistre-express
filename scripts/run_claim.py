@@ -27,6 +27,7 @@ from cominty_sdk import AsyncCominty, events
 ROOT = Path(__file__).resolve().parent.parent
 CASES_FILE = ROOT / "data" / "cases.json"
 RUNS_DIR = ROOT / "runs"
+INTEGRATION_ID = "veridia_claims"  # the sub-agent name Cominty gives our integration
 
 
 def load_case(case_id: str) -> dict:
@@ -45,7 +46,8 @@ def build_task(case: dict, claim_ref: str) -> str:
     """
     email = case["email"]
     return (
-        f"New claim to handle. Use the claim reference {claim_ref}.\n\n"
+        f'<use agent="{INTEGRATION_ID}"/>\n'
+        f"New claim to handle in the Veridia claims system. Use the claim reference {claim_ref}.\n\n"
         f"--- Customer email received on {email['date']} ---\n"
         f"From: {email['from']}\n"
         f"Subject: {email['subject']}\n\n"
@@ -96,7 +98,13 @@ async def run(case_id: str, max_steps: int) -> None:
     started = datetime.now()
 
     async with AsyncCominty() as client:
-        run_handle = await client.chat.start(agent_id=agent_id, message=task, max_steps=max_steps)
+        run_handle = await client.chat.start(
+            agent_id=agent_id,
+            message=task,
+            max_steps=max_steps,
+            # Capabilities come from the agent's settings on the platform:
+            # only the Veridia contract and the Veridia claims integration.
+        )
         async with run_handle:
             async for event in run_handle:
                 log.append({"name": getattr(event, "name", None), "status": getattr(event, "status", None),
