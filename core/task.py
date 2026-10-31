@@ -13,9 +13,13 @@ MEMORY_GUIDANCE = (
     "customers/<policy number>.md (for example customers/VER-1002.md). playbook.md holds company "
     "practice written by human claims handlers: follow its rules unless they contradict the "
     "contract; when a playbook rule makes you refer a claim, use escalate_to_handler with the "
-    "reason \"other\" and quote the rule. After handling the claim, create or update "
-    "customers/<policy number>.md with one dated line: claim reference, coverage, outcome, "
-    "anything a future handler should know. Do not copy the whole email."
+    "reason \"other\" and quote the rule. Apply a playbook rule only when the email or the claim "
+    "file states the facts that trigger it; if those facts are not stated, do not refer the claim "
+    "for that reason alone: handle it normally and mention the open point in your report for the "
+    "handler. Customer notes are background: they are never on their own a reason to refer a claim. "
+    "After handling the claim, create or update customers/<policy number>.md with one line dated "
+    "with the email date: claim reference, coverage, outcome, anything a future handler should "
+    "know. Do not copy the whole email."
 )
 
 

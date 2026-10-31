@@ -118,11 +118,12 @@ function renderFile(data, { landing = false } = {}) {
   const status = claim ? STATUS[claim.status] : null;
   const statusCls = status ? status.cls : "other";
   const statusText = status ? status.text : (claim ? `Stopped at: ${claim.status}` : "No claim was opened");
+  const staged = claim && ["pending_approval", "approved"].includes(claim.status);
   const figures = claim && claim.payout !== null && claim.payout !== undefined ? `
     <dl class="figures">
       <dt>Deductible paid by the customer</dt><dd>${euro(claim.deductible)}</dd>
       <dt>Assessor visit</dt><dd>${claim.assessor_required ? (claim.assessor_date || "required") : "not needed"}</dd>
-      <dt>Payout</dt><dd class="big">${euro(claim.payout)}</dd>
+      <dt>${staged ? "Payout" : "Payout computed for the handler (not staged)"}</dt><dd class="${staged ? "big" : ""}">${euro(claim.payout)}</dd>
     </dl>` : "";
   const cost = data.cost ? `€${Number(data.cost.total).toFixed(4)}` : "n/a";
   const approved = claim && claim.status === "approved";
