@@ -1,0 +1,76 @@
+{
+  "review_id": "R-15",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"approve\",\n  \"issues\": [],\n  \"summary\": \"All recorded facts match the customer email of 2026-10-04 and the mailroom record (photos and repair quote received), the C2 collision coverage is in the VER-1004 Policy Schedule, the claim was reported 1 day after the 2026-10-03 incident (within the 5-day deadline of contract Article 4.1), no Article 3 exclusion applies, the required C2 documents (photos + repair quote, no accident report needed as no third party) are provided, the commercial-vehicle playbook rule does not apply (no third party), and the €300 C2 deductible with no assessor (repair cost €900 ≤ €1,500 per Article 6.1) is correct, so the staged €600 payout should be approved.\"\n}\n```",
+  "questions": [],
+  "thread_id": "0dd13de7-3f69-4fa2-af08-308193f0f5fc",
+  "cost": {
+    "failed": false,
+    "input_tokens": 75969,
+    "cached_tokens": 63232,
+    "output_tokens": 1889,
+    "input_cost": "0.01132292",
+    "output_cost": "0.00384210",
+    "total": "0.01516502"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 42.6,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "summary": "All recorded facts match the customer email of 2026-10-04 and the mailroom record (photos and repair quote received), the C2 collision coverage is in the VER-1004 Policy Schedule, the claim was reported 1 day after the 2026-10-03 incident (within the 5-day deadline of contract Article 4.1), no Article 3 exclusion applies, the required C2 documents (photos + repair quote, no accident report needed as no third party) are provided, the commercial-vehicle playbook rule does not apply (no third party), and the €300 C2 deductible with no assessor (repair cost €900 ≤ €1,500 per Article 6.1) is correct, so the staged €600 payout should be approved.",
+    "unreadable": false
+  }
+}

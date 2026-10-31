@@ -1,0 +1,71 @@
+{
+  "review_id": "R-11",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"approve\",\n  \"issues\": [],\n  \"summary\": \"All recorded facts match the customer email, the repair quote (total incl. VAT €1,640.00, Article 1), and the Veridia contract: C2 collision is in the Policy Schedule, the claim was reported within 5 days (2026-10-27 incident, 2026-10-28 email), no third party and no exclusion apply, both required C2 documents (photos + repair quote) are provided and belong to policyholder Thomas Petit / VW Golf (2020) on policy VER-1004, the €300 C2 deductible is correct (at-fault, licence held since 2008 so no young-driver surcharge, not-at-fault waiver not applicable), and the assessor is correctly required because the repair cost exceeds €1,500 (Article 6.1).\"\n}\n```",
+  "questions": [],
+  "thread_id": "4df86573-4f14-4a36-89d2-a999715c90c4",
+  "cost": {
+    "failed": false,
+    "input_tokens": 43202,
+    "cached_tokens": 33792,
+    "output_tokens": 1389,
+    "input_cost": "0.00721624",
+    "output_cost": "0.00281490",
+    "total": "0.01003114"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 17.3,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "summary": "All recorded facts match the customer email, the repair quote (total incl. VAT €1,640.00, Article 1), and the Veridia contract: C2 collision is in the Policy Schedule, the claim was reported within 5 days (2026-10-27 incident, 2026-10-28 email), no third party and no exclusion apply, both required C2 documents (photos + repair quote) are provided and belong to policyholder Thomas Petit / VW Golf (2020) on policy VER-1004, the €300 C2 deductible is correct (at-fault, licence held since 2008 so no young-driver surcharge, not-at-fault waiver not applicable), and the assessor is correctly required because the repair cost exceeds €1,500 (Article 6.1).",
+    "unreadable": false
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "review_id": "R-10",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"approve\",\n  \"issues\": [],\n  \"summary\": \"All recorded facts match the customer email, the repair quote (which names Emma Rousseau, policy VER-1007 and the Tesla Model 3 2023, total incl. VAT €1,180.00 per contract Article 1), and the Veridia contract: C3 glass breakage is in the Policy Schedule, the claim was reported 2026-10-27 within the 5-day deadline of Article 4.1, both required C3 documents (photos and repair quote) were received, no exclusion applies, no third party/commercial vehicle is mentioned so no playbook referral is needed, the €50 C3 deductible and €1,130 payout are correct, and no assessor is required since €1,180 is not above €1,500 (Article 6.1).\"\n}\n```",
+  "questions": [],
+  "thread_id": "62a42c63-41f6-4d02-b3a7-8edf22e9fcfb",
+  "cost": {
+    "failed": false,
+    "input_tokens": 62285,
+    "cached_tokens": 51200,
+    "output_tokens": 1427,
+    "input_cost": "0.00909812",
+    "output_cost": "0.00285249",
+    "total": "0.01195061"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 32.6,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "summary": "All recorded facts match the customer email, the repair quote (which names Emma Rousseau, policy VER-1007 and the Tesla Model 3 2023, total incl. VAT €1,180.00 per contract Article 1), and the Veridia contract: C3 glass breakage is in the Policy Schedule, the claim was reported 2026-10-27 within the 5-day deadline of Article 4.1, both required C3 documents (photos and repair quote) were received, no exclusion applies, no third party/commercial vehicle is mentioned so no playbook referral is needed, the €50 C3 deductible and €1,130 payout are correct, and no assessor is required since €1,180 is not above €1,500 (Article 6.1).",
+    "unreadable": false
+  }
+}

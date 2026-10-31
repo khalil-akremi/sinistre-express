@@ -1,0 +1,84 @@
+{
+  "review_id": "R-01",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"concerns\",\n  \"issues\": [\n    {\n      \"field\": \"repair cost in EUR\",\n      \"recorded\": \"900\",\n      \"should_be\": \"1640.00 (TOTAL INCL. VAT on quote Q-2610-5283)\",\n      \"evidence\": \"repair_quote.pdf (/home/cominty/user_uploads/ol-lPElx/repair_quote.pdf) shows 'TOTAL INCL. VAT 1 640,00 €'; the €900 in the customer email is only the garage's verbal phone estimate ('around €900'), and contract Article 1 defines repair cost as the total including VAT on the written quote (document 2630#10414, page 1).\"\n    },\n    {\n      \"field\": \"assessor required\",\n      \"recorded\": \"no\",\n      \"should_be\": \"yes — independent assessor must inspect the vehicle when the repair cost is above €1,500, and the quote's total incl. VAT is €1,640.00\",\n      \"evidence\": \"Contract Article 6.1 (document 2630#10414, page 3) vs. repair_quote.pdf total incl. VAT of €1,640.00.\"\n    }\n  ],\n  \"summary\": \"The claim is payable in principle (C2 collision is in the Policy Schedule, reported within 5 days, no exclusion, no third party so no accident report needed, photos and quote provided), but the recorded repair cost is the verbal €900 estimate instead of the €1,640.00 total incl. VAT on the attached quote, which also means an independent assessor is required above €1,500 — the staged payout of €600 is therefore based on a wrong fact.\"\n}\n```",
+  "questions": [],
+  "thread_id": "c9d6a8a0-45a0-43e8-8e5d-f3dbf2342534",
+  "cost": {
+    "failed": false,
+    "input_tokens": 59960,
+    "cached_tokens": 43776,
+    "output_tokens": 1497,
+    "input_cost": "0.01255024",
+    "output_cost": "0.00303884",
+    "total": "0.01558908"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 21.7,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "repair cost in EUR",
+        "recorded": "900",
+        "should_be": "1640.00 (TOTAL INCL. VAT on quote Q-2610-5283)",
+        "evidence": "repair_quote.pdf (/home/cominty/user_uploads/ol-lPElx/repair_quote.pdf) shows 'TOTAL INCL. VAT 1 640,00 €'; the €900 in the customer email is only the garage's verbal phone estimate ('around €900'), and contract Article 1 defines repair cost as the total including VAT on the written quote (document 2630#10414, page 1)."
+      },
+      {
+        "field": "assessor required",
+        "recorded": "no",
+        "should_be": "yes — independent assessor must inspect the vehicle when the repair cost is above €1,500, and the quote's total incl. VAT is €1,640.00",
+        "evidence": "Contract Article 6.1 (document 2630#10414, page 3) vs. repair_quote.pdf total incl. VAT of €1,640.00."
+      }
+    ],
+    "summary": "The claim is payable in principle (C2 collision is in the Policy Schedule, reported within 5 days, no exclusion, no third party so no accident report needed, photos and quote provided), but the recorded repair cost is the verbal €900 estimate instead of the €1,640.00 total incl. VAT on the attached quote, which also means an independent assessor is required above €1,500 — the staged payout of €600 is therefore based on a wrong fact.",
+    "unreadable": false
+  }
+}

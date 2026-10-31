@@ -1,0 +1,96 @@
+{
+  "review_id": "R-04",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"approve\",\n  \"issues\": [],\n  \"summary\": \"All recorded facts match the customer email, the signed accident report and the repair quote (incident 2026-10-12 reported 2026-10-14 within the 5-day deadline, C2 collision damage is in the Policy Schedule, repair cost €1,200 is the total incl. VAT per Article 1, policyholder not at fault with the third party identified as Rapid Livraisons SARL / Marc Dubois, all three required C2 documents provided and belonging to Claire Martin's Peugeot 208 FG-218-LM, no exclusion applies), so the €0 deductible (not-at-fault waiver, Article 5.2; licence held since 2012 so no young-driver surcharge) and €1,200 payout (below the €14,000 market value, no assessor needed under €1,500 per Article 6.1) are correct; note for the approver that the other vehicle is a commercial van, so per the handler playbook Veridia should pursue recovery from Axelia Pro Assurances, though this does not affect payment to the policyholder.\"\n}\n```",
+  "questions": [],
+  "thread_id": "b57507d5-4cd1-405e-a3d2-ce5133f05311",
+  "cost": {
+    "failed": false,
+    "input_tokens": 77649,
+    "cached_tokens": 57088,
+    "output_tokens": 2689,
+    "input_cost": "0.01560884",
+    "output_cost": "0.00547405",
+    "total": "0.02108289"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 39.0,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "summary": "All recorded facts match the customer email, the signed accident report and the repair quote (incident 2026-10-12 reported 2026-10-14 within the 5-day deadline, C2 collision damage is in the Policy Schedule, repair cost €1,200 is the total incl. VAT per Article 1, policyholder not at fault with the third party identified as Rapid Livraisons SARL / Marc Dubois, all three required C2 documents provided and belonging to Claire Martin's Peugeot 208 FG-218-LM, no exclusion applies), so the €0 deductible (not-at-fault waiver, Article 5.2; licence held since 2012 so no young-driver surcharge) and €1,200 payout (below the €14,000 market value, no assessor needed under €1,500 per Article 6.1) are correct; note for the approver that the other vehicle is a commercial van, so per the handler playbook Veridia should pursue recovery from Axelia Pro Assurances, though this does not affect payment to the policyholder.",
+    "unreadable": false
+  }
+}

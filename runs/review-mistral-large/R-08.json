@@ -1,0 +1,88 @@
+{
+  "review_id": "R-08",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"concerns\",\n  \"issues\": [\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2 (Collision damage, standard deductible €300)\",\n      \"should_be\": \"C3 (Glass breakage, standard deductible €50)\",\n      \"evidence\": \"Customer email (2026-10-27): 'A stone thrown up on the A6 motorway on 26 October 2026 cracked my windscreen' — windscreen damage with no collision with another vehicle. Veridia contract Article 2 coverage table (contract.pdf, page 1): C2 covers 'Damage to the insured vehicle after a collision' (€300 deductible) while C3 'Glass breakage' explicitly covers 'Windscreen, side windows' (€50 deductible). C3 is listed in the Policy Schedule for VER-1007, so Article 2 is satisfied. Because the recorded coverage is C2, the claims system applied the €300 C2 deductible and staged €880; under the correct C3 coverage the deductible is €50.\"\n    }\n  ],\n  \"summary\": \"All other facts check out (dates within the 5-day reporting deadline of Article 4.1, repair cost €1,180 matches the total incl. VAT on quote Q-2610-5246 per Article 1, both required C3 documents provided and belonging to Emma Rousseau / Tesla Model 3 / VER-1007, no exclusion, no third party so no playbook referral, and no assessor needed since €1,180 is not above €1,500 per Article 6.1), but the coverage was recorded as C2 instead of C3 glass breakage, which changes the deductible from €300 to €50 and the staged payout.\"\n}\n```",
+  "questions": [],
+  "thread_id": "7227a88c-837f-4e94-bf58-bdbeb2b124c6",
+  "cost": {
+    "failed": false,
+    "input_tokens": 51590,
+    "cached_tokens": 34816,
+    "output_tokens": 1647,
+    "input_cost": "0.01200168",
+    "output_cost": "0.00332742",
+    "total": "0.01532910"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 23.2,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "coverage",
+        "recorded": "C2 (Collision damage, standard deductible €300)",
+        "should_be": "C3 (Glass breakage, standard deductible €50)",
+        "evidence": "Customer email (2026-10-27): 'A stone thrown up on the A6 motorway on 26 October 2026 cracked my windscreen' — windscreen damage with no collision with another vehicle. Veridia contract Article 2 coverage table (contract.pdf, page 1): C2 covers 'Damage to the insured vehicle after a collision' (€300 deductible) while C3 'Glass breakage' explicitly covers 'Windscreen, side windows' (€50 deductible). C3 is listed in the Policy Schedule for VER-1007, so Article 2 is satisfied. Because the recorded coverage is C2, the claims system applied the €300 C2 deductible and staged €880; under the correct C3 coverage the deductible is €50."
+      }
+    ],
+    "summary": "All other facts check out (dates within the 5-day reporting deadline of Article 4.1, repair cost €1,180 matches the total incl. VAT on quote Q-2610-5246 per Article 1, both required C3 documents provided and belonging to Emma Rousseau / Tesla Model 3 / VER-1007, no exclusion, no third party so no playbook referral, and no assessor needed since €1,180 is not above €1,500 per Article 6.1), but the coverage was recorded as C2 instead of C3 glass breakage, which changes the deductible from €300 to €50 and the staged payout.",
+    "unreadable": false
+  }
+}

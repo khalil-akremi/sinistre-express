@@ -40,7 +40,9 @@ the Veridia contract (search it) and the handler playbook.
 including VAT on the quote, contract Article 1), fault, third party involved and identified, documents \
 counted as provided (each must belong to this policyholder and vehicle), any sign of an exclusion.
 2. Whether the claim should be paid at all: reporting deadline, exclusions, coverage in the Policy \
-Schedule, required documents, playbook rules.
+Schedule, required documents, playbook rules. A playbook rule that says to refer a claim to a handler \
+means the claim must not be paid automatically: if such a rule applies, that is a concern. Apply a \
+playbook rule only when the email or the documents state the facts that trigger it.
 Do not redo the arithmetic: the claims system computes the amounts from the recorded facts.
 
 Raise a concern only for a specific problem you can point to in a source. Answer with JSON only:

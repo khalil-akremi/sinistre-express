@@ -72,8 +72,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:16+00:00",
-      "updated_at": "2026-10-31T14:39:16+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   },
   {
@@ -155,8 +155,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:16+00:00",
-      "updated_at": "2026-10-31T14:39:16+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   },
   {
@@ -240,8 +240,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:16+00:00",
-      "updated_at": "2026-10-31T14:39:16+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   },
   {
@@ -327,8 +327,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:16+00:00",
-      "updated_at": "2026-10-31T14:39:16+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   },
   {
@@ -402,8 +402,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:16+00:00",
-      "updated_at": "2026-10-31T14:39:16+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   },
   {
@@ -485,8 +485,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:16+00:00",
-      "updated_at": "2026-10-31T14:39:16+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   },
   {
@@ -570,8 +570,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:16+00:00",
-      "updated_at": "2026-10-31T14:39:16+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   },
   {
@@ -655,8 +655,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:16+00:00",
-      "updated_at": "2026-10-31T14:39:16+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   },
   {
@@ -738,8 +738,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:16+00:00",
-      "updated_at": "2026-10-31T14:39:17+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   },
   {
@@ -823,8 +823,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:17+00:00",
-      "updated_at": "2026-10-31T14:39:17+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   },
   {
@@ -900,8 +900,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:17+00:00",
-      "updated_at": "2026-10-31T14:39:17+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   },
   {
@@ -951,7 +951,7 @@
       "incident_date": "2026-10-29",
       "report_date": "2026-10-30",
       "repair_cost": 0,
-      "at_fault": true,
+      "at_fault": false,
       "third_party_involved": false,
       "third_party_identified": false,
       "documents_provided": [
@@ -967,7 +967,7 @@
       "report_date": "2026-10-30",
       "description": "Prepared by the handler agent.",
       "repair_cost": 0,
-      "at_fault": 1,
+      "at_fault": 0,
       "third_party_involved": 0,
       "third_party_identified": 0,
       "documents_provided": "[\"police_report\"]",
@@ -982,8 +982,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:17+00:00",
-      "updated_at": "2026-10-31T14:39:17+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   },
   {
@@ -1063,58 +1063,50 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:17+00:00",
-      "updated_at": "2026-10-31T14:39:17+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   },
   {
     "review_id": "R-14",
-    "source_case": "CLM-07",
+    "source_case": "CLM-08",
     "mistake": null,
     "field": null,
     "expected_verdict": "approve",
     "email": {
-      "date": "2026-10-10",
-      "from": "Claire Martin",
-      "subject": "Claim - broken glass - VER-1001",
-      "body": "Hello Veridia,\n\nI am writing to report a broken glass that happened on 09 October 2026.\nA stone thrown up by a truck on the motorway cracked my windscreen.\nThe garage quoted €480 to repair my car.\n\nKind regards,\nClaire Martin\nPolicy number: VER-1001\n\nAttached: damage_photos.zip, repair_quote.pdf",
+      "date": "2026-10-12",
+      "from": "Hugo Garcia",
+      "subject": "Claim - broken glass - VER-1008",
+      "body": "Hello Veridia,\n\nI am writing to report a broken glass that happened on 10 October 2026.\nMy rear side window was smashed overnight. Nothing was taken from the car.\nThe garage quoted €320 to repair my car.\n\nKind regards,\nHugo Garcia\nPolicy number: VER-1008\n\nAttached: damage_photos.zip, repair_quote.pdf",
       "attachments": [
         "damage_photos.zip",
         "repair_quote.pdf"
       ]
     },
     "policy": {
-      "policy_id": "VER-1001",
-      "holder_name": "Claire Martin",
-      "vehicle": "Peugeot 208 (2021)",
-      "market_value_eur": 14000,
-      "licence_date": "2012-05-14",
+      "policy_id": "VER-1008",
+      "holder_name": "Hugo Garcia",
+      "vehicle": "Fiat 500 (2018)",
+      "market_value_eur": 6500,
+      "licence_date": "2019-07-22",
       "coverages": [
         {
           "code": "C1",
           "name": "Third-party liability"
         },
         {
-          "code": "C2",
-          "name": "Collision damage"
-        },
-        {
           "code": "C3",
           "name": "Glass breakage"
-        },
-        {
-          "code": "C4",
-          "name": "Theft"
         }
       ]
     },
     "created": {
-      "policy_id": "VER-1001",
+      "policy_id": "VER-1008",
       "coverage": "C3",
-      "incident_date": "2026-10-09",
-      "report_date": "2026-10-10",
-      "repair_cost": 480,
-      "at_fault": true,
+      "incident_date": "2026-10-10",
+      "report_date": "2026-10-12",
+      "repair_cost": 320,
+      "at_fault": false,
       "third_party_involved": false,
       "third_party_identified": false,
       "documents_provided": [
@@ -1125,13 +1117,13 @@
     },
     "claim": {
       "claim_ref": "R-14",
-      "policy_id": "VER-1001",
+      "policy_id": "VER-1008",
       "coverage": "C3",
-      "incident_date": "2026-10-09",
-      "report_date": "2026-10-10",
+      "incident_date": "2026-10-10",
+      "report_date": "2026-10-12",
       "description": "Prepared by the handler agent.",
-      "repair_cost": 480,
-      "at_fault": 1,
+      "repair_cost": 320,
+      "at_fault": 0,
       "third_party_involved": 0,
       "third_party_identified": 0,
       "documents_provided": "[\"photos\", \"repair_quote\"]",
@@ -1139,15 +1131,15 @@
       "status": "pending_approval",
       "blocking_issues": "[]",
       "deductible": 50,
-      "payout": 430,
+      "payout": 270,
       "assessor_required": 0,
       "assessor_date": null,
       "requested_documents": null,
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:17+00:00",
-      "updated_at": "2026-10-31T14:39:17+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   },
   {
@@ -1221,8 +1213,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:17+00:00",
-      "updated_at": "2026-10-31T14:39:17+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   },
   {
@@ -1298,8 +1290,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T14:39:17+00:00",
-      "updated_at": "2026-10-31T14:39:17+00:00"
+      "created_at": "2026-10-31T15:14:50+00:00",
+      "updated_at": "2026-10-31T15:14:50+00:00"
     }
   }
 ]

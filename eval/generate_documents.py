@@ -402,7 +402,7 @@ def build_case(s: DocScenario) -> dict:
         claim_ref=s.case_id, policy_id=s.policy_id, coverage=s.coverage,
         incident_date=s.incident, report_date=s.incident + timedelta(days=s.delay_days),
         repair_cost=s.quote.total if s.quote and "repair_cost" not in s.ungraded else 0,
-        at_fault=s.at_fault, third_party_involved=s.third_party_involved,
+        at_fault=s.at_fault if s.coverage == C2 else False, third_party_involved=s.third_party_involved,
         third_party_identified=s.third_party_identified, documents_provided=s.valid_documents,
         exclusion_signal=None,
     )

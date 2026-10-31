@@ -1,0 +1,106 @@
+{
+  "review_id": "R-13",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"approve\",\n  \"issues\": [],\n  \"summary\": \"All recorded facts match the customer email of 2026-10-15 (incident 2026-10-14, at-fault collision with identified third party Ms. Laurent, €2,400 quote, all three C2-required documents received), the claim was reported within the 5-day deadline of contract Article 4.1, C2 is listed in the Policy Schedule for VER-1002, no Article 3 exclusion applies, the other vehicle is a car (not a commercial vehicle, so no playbook referral), and the system-computed deductible (€300 C2 + €400 young-driver surcharge, licence 2024-09-02 < 3 years at incident, no not-at-fault waiver) and assessor requirement (repair cost above €1,500, Article 6.1) are consistent with the contract.\"\n}\n```",
+  "questions": [],
+  "thread_id": "936fb77c-b49b-4c17-8cf3-0b610de719a1",
+  "cost": {
+    "failed": false,
+    "input_tokens": 139542,
+    "cached_tokens": 119808,
+    "output_tokens": 3083,
+    "input_cost": "0.01881000",
+    "output_cost": "0.00625924",
+    "total": "0.02506924"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 48.7,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "summary": "All recorded facts match the customer email of 2026-10-15 (incident 2026-10-14, at-fault collision with identified third party Ms. Laurent, €2,400 quote, all three C2-required documents received), the claim was reported within the 5-day deadline of contract Article 4.1, C2 is listed in the Policy Schedule for VER-1002, no Article 3 exclusion applies, the other vehicle is a car (not a commercial vehicle, so no playbook referral), and the system-computed deductible (€300 C2 + €400 young-driver surcharge, licence 2024-09-02 < 3 years at incident, no not-at-fault waiver) and assessor requirement (repair cost above €1,500, Article 6.1) are consistent with the contract.",
+    "unreadable": false
+  }
+}

@@ -320,7 +320,9 @@ def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRu
     async def get_claim(request: Request) -> Response:
         ref = request.path_params["ref"]
         if ref not in runs and not system.action_log(ref):
-            return JSONResponse({"error": "Unknown claim."}, status_code=404)
+            return JSONResponse({"error": "This claim is no longer on the server: it restarted (new deploy or "
+                                          "idle restart on free hosting). Please send the claim again."},
+                                status_code=404)
         return JSONResponse(claim_payload(ref))
 
     @server.custom_route("/api/claims/{ref}/stream", methods=["GET"], include_in_schema=False)

@@ -317,7 +317,7 @@
       "incident_date": "2026-10-29",
       "report_date": "2026-10-30",
       "repair_cost": 0,
-      "at_fault": true,
+      "at_fault": false,
       "third_party_involved": false,
       "third_party_identified": false,
       "documents_provided": [

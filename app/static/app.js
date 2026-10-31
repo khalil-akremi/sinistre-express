@@ -143,7 +143,9 @@ function renderFile(data, { landing = false } = {}) {
       <dt>Assessor visit</dt><dd>${claim.assessor_required ? (claim.assessor_date || "required") : "not needed"}</dd>
       <dt>${staged ? "Payout" : "Payout computed for the handler (not staged)"}</dt><dd class="${staged ? "big" : ""}">${euro(claim.payout)}</dd>
     </dl>` : "";
-  const cost = data.cost ? `€${Number(data.cost.total).toFixed(4)}` : "n/a";
+  const reviewCost = data.review && data.review.cost ? Number(data.review.cost.total) : null;
+  const cost = (data.cost ? `€${Number(data.cost.total).toFixed(4)}` : "n/a") +
+    (reviewCost !== null ? ` + Reviewer €${reviewCost.toFixed(4)}` : "");
   const approved = claim && claim.status === "approved";
   const canApprove = claim && claim.status === "pending_approval";
   const review = data.review;

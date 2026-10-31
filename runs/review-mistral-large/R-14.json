@@ -1,0 +1,114 @@
+{
+  "review_id": "R-14",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"concerns\",\n  \"issues\": [\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": \"false\",\n      \"should_be\": \"true — a truck (commercial vehicle) threw up the stone that cracked the windscreen, so a third party was involved even though its insurer/registration is not named\",\n      \"evidence\": \"Customer email received 2026-10-10: 'A stone thrown up by a truck on the motorway cracked my windscreen.' Handler playbook: 'When the other driver is a commercial vehicle (van, truck, lorry, delivery vehicle), refer the claim to a handler so Veridia can recover the money from their insurer.' The staged claim records third party involved = false and therefore skips this mandatory referral.\"\n    },\n    {\n      \"field\": \"policyholder_at_fault\",\n      \"recorded\": \"true\",\n      \"should_be\": \"false — the damage was caused by a stone projected by another vehicle, not by the policyholder; note this does not change the C3 outcome because the not-at-fault waiver in contract Article 5.2 applies only to C2, so the €50 C3 deductible and €430 payout are unaffected\",\n      \"evidence\": \"Customer email received 2026-10-10 ('A stone thrown up by a truck...'); Veridia contract Article 5.2 (not-at-fault waiver limited to C2) and Article 2 (C3 standard deductible €50).\"\n    }\n  ],\n  \"summary\": \"The claim is timely (reported 2026-10-10 for a 2026-10-09 incident, within the 5-day deadline of Article 4.1), C3 glass breakage is in the Policy Schedule, both required documents (photos, repair quote) were received, no exclusion applies, and the €430 payout (€480 − €50 C3 deductible, no assessor needed under Article 6.1) is arithmetically consistent — but the email clearly states a truck threw up the stone, so the recorded 'third party involved: false' and 'at fault: true' contradict the email and the playbook's mandatory referral to a handler for recovery from the truck's insurer.\"\n}\n```",
+  "questions": [],
+  "thread_id": "83b55723-34a0-45c0-a6fd-fa98455cafac",
+  "cost": {
+    "failed": false,
+    "input_tokens": 119072,
+    "cached_tokens": 101888,
+    "output_tokens": 3134,
+    "input_cost": "0.01613216",
+    "output_cost": "0.00637651",
+    "total": "0.02250867"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 52.6,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "third_party_involved",
+        "recorded": "false",
+        "should_be": "true — a truck (commercial vehicle) threw up the stone that cracked the windscreen, so a third party was involved even though its insurer/registration is not named",
+        "evidence": "Customer email received 2026-10-10: 'A stone thrown up by a truck on the motorway cracked my windscreen.' Handler playbook: 'When the other driver is a commercial vehicle (van, truck, lorry, delivery vehicle), refer the claim to a handler so Veridia can recover the money from their insurer.' The staged claim records third party involved = false and therefore skips this mandatory referral."
+      },
+      {
+        "field": "policyholder_at_fault",
+        "recorded": "true",
+        "should_be": "false — the damage was caused by a stone projected by another vehicle, not by the policyholder; note this does not change the C3 outcome because the not-at-fault waiver in contract Article 5.2 applies only to C2, so the €50 C3 deductible and €430 payout are unaffected",
+        "evidence": "Customer email received 2026-10-10 ('A stone thrown up by a truck...'); Veridia contract Article 5.2 (not-at-fault waiver limited to C2) and Article 2 (C3 standard deductible €50)."
+      }
+    ],
+    "summary": "The claim is timely (reported 2026-10-10 for a 2026-10-09 incident, within the 5-day deadline of Article 4.1), C3 glass breakage is in the Policy Schedule, both required documents (photos, repair quote) were received, no exclusion applies, and the €430 payout (€480 − €50 C3 deductible, no assessor needed under Article 6.1) is arithmetically consistent — but the email clearly states a truck threw up the stone, so the recorded 'third party involved: false' and 'at fault: true' contradict the email and the playbook's mandatory referral to a handler for recovery from the truck's insurer.",
+    "unreadable": false
+  }
+}

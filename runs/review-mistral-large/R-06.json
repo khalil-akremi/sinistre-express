@@ -1,0 +1,153 @@
+{
+  "review_id": "R-06",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"concerns\",\n  \"issues\": [\n    {\n      \"field\": \"date the claim was reported\",\n      \"recorded\": \"2026-10-03\",\n      \"should_be\": \"2026-10-11\",\n      \"evidence\": \"The customer email is headed 'Customer email received on 2026-10-11' and Claire Martin writes 'I was too busy with work to report it earlier, sorry for the delay' — the claim was reported on 2026-10-11, 9 calendar days after the 2026-10-02 incident. Contract Article 4.1 (contract.pdf, 2630#10414, p.2) requires reporting within 5 days of the incident, and Article 7.1 (p.3) requires that a claim reported after the Article 4.1 deadline be referred to a Veridia claims handler who takes the decision ('A late claim is never refused automatically'). The staged result instead treats this as an in-deadline claim pending approval with payout €350, so the late-reporting fact and the mandatory handler referral are both wrong/missing.\"\n    }\n  ],\n  \"summary\": \"All other recorded facts match the email and contract (C2 collision is in the Policy Schedule, incident 2026-10-02, €650 quote, policyholder at fault, no third party, photos and repair quote received, no exclusion, no assessor needed under €1,500, €300 deductible since she is at fault and licensed since 2012), but the claim was actually reported on 2026-10-11, 9 days after the incident — beyond the 5-day deadline of Article 4.1 — so per Article 7.1 it must be referred to a claims handler for the decision rather than approved as staged.\"\n}\n```",
+  "questions": [],
+  "thread_id": "68c34bde-4d57-4d00-ba15-11c2167870aa",
+  "cost": {
+    "failed": false,
+    "input_tokens": 196695,
+    "cached_tokens": 158720,
+    "output_tokens": 5373,
+    "input_cost": "0.03247852",
+    "output_cost": "0.01094477",
+    "total": "0.04342329"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 78.9,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "date the claim was reported",
+        "recorded": "2026-10-03",
+        "should_be": "2026-10-11",
+        "evidence": "The customer email is headed 'Customer email received on 2026-10-11' and Claire Martin writes 'I was too busy with work to report it earlier, sorry for the delay' — the claim was reported on 2026-10-11, 9 calendar days after the 2026-10-02 incident. Contract Article 4.1 (contract.pdf, 2630#10414, p.2) requires reporting within 5 days of the incident, and Article 7.1 (p.3) requires that a claim reported after the Article 4.1 deadline be referred to a Veridia claims handler who takes the decision ('A late claim is never refused automatically'). The staged result instead treats this as an in-deadline claim pending approval with payout €350, so the late-reporting fact and the mandatory handler referral are both wrong/missing."
+      }
+    ],
+    "summary": "All other recorded facts match the email and contract (C2 collision is in the Policy Schedule, incident 2026-10-02, €650 quote, policyholder at fault, no third party, photos and repair quote received, no exclusion, no assessor needed under €1,500, €300 deductible since she is at fault and licensed since 2012), but the claim was actually reported on 2026-10-11, 9 days after the incident — beyond the 5-day deadline of Article 4.1 — so per Article 7.1 it must be referred to a claims handler for the decision rather than approved as staged.",
+    "unreadable": false
+  }
+}

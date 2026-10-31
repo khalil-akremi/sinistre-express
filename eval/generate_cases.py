@@ -114,7 +114,7 @@ SCENARIOS = [
              documents=ALL_C2_TP_DOCS),
     Scenario("CLM-07", "Glass breakage", "VER-1001", C3, day(9), 1,
              "A stone thrown up by a truck on the motorway cracked my windscreen.",
-             repair_cost=480, documents=("photos", "repair_quote")),
+             repair_cost=480, third_party_involved=True, documents=("photos", "repair_quote")),
     Scenario("CLM-08", "Glass breakage, small", "VER-1008", C3, day(10), 2,
              "My rear side window was smashed overnight. Nothing was taken from the car.",
              repair_cost=320, documents=("photos", "repair_quote")),
@@ -211,7 +211,9 @@ def build_case(s: Scenario) -> dict:
         incident_date=s.incident,
         report_date=s.incident + timedelta(days=s.delay_days),
         repair_cost=s.repair_cost,
-        at_fault=s.at_fault,
+        # Glass and theft: the policyholder is the victim, never "at fault" (a stolen car's
+        # owner is not at fault). Found by the Reviewer agent, which flagged the old label.
+        at_fault=s.at_fault if s.coverage in (Coverage.THIRD_PARTY, C2) else False,
         third_party_involved=s.third_party_involved,
         third_party_identified=s.third_party_identified,
         documents_provided=s.documents,

@@ -1,0 +1,83 @@
+{
+  "review_id": "R-02",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"concerns\",\n  \"issues\": [\n    {\n      \"field\": \"policyholder at fault\",\n      \"recorded\": \"false\",\n      \"should_be\": \"true\",\n      \"evidence\": \"accident_report_signed.pdf, section 14 Observations: Driver A (Lucas Bernard, Vehicle A, policy VER-1002, Renault Clio GK-904-TR) states 'I moved into the left lane without seeing vehicle B in my blind spot. I accept that the accident is my fault', and box 'Was changing lanes' is ticked for Vehicle A. The email also says both cars were changing lanes, but the signed report explicitly attributes fault to the policyholder. This also affects the deductible: contract Article 5.2 waives the C2 deductible only when the authorised driver is NOT at fault and the third party is identified, so the recorded €0 deductible rests on an incorrect fault fact.\"\n    }\n  ],\n  \"summary\": \"All other facts check out (incident 2026-10-14 reported 2026-10-15 within the 5-day deadline of Article 4.1; C2 collision is in the Policy Schedule; repair cost €2,400 matches the quote's total incl. VAT per Article 1; third party Julie Laurent is identified with a private car, so the playbook's commercial-vehicle referral does not apply; photos, quote and signed accident report are all present and belong to Lucas Bernard's Renault Clio GK-904-TR; no exclusion in Article 3), but the recorded 'policyholder at fault: false' contradicts the signed accident report where the policyholder accepts fault, which wrongly triggers the Article 5.2 not-at-fault deductible waiver.\"\n}\n```",
+  "questions": [],
+  "thread_id": "371d6815-4364-427b-8f66-b02e31742d5e",
+  "cost": {
+    "failed": false,
+    "input_tokens": 45701,
+    "cached_tokens": 34816,
+    "output_tokens": 1486,
+    "input_cost": "0.00809124",
+    "output_cost": "0.00299894",
+    "total": "0.01109018"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 24.0,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "policyholder at fault",
+        "recorded": "false",
+        "should_be": "true",
+        "evidence": "accident_report_signed.pdf, section 14 Observations: Driver A (Lucas Bernard, Vehicle A, policy VER-1002, Renault Clio GK-904-TR) states 'I moved into the left lane without seeing vehicle B in my blind spot. I accept that the accident is my fault', and box 'Was changing lanes' is ticked for Vehicle A. The email also says both cars were changing lanes, but the signed report explicitly attributes fault to the policyholder. This also affects the deductible: contract Article 5.2 waives the C2 deductible only when the authorised driver is NOT at fault and the third party is identified, so the recorded €0 deductible rests on an incorrect fault fact."
+      }
+    ],
+    "summary": "All other facts check out (incident 2026-10-14 reported 2026-10-15 within the 5-day deadline of Article 4.1; C2 collision is in the Policy Schedule; repair cost €2,400 matches the quote's total incl. VAT per Article 1; third party Julie Laurent is identified with a private car, so the playbook's commercial-vehicle referral does not apply; photos, quote and signed accident report are all present and belong to Lucas Bernard's Renault Clio GK-904-TR; no exclusion in Article 3), but the recorded 'policyholder at fault: false' contradicts the signed accident report where the policyholder accepts fault, which wrongly triggers the Article 5.2 not-at-fault deductible waiver.",
+    "unreadable": false
+  }
+}

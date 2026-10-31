@@ -128,7 +128,7 @@
       "incident_date": "2026-10-15",
       "report_date": "2026-10-19",
       "repair_cost": 0,
-      "at_fault": true,
+      "at_fault": false,
       "third_party_involved": false,
       "third_party_identified": false,
       "documents_provided": [],
@@ -501,8 +501,8 @@
       "incident_date": "2026-10-09",
       "report_date": "2026-10-10",
       "repair_cost": 480,
-      "at_fault": true,
-      "third_party_involved": false,
+      "at_fault": false,
+      "third_party_involved": true,
       "third_party_identified": false,
       "documents_provided": [
         "photos",
@@ -553,7 +553,7 @@
       "incident_date": "2026-10-10",
       "report_date": "2026-10-12",
       "repair_cost": 320,
-      "at_fault": true,
+      "at_fault": false,
       "third_party_involved": false,
       "third_party_identified": false,
       "documents_provided": [
@@ -604,7 +604,7 @@
       "incident_date": "2026-10-11",
       "report_date": "2026-10-12",
       "repair_cost": 0,
-      "at_fault": true,
+      "at_fault": false,
       "third_party_involved": false,
       "third_party_identified": false,
       "documents_provided": [
@@ -654,7 +654,7 @@
       "incident_date": "2026-10-16",
       "report_date": "2026-10-17",
       "repair_cost": 0,
-      "at_fault": true,
+      "at_fault": false,
       "third_party_involved": false,
       "third_party_identified": false,
       "documents_provided": [
@@ -704,7 +704,7 @@
       "incident_date": "2026-10-17",
       "report_date": "2026-10-19",
       "repair_cost": 0,
-      "at_fault": true,
+      "at_fault": false,
       "third_party_involved": false,
       "third_party_identified": false,
       "documents_provided": [
@@ -799,7 +799,7 @@
       "incident_date": "2026-10-19",
       "report_date": "2026-10-20",
       "repair_cost": 0,
-      "at_fault": true,
+      "at_fault": false,
       "third_party_involved": false,
       "third_party_identified": false,
       "documents_provided": [
@@ -1032,7 +1032,7 @@
       "incident_date": "2026-10-23",
       "report_date": "2026-10-24",
       "repair_cost": 0,
-      "at_fault": true,
+      "at_fault": false,
       "third_party_involved": false,
       "third_party_identified": false,
       "documents_provided": [
@@ -1078,7 +1078,7 @@
       "incident_date": "2026-10-24",
       "report_date": "2026-10-25",
       "repair_cost": 450,
-      "at_fault": true,
+      "at_fault": false,
       "third_party_involved": false,
       "third_party_identified": false,
       "documents_provided": [
@@ -1124,7 +1124,7 @@
       "incident_date": "2026-10-25",
       "report_date": "2026-10-28",
       "repair_cost": 0,
-      "at_fault": true,
+      "at_fault": false,
       "third_party_involved": false,
       "third_party_identified": false,
       "documents_provided": [

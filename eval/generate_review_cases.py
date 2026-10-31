@@ -42,7 +42,7 @@ PLAN = [
     ("R-11", "DOC-04", None, None, {}),
     ("R-12", "DOC-06", None, None, {}),
     ("R-13", "CLM-B", None, None, {}),
-    ("R-14", "CLM-07", None, None, {}),
+    ("R-14", "CLM-08", None, None, {}),
     ("R-15", "CLM-01", None, None, {}),
     ("R-16", "CLM-06", None, None, {}),
 ]

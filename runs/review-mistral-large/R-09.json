@@ -1,0 +1,81 @@
+{
+  "review_id": "R-09",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"approve\",\n  \"issues\": [],\n  \"summary\": \"All recorded facts match the customer email and both attached documents (accident report and repair quote, both naming Lucas Bernard, policy VER-1002 and the Renault Clio GK-904-TR), the claim was reported within the 5-day deadline, C2 collision is in the Policy Schedule, all C2-required documents are provided, no exclusion applies, the third party is a private car (not a commercial vehicle, so no playbook referral), and the system-computed deductible (€700 = €300 C2 + €400 young-driver surcharge, licence 2024-09-02 < 3 years) and assessor requirement (> €1,500) follow the contract, so the staged payment of €1,700 is correct.\"\n}\n```",
+  "questions": [],
+  "thread_id": "5b54992a-dd0f-4ab0-9165-bff586ae495d",
+  "cost": {
+    "failed": false,
+    "input_tokens": 46168,
+    "cached_tokens": 34304,
+    "output_tokens": 1253,
+    "input_cost": "0.00853632",
+    "output_cost": "0.00250040",
+    "total": "0.01103672"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 25.8,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "summary": "All recorded facts match the customer email and both attached documents (accident report and repair quote, both naming Lucas Bernard, policy VER-1002 and the Renault Clio GK-904-TR), the claim was reported within the 5-day deadline, C2 collision is in the Policy Schedule, all C2-required documents are provided, no exclusion applies, the third party is a private car (not a commercial vehicle, so no playbook referral), and the system-computed deductible (€700 = €300 C2 + €400 young-driver surcharge, licence 2024-09-02 < 3 years) and assessor requirement (> €1,500) follow the contract, so the staged payment of €1,700 is correct.",
+    "unreadable": false
+  }
+}

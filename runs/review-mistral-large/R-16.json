@@ -1,0 +1,146 @@
+{
+  "review_id": "R-16",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"approve\",\n  \"issues\": [],\n  \"summary\": \"All recorded facts match the customer email and the Veridia contract: policy VER-1004 (Thomas Petit, VW Golf 2020) holds C2 collision cover in the Policy Schedule, the 2026-10-08 incident was reported on 2026-10-10 (within the 5-day deadline of Article 4.1), the policyholder is at fault with an identified third party (Mr. Blanc, joint signed accident report), all three C2-required documents were received, no Article 3 exclusion applies, the €300 C2 deductible is correct (not-at-fault waiver does not apply since the policyholder is at fault; no young-driver surcharge as the licence dates from 2008), and no assessor is needed since €1,500 is not above €1,500 (Article 6.1), so the staged €1,200 payout is payable.\"\n}\n```",
+  "questions": [],
+  "thread_id": "8b568f92-1006-42af-8f45-c47001545337",
+  "cost": {
+    "failed": false,
+    "input_tokens": 181427,
+    "cached_tokens": 157184,
+    "output_tokens": 3091,
+    "input_cost": "0.02316476",
+    "output_cost": "0.00619764",
+    "total": "0.02936240"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 73.2,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "summary": "All recorded facts match the customer email and the Veridia contract: policy VER-1004 (Thomas Petit, VW Golf 2020) holds C2 collision cover in the Policy Schedule, the 2026-10-08 incident was reported on 2026-10-10 (within the 5-day deadline of Article 4.1), the policyholder is at fault with an identified third party (Mr. Blanc, joint signed accident report), all three C2-required documents were received, no Article 3 exclusion applies, the €300 C2 deductible is correct (not-at-fault waiver does not apply since the policyholder is at fault; no young-driver surcharge as the licence dates from 2008), and no assessor is needed since €1,500 is not above €1,500 (Article 6.1), so the staged €1,200 payout is payable.",
+    "unreadable": false
+  }
+}

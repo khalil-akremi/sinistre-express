@@ -1,0 +1,73 @@
+{
+  "review_id": "R-12",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"concerns\",\n  \"issues\": [\n    {\n      \"field\": \"policyholder at fault\",\n      \"recorded\": \"true\",\n      \"should_be\": \"false\",\n      \"evidence\": \"Customer email 2026-10-30 ('My car was stolen from the street where I live') and police_report.pdf (receipt of a theft complaint, complaint no. 2026/011/48213, 'Date of the theft: 29/10/2026', 'Keys: both keys kept by the complainant', signs of break-in reported) describe a theft by an unknown person with no other driver involved, so the policyholder is the victim, not at fault. This does not change the C4 payout (theft is paid at market value per Article 2), but the recorded fact contradicts the sources.\"\n    }\n  ],\n  \"summary\": \"All other facts check out — C4 theft is in the Policy Schedule for VER-1001 (Peugeot 208, market value €14,000), incident 2026-10-29 and report 2026-10-30 are within the 2-day theft deadline (Article 4.1), the police report is the required document for C4 and belongs to Claire Martin / this vehicle, no exclusion applies, no third party/commercial vehicle so no handler referral is needed, and deductible €1,400 / payout €12,600 match the C4 rule (10% of claim, min €500) — but the recorded 'policyholder at fault: true' contradicts the email and police report and should be corrected to false before approval.\"\n}\n```",
+  "questions": [],
+  "thread_id": "27e06922-2ce3-405c-abbd-f5c3e4d8fe89",
+  "cost": {
+    "failed": false,
+    "input_tokens": 39986,
+    "cached_tokens": 24832,
+    "output_tokens": 1980,
+    "input_cost": "0.01065144",
+    "output_cost": "0.00405721",
+    "total": "0.01470865"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 39.5,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "policyholder at fault",
+        "recorded": "true",
+        "should_be": "false",
+        "evidence": "Customer email 2026-10-30 ('My car was stolen from the street where I live') and police_report.pdf (receipt of a theft complaint, complaint no. 2026/011/48213, 'Date of the theft: 29/10/2026', 'Keys: both keys kept by the complainant', signs of break-in reported) describe a theft by an unknown person with no other driver involved, so the policyholder is the victim, not at fault. This does not change the C4 payout (theft is paid at market value per Article 2), but the recorded fact contradicts the sources."
+      }
+    ],
+    "summary": "All other facts check out — C4 theft is in the Policy Schedule for VER-1001 (Peugeot 208, market value €14,000), incident 2026-10-29 and report 2026-10-30 are within the 2-day theft deadline (Article 4.1), the police report is the required document for C4 and belongs to Claire Martin / this vehicle, no exclusion applies, no third party/commercial vehicle so no handler referral is needed, and deductible €1,400 / payout €12,600 match the C4 rule (10% of claim, min €500) — but the recorded 'policyholder at fault: true' contradicts the email and police report and should be corrected to false before approval.",
+    "unreadable": false
+  }
+}
