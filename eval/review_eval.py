@@ -61,9 +61,8 @@ async def main_async(args: argparse.Namespace) -> None:
     agent_id = clean_secret(args.agent_id or os.environ.get("REVIEWER_AGENT_ID"))
     if not agent_id:
         raise SystemExit("Set REVIEWER_AGENT_ID in .env (or pass --agent-id).")
-    cases = json.loads(CASES_FILE.read_text(encoding="utf-8"))
-    if args.cases:
-        cases = [c for c in cases if c["review_id"] in set(args.cases)]
+    all_cases = json.loads(CASES_FILE.read_text(encoding="utf-8"))
+    cases = [c for c in all_cases if not args.cases or c["review_id"] in set(args.cases)]
     run_dir = ROOT / "runs" / f"review-{args.label}"
     run_dir.mkdir(parents=True, exist_ok=True)
     print(f"Reviewer evaluation '{args.label}' (agent {agent_id}): {len(cases)} prepared claims")
@@ -73,7 +72,7 @@ async def main_async(args: argparse.Namespace) -> None:
                             user_id=clean_secret(os.environ.get("COMINTY_USER_ID"))) as client:
         for i, case in enumerate(cases, 1):
             path = run_dir / f"{case['review_id']}.json"
-            if path.exists() and not json.loads(path.read_text(encoding="utf-8")).get("error"):
+            if path.exists() and not args.redo and not json.loads(path.read_text(encoding="utf-8")).get("error"):
                 print(f"[{i}/{len(cases)}] {case['review_id']}: already run, skipped")
                 continue
             task = build_review_task(case["email"], case["policy"], case["created"], case["claim"], [VAN_RULE])
@@ -92,7 +91,7 @@ async def main_async(args: argparse.Namespace) -> None:
                   f"(expected {case['expected_verdict']}) {'✅' if ok else '❌'}"
                   + (f"  ERROR {record['error']}" if record.get("error") else ""))
 
-    report = render(cases, run_dir, args.label)
+    report = render(all_cases, run_dir, args.label)  # always the whole set
     (run_dir / "report.md").write_text(report, encoding="utf-8")
     print("\n" + report)
 
@@ -142,6 +141,7 @@ def main() -> None:
     parser.add_argument("--label", default=time.strftime("%m%d-%H%M"))
     parser.add_argument("--agent-id", help="reviewer agent to test (default: REVIEWER_AGENT_ID)")
     parser.add_argument("--cases", nargs="*")
+    parser.add_argument("--redo", action="store_true", help="run the chosen files again even if already done")
     args = parser.parse_args()
     asyncio.run(main_async(args))
 

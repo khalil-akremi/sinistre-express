@@ -1,0 +1,76 @@
+{
+  "review_id": "R-10",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"approve\",\n  \"issues\": [],\n  \"summary\": \"All recorded facts match the customer email and repair_quote.pdf (policy VER-1007, Emma Rousseau, Tesla Model 3 2023; windscreen damage on 2026-10-26 reported 2026-10-27, within the 5-day deadline of contract Article 4.1; repair cost €1,180 equals the total incl. VAT per Article 1; C3 glass breakage is in the Policy Schedule and requires photos plus repair quote, both provided; no exclusion applies and no third party/commercial vehicle is mentioned, so the playbook referral rule is not triggered; €1,180 is below the €1,500 assessor threshold of Article 6.1), so the staged payment of €1,130 after the €50 C3 deductible is correct.\"\n}\n```",
+  "questions": [],
+  "thread_id": "98c3a289-b8f3-494d-bfdb-5503036eb7da",
+  "cost": {
+    "failed": false,
+    "input_tokens": 68490,
+    "cached_tokens": 59136,
+    "output_tokens": 1169,
+    "input_cost": "0.00881112",
+    "output_cost": "0.00234264",
+    "total": "0.01115376"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 29.4,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "summary": "All recorded facts match the customer email and repair_quote.pdf (policy VER-1007, Emma Rousseau, Tesla Model 3 2023; windscreen damage on 2026-10-26 reported 2026-10-27, within the 5-day deadline of contract Article 4.1; repair cost €1,180 equals the total incl. VAT per Article 1; C3 glass breakage is in the Policy Schedule and requires photos plus repair quote, both provided; no exclusion applies and no third party/commercial vehicle is mentioned, so the playbook referral rule is not triggered; €1,180 is below the €1,500 assessor threshold of Article 6.1), so the staged payment of €1,130 after the €50 C3 deductible is correct.",
+    "unreadable": false
+  }
+}

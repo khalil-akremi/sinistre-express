@@ -1,0 +1,73 @@
+{
+  "review_id": "R-03",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"concerns\",\n  \"issues\": [\n    {\n      \"field\": \"documents counted as provided / repair_quote (and repair cost in EUR: 980)\",\n      \"recorded\": \"repair_quote.pdf counted as provided for policy VER-1003 (Ines Haddad, Toyota Yaris 2019) and used as the basis for the €980 repair cost\",\n      \"should_be\": \"The repair quote counted as provided must belong to this policyholder and vehicle; the quote on file is made out to Mr. Julien Roche, Renault Clio (2017), registration DX-482-KD — a different customer and a different vehicle\",\n      \"evidence\": \"repair_quote.pdf (Garage des Lilas, quote Q-2610-5320): 'Customer Mr. Julien Roche … Vehicle Renault Clio (2017), Registration DX-482-KD', total incl. VAT 980,00 €; Policy Schedule for VER-1003: holder Ines Haddad, vehicle Toyota Yaris (2019). Contract Article 4.3 (2630#10414, page 2) requires a repair quote for C2, and the review rule requires each provided document to belong to this policyholder and vehicle.\"\n    }\n  ],\n  \"summary\": \"All other facts check out (C2 in the Policy Schedule, incident 2026-10-28 reported 2026-10-29 within the 5-day deadline of Article 4.1, policyholder at fault with no third party so the €300 C2 deductible applies and the commercial-vehicle referral playbook rule is not triggered, no exclusion indicated, €980 ≤ €1,500 so no assessor per Article 6.1, photos counted as received), but the attached repair quote belongs to a different customer and vehicle (Julien Roche, Renault Clio DX-482-KD), so the €980 repair cost is not supported by a valid quote for Ines Haddad's Toyota Yaris and the payment should not be approved as staged.\"\n}\n```",
+  "questions": [],
+  "thread_id": "4f8d61b8-e902-4aab-a35d-a03239f21a88",
+  "cost": {
+    "failed": false,
+    "input_tokens": 68962,
+    "cached_tokens": 59648,
+    "output_tokens": 1485,
+    "input_cost": "0.00910200",
+    "output_cost": "0.00302088",
+    "total": "0.01212288"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 33.9,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "documents counted as provided / repair_quote (and repair cost in EUR: 980)",
+        "recorded": "repair_quote.pdf counted as provided for policy VER-1003 (Ines Haddad, Toyota Yaris 2019) and used as the basis for the €980 repair cost",
+        "should_be": "The repair quote counted as provided must belong to this policyholder and vehicle; the quote on file is made out to Mr. Julien Roche, Renault Clio (2017), registration DX-482-KD — a different customer and a different vehicle",
+        "evidence": "repair_quote.pdf (Garage des Lilas, quote Q-2610-5320): 'Customer Mr. Julien Roche … Vehicle Renault Clio (2017), Registration DX-482-KD', total incl. VAT 980,00 €; Policy Schedule for VER-1003: holder Ines Haddad, vehicle Toyota Yaris (2019). Contract Article 4.3 (2630#10414, page 2) requires a repair quote for C2, and the review rule requires each provided document to belong to this policyholder and vehicle."
+      }
+    ],
+    "summary": "All other facts check out (C2 in the Policy Schedule, incident 2026-10-28 reported 2026-10-29 within the 5-day deadline of Article 4.1, policyholder at fault with no third party so the €300 C2 deductible applies and the commercial-vehicle referral playbook rule is not triggered, no exclusion indicated, €980 ≤ €1,500 so no assessor per Article 6.1, photos counted as received), but the attached repair quote belongs to a different customer and vehicle (Julien Roche, Renault Clio DX-482-KD), so the €980 repair cost is not supported by a valid quote for Ines Haddad's Toyota Yaris and the payment should not be approved as staged.",
+    "unreadable": false
+  }
+}

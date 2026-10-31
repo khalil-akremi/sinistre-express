@@ -1,0 +1,76 @@
+{
+  "review_id": "R-09",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"approve\",\n  \"issues\": [],\n  \"summary\": \"All recorded facts match the customer email and both attached documents (accident report and repair quote belong to Lucas Bernard / VER-1002 / Renault Clio GK-904-TR), the claim was reported within the 5-day deadline, C2 collision damage is in the Policy Schedule, all required C2 documents are provided, the third party (Julie Laurent, Renault Mégane, a private car — not a commercial vehicle, so the playbook referral rule does not trigger) is identified, and no exclusion applies, so the staged payment can be approved.\"\n}\n```",
+  "questions": [],
+  "thread_id": "bd1caccb-ccf5-4ba8-adb1-c71706be7615",
+  "cost": {
+    "failed": false,
+    "input_tokens": 65692,
+    "cached_tokens": 54784,
+    "output_tokens": 1180,
+    "input_cost": "0.00949408",
+    "output_cost": "0.00236563",
+    "total": "0.01185971"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 27.7,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "summary": "All recorded facts match the customer email and both attached documents (accident report and repair quote belong to Lucas Bernard / VER-1002 / Renault Clio GK-904-TR), the claim was reported within the 5-day deadline, C2 collision damage is in the Policy Schedule, all required C2 documents are provided, the third party (Julie Laurent, Renault Mégane, a private car — not a commercial vehicle, so the playbook referral rule does not trigger) is identified, and no exclusion applies, so the staged payment can be approved.",
+    "unreadable": false
+  }
+}

@@ -33,7 +33,7 @@ PLAN = [
      "exclusion_signal", {"exclusion_signal": None}),
     ("R-06", "CLM-15", "Recorded a wrong report date, hiding a late report (9 days after the incident).",
      "report_date", {"report_date": "2026-10-03"}),
-    ("R-07", "CLM-A", "Recorded the other driver as not identified, so the not-at-fault waiver was lost.",
+    ("R-07", "CLM-05", "Recorded the other driver as not identified, so the not-at-fault waiver was lost.",
      "third_party_identified", {"third_party_identified": False}),
     ("R-08", "DOC-03", "Recorded a windscreen claim as collision (C2) instead of glass (C3).",
      "coverage", {"coverage": "C2"}),

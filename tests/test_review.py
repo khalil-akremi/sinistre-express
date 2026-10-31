@@ -36,7 +36,7 @@ def test_review_task_has_the_sources_but_not_the_handlers_reasoning():
     task = build_review_task(case["email"], case["policy"], case["created"], case["claim"], ["Vans go to a handler."])
     assert "around €900" in task                                  # the email
     assert "repair_quote.pdf" in task and "open them" in task     # the document to open
-    assert "repair cost in EUR: 900" in task                      # what the handler recorded
+    assert "- repair_cost (repair cost in EUR): 900" in task      # what the handler recorded
     assert "Vans go to a handler." in task and "Emma" not in task
     assert "status pending_approval" in task and "payout €600" in task
     assert "Status:" not in task                                  # no handler report
@@ -125,7 +125,7 @@ def test_reviewer_receives_the_same_documents(tmp_path):
         data = wait_done(client, res.json()["claim_ref"])
     assert data["claim"]["status"] == "pending_approval" and data["review"]["verdict"] == "approve"
     assert [f.name for f in reviewer.files[0]] == ["repair_quote.pdf"]
-    assert "repair_quote.pdf" in reviewer.tasks[0] and "repair cost in EUR: 1180" in reviewer.tasks[0]
+    assert "repair_quote.pdf" in reviewer.tasks[0] and "(repair cost in EUR): 1180" in reviewer.tasks[0]
 
 
 def test_a_broken_reviewer_means_a_person_must_look(tmp_path):
@@ -157,3 +157,34 @@ def test_review_report_counts_catches_and_false_alarms(tmp_path):
     report = render(REVIEW_CASES, tmp_path, "test")
     assert "| Planted mistakes caught | 7/8 |" in report
     assert "| False alarms on correct claims | 1/8 |" in report
+
+
+# ------------------------------------------------- checks -> verdict (code decides)
+from core.review import FACT_LABELS  # noqa: E402
+
+
+def checks_reply(mismatch=None, paid=True, skip=None):
+    checks = [{"field": f, "recorded": "x", "sources_say": "y" if f == mismatch else "x",
+               "match": f != mismatch, "evidence": "email"} for f in FACT_LABELS if f != skip]
+    return json.dumps({"checks": checks, "payment": {"should_be_paid": paid, "evidence": "ok"},
+                       "summary": "Everything matches."})
+
+
+def test_all_checks_match_means_approve():
+    v = parse_verdict(checks_reply())
+    assert v["verdict"] == "approve" and len(v["checks"]) == len(FACT_LABELS)
+
+
+def test_one_mismatch_means_concerns_even_if_the_summary_says_fine():
+    v = parse_verdict(checks_reply(mismatch="third_party_identified"))
+    assert v["verdict"] == "concerns" and v["issues"][0]["field"] == "third_party_identified"
+
+
+def test_should_not_be_paid_means_concerns():
+    v = parse_verdict(checks_reply(paid=False))
+    assert v["verdict"] == "concerns" and v["issues"][0]["field"] == "payment decision"
+
+
+def test_a_fact_left_unchecked_means_concerns():
+    v = parse_verdict(checks_reply(skip="at_fault"))
+    assert v["verdict"] == "concerns" and v["issues"][0]["field"] == "review incomplete"

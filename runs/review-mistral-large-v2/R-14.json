@@ -1,0 +1,121 @@
+{
+  "review_id": "R-14",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"approve\",\n  \"issues\": [],\n  \"summary\": \"All recorded facts match the customer email of 2026-10-12 (incident 2026-10-10, glass breakage on policy VER-1008, €320 quote, no fault, no third party, photos and repair quote received per the mailroom), C3 glass breakage is in the Policy Schedule with a €50 deductible, the claim was reported within the 5-day deadline of contract Article 4.1, no Article 3 exclusion applies, both C3-required documents (photos, repair quote) were provided, the €320 repair cost is below the €1,500 assessor threshold of Article 6.1, and the playbook's commercial-vehicle referral rule is not triggered because no third party is involved — so the staged €270 payout (assessor not required) is correct.\"\n}\n```",
+  "questions": [],
+  "thread_id": "275ad0f2-3bd9-4d95-97c8-91b57b9f7788",
+  "cost": {
+    "failed": false,
+    "input_tokens": 159463,
+    "cached_tokens": 135680,
+    "output_tokens": 4028,
+    "input_cost": "0.02203644",
+    "output_cost": "0.00819424",
+    "total": "0.03023068"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 62.7,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "summary": "All recorded facts match the customer email of 2026-10-12 (incident 2026-10-10, glass breakage on policy VER-1008, €320 quote, no fault, no third party, photos and repair quote received per the mailroom), C3 glass breakage is in the Policy Schedule with a €50 deductible, the claim was reported within the 5-day deadline of contract Article 4.1, no Article 3 exclusion applies, both C3-required documents (photos, repair quote) were provided, the €320 repair cost is below the €1,500 assessor threshold of Article 6.1, and the playbook's commercial-vehicle referral rule is not triggered because no third party is involved — so the staged €270 payout (assessor not required) is correct.",
+    "unreadable": false
+  }
+}

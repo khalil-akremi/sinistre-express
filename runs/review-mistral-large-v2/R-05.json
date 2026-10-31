@@ -1,0 +1,133 @@
+{
+  "review_id": "R-05",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"concerns\",\n  \"issues\": [\n    {\n      \"field\": \"possible exclusion flagged\",\n      \"recorded\": \"null\",\n      \"should_be\": \"Possible exclusion under Article 3.1 (driver had alcohol above the legal limit / under the influence) — the claim must be referred to a Veridia claims handler per Article 3 ('An exclusion is never applied automatically. When a claim shows a possible exclusion, it is referred to a claims handler, who decides') and Article 7.2, and must not be paid automatically\",\n      \"evidence\": \"Customer email dated 2026-10-22: 'Coming back from a friend's birthday party, where I had a few drinks, I lost control and hit a fence.' Veridia contract (document 2630#10414, contract.pdf): Article 3.1 exclusion list on page 2, referral rule at end of Article 3 on page 2, and Article 7.2 on page 3\"\n    }\n  ],\n  \"summary\": \"All recorded facts (policy VER-1004, C2 coverage in the Policy Schedule, incident 2026-10-21 reported 2026-10-22 within the 5-day deadline of Article 4.1, €1,800 repair cost, at fault, no third party, photos and repair quote provided, €300 deductible with no young-driver surcharge since the licence dates from 2008, assessor required since €1,800 > €1,500) match the email and contract, but the email states the driver had 'a few drinks' before losing control, which is a possible alcohol exclusion under Article 3.1 that the handler recorded as null — per Articles 3 and 7.2 this claim must be referred to a claims handler and must not be paid automatically, so do not approve the staged payment yet.\"\n}\n```",
+  "questions": [],
+  "thread_id": "9fd3fb2f-7a43-4aa0-8978-f8a254d564b4",
+  "cost": {
+    "failed": false,
+    "input_tokens": 148393,
+    "cached_tokens": 119296,
+    "output_tokens": 3460,
+    "input_cost": "0.02448628",
+    "output_cost": "0.00700801",
+    "total": "0.03149429"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 71.9,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "possible exclusion flagged",
+        "recorded": "null",
+        "should_be": "Possible exclusion under Article 3.1 (driver had alcohol above the legal limit / under the influence) — the claim must be referred to a Veridia claims handler per Article 3 ('An exclusion is never applied automatically. When a claim shows a possible exclusion, it is referred to a claims handler, who decides') and Article 7.2, and must not be paid automatically",
+        "evidence": "Customer email dated 2026-10-22: 'Coming back from a friend's birthday party, where I had a few drinks, I lost control and hit a fence.' Veridia contract (document 2630#10414, contract.pdf): Article 3.1 exclusion list on page 2, referral rule at end of Article 3 on page 2, and Article 7.2 on page 3"
+      }
+    ],
+    "summary": "All recorded facts (policy VER-1004, C2 coverage in the Policy Schedule, incident 2026-10-21 reported 2026-10-22 within the 5-day deadline of Article 4.1, €1,800 repair cost, at fault, no third party, photos and repair quote provided, €300 deductible with no young-driver surcharge since the licence dates from 2008, assessor required since €1,800 > €1,500) match the email and contract, but the email states the driver had 'a few drinks' before losing control, which is a possible alcohol exclusion under Article 3.1 that the handler recorded as null — per Articles 3 and 7.2 this claim must be referred to a claims handler and must not be paid automatically, so do not approve the staged payment yet.",
+    "unreadable": false
+  }
+}

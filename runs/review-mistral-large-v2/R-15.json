@@ -1,0 +1,71 @@
+{
+  "review_id": "R-15",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"approve\",\n  \"issues\": [],\n  \"summary\": \"All recorded facts match the customer email of 2026-10-04 (accident 2026-10-03, self-inflicted collision with a pillar, no third party, €900 quote, photos and repair quote attached and counted as received per the mailroom note), C2 collision is in the VER-1004 Policy Schedule, the claim was reported within the 5-day deadline (Article 4.1), no Article 3 exclusion is indicated, the required C2 documents are present, the playbook's commercial-vehicle referral rule does not apply because no third party was involved, and the €300 C2 deductible with no not-at-fault waiver (driver at fault) and no young-driver surcharge (licence since 2008) yields the staged €600 payout with no assessor needed (repair cost €900 is not above €1,500).\"\n}\n```",
+  "questions": [],
+  "thread_id": "7d3f8e17-4d2e-4648-ae52-201630d54c1a",
+  "cost": {
+    "failed": false,
+    "input_tokens": 70156,
+    "cached_tokens": 52224,
+    "output_tokens": 1801,
+    "input_cost": "0.01419872",
+    "output_cost": "0.00366619",
+    "total": "0.01786491"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 43.4,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "summary": "All recorded facts match the customer email of 2026-10-04 (accident 2026-10-03, self-inflicted collision with a pillar, no third party, €900 quote, photos and repair quote attached and counted as received per the mailroom note), C2 collision is in the VER-1004 Policy Schedule, the claim was reported within the 5-day deadline (Article 4.1), no Article 3 exclusion is indicated, the required C2 documents are present, the playbook's commercial-vehicle referral rule does not apply because no third party was involved, and the €300 C2 deductible with no not-at-fault waiver (driver at fault) and no young-driver surcharge (licence since 2008) yields the staged €600 payout with no assessor needed (repair cost €900 is not above €1,500).",
+    "unreadable": false
+  }
+}

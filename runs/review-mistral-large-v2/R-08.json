@@ -1,0 +1,79 @@
+{
+  "review_id": "R-08",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"concerns\",\n  \"issues\": [\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2 (Collision damage)\",\n      \"should_be\": \"C3 (Glass breakage)\",\n      \"evidence\": \"Customer email (received 2026-10-27): 'A stone thrown up on the A6 motorway on 26 October 2026 cracked my windscreen' — this is glass breakage, not a collision. Contract Article 2 (document 2630#10414, page 1): C2 covers 'Damage to the insured vehicle after a collision'; C3 covers 'Windscreen, side windows'. C3 is listed in the Policy Schedule for VER-1007, so the claim is payable, but under C3, not C2.\"\n    },\n    {\n      \"field\": \"deductible / payout (derived from the wrong coverage)\",\n      \"recorded\": \"deductible €300; payout €880\",\n      \"should_be\": \"C3 standard deductible is €50 (the €300 deductible belongs to C2), so the deductible/payout computed from the recorded C2 coverage are wrong\",\n      \"evidence\": \"Contract Article 2 coverage table (document 2630#10414, page 1): C2 standard deductible €300, C3 standard deductible €50. Article 5.2 not-at-fault waiver applies only to C2, so it cannot be used here. Amounts themselves are computed by the claims system; only the coverage fact feeding them is wrong.\"\n    }\n  ],\n  \"summary\": \"The claim is a windscreen glass breakage and should be recorded under coverage C3 (deductible €50), not C2 as recorded; all other facts (dates, €1,180 incl. VAT quote, no fault, no third party, photos + quote provided, reported within 5 days, no exclusion, no assessor needed) match the email, the quote and the contract, so the payment should proceed only after the coverage is corrected.\"\n}\n```",
+  "questions": [],
+  "thread_id": "78634c1f-c319-4f57-8eda-dbb8ec85f69f",
+  "cost": {
+    "failed": false,
+    "input_tokens": 47779,
+    "cached_tokens": 39936,
+    "output_tokens": 1320,
+    "input_cost": "0.00680348",
+    "output_cost": "0.00268048",
+    "total": "0.00948396"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 26.6,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "coverage",
+        "recorded": "C2 (Collision damage)",
+        "should_be": "C3 (Glass breakage)",
+        "evidence": "Customer email (received 2026-10-27): 'A stone thrown up on the A6 motorway on 26 October 2026 cracked my windscreen' — this is glass breakage, not a collision. Contract Article 2 (document 2630#10414, page 1): C2 covers 'Damage to the insured vehicle after a collision'; C3 covers 'Windscreen, side windows'. C3 is listed in the Policy Schedule for VER-1007, so the claim is payable, but under C3, not C2."
+      },
+      {
+        "field": "deductible / payout (derived from the wrong coverage)",
+        "recorded": "deductible €300; payout €880",
+        "should_be": "C3 standard deductible is €50 (the €300 deductible belongs to C2), so the deductible/payout computed from the recorded C2 coverage are wrong",
+        "evidence": "Contract Article 2 coverage table (document 2630#10414, page 1): C2 standard deductible €300, C3 standard deductible €50. Article 5.2 not-at-fault waiver applies only to C2, so it cannot be used here. Amounts themselves are computed by the claims system; only the coverage fact feeding them is wrong."
+      }
+    ],
+    "summary": "The claim is a windscreen glass breakage and should be recorded under coverage C3 (deductible €50), not C2 as recorded; all other facts (dates, €1,180 incl. VAT quote, no fault, no third party, photos + quote provided, reported within 5 days, no exclusion, no assessor needed) match the email, the quote and the contract, so the payment should proceed only after the coverage is corrected.",
+    "unreadable": false
+  }
+}

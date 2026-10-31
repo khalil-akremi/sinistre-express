@@ -1,0 +1,81 @@
+{
+  "review_id": "R-12",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"approve\",\n  \"issues\": [],\n  \"summary\": \"All recorded facts match the customer email and the police report (theft of the insured Peugeot 208 on 2026-10-29, reported 2026-10-30 within the 2-day theft deadline, C4 theft coverage present in the Policy Schedule, police report provided and belonging to Claire Martin / this vehicle, no third party, no exclusion indicators), and no playbook referral rule applies since no other vehicle is involved, so the staged payment can be approved.\"\n}\n```",
+  "questions": [],
+  "thread_id": "e1a4145f-0cad-4641-9ff3-4dd2148e892d",
+  "cost": {
+    "failed": false,
+    "input_tokens": 62878,
+    "cached_tokens": 52224,
+    "output_tokens": 1143,
+    "input_cost": "0.00900776",
+    "output_cost": "0.00226694",
+    "total": "0.01127470"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 34.0,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "summary": "All recorded facts match the customer email and the police report (theft of the insured Peugeot 208 on 2026-10-29, reported 2026-10-30 within the 2-day theft deadline, C4 theft coverage present in the Policy Schedule, police report provided and belonging to Claire Martin / this vehicle, no third party, no exclusion indicators), and no playbook referral rule applies since no other vehicle is involved, so the staged payment can be approved.",
+    "unreadable": false
+  }
+}

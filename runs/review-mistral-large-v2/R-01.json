@@ -1,0 +1,104 @@
+{
+  "review_id": "R-01",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"concerns\",\n  \"issues\": [\n    {\n      \"field\": \"repair cost in EUR\",\n      \"recorded\": \"900\",\n      \"should_be\": \"1640.00 (total incl. VAT on the quote)\",\n      \"evidence\": \"repair_quote.pdf (Garage Central Auto, quote Q-2610-5283, issued 28/10/2026, customer Thomas Petit, policy VER-1004, VW Golf 2020): 'TOTAL INCL. VAT 1 640,00 €'. Contract Article 1 defines repair cost as the total amount including VAT shown on the repair quote. The €900 figure comes only from the garage's phone estimate in the customer email, not from the written quote.\"\n    },\n    {\n      \"field\": \"assessor required\",\n      \"recorded\": \"no\",\n      \"should_be\": \"yes\",\n      \"evidence\": \"Contract Article 6.1 (contract.pdf, page 3): for C2/C3 damage claims an independent assessor must inspect the vehicle when the repair cost is above €1,500. The quote's total incl. VAT is €1,640.00 (repair_quote.pdf), which is above €1,500, so an assessor is required.\"\n    }\n  ],\n  \"summary\": \"The claim is correctly classified (C2, reported within the 5-day deadline, at-fault single-vehicle collision with no third party so the commercial-vehicle referral playbook rule does not apply, required C2 documents provided, no exclusion), but the recorded repair cost is the €900 phone estimate instead of the €1,640.00 total incl. VAT on the attached quote, and because the true cost exceeds €1,500 an independent assessor is required, so the staged payment (deductible €300 / payout €600 / no assessor) must not be approved as recorded.\"\n}\n```",
+  "questions": [],
+  "thread_id": "e31c75d6-5483-4267-ac45-509900d244fe",
+  "cost": {
+    "failed": false,
+    "input_tokens": 74957,
+    "cached_tokens": 61952,
+    "output_tokens": 2094,
+    "input_cost": "0.01097876",
+    "output_cost": "0.00424118",
+    "total": "0.01521994"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "error",
+      "error": "Tool execution error: page_label='4' was not found for document_id='2630#10414' : Available pages [\"1\", \"2\", \"3\"]"
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 35.1,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "repair cost in EUR",
+        "recorded": "900",
+        "should_be": "1640.00 (total incl. VAT on the quote)",
+        "evidence": "repair_quote.pdf (Garage Central Auto, quote Q-2610-5283, issued 28/10/2026, customer Thomas Petit, policy VER-1004, VW Golf 2020): 'TOTAL INCL. VAT 1 640,00 €'. Contract Article 1 defines repair cost as the total amount including VAT shown on the repair quote. The €900 figure comes only from the garage's phone estimate in the customer email, not from the written quote."
+      },
+      {
+        "field": "assessor required",
+        "recorded": "no",
+        "should_be": "yes",
+        "evidence": "Contract Article 6.1 (contract.pdf, page 3): for C2/C3 damage claims an independent assessor must inspect the vehicle when the repair cost is above €1,500. The quote's total incl. VAT is €1,640.00 (repair_quote.pdf), which is above €1,500, so an assessor is required."
+      }
+    ],
+    "summary": "The claim is correctly classified (C2, reported within the 5-day deadline, at-fault single-vehicle collision with no third party so the commercial-vehicle referral playbook rule does not apply, required C2 documents provided, no exclusion), but the recorded repair cost is the €900 phone estimate instead of the €1,640.00 total incl. VAT on the attached quote, and because the true cost exceeds €1,500 an independent assessor is required, so the staged payment (deductible €300 / payout €600 / no assessor) must not be approved as recorded.",
+    "unreadable": false
+  }
+}

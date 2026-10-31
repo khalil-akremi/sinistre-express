@@ -72,8 +72,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   },
   {
@@ -155,8 +155,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   },
   {
@@ -240,8 +240,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   },
   {
@@ -327,8 +327,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   },
   {
@@ -402,8 +402,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   },
   {
@@ -485,21 +485,21 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   },
   {
     "review_id": "R-07",
-    "source_case": "CLM-A",
+    "source_case": "CLM-05",
     "mistake": "Recorded the other driver as not identified, so the not-at-fault waiver was lost.",
     "field": "third_party_identified",
     "expected_verdict": "concerns",
     "email": {
-      "date": "2026-10-14",
-      "from": "Claire Martin",
-      "subject": "Claim - accident - VER-1001",
-      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 12 October 2026.\nA van ran a red light and hit the side of my car at the Rue de Rivoli crossing. The van driver, Mr. Dubois, admitted it was his fault and we both signed the accident report.\nThe garage quoted €1,200 to repair my car.\n\nKind regards,\nClaire Martin\nPolicy number: VER-1001\n\nAttached: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf",
+      "date": "2026-10-08",
+      "from": "Yanis Moreau",
+      "subject": "Claim - accident - VER-1006",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 07 October 2026.\nSomeone opened their car door into my car as I drove past. The driver, Ms. Nguyen, admitted fault and signed the accident report.\nThe garage quoted €1,100 to repair my car.\n\nKind regards,\nYanis Moreau\nPolicy number: VER-1006\n\nAttached: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf",
       "attachments": [
         "damage_photos.zip",
         "repair_quote.pdf",
@@ -507,11 +507,11 @@
       ]
     },
     "policy": {
-      "policy_id": "VER-1001",
-      "holder_name": "Claire Martin",
-      "vehicle": "Peugeot 208 (2021)",
-      "market_value_eur": 14000,
-      "licence_date": "2012-05-14",
+      "policy_id": "VER-1006",
+      "holder_name": "Yanis Moreau",
+      "vehicle": "Dacia Sandero (2022)",
+      "market_value_eur": 11000,
+      "licence_date": "2025-01-15",
       "coverages": [
         {
           "code": "C1",
@@ -522,21 +522,17 @@
           "name": "Collision damage"
         },
         {
-          "code": "C3",
-          "name": "Glass breakage"
-        },
-        {
           "code": "C4",
           "name": "Theft"
         }
       ]
     },
     "created": {
-      "policy_id": "VER-1001",
+      "policy_id": "VER-1006",
       "coverage": "C2",
-      "incident_date": "2026-10-12",
-      "report_date": "2026-10-14",
-      "repair_cost": 1200,
+      "incident_date": "2026-10-07",
+      "report_date": "2026-10-08",
+      "repair_cost": 1100,
       "at_fault": false,
       "third_party_involved": true,
       "third_party_identified": false,
@@ -549,12 +545,12 @@
     },
     "claim": {
       "claim_ref": "R-07",
-      "policy_id": "VER-1001",
+      "policy_id": "VER-1006",
       "coverage": "C2",
-      "incident_date": "2026-10-12",
-      "report_date": "2026-10-14",
+      "incident_date": "2026-10-07",
+      "report_date": "2026-10-08",
       "description": "Prepared by the handler agent.",
-      "repair_cost": 1200,
+      "repair_cost": 1100,
       "at_fault": 0,
       "third_party_involved": 1,
       "third_party_identified": 0,
@@ -562,16 +558,16 @@
       "exclusion_signal": null,
       "status": "pending_approval",
       "blocking_issues": "[]",
-      "deductible": 300,
-      "payout": 900,
+      "deductible": 700,
+      "payout": 400,
       "assessor_required": 0,
       "assessor_date": null,
       "requested_documents": null,
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   },
   {
@@ -655,8 +651,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   },
   {
@@ -738,8 +734,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   },
   {
@@ -823,8 +819,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   },
   {
@@ -900,8 +896,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   },
   {
@@ -982,8 +978,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   },
   {
@@ -1063,8 +1059,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   },
   {
@@ -1138,8 +1134,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   },
   {
@@ -1213,8 +1209,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   },
   {
@@ -1290,8 +1286,8 @@
       "escalation_reasons": null,
       "handler_note": null,
       "approved_by": null,
-      "created_at": "2026-10-31T15:14:50+00:00",
-      "updated_at": "2026-10-31T15:14:50+00:00"
+      "created_at": "2026-10-31T15:28:58+00:00",
+      "updated_at": "2026-10-31T15:28:58+00:00"
     }
   }
 ]

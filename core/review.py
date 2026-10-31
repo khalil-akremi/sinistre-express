@@ -45,9 +45,13 @@ means the claim must not be paid automatically: if such a rule applies, that is 
 playbook rule only when the email or the documents state the facts that trigger it.
 Do not redo the arithmetic: the claims system computes the amounts from the recorded facts.
 
-Raise a concern only for a specific problem you can point to in a source. Answer with JSON only:
-{{"verdict": "approve" or "concerns", "issues": [{{"field": "...", "recorded": "...", "should_be": "...", \
-"evidence": "where you saw it"}}], "summary": "one sentence for the person approving"}}
+Answer with JSON only. Give one check for EVERY recorded fact listed below (use its key as "field"), \
+then one check of the decision to pay. Set "match" to false only for a specific difference you can point \
+to in a source:
+{{"checks": [{{"field": "repair_cost", "recorded": "...", "sources_say": "...", "match": true or false, \
+"evidence": "where you saw it"}}, ...one per fact...],
+ "payment": {{"should_be_paid": true or false, "evidence": "deadline, exclusions, coverage, documents, playbook"}},
+ "summary": "one sentence for the person approving"}}
 
 --- Customer email received on {date} ---
 From: {sender}
@@ -76,7 +80,7 @@ def build_review_task(email: dict, policy: dict, created: dict, claim: dict, pla
         parts.append(f"Attached documents (open them): {', '.join(files)}.")
     if email.get("attachments"):
         parts.append(f"Also stored by the mailroom (cannot be opened, count as received): {', '.join(email['attachments'])}.")
-    facts = "\n".join(f"- {FACT_LABELS.get(k, k)}: {json.dumps(created.get(k))}" for k in FACT_LABELS)
+    facts = "\n".join(f"- {k} ({FACT_LABELS[k]}): {json.dumps(created.get(k))}" for k in FACT_LABELS)
     return REVIEW_TASK.format(
         date=email["date"], sender=email["from"], subject=email["subject"], body=email["body"],
         attachments=" ".join(parts) or "No attachment.",
@@ -90,18 +94,44 @@ def build_review_task(email: dict, policy: dict, created: dict, claim: dict, pla
 
 
 def parse_verdict(text: str | None) -> dict:
-    """The Reviewer's JSON verdict. Anything unreadable counts as a concern: when in doubt, a person looks."""
+    """Turn the Reviewer's checks into a verdict. The model reads; this code decides.
+
+    - any fact check with "match": false, or "should_be_paid": false -> concerns
+    - a fact left unchecked -> concerns (the review is incomplete)
+    - anything unreadable -> concerns: when in doubt, a person looks
+    (The older {"verdict", "issues"} format is still accepted.)
+    """
     match = re.search(r"\{.*\}", text or "", re.S)
     try:
         data = json.loads(match.group(0)) if match else None
     except json.JSONDecodeError:
         data = None
-    if not isinstance(data, dict) or data.get("verdict") not in ("approve", "concerns"):
-        return {"verdict": "concerns", "issues": [], "summary": "The review could not be read; check the claim manually.",
-                "unreadable": True}
+    unreadable = {"verdict": "concerns", "issues": [], "checks": [], "unreadable": True,
+                  "summary": "The review could not be read; check the claim manually."}
+    if not isinstance(data, dict):
+        return unreadable
+    summary = str(data.get("summary") or "")
+
+    if isinstance(data.get("checks"), list):
+        checks = [c for c in data["checks"] if isinstance(c, dict) and "field" in c]
+        issues = [{"field": c["field"], "recorded": c.get("recorded"), "should_be": c.get("sources_say"),
+                   "evidence": c.get("evidence", "")} for c in checks if c.get("match") is False]
+        payment = data.get("payment") if isinstance(data.get("payment"), dict) else {}
+        if payment.get("should_be_paid") is False:
+            issues.append({"field": "payment decision", "recorded": "payment staged", "should_be": "not paid",
+                           "evidence": payment.get("evidence", "")})
+        unchecked = [f for f in FACT_LABELS if f not in {c["field"] for c in checks}]
+        if unchecked:
+            issues.append({"field": "review incomplete", "recorded": ", ".join(unchecked),
+                           "should_be": "checked", "evidence": "the Reviewer did not check these facts"})
+        return {"verdict": "concerns" if issues else "approve", "issues": issues, "checks": checks,
+                "summary": summary, "unreadable": False}
+
+    if data.get("verdict") not in ("approve", "concerns"):
+        return unreadable
     issues = [i for i in data.get("issues") or [] if isinstance(i, dict)]
-    verdict = "concerns" if issues else data["verdict"]  # an issue listed is a concern, whatever the label says
-    return {"verdict": verdict, "issues": issues, "summary": str(data.get("summary") or ""), "unreadable": False}
+    return {"verdict": "concerns" if issues else data["verdict"], "issues": issues, "checks": [],
+            "summary": summary, "unreadable": False}
 
 
 def created_inputs(action_log: list[dict]) -> dict | None:

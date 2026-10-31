@@ -1,0 +1,136 @@
+{
+  "review_id": "R-07",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "{\"verdict\": \"approve\", \"issues\": [], \"summary\": \"All recorded facts match the customer email and the mailroom receipt (incident 2026-10-07, reported 2026-10-08 within the 5-day deadline of contract Article 4.1; C2 collision is in the Policy Schedule; repair cost €1,100 as quoted; policyholder not at fault; third party Ms. Nguyen involved but not identified beyond a name, so the Article 5.2 not-at-fault waiver does not apply and the €300 C2 deductible plus the €400 Article 5.3 young-driver surcharge (licence 2025-01-15, under 3 years at incident) gives the €700 deductible and €400 payout; all three C2-required documents received; no exclusion indicated; repair cost below €1,500 so no assessor per Article 6.1; the playbook commercial-vehicle referral rule does not apply because the email describes a car, not a van/truck/delivery vehicle), so the staged payment is correct.\"}",
+  "questions": [],
+  "thread_id": "98ad4243-acc3-4e90-b3ee-1a6e9ecdfd24",
+  "cost": {
+    "failed": false,
+    "input_tokens": 179105,
+    "cached_tokens": 141568,
+    "output_tokens": 3556,
+    "input_cost": "0.03149172",
+    "output_cost": "0.00718462",
+    "total": "0.03867634"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 66.5,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "summary": "All recorded facts match the customer email and the mailroom receipt (incident 2026-10-07, reported 2026-10-08 within the 5-day deadline of contract Article 4.1; C2 collision is in the Policy Schedule; repair cost €1,100 as quoted; policyholder not at fault; third party Ms. Nguyen involved but not identified beyond a name, so the Article 5.2 not-at-fault waiver does not apply and the €300 C2 deductible plus the €400 Article 5.3 young-driver surcharge (licence 2025-01-15, under 3 years at incident) gives the €700 deductible and €400 payout; all three C2-required documents received; no exclusion indicated; repair cost below €1,500 so no assessor per Article 6.1; the playbook commercial-vehicle referral rule does not apply because the email describes a car, not a van/truck/delivery vehicle), so the staged payment is correct.",
+    "unreadable": false
+  }
+}

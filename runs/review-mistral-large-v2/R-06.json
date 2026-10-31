@@ -1,0 +1,164 @@
+{
+  "review_id": "R-06",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"concerns\",\n  \"issues\": [\n    {\n      \"field\": \"date the claim was reported (email date)\",\n      \"recorded\": \"2026-10-03\",\n      \"should_be\": \"2026-10-11\",\n      \"evidence\": \"Customer email header: 'Customer email received on 2026-10-11'; body: 'I was too busy with work to report it earlier, sorry for the delay.' No source shows any report on 2026-10-03.\"\n    },\n    {\n      \"field\": \"referral to a claims handler / automatic payment\",\n      \"recorded\": \"status pending_approval with payout €350 staged for automatic approval (assessor required: no, no handler referral)\",\n      \"should_be\": \"Claim must be referred to a Veridia claims handler, not paid automatically\",\n      \"evidence\": \"Contract Article 4.1 (claim must be reported within 5 days of the incident; incident 2026-10-02, reported 2026-10-11 = 9 days) and Article 7.1 ('a claim reported after the deadline in Article 4.1' is referred to a claims handler, who takes the decision; 'a late claim is never refused automatically').\"\n    }\n  ],\n  \"summary\": \"All other recorded facts check out (C2 collision is in the Policy Schedule, incident 2026-10-02, €650 repair cost, policyholder at fault, no third party so the commercial-vehicle playbook rule does not apply, both required C2 documents attached, no exclusion, €300 deductible and €350 payout consistent since the not-at-fault waiver needs a non-fault driver and the €650 cost is below the €1,500 assessor threshold), but the report date is recorded as 2026-10-03 when the email was actually received on 2026-10-11, i.e. 9 days after the incident, past the 5-day deadline in Article 4.1, so under Article 7.1 the claim must be referred to a handler and must not be paid automatically.\"\n}\n```",
+  "questions": [],
+  "thread_id": "ed43729b-24fb-4de9-ad70-da33e3a673ba",
+  "cost": {
+    "failed": false,
+    "input_tokens": 167190,
+    "cached_tokens": 136704,
+    "output_tokens": 3292,
+    "input_cost": "0.02590488",
+    "output_cost": "0.00661773",
+    "total": "0.03252261"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 48.2,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "date the claim was reported (email date)",
+        "recorded": "2026-10-03",
+        "should_be": "2026-10-11",
+        "evidence": "Customer email header: 'Customer email received on 2026-10-11'; body: 'I was too busy with work to report it earlier, sorry for the delay.' No source shows any report on 2026-10-03."
+      },
+      {
+        "field": "referral to a claims handler / automatic payment",
+        "recorded": "status pending_approval with payout €350 staged for automatic approval (assessor required: no, no handler referral)",
+        "should_be": "Claim must be referred to a Veridia claims handler, not paid automatically",
+        "evidence": "Contract Article 4.1 (claim must be reported within 5 days of the incident; incident 2026-10-02, reported 2026-10-11 = 9 days) and Article 7.1 ('a claim reported after the deadline in Article 4.1' is referred to a claims handler, who takes the decision; 'a late claim is never refused automatically')."
+      }
+    ],
+    "summary": "All other recorded facts check out (C2 collision is in the Policy Schedule, incident 2026-10-02, €650 repair cost, policyholder at fault, no third party so the commercial-vehicle playbook rule does not apply, both required C2 documents attached, no exclusion, €300 deductible and €350 payout consistent since the not-at-fault waiver needs a non-fault driver and the €650 cost is below the €1,500 assessor threshold), but the report date is recorded as 2026-10-03 when the email was actually received on 2026-10-11, i.e. 9 days after the incident, past the 5-day deadline in Article 4.1, so under Article 7.1 the claim must be referred to a handler and must not be paid automatically.",
+    "unreadable": false
+  }
+}

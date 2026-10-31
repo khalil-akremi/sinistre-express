@@ -1,0 +1,83 @@
+{
+  "review_id": "R-02",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"concerns\",\n  \"issues\": [\n    {\n      \"field\": \"policyholder at fault\",\n      \"recorded\": \"false\",\n      \"should_be\": \"true\",\n      \"evidence\": \"accident_report_signed.pdf, section 14 Observations, Driver A (Lucas Bernard, policy VER-1002, Renault Clio GK-904-TR): \\\"I moved into the left lane without seeing vehicle B in my blind spot. I accept that the accident is my fault.\\\" This signed joint accident report directly contradicts the recorded fact. The error also breaks the deductible logic: Article 5.2 of the Veridia contract (2630#10414, page 2) waives the C2 deductible only when the authorised driver is NOT at fault and the third party is identified; with fault admitted, the standard C2 deductible (€300, Article 2) applies, plus the young-driver surcharge of €400 under Article 5.3 because the licence date in the Policy Schedule (2024-09-02) is less than 3 years before the incident (2026-10-14) — so the staged €0 deductible / €2400 payout rests on a wrong fact.\"\n    }\n  ],\n  \"summary\": \"All other facts check out (policy VER-1002, C2 collision coverage in the Policy Schedule, incident 2026-10-14 reported 2026-10-15 within the 5-day deadline of Article 4.1, repair cost €2,400 = total incl. VAT on quote Q-2610-5172 per Article 1, third party Julie Laurent identified as a private car so the commercial-vehicle playbook rule does not apply, all three C2-required documents provided and belonging to this policyholder and vehicle, no exclusion under Article 3, assessor correctly booked since €2,400 > €1,500 per Article 6), but the claim was recorded as not-at-fault while the signed accident report has the policyholder admitting fault, which invalidates the €0 deductible and the €2,400 payout as staged.\"\n}\n```",
+  "questions": [],
+  "thread_id": "f6ff747e-ebca-4a70-846b-01905cbce411",
+  "cost": {
+    "failed": false,
+    "input_tokens": 58538,
+    "cached_tokens": 46848,
+    "output_tokens": 2613,
+    "input_cost": "0.00949528",
+    "output_cost": "0.00536327",
+    "total": "0.01485855"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 34.7,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "policyholder at fault",
+        "recorded": "false",
+        "should_be": "true",
+        "evidence": "accident_report_signed.pdf, section 14 Observations, Driver A (Lucas Bernard, policy VER-1002, Renault Clio GK-904-TR): \"I moved into the left lane without seeing vehicle B in my blind spot. I accept that the accident is my fault.\" This signed joint accident report directly contradicts the recorded fact. The error also breaks the deductible logic: Article 5.2 of the Veridia contract (2630#10414, page 2) waives the C2 deductible only when the authorised driver is NOT at fault and the third party is identified; with fault admitted, the standard C2 deductible (€300, Article 2) applies, plus the young-driver surcharge of €400 under Article 5.3 because the licence date in the Policy Schedule (2024-09-02) is less than 3 years before the incident (2026-10-14) — so the staged €0 deductible / €2400 payout rests on a wrong fact."
+      }
+    ],
+    "summary": "All other facts check out (policy VER-1002, C2 collision coverage in the Policy Schedule, incident 2026-10-14 reported 2026-10-15 within the 5-day deadline of Article 4.1, repair cost €2,400 = total incl. VAT on quote Q-2610-5172 per Article 1, third party Julie Laurent identified as a private car so the commercial-vehicle playbook rule does not apply, all three C2-required documents provided and belonging to this policyholder and vehicle, no exclusion under Article 3, assessor correctly booked since €2,400 > €1,500 per Article 6), but the claim was recorded as not-at-fault while the signed accident report has the policyholder admitting fault, which invalidates the €0 deductible and the €2,400 payout as staged.",
+    "unreadable": false
+  }
+}

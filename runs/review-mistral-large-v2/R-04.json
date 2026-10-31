@@ -1,0 +1,83 @@
+{
+  "review_id": "R-04",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"verdict\": \"concerns\",\n  \"issues\": [\n    {\n      \"field\": \"decision to pay / referral to handler\",\n      \"recorded\": \"status pending_approval with payout €1200 paid automatically (assessor required: no)\",\n      \"should_be\": \"The claim must be referred to a claims handler and not paid automatically, because the other driver's vehicle is a commercial vehicle\",\n      \"evidence\": \"Handler playbook (given in the review request): 'When the other driver is a commercial vehicle (van, truck, lorry, delivery vehicle), refer the claim to a handler so Veridia can recover the money from their insurer.' The accident report (accident_report_signed.pdf, Vehicle B section) states Vehicle B is a 'Ford Transit Custom', VEHICLE TYPE 'Van', policyholder 'Rapid Livraisons SARL (company vehicle)', driver Mr. Marc Dubois — i.e. a delivery van of a commercial company, which triggers the playbook rule.\"\n    }\n  ],\n  \"summary\": \"All recorded facts match the email and documents (incident 2026-10-12 reported 2026-10-14 within the 5-day deadline of contract Article 4.1, C2 collision covered in the Policy Schedule, repair cost €1200 = total incl. VAT per Article 1, not at fault with identified third party Rapid Livraisons SARL so the €0 deductible waiver of Article 5.2 applies, no exclusion under Article 3, all three C2-required documents provided and belonging to Claire Martin's Peugeot 208 FG-218-LM, no assessor needed since €1200 ≤ €1,500 per Article 6.1), but the other vehicle is a commercial delivery van, so the playbook requires referral to a handler and the claim must not be paid automatically.\"\n}\n```",
+  "questions": [],
+  "thread_id": "b3f800d8-472a-444b-8bf2-4b6beeb0e7c2",
+  "cost": {
+    "failed": false,
+    "input_tokens": 44416,
+    "cached_tokens": 34048,
+    "output_tokens": 1659,
+    "input_cost": "0.00771712",
+    "output_cost": "0.00336674",
+    "total": "0.01108386"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 33.9,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "decision to pay / referral to handler",
+        "recorded": "status pending_approval with payout €1200 paid automatically (assessor required: no)",
+        "should_be": "The claim must be referred to a claims handler and not paid automatically, because the other driver's vehicle is a commercial vehicle",
+        "evidence": "Handler playbook (given in the review request): 'When the other driver is a commercial vehicle (van, truck, lorry, delivery vehicle), refer the claim to a handler so Veridia can recover the money from their insurer.' The accident report (accident_report_signed.pdf, Vehicle B section) states Vehicle B is a 'Ford Transit Custom', VEHICLE TYPE 'Van', policyholder 'Rapid Livraisons SARL (company vehicle)', driver Mr. Marc Dubois — i.e. a delivery van of a commercial company, which triggers the playbook rule."
+      }
+    ],
+    "summary": "All recorded facts match the email and documents (incident 2026-10-12 reported 2026-10-14 within the 5-day deadline of contract Article 4.1, C2 collision covered in the Policy Schedule, repair cost €1200 = total incl. VAT per Article 1, not at fault with identified third party Rapid Livraisons SARL so the €0 deductible waiver of Article 5.2 applies, no exclusion under Article 3, all three C2-required documents provided and belonging to Claire Martin's Peugeot 208 FG-218-LM, no assessor needed since €1200 ≤ €1,500 per Article 6.1), but the other vehicle is a commercial delivery van, so the playbook requires referral to a handler and the claim must not be paid automatically.",
+    "unreadable": false
+  }
+}
