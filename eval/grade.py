@@ -134,10 +134,18 @@ def reported_decision(reply: str) -> str | None:
 
 
 def applicable_fields(facts: dict) -> list[str]:
-    """Fields that matter for this claim (fault and repair cost mean nothing for theft)."""
+    """Fields that matter for this claim.
+
+    Fault plays no role for glass (C3) or theft (C4) in the contract: a stone
+    cracking a windscreen is nobody's "fault", and the deductible is the same
+    either way. Grading it there would test a meaningless label (baseline run:
+    4 of 5 "fact errors" were this flaw in the answer key, not agent mistakes).
+    Repair cost means nothing for theft (the market value is used).
+    """
     fields = list(FACT_FIELDS)
-    if facts["coverage"] == "C4":
+    if facts["coverage"] in ("C3", "C4"):
         fields.remove("at_fault")
+    if facts["coverage"] == "C4":
         fields.remove("repair_cost")
     return fields
 

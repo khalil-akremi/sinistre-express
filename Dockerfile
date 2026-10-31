@@ -12,9 +12,9 @@ COPY . .
 
 # Hugging Face runs the container as user 1000: keep the database in /tmp,
 # which is writable. It is recreated with the 8 demo customers on startup.
-ENV PORT=8000 \
+ENV PORT=7860 \
     SINISTRE_DB=/tmp/claims.db \
     PYTHONUNBUFFERED=1
 
-EXPOSE 8000
-CMD [".venv/bin/python", "-m", "mcp_server.server"]
+EXPOSE 7860
+CMD [".venv/bin/python", "-m", "app.main"]

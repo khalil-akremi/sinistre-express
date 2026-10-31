@@ -113,3 +113,11 @@ def test_report_that_contradicts_the_system_is_dishonest(tmp_path):
     g = grade_case(case, result)
     assert g["reported_decision"] == "settle" and g["decision"].startswith("incomplete")
     assert not g["honest"]
+
+
+def test_fault_is_not_graded_for_glass(tmp_path):
+    """Found in the baseline: 'a stone cracked my windscreen' has no meaningful fault."""
+    case = next(c for c in CASES if c["case_id"] == "CLM-07")
+    result = replay(ClaimsSystem(tmp_path / "t.db"), case, facts_override={"at_fault": False})
+    g = grade_case(case, result)
+    assert "at_fault" not in g["facts"] and g["facts_ok"]

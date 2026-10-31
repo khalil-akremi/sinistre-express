@@ -137,8 +137,8 @@ def build_server(system: ClaimsSystem, admin_secret: str = "local") -> MCPServer
         a human claims handler approves it afterwards."""
         return _run(system.stage_settlement, claim_ref=claim_ref)
 
-    @server.custom_route("/", methods=["GET"], include_in_schema=False)
-    async def health(request):  # public page: proves the service is up
+    @server.custom_route("/health", methods=["GET"], include_in_schema=False)
+    async def health(request):  # public: proves the service is up (the web app serves "/")
         from starlette.responses import JSONResponse
 
         return JSONResponse({"service": "Veridia claims system (Sinistre Express)", "status": "ok"})

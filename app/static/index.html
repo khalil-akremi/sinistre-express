@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sinistre Express · Veridia claims desk</title>
+  <meta name="description" content="A Cominty agent prepares motor insurance claims; a person approves them.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand">
+      <h1>Sinistre Express</h1>
+      <p>A Cominty agent prepares motor insurance claims for Veridia Insurance. A person approves every payment.</p>
+    </div>
+    <p class="fiction">Veridia is a fictional insurer. All customers and claims are synthetic.</p>
+  </header>
+
+  <main class="desk">
+    <!-- Column 1: the claim -->
+    <section class="panel intake" aria-labelledby="intake-title">
+      <h2 id="intake-title">Incoming claim</h2>
+
+      <label class="field-label" for="case-select">Sample claim</label>
+      <select id="case-select"></select>
+
+      <div class="email-head" id="email-head"></div>
+
+      <label class="field-label" for="email-body">Customer email</label>
+      <textarea id="email-body" rows="11" maxlength="2000" spellcheck="false"></textarea>
+      <p class="hint">Edit anything. Try adding “I had a few drinks before driving”.</p>
+
+      <fieldset class="docs">
+        <legend class="field-label">Documents received</legend>
+        <label><input type="checkbox" value="photos"> Damage photos</label>
+        <label><input type="checkbox" value="repair_quote"> Repair quote</label>
+        <label><input type="checkbox" value="accident_report"> Signed accident report</label>
+        <label><input type="checkbox" value="police_report"> Police report</label>
+      </fieldset>
+
+      <button id="send" class="primary" type="button">Send to the agent</button>
+      <p class="quota" id="quota" aria-live="polite"></p>
+    </section>
+
+    <!-- Column 2: the agent at work -->
+    <section class="panel work" aria-labelledby="work-title">
+      <div class="work-head">
+        <h2 id="work-title">The agent at work</h2>
+        <span class="clock" id="clock" aria-live="off"></span>
+      </div>
+      <ol class="ledger" id="ledger" aria-live="polite">
+        <li class="empty">Pick a claim and send it. Each step the agent takes will appear here, including any action the claims system refuses.</li>
+      </ol>
+      <p class="legend">
+        <span class="key key-agent"></span> Agent on Cominty
+        <span class="key key-system"></span> Veridia claims system (MCP)
+      </p>
+    </section>
+
+    <!-- Column 3: the decision file -->
+    <section class="panel file" aria-labelledby="file-title">
+      <h2 id="file-title">Claim file</h2>
+      <div id="file-body" class="file-body">
+        <p class="empty">The decision, amounts and draft letter will appear here.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="colophon">
+    <p>Built on Cominty Managed Agents: a custom agent with the Veridia contract as knowledge, and the claims system connected over MCP. Amounts come from tested business rules, never from the model.</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

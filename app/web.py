@@ -1,0 +1,283 @@
+"""The claims-desk web app: pages and API, added to the same server as MCP.
+
+Routes
+    GET  /                          the web page
+    GET  /static/<file>             CSS and JavaScript
+    GET  /api/cases                 sample claims (emails only, never the answers)
+    POST /api/claims                start the agent on an email -> {"claim_ref": ...}
+    GET  /api/claims/<ref>/stream   live timeline (Server-Sent Events)
+    GET  /api/claims/<ref>          claim record, agent reply, cost, audit log
+    POST /api/claims/<ref>/approve  the human approval (the agent cannot do this)
+
+The Cominty API key stays on the server. The browser only talks to these routes.
+Every public run spends credits, so runs are rate-limited (one at a time,
+a daily maximum).
+"""
+
+from __future__ import annotations
+
+import asyncio
+import json
+import os
+import re
+import secrets
+import time
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from pathlib import Path
+
+from starlette.requests import Request
+from starlette.responses import FileResponse, JSONResponse, Response, StreamingResponse
+
+from app.agent import AgentRunner
+from core.task import build_task
+from mcp.server.mcpserver import MCPServer
+from mcp_server.tools import ClaimsSystem, ToolRefused
+
+ROOT = Path(__file__).resolve().parent.parent
+STATIC_DIR = Path(__file__).resolve().parent / "static"
+CASES_FILE = ROOT / "data" / "cases.json"
+
+DOC_FILES = {
+    "photos": "damage_photos.zip",
+    "repair_quote": "repair_quote.pdf",
+    "accident_report": "accident_report_signed.pdf",
+    "police_report": "police_report.pdf",
+}
+FILE_TO_DOC = {v: k for k, v in DOC_FILES.items()}
+MAX_BODY_CHARS = 2000
+RUN_TIMEOUT_S = 360
+STREAM_POLL_S = 0.7
+
+
+# ------------------------------------------------------------- run state
+@dataclass
+class Run:
+    claim_ref: str
+    case_id: str
+    started: float = field(default_factory=time.monotonic)
+    events: list[dict] = field(default_factory=list)
+    done: bool = False
+    reply: str | None = None
+    cost: dict | None = None
+    error: str | None = None
+    seconds: float | None = None
+
+
+@dataclass
+class Limits:
+    """Protects the credits behind a public demo link."""
+
+    daily_max: int
+    used_today: int = 0
+    day: str = ""
+
+    def try_take(self) -> bool:
+        today = datetime.now(timezone.utc).date().isoformat()
+        if today != self.day:
+            self.day, self.used_today = today, 0
+        if self.used_today >= self.daily_max:
+            return False
+        self.used_today += 1
+        return True
+
+
+# ------------------------------------------------------------- helpers
+def load_cases() -> list[dict]:
+    return json.loads(CASES_FILE.read_text(encoding="utf-8"))
+
+
+def public_case(case: dict) -> dict:
+    """What the browser may see: the email and attachments, never the answer key."""
+    email = case["email"]
+    body = re.sub(r"\n+Attached:.*\Z", "", email["body"], flags=re.S).rstrip()
+    return {
+        "case_id": case["case_id"],
+        "title": case["title"],
+        "demo": case["demo"],
+        "date": email["date"],
+        "from": email["from"],
+        "subject": email["subject"],
+        "body": body,
+        "documents": [FILE_TO_DOC[f] for f in email["attachments"]],
+    }
+
+
+def make_email(case: dict, body: str, documents: list[str]) -> dict:
+    """Rebuild an email from a sample, the edited text and the ticked documents."""
+    files = [DOC_FILES[d] for d in documents]
+    full_body = body.rstrip() + (f"\n\nAttached: {', '.join(files)}" if files else "")
+    email = case["email"]
+    return {"date": email["date"], "from": email["from"], "subject": email["subject"],
+            "body": full_body, "attachments": files}
+
+
+def log_item(entry: dict) -> dict:
+    """One audit-log entry from our MCP server -> one timeline item."""
+    tool, args, result = entry["tool"], entry["arguments"], entry["result"]
+    if not entry["ok"]:
+        return {"source": "system", "icon": "⛔", "text": f"{tool} refused by the claims system",
+                "detail": result.get("error", ""), "tool": tool, "ok": False}
+    detail = ""
+    if tool == "get_policy":
+        detail = f"{result['holder_name']}, {result['vehicle']}, licence since {result['licence_date']}"
+    elif tool == "create_claim":
+        checks = result["checks"]
+        bits = [f"{checks['coverage']}",
+                "on time" if checks["reported_on_time"] else f"LATE ({checks['days_to_report']} days)"]
+        if checks["missing_documents"]:
+            bits.append("missing: " + ", ".join(checks["missing_documents"]))
+        if checks["possible_exclusion"]:
+            bits.append(f"possible exclusion: {checks['possible_exclusion']}")
+        if not checks["coverage_in_policy_schedule"]:
+            bits.append("coverage NOT in the policy")
+        detail = "; ".join(bits)
+    elif tool == "compute_settlement":
+        detail = "; ".join(result["calculation"])
+    elif tool == "request_documents":
+        detail = "requested: " + ", ".join(result["documents_requested"])
+    elif tool == "escalate_to_handler":
+        detail = "reasons: " + ", ".join(result["reasons"])
+    elif tool == "schedule_assessor":
+        detail = f"visit on {result['assessor_visit_date']}"
+    elif tool == "stage_settlement":
+        detail = f"€{result['payout_eur']} pending human approval"
+    elif tool.startswith("approve_settlement"):
+        detail = f"approved by {args.get('handler_name', 'a human')}"
+    return {"source": "system", "icon": "✅", "text": tool, "detail": detail, "tool": tool, "ok": True}
+
+
+def sse(event: str, data: dict) -> str:
+    return f"event: {event}\ndata: {json.dumps(data, ensure_ascii=False, default=str)}\n\n"
+
+
+# --------------------------------------------------------------- routes
+def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRunner,
+                        daily_max: int | None = None) -> dict[str, Run]:
+    runs: dict[str, Run] = {}
+    limits = Limits(daily_max if daily_max is not None else int(os.environ.get("DEMO_DAILY_LIMIT", "30")))
+    busy = asyncio.Lock()
+    cases = {c["case_id"]: c for c in load_cases()}
+
+    async def execute(run: Run, task: str) -> None:
+        async with busy:
+            try:
+                result = await asyncio.wait_for(runner(task, run.events.append), timeout=RUN_TIMEOUT_S)
+                run.reply, run.cost = result.get("reply"), result.get("cost")
+            except Exception as exc:  # noqa: BLE001  (shown to the user, never crashes the server)
+                run.error = f"{type(exc).__name__}: {exc}"
+            finally:
+                run.seconds = round(time.monotonic() - run.started, 1)
+                run.done = True
+
+    def claim_payload(ref: str) -> dict:
+        try:
+            claim = system.get_claim(ref)
+        except ToolRefused:
+            claim = None
+        run = runs.get(ref)
+        return {
+            "claim_ref": ref,
+            "claim": claim,
+            "log": [log_item(e) for e in system.action_log(ref)],
+            "reply": run.reply if run else None,
+            "cost": run.cost if run else None,
+            "error": run.error if run else None,
+            "seconds": run.seconds if run else None,
+            "done": run.done if run else True,
+        }
+
+    @server.custom_route("/", methods=["GET"], include_in_schema=False)
+    async def index(request: Request) -> Response:
+        return FileResponse(STATIC_DIR / "index.html")
+
+    @server.custom_route("/static/{name}", methods=["GET"], include_in_schema=False)
+    async def static(request: Request) -> Response:
+        name = request.path_params["name"]
+        path = STATIC_DIR / name
+        if "/" in name or ".." in name or not path.is_file():
+            return JSONResponse({"error": "not found"}, status_code=404)
+        return FileResponse(path)
+
+    @server.custom_route("/api/cases", methods=["GET"], include_in_schema=False)
+    async def list_cases(request: Request) -> Response:
+        return JSONResponse({
+            "cases": [public_case(c) for c in cases.values()],
+            "runs_left_today": max(limits.daily_max - limits.used_today, 0)
+            if limits.day == datetime.now(timezone.utc).date().isoformat() else limits.daily_max,
+        })
+
+    @server.custom_route("/api/claims", methods=["POST"], include_in_schema=False)
+    async def start_claim(request: Request) -> Response:
+        try:
+            payload = await request.json()
+        except (json.JSONDecodeError, ValueError):
+            return JSONResponse({"error": "Invalid JSON."}, status_code=400)
+        case = cases.get(str(payload.get("case_id", "")))
+        body = str(payload.get("body", "")).strip()
+        documents = payload.get("documents", [])
+        if case is None:
+            return JSONResponse({"error": "Choose one of the sample claims."}, status_code=400)
+        if not body or len(body) > MAX_BODY_CHARS:
+            return JSONResponse({"error": f"The email must be 1 to {MAX_BODY_CHARS} characters."},
+                                status_code=400)
+        if not isinstance(documents, list) or any(d not in DOC_FILES for d in documents):
+            return JSONResponse({"error": "Unknown document type."}, status_code=400)
+        if busy.locked():
+            return JSONResponse({"error": "The agent is already handling a claim. Try again in a minute."},
+                                status_code=429)
+        if not limits.try_take():
+            return JSONResponse({"error": "The demo's daily limit is reached. Please try again tomorrow."},
+                                status_code=429)
+
+        claim_ref = f"DEMO-{datetime.now(timezone.utc):%m%d%H%M%S}-{secrets.token_hex(2).upper()}"
+        run = Run(claim_ref=claim_ref, case_id=case["case_id"])
+        runs[claim_ref] = run
+        task = build_task(make_email(case, body, list(dict.fromkeys(documents))), claim_ref)
+        asyncio.create_task(execute(run, task))
+        return JSONResponse({"claim_ref": claim_ref}, status_code=202)
+
+    @server.custom_route("/api/claims/{ref}", methods=["GET"], include_in_schema=False)
+    async def get_claim(request: Request) -> Response:
+        ref = request.path_params["ref"]
+        if ref not in runs and not system.action_log(ref):
+            return JSONResponse({"error": "Unknown claim."}, status_code=404)
+        return JSONResponse(claim_payload(ref))
+
+    @server.custom_route("/api/claims/{ref}/stream", methods=["GET"], include_in_schema=False)
+    async def stream(request: Request) -> Response:
+        ref = request.path_params["ref"]
+        run = runs.get(ref)
+        if run is None:
+            return JSONResponse({"error": "Unknown claim."}, status_code=404)
+
+        async def events():
+            sent_agent, sent_log = 0, 0
+            while True:
+                for item in run.events[sent_agent:]:
+                    yield sse("step", item)
+                sent_agent = len(run.events)
+                log = system.action_log(ref)
+                for entry in log[sent_log:]:
+                    yield sse("step", log_item(entry))
+                sent_log = len(log)
+                if run.done:
+                    yield sse("done", claim_payload(ref))
+                    return
+                if await request.is_disconnected():
+                    return
+                await asyncio.sleep(STREAM_POLL_S)
+
+        return StreamingResponse(events(), media_type="text/event-stream",
+                                 headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+    @server.custom_route("/api/claims/{ref}/approve", methods=["POST"], include_in_schema=False)
+    async def approve(request: Request) -> Response:
+        ref = request.path_params["ref"]
+        try:
+            system.approve_settlement(ref, handler_name="Demo claims handler")
+        except ToolRefused as exc:
+            return JSONResponse({"error": str(exc)}, status_code=409)
+        return JSONResponse(claim_payload(ref))
+
+    return runs

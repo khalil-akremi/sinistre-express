@@ -30,34 +30,17 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from cominty_sdk import AsyncCominty, events
+from core.task import build_task as _build_task
 from eval.grade import grade_run
 
 ROOT = Path(__file__).resolve().parent.parent
 CASES_FILE = ROOT / "data" / "cases.json"
 DEFAULT_SERVER = "https://sinistre-express.onrender.com"
-INTEGRATION_ID = "veridia_claims"
 CASE_TIMEOUT_S = 300
 
 
 def build_task(case: dict, claim_ref: str) -> str:
-    """Only the customer email is given; the facts and answers stay hidden."""
-    email = case["email"]
-    return (
-        f'<use agent="{INTEGRATION_ID}"/>\n'
-        f"New claim to handle in the Veridia claims system. Use the claim reference {claim_ref}.\n\n"
-        f"--- Customer email received on {email['date']} ---\n"
-        f"From: {email['from']}\n"
-        f"Subject: {email['subject']}\n\n"
-        f"{email['body']}\n"
-        f"--- End of email ---\n\n"
-        + (
-            "The mailroom received these attachments and stored them in the claim file: "
-            f"{', '.join(email['attachments'])}. Count them as provided documents "
-            "(you cannot open them)."
-            if email["attachments"]
-            else "No attachment was received with this email."
-        )
-    )
+    return _build_task(case["email"], claim_ref)
 
 
 def http_get_json(url: str, timeout: float = 90) -> dict:
@@ -70,7 +53,7 @@ def wake_server(server: str) -> None:
     print(f"Waking {server} ...", end=" ", flush=True)
     for attempt in range(4):
         try:
-            http_get_json(server + "/")
+            http_get_json(server + "/health")
             print("ok")
             return
         except Exception:  # noqa: BLE001

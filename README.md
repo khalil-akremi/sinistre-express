@@ -28,6 +28,7 @@ All data is synthetic. Veridia Insurance is a fictional company.
 | `data/` | The contract, customers and test cases with their expected outcomes |
 | `eval/` | Test-case generator (and later the evaluation pipeline) |
 | `mcp_server/` | The claims system: SQLite database, 7 MCP tools, action log |
+| `app/` | The claims-desk web app (live timeline, human approval), served with the MCP server |
 | `tests/` | Automated tests (rules, tools, MCP protocol) |
 | `scripts/` | Utilities, e.g. `check_server.py` |
 
@@ -36,6 +37,6 @@ All data is synthetic. Veridia Insurance is a fictional company.
 ```bash
 uv sync
 uv run pytest                          # all tests
-uv run python -m mcp_server.server     # MCP server on http://localhost:8000/mcp
+uv run python -m app.main              # web app on http://localhost:8000, MCP at /mcp
 uv run python scripts/check_server.py  # connect like the agent and list the tools
 ```
