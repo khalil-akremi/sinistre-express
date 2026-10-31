@@ -5,6 +5,7 @@ Veridia Insurance is a fictional company. This contract is written for a
 software demonstration and has no legal value.
 
 The contract is made of two parts:
+
 - these **General Conditions**, which apply to every policyholder;
 - the **Policy Schedule**, which lists the facts about one policyholder
   (coverages bought, vehicle, market value, driving licence date).
@@ -19,12 +20,16 @@ All amounts are in euros. All deadlines are in calendar days.
 - **Policyholder**: the person named in the Policy Schedule.
 - **Authorised driver**: the policyholder, or anyone driving with their
   permission and holding a valid driving licence.
+
 - **Third party**: any person other than the authorised driver.
 - **Deductible**: the part of each claim that remains payable by the
   policyholder.
+
 - **Market value**: the value of the insured vehicle, as stated in the
   Policy Schedule.
-- **Repair cost**: the amount shown on the repair quote or invoice.
+
+- **Repair cost**: the total amount **including VAT** shown on the repair
+  quote or invoice (the "total incl. VAT" line), parts and labour included.
 
 ---
 
