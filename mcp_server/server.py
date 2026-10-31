@@ -48,13 +48,18 @@ def _run(method, **kwargs) -> dict:
         raise ToolError(str(exc)) from exc
 
 
-def build_server(system: ClaimsSystem) -> MCPServer:
+def admin_token() -> str:
+    """Token protecting the read-only admin endpoint: the MCP secret, or 'local'."""
+    return os.environ.get("MCP_SECRET_TOKEN", "").strip() or "local"
+
+
+def build_server(system: ClaimsSystem, admin_secret: str = "local") -> MCPServer:
     server = MCPServer(name="veridia-claims", instructions=INSTRUCTIONS)
 
     @server.tool()
     def get_policy(
         policy_id: Annotated[str, Field(description="Policy number from the customer's email, e.g. 'VER-1002'.")],
-        claim_ref: Annotated[str | None, Field(description="The claim reference from your task.")] = None,
+        claim_ref: ClaimRef,
     ) -> dict:
         """Look up a customer's Policy Schedule: the coverages they bought, their
         vehicle, its market value and their driving licence date."""
@@ -138,6 +143,23 @@ def build_server(system: ClaimsSystem) -> MCPServer:
 
         return JSONResponse({"service": "Veridia claims system (Sinistre Express)", "status": "ok"})
 
+    @server.custom_route("/admin/{token}/claims/{claim_ref}", methods=["GET"], include_in_schema=False)
+    async def claim_snapshot(request):
+        """Read-only view of one claim and its action log, for the evaluation.
+        Protected by the same secret as the MCP endpoint. Never published to the agent."""
+        import secrets
+
+        from starlette.responses import JSONResponse
+
+        if not secrets.compare_digest(request.path_params["token"], admin_secret):
+            return JSONResponse({"error": "not found"}, status_code=404)
+        claim_ref = request.path_params["claim_ref"]
+        try:
+            claim = system.get_claim(claim_ref)
+        except ToolRefused:
+            claim = None
+        return JSONResponse({"claim": claim, "action_log": system.action_log(claim_ref)})
+
     return server
 
 
@@ -151,7 +173,7 @@ def main() -> None:
     import anyio
 
     system = ClaimsSystem(db_path_from_env())
-    server = build_server(system)
+    server = build_server(system, admin_secret=admin_token())
     port = int(os.environ.get("PORT", "8000"))
     path = mcp_path()
     # Behind a public host (Hugging Face) the Host header is the public domain,

@@ -154,8 +154,8 @@ class ClaimsSystem:
 
     # ------------------------------------------------------- tool 1: get_policy
     @logged
-    def get_policy(self, *, policy_id: str, claim_ref: str | None = None) -> dict:
-        # claim_ref is optional: it only links this lookup to a claim in the log.
+    def get_policy(self, *, policy_id: str, claim_ref: str) -> dict:
+        # claim_ref links this lookup to its claim in the audit log.
         row = self._policy_row(policy_id)
         coverages = json.loads(row["coverages"])
         return {

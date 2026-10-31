@@ -87,9 +87,22 @@ def test_refusal_message_reaches_the_agent(server):
 def test_missing_argument_rejected_by_schema(server):
     async def go():
         async with Client(server) as client:
-            return await client.call_tool("get_policy", {"policy_id": "VER-1001"}), \
+            return await client.call_tool("get_policy", {"policy_id": "VER-1001", "claim_ref": "T-1"}), \
                 await client.call_tool("schedule_assessor", {})
 
     ok, missing_arg = run(go())
     assert not ok.is_error
     assert missing_arg.is_error
+
+
+def test_admin_snapshot_requires_the_secret(tmp_path):
+    from starlette.testclient import TestClient
+
+    system = ClaimsSystem(tmp_path / "test.db")
+    system.get_policy(policy_id="VER-1004", claim_ref="T-9")
+    app = build_server(system, admin_secret="s3cret").streamable_http_app()
+    with TestClient(app) as client:
+        assert client.get("/admin/wrong/claims/T-9").status_code == 404
+        data = client.get("/admin/s3cret/claims/T-9").json()
+    assert data["claim"] is None  # looked up, not opened yet
+    assert [e["tool"] for e in data["action_log"]] == ["get_policy"]

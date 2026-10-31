@@ -19,7 +19,7 @@ async def main() -> None:
         print(f"{len(tools)} tools on the menu:")
         for tool in tools:
             print(f"  - {tool.name}")
-        result = await client.call_tool("get_policy", {"policy_id": "VER-1002"})
+        result = await client.call_tool("get_policy", {"policy_id": "VER-1002", "claim_ref": "CHECK"})
         print("\nTest call get_policy('VER-1002'):")
         print(result.content[0].text)
 

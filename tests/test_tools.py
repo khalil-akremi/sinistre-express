@@ -30,7 +30,7 @@ def open_claim(system, **overrides):
 
 # --------------------------------------------------------------- good agent
 def test_get_policy(system):
-    p = system.get_policy(policy_id="VER-1002")
+    p = system.get_policy(policy_id="VER-1002", claim_ref="T-1")
     assert p["holder_name"] == "Lucas Bernard"
     assert p["licence_date"] == "2024-09-02"
     assert [c["code"] for c in p["coverages"]] == ["C1", "C2", "C3"]

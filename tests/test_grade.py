@@ -1,0 +1,87 @@
+"""Tests for the grader, using simulated agents on the real claims system.
+
+- A perfect agent replays every case with the true facts: it must score 100%.
+- A careless agent misses the alcohol hint in CLM-16: the grader must catch
+  the wrong fact, the wrong decision and the safety violation.
+
+Run:  uv run pytest
+"""
+
+import json
+from pathlib import Path
+
+import pytest
+
+from eval.grade import grade_case, summarise
+from mcp_server.tools import ClaimsSystem
+
+CASES = json.loads((Path(__file__).resolve().parent.parent / "data" / "cases.json").read_text(encoding="utf-8"))
+REASON_CODE = {"late_report": "late_report", "coverage_not_in_schedule": "coverage_not_in_schedule"}
+
+
+def replay(system: ClaimsSystem, case: dict, facts_override: dict | None = None) -> dict:
+    """Play the agent: call the tools a careful handler would call, given the facts it read."""
+    facts = case["facts"] | (facts_override or {})
+    ref = case["case_id"]
+    system.get_policy(policy_id=facts["policy_id"], claim_ref=ref)
+    created = system.create_claim(
+        claim_ref=ref, policy_id=facts["policy_id"], coverage=facts["coverage"],
+        incident_date=facts["incident_date"], report_date=facts["report_date"],
+        description="Replayed by a simulated agent.", repair_cost=facts["repair_cost"],
+        at_fault=facts["at_fault"], third_party_involved=facts["third_party_involved"],
+        third_party_identified=facts["third_party_identified"],
+        documents_provided=facts["documents_provided"], exclusion_signal=facts["exclusion_signal"],
+    )
+    issues = created["blocking_issues"]
+    missing = created["checks"]["missing_documents"]
+    reasons = sorted({"possible_exclusion" if i.startswith("possible_exclusion") else REASON_CODE[i]
+                      for i in issues if not i.startswith("missing_document")})
+    if missing:
+        system.request_documents(claim_ref=ref, documents=missing, message_to_customer="Please send them.")
+    if reasons:
+        system.escalate_to_handler(claim_ref=ref, reasons=reasons, summary="Needs a human decision.")
+    if not issues:
+        settlement = system.compute_settlement(claim_ref=ref)
+        if settlement["assessor_required"]:
+            system.schedule_assessor(claim_ref=ref)
+        system.stage_settlement(claim_ref=ref)
+    return {
+        "case_id": ref, "claim_ref": ref,
+        "claim": system.get_claim(ref), "action_log": system.action_log(ref),
+        "cost": {"total": "0.01", "input_tokens": 1000, "output_tokens": 100}, "seconds": 30,
+    }
+
+
+@pytest.mark.parametrize("case", CASES, ids=[c["case_id"] for c in CASES])
+def test_perfect_agent_scores_100_percent(tmp_path, case):
+    g = grade_case(case, replay(ClaimsSystem(tmp_path / "t.db"), case))
+    assert g["decision_ok"], g
+    assert g["amounts_ok"] in (True, None), g
+    assert g["facts_ok"], g["facts"]
+    assert g["trajectory_ok"], (g["missing_tools"], g["extra_tools"])
+    assert g["safe"]
+
+
+def test_careless_agent_is_caught(tmp_path):
+    case = next(c for c in CASES if c["case_id"] == "CLM-16")  # "a few drinks" before driving
+    result = replay(ClaimsSystem(tmp_path / "t.db"), case, facts_override={"exclusion_signal": None})
+    g = grade_case(case, result)
+    assert g["facts"]["exclusion_flagged"] is False
+    assert g["decision"] == "settle" and not g["decision_ok"]
+    assert g["safety_violations"] == ["stage_settlement"]
+
+
+def test_agent_that_never_opened_the_claim(tmp_path):
+    case = CASES[0]
+    g = grade_case(case, {"case_id": case["case_id"], "claim": None, "action_log": [], "error": "timeout"})
+    assert not g["decision_ok"] and not g["facts_ok"] and not g["trajectory_ok"]
+    assert g["decision"] == "incomplete:None"
+
+
+def test_summary_counts(tmp_path):
+    system = ClaimsSystem(tmp_path / "t.db")
+    grades = [grade_case(c, replay(system, c)) for c in CASES]
+    s = summarise(grades)
+    assert s["decision_ok"] == s["cases"] == len(CASES)
+    assert s["amounts_ok"] == s["amounts_n"] == 13
+    assert s["safety_violations"] == 0
