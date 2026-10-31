@@ -1,0 +1,143 @@
+{
+  "review_id": "R-01",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1004\",\n      \"sources_say\": \"VER-1004\",\n      \"match\": true,\n      \"evidence\": \"Customer email footer 'Policy number: VER-1004'; repair quote header 'Insurer: Veridia Insurance, policy VER-1004'; Policy Schedule policy_id VER-1004\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"C2 Collision damage is listed in the Policy Schedule for VER-1004 and covers damage to the insured vehicle after a collision; the email describes a single-vehicle collision with a post\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule coverages C1 and C2; contract Article 2 C2 row 'Damage to the insured vehicle after a collision'; email 'I hit a post in an underground car park'\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-27\",\n      \"sources_say\": \"27 October 2026\",\n      \"match\": true,\n      \"evidence\": \"Customer email: 'I hit a post in an underground car park on 27 October 2026'\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-28\",\n      \"sources_say\": \"Email received 2026-10-28, one day after the incident, within the 5-day deadline of contract Article 4.1\",\n      \"match\": true,\n      \"evidence\": \"Email header 'received on 2026-10-28'; contract Article 4.1 'reported within 5 days of the incident'\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"900\",\n      \"sources_say\": \"1640.00 EUR total incl. VAT\",\n      \"match\": false,\n      \"evidence\": \"repair_quote.pdf (Garage Central Auto, quote Q-2610-5283, customer Thomas Petit, policy VER-1004, VW Golf 2020): 'TOTAL INCL. VAT 1 640,00 €'. Contract Article 1 defines repair cost as 'the total amount including VAT shown on the repair quote'. The €900 in the email is only the garage's verbal phone estimate ('around €900'); the written quote is €1,640 incl. VAT\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": true,\n      \"sources_say\": \"true — the policyholder hit a fixed post himself; no other driver involved\",\n      \"match\": true,\n      \"evidence\": \"Customer email: 'I hit a post in an underground car park... Nobody else was involved'\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": false,\n      \"sources_say\": \"false — nobody else was involved\",\n      \"match\": true,\n      \"evidence\": \"Customer email: 'Nobody else was involved'\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": false,\n      \"sources_say\": \"false — consistent, since no third party was involved; the handler playbook rule on commercial vehicles is not triggered\",\n      \"match\": true,\n      \"evidence\": \"Customer email 'Nobody else was involved'; handler playbook rule applies only 'when the other driver is a commercial vehicle', which the email and documents do not state\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\"],\n      \"sources_say\": \"Both C2-required documents are present: repair_quote.pdf belongs to Thomas Petit / policy VER-1004 / VW Golf (2020) (registration FD-371-WS), and damage_photos.zip is counted as received per the mailroom; no signed accident report is needed because no third party is involved\",\n      \"match\": true,\n      \"evidence\": \"repair_quote.pdf header (customer, insurer, policy, vehicle all match the Policy Schedule); email attachment list 'repair_quote.pdf, damage_photos.zip'; contract Article 4.3 C2 row 'Photos of the damage; repair quote; accident report signed by both drivers when a third party is involved'\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"null — nothing in the email or quote indicates alcohol/drugs, invalid licence (licence date 2008-11-01 per Schedule), racing, intentional damage, or wear/mechanical failure only\",\n      \"match\": true,\n      \"evidence\": \"Customer email and repair_quote.pdf contain no exclusion facts; contract Article 3 exclusion list; Policy Schedule licence_date 2008-11-01\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"The claim itself is payable: reported 2026-10-28, within the 5-day deadline (contract Art. 4.1); C2 collision is in the Policy Schedule (Art. 2); both required C2 documents are provided (Art. 4.3); no Article 3 exclusion signal; the playbook commercial-vehicle referral rule is not triggered because the email states no other vehicle was involved. However, the recorded repair_cost of €900 is wrong (quote total incl. VAT is €1,640 per Art. 1), and because the true repair cost is above €1,500, contract Article 6.1 requires an independent assessor to inspect the vehicle — so the staged result 'assessor required: no' and the €600 payout computed from €900 cannot be approved as staged. At-fault C2 with identified third party absent means the standard €300 C2 deductible applies (Art. 5.2 waiver not applicable; no young-driver surcharge, licence since 2008).\"\n  },\n  \"summary\": \"Approve the claim in principle (C2 covered, reported on time, documents provided, no exclusion, no playbook referral), but do not approve the staged €600 payment: the repair quote's total incl. VAT is €1,640, not €900, and at that amount an independent assessor is required under Article 6.1 before payment.\"\n}\n```",
+  "questions": [],
+  "thread_id": "adb73f29-fc47-4a2e-8a8b-9ba4b821312b",
+  "cost": {
+    "failed": false,
+    "input_tokens": 57209,
+    "cached_tokens": 48896,
+    "output_tokens": 3089,
+    "input_cost": "0.00789908",
+    "output_cost": "0.00638570",
+    "total": "0.01428478"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 39.4,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "repair_cost",
+        "recorded": "900",
+        "should_be": "1640.00 EUR total incl. VAT",
+        "evidence": "repair_quote.pdf (Garage Central Auto, quote Q-2610-5283, customer Thomas Petit, policy VER-1004, VW Golf 2020): 'TOTAL INCL. VAT 1 640,00 €'. Contract Article 1 defines repair cost as 'the total amount including VAT shown on the repair quote'. The €900 in the email is only the garage's verbal phone estimate ('around €900'); the written quote is €1,640 incl. VAT"
+      }
+    ],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1004",
+        "sources_say": "VER-1004",
+        "match": true,
+        "evidence": "Customer email footer 'Policy number: VER-1004'; repair quote header 'Insurer: Veridia Insurance, policy VER-1004'; Policy Schedule policy_id VER-1004"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "C2 Collision damage is listed in the Policy Schedule for VER-1004 and covers damage to the insured vehicle after a collision; the email describes a single-vehicle collision with a post",
+        "match": true,
+        "evidence": "Policy Schedule coverages C1 and C2; contract Article 2 C2 row 'Damage to the insured vehicle after a collision'; email 'I hit a post in an underground car park'"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-27",
+        "sources_say": "27 October 2026",
+        "match": true,
+        "evidence": "Customer email: 'I hit a post in an underground car park on 27 October 2026'"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-28",
+        "sources_say": "Email received 2026-10-28, one day after the incident, within the 5-day deadline of contract Article 4.1",
+        "match": true,
+        "evidence": "Email header 'received on 2026-10-28'; contract Article 4.1 'reported within 5 days of the incident'"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "900",
+        "sources_say": "1640.00 EUR total incl. VAT",
+        "match": false,
+        "evidence": "repair_quote.pdf (Garage Central Auto, quote Q-2610-5283, customer Thomas Petit, policy VER-1004, VW Golf 2020): 'TOTAL INCL. VAT 1 640,00 €'. Contract Article 1 defines repair cost as 'the total amount including VAT shown on the repair quote'. The €900 in the email is only the garage's verbal phone estimate ('around €900'); the written quote is €1,640 incl. VAT"
+      },
+      {
+        "field": "at_fault",
+        "recorded": true,
+        "sources_say": "true — the policyholder hit a fixed post himself; no other driver involved",
+        "match": true,
+        "evidence": "Customer email: 'I hit a post in an underground car park... Nobody else was involved'"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": false,
+        "sources_say": "false — nobody else was involved",
+        "match": true,
+        "evidence": "Customer email: 'Nobody else was involved'"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": false,
+        "sources_say": "false — consistent, since no third party was involved; the handler playbook rule on commercial vehicles is not triggered",
+        "match": true,
+        "evidence": "Customer email 'Nobody else was involved'; handler playbook rule applies only 'when the other driver is a commercial vehicle', which the email and documents do not state"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "sources_say": "Both C2-required documents are present: repair_quote.pdf belongs to Thomas Petit / policy VER-1004 / VW Golf (2020) (registration FD-371-WS), and damage_photos.zip is counted as received per the mailroom; no signed accident report is needed because no third party is involved",
+        "match": true,
+        "evidence": "repair_quote.pdf header (customer, insurer, policy, vehicle all match the Policy Schedule); email attachment list 'repair_quote.pdf, damage_photos.zip'; contract Article 4.3 C2 row 'Photos of the damage; repair quote; accident report signed by both drivers when a third party is involved'"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "null — nothing in the email or quote indicates alcohol/drugs, invalid licence (licence date 2008-11-01 per Schedule), racing, intentional damage, or wear/mechanical failure only",
+        "match": true,
+        "evidence": "Customer email and repair_quote.pdf contain no exclusion facts; contract Article 3 exclusion list; Policy Schedule licence_date 2008-11-01"
+      }
+    ],
+    "summary": "Approve the claim in principle (C2 covered, reported on time, documents provided, no exclusion, no playbook referral), but do not approve the staged €600 payment: the repair quote's total incl. VAT is €1,640, not €900, and at that amount an independent assessor is required under Article 6.1 before payment.",
+    "unreadable": false
+  }
+}

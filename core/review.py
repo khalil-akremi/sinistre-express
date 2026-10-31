@@ -52,6 +52,9 @@ to in a source:
 "evidence": "where you saw it"}}, ...one per fact...],
  "payment": {{"should_be_paid": true or false, "evidence": "deadline, exclusions, coverage, documents, playbook"}},
  "summary": "one sentence for the person approving"}}
+Nobody can answer questions during this review: never ask one, always finish with the JSON. Files stored \
+by the mailroom cannot be opened: do not try. If a fact cannot be verified in any source, say so in its \
+evidence and set "match" to false only if a source contradicts it.
 
 --- Customer email received on {date} ---
 From: {sender}

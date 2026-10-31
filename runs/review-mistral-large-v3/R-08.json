@@ -1,0 +1,168 @@
+{
+  "review_id": "R-08",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1007\",\n      \"sources_say\": \"Customer email subject 'Claim - broken glass - VER-1007' and signature block 'Policy number: VER-1007'; Policy Schedule policy_id VER-1007, holder Emma Rousseau; repair quote states 'Insurer: Veridia Insurance, policy VER-1007'\",\n      \"match\": true,\n      \"evidence\": \"Customer email (2026-10-27); Policy Schedule; repair_quote.pdf header\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2 (Collision damage)\",\n      \"sources_say\": \"The email describes a stone thrown up on the A6 cracking the windscreen — glass breakage, i.e. C3 ('Windscreen, side windows'), not C2 ('Damage to the insured vehicle after a collision'). C3 is listed in the Policy Schedule, so glass breakage is covered, but under C3, not C2\",\n      \"match\": false,\n      \"evidence\": \"Customer email ('a stone ... cracked my windscreen'); contract Article 2 coverage table (C2 = collision, C3 = windscreen/side windows); Policy Schedule coverages include C3\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-26\",\n      \"sources_say\": \"Email: 'on 26 October 2026'\",\n      \"match\": true,\n      \"evidence\": \"Customer email body\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-27\",\n      \"sources_say\": \"Email received on 2026-10-27, one day after the incident\",\n      \"match\": true,\n      \"evidence\": \"Customer email header 'received on 2026-10-27'\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"1180\",\n      \"sources_say\": \"Repair quote Q-2610-5246 'TOTAL INCL. VAT 1 180,00 €', which is the 'total incl. VAT' line that Article 1 defines as the repair cost\",\n      \"match\": true,\n      \"evidence\": \"repair_quote.pdf totals block; contract Article 1 definition of repair cost\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": \"false\",\n      \"sources_say\": \"The damage was caused by a stone thrown up on the motorway; nothing in the email or the quote indicates the policyholder caused it\",\n      \"match\": true,\n      \"evidence\": \"Customer email ('A stone thrown up on the A6 motorway ... cracked my windscreen')\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": \"false\",\n      \"sources_say\": \"The email describes only a stone impact; no other vehicle or person is mentioned, so no third party was involved\",\n      \"match\": true,\n      \"evidence\": \"Customer email body\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": \"false\",\n      \"sources_say\": \"No third party is named or described anywhere in the email or documents, consistent with 'not identified'\",\n      \"match\": true,\n      \"evidence\": \"Customer email; repair_quote.pdf (no third party mentioned)\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\"],\n      \"sources_say\": \"Email attachments: repair_quote.pdf and damage_photos.zip. repair_quote.pdf was opened and belongs to this policyholder and vehicle (Customer Emma Rousseau, policy VER-1007, Tesla Model 3 (2023), registration GL-660-ZA — matching the Policy Schedule). damage_photos.zip is stored by the mailroom and counted as received. Article 4.3 requires exactly 'Photos of the damage; repair quote' for C3 glass claims\",\n      \"match\": true,\n      \"evidence\": \"Customer email attachment list; repair_quote.pdf customer/vehicle block; contract Article 4.3 required-documents table (C3 row)\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": \"null\",\n      \"sources_say\": \"Nothing in the email or the quote indicates alcohol/drugs, invalid licence, racing/track use, intentional damage, or wear/mechanical failure — a stone impact is none of the Article 3 exclusions\",\n      \"match\": true,\n      \"evidence\": \"Customer email; repair_quote.pdf; contract Article 3 exclusions list\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"Reported 2026-10-27, one day after the 2026-10-26 incident — within the 5-day deadline of Article 4.1, so no Article 7.1 referral. No Article 3 exclusion applies (exclusion_signal null is correct). The damage is glass breakage (C3), which IS in the Policy Schedule, so Article 2/7.3 referral does not apply. Required C3 documents (photos + repair quote) were provided. The playbook rule 'refer when the other driver is a commercial vehicle' is NOT triggered: the email and documents state only a stone thrown up, with no other driver or vehicle at all. Repair cost €1,180 is below the €1,500 assessor threshold of Article 6.1, so 'assessor required: no' is consistent. The claim should be paid — but under coverage C3 (glass breakage, €50 standard deductible), not C2 as recorded; the recorded coverage code C2 is wrong, which is why the staged deductible (€300) and payout (€880) are computed from the wrong coverage.\"\n  },\n  \"summary\": \"All facts match the email and the repair quote, and the claim is payable (in time, covered under C3 glass breakage, documents provided, no exclusion, playbook commercial-vehicle rule not triggered), but the recorded coverage is C2 collision instead of C3 glass breakage, so the staged deductible/payout are based on the wrong coverage code.\"\n}\n```",
+  "questions": [],
+  "thread_id": "76d39a63-fb40-4886-bf86-3c4647f55bf3",
+  "cost": {
+    "failed": false,
+    "input_tokens": 74944,
+    "cached_tokens": 62976,
+    "output_tokens": 3084,
+    "input_cost": "0.01047632",
+    "output_cost": "0.00631829",
+    "total": "0.01679461"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 53.7,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "coverage",
+        "recorded": "C2 (Collision damage)",
+        "should_be": "The email describes a stone thrown up on the A6 cracking the windscreen — glass breakage, i.e. C3 ('Windscreen, side windows'), not C2 ('Damage to the insured vehicle after a collision'). C3 is listed in the Policy Schedule, so glass breakage is covered, but under C3, not C2",
+        "evidence": "Customer email ('a stone ... cracked my windscreen'); contract Article 2 coverage table (C2 = collision, C3 = windscreen/side windows); Policy Schedule coverages include C3"
+      }
+    ],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1007",
+        "sources_say": "Customer email subject 'Claim - broken glass - VER-1007' and signature block 'Policy number: VER-1007'; Policy Schedule policy_id VER-1007, holder Emma Rousseau; repair quote states 'Insurer: Veridia Insurance, policy VER-1007'",
+        "match": true,
+        "evidence": "Customer email (2026-10-27); Policy Schedule; repair_quote.pdf header"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2 (Collision damage)",
+        "sources_say": "The email describes a stone thrown up on the A6 cracking the windscreen — glass breakage, i.e. C3 ('Windscreen, side windows'), not C2 ('Damage to the insured vehicle after a collision'). C3 is listed in the Policy Schedule, so glass breakage is covered, but under C3, not C2",
+        "match": false,
+        "evidence": "Customer email ('a stone ... cracked my windscreen'); contract Article 2 coverage table (C2 = collision, C3 = windscreen/side windows); Policy Schedule coverages include C3"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-26",
+        "sources_say": "Email: 'on 26 October 2026'",
+        "match": true,
+        "evidence": "Customer email body"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-27",
+        "sources_say": "Email received on 2026-10-27, one day after the incident",
+        "match": true,
+        "evidence": "Customer email header 'received on 2026-10-27'"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "1180",
+        "sources_say": "Repair quote Q-2610-5246 'TOTAL INCL. VAT 1 180,00 €', which is the 'total incl. VAT' line that Article 1 defines as the repair cost",
+        "match": true,
+        "evidence": "repair_quote.pdf totals block; contract Article 1 definition of repair cost"
+      },
+      {
+        "field": "at_fault",
+        "recorded": "false",
+        "sources_say": "The damage was caused by a stone thrown up on the motorway; nothing in the email or the quote indicates the policyholder caused it",
+        "match": true,
+        "evidence": "Customer email ('A stone thrown up on the A6 motorway ... cracked my windscreen')"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": "false",
+        "sources_say": "The email describes only a stone impact; no other vehicle or person is mentioned, so no third party was involved",
+        "match": true,
+        "evidence": "Customer email body"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": "false",
+        "sources_say": "No third party is named or described anywhere in the email or documents, consistent with 'not identified'",
+        "match": true,
+        "evidence": "Customer email; repair_quote.pdf (no third party mentioned)"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "sources_say": "Email attachments: repair_quote.pdf and damage_photos.zip. repair_quote.pdf was opened and belongs to this policyholder and vehicle (Customer Emma Rousseau, policy VER-1007, Tesla Model 3 (2023), registration GL-660-ZA — matching the Policy Schedule). damage_photos.zip is stored by the mailroom and counted as received. Article 4.3 requires exactly 'Photos of the damage; repair quote' for C3 glass claims",
+        "match": true,
+        "evidence": "Customer email attachment list; repair_quote.pdf customer/vehicle block; contract Article 4.3 required-documents table (C3 row)"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": "null",
+        "sources_say": "Nothing in the email or the quote indicates alcohol/drugs, invalid licence, racing/track use, intentional damage, or wear/mechanical failure — a stone impact is none of the Article 3 exclusions",
+        "match": true,
+        "evidence": "Customer email; repair_quote.pdf; contract Article 3 exclusions list"
+      }
+    ],
+    "summary": "All facts match the email and the repair quote, and the claim is payable (in time, covered under C3 glass breakage, documents provided, no exclusion, playbook commercial-vehicle rule not triggered), but the recorded coverage is C2 collision instead of C3 glass breakage, so the staged deductible/payout are based on the wrong coverage code.",
+    "unreadable": false
+  }
+}

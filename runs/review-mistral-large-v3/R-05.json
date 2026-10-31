@@ -1,0 +1,194 @@
+{
+  "review_id": "R-05",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1004\",\n      \"sources_say\": \"Customer email signs off 'Policy number: VER-1004' and the Policy Schedule is for policy_id VER-1004, holder Thomas Petit\",\n      \"match\": true,\n      \"evidence\": \"Customer email footer 'Policy number: VER-1004'; Policy Schedule from claims system (policy_id VER-1004)\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"Policy Schedule lists coverages C1 (Third-party liability) and C2 (Collision damage); the email describes damage to the policyholder's own car after losing control and hitting a fence, which is collision damage to the insured vehicle (C2 per contract Article 2 table)\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule coverages [C1, C2]; customer email 'I lost control and hit a fence'; contract Article 2 C2 row 'Damage to the insured vehicle after a collision' <cite document_id=\\\"2630#10414\\\" pages=\\\"1\\\" name=\\\"contract.pdf\\\"/>\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-21\",\n      \"sources_say\": \"Email: 'an accident that happened on 21 October 2026'\",\n      \"match\": true,\n      \"evidence\": \"Customer email received 2026-10-22, body: 'accident that happened on 21 October 2026'\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-22\",\n      \"sources_say\": \"Email received on 2026-10-22, one day after the incident, within the 5-day reporting deadline of contract Article 4.1\",\n      \"match\": true,\n      \"evidence\": \"Customer email header 'received on 2026-10-22'; contract Article 4.1 'reported within 5 days' <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": 1800,\n      \"sources_say\": \"Email: 'The garage quoted €1,800 to repair my car'; per contract Article 1 repair cost is the total incl. VAT on the quote. The attached repair_quote.pdf cannot be opened (mailroom note: count as received), so the email figure €1,800 is the stated quote total\",\n      \"match\": true,\n      \"evidence\": \"Customer email 'The garage quoted €1,800'; contract Article 1 definition of repair cost <cite document_id=\\\"2630#10414\\\" pages=\\\"1\\\" name=\\\"contract.pdf\\\"/>; mailroom note 'repair_quote.pdf ... count as received'\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": true,\n      \"sources_say\": \"Email: 'I lost control and hit a fence' — single-vehicle accident caused by the policyholder driving, so the authorised driver is at fault\",\n      \"match\": true,\n      \"evidence\": \"Customer email 'I lost control and hit a fence. No one else was involved.'\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": false,\n      \"sources_say\": \"Email: 'No one else was involved' — only the policyholder's car and a fence; no third party as defined in contract Article 1 ('any person other than the authorised driver')\",\n      \"match\": true,\n      \"evidence\": \"Customer email 'No one else was involved.'; contract Article 1 third-party definition <cite document_id=\\\"2630#10414\\\" pages=\\\"1\\\" name=\\\"contract.pdf\\\"/>\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": false,\n      \"sources_say\": \"No third party was involved, so there is no third party to identify; consistent with the email\",\n      \"match\": true,\n      \"evidence\": \"Customer email 'No one else was involved.'\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\"],\n      \"sources_say\": \"Email attachments damage_photos.zip and repair_quote.pdf, both from Thomas Petit regarding policy VER-1004 (his vehicle); mailroom stored both and instructed to count them as received. For C2 the required documents are photos of the damage and repair quote (accident report only when a third party is involved — none here), so both required documents are provided\",\n      \"match\": true,\n      \"evidence\": \"Customer email 'Attached: damage_photos.zip, repair_quote.pdf'; mailroom note 'damage_photos.zip, repair_quote.pdf ... count as received'; contract Article 4.3 C2 required documents <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"The email states 'Coming back from a friend's birthday party, where I had a few drinks, I lost control and hit a fence' — an admission of alcohol consumption before driving, which is a possible exclusion signal under contract Article 3.1 ('the driver had alcohol above the legal limit'); the handler should have flagged it instead of recording null\",\n      \"match\": false,\n      \"evidence\": \"Customer email 'where I had a few drinks'; contract Article 3.1 alcohol exclusion and 'When a claim shows a possible exclusion, it is referred to a claims handler' <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": false,\n    \"evidence\": \"Deadline is fine (reported 2026-10-22, one day after the 2026-10-21 incident, within the 5 days of Article 4.1 <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>), coverage C2 is in the Policy Schedule, and the required C2 documents (photos, repair quote) were provided, so none of those block payment. The handler-playbook rule about commercial vehicles does not apply because the email states no third party was involved. However, the email states the driver 'had a few drinks' before driving, which is a possible exclusion under contract Article 3.1 (alcohol); Article 3 and Article 7.2 require that a claim showing a possible exclusion be referred to a Veridia claims handler who takes the decision — it must not be paid automatically. The staged automatic payout (pending_approval, €1500) should therefore not be approved as-is; the claim must go to a handler because of the unrecorded possible alcohol exclusion.\"\n  },\n  \"summary\": \"All recorded facts match the email and documents except exclusion_signal: the customer admitted to 'a few drinks' before the crash, a possible alcohol exclusion (contract Article 3.1) that must be referred to a handler under Article 7.2, so the staged automatic payment should not be approved.\"\n}\n```",
+  "questions": [],
+  "thread_id": "62534096-e0a6-4052-a956-9733e5f43daa",
+  "cost": {
+    "failed": false,
+    "input_tokens": 123237,
+    "cached_tokens": 96256,
+    "output_tokens": 4876,
+    "input_cost": "0.02217332",
+    "output_cost": "0.01001106",
+    "total": "0.03218438"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 50.9,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "should_be": "The email states 'Coming back from a friend's birthday party, where I had a few drinks, I lost control and hit a fence' — an admission of alcohol consumption before driving, which is a possible exclusion signal under contract Article 3.1 ('the driver had alcohol above the legal limit'); the handler should have flagged it instead of recording null",
+        "evidence": "Customer email 'where I had a few drinks'; contract Article 3.1 alcohol exclusion and 'When a claim shows a possible exclusion, it is referred to a claims handler' <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>"
+      },
+      {
+        "field": "payment decision",
+        "recorded": "payment staged",
+        "should_be": "not paid",
+        "evidence": "Deadline is fine (reported 2026-10-22, one day after the 2026-10-21 incident, within the 5 days of Article 4.1 <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>), coverage C2 is in the Policy Schedule, and the required C2 documents (photos, repair quote) were provided, so none of those block payment. The handler-playbook rule about commercial vehicles does not apply because the email states no third party was involved. However, the email states the driver 'had a few drinks' before driving, which is a possible exclusion under contract Article 3.1 (alcohol); Article 3 and Article 7.2 require that a claim showing a possible exclusion be referred to a Veridia claims handler who takes the decision — it must not be paid automatically. The staged automatic payout (pending_approval, €1500) should therefore not be approved as-is; the claim must go to a handler because of the unrecorded possible alcohol exclusion."
+      }
+    ],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1004",
+        "sources_say": "Customer email signs off 'Policy number: VER-1004' and the Policy Schedule is for policy_id VER-1004, holder Thomas Petit",
+        "match": true,
+        "evidence": "Customer email footer 'Policy number: VER-1004'; Policy Schedule from claims system (policy_id VER-1004)"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "Policy Schedule lists coverages C1 (Third-party liability) and C2 (Collision damage); the email describes damage to the policyholder's own car after losing control and hitting a fence, which is collision damage to the insured vehicle (C2 per contract Article 2 table)",
+        "match": true,
+        "evidence": "Policy Schedule coverages [C1, C2]; customer email 'I lost control and hit a fence'; contract Article 2 C2 row 'Damage to the insured vehicle after a collision' <cite document_id=\"2630#10414\" pages=\"1\" name=\"contract.pdf\"/>"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-21",
+        "sources_say": "Email: 'an accident that happened on 21 October 2026'",
+        "match": true,
+        "evidence": "Customer email received 2026-10-22, body: 'accident that happened on 21 October 2026'"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-22",
+        "sources_say": "Email received on 2026-10-22, one day after the incident, within the 5-day reporting deadline of contract Article 4.1",
+        "match": true,
+        "evidence": "Customer email header 'received on 2026-10-22'; contract Article 4.1 'reported within 5 days' <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": 1800,
+        "sources_say": "Email: 'The garage quoted €1,800 to repair my car'; per contract Article 1 repair cost is the total incl. VAT on the quote. The attached repair_quote.pdf cannot be opened (mailroom note: count as received), so the email figure €1,800 is the stated quote total",
+        "match": true,
+        "evidence": "Customer email 'The garage quoted €1,800'; contract Article 1 definition of repair cost <cite document_id=\"2630#10414\" pages=\"1\" name=\"contract.pdf\"/>; mailroom note 'repair_quote.pdf ... count as received'"
+      },
+      {
+        "field": "at_fault",
+        "recorded": true,
+        "sources_say": "Email: 'I lost control and hit a fence' — single-vehicle accident caused by the policyholder driving, so the authorised driver is at fault",
+        "match": true,
+        "evidence": "Customer email 'I lost control and hit a fence. No one else was involved.'"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": false,
+        "sources_say": "Email: 'No one else was involved' — only the policyholder's car and a fence; no third party as defined in contract Article 1 ('any person other than the authorised driver')",
+        "match": true,
+        "evidence": "Customer email 'No one else was involved.'; contract Article 1 third-party definition <cite document_id=\"2630#10414\" pages=\"1\" name=\"contract.pdf\"/>"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": false,
+        "sources_say": "No third party was involved, so there is no third party to identify; consistent with the email",
+        "match": true,
+        "evidence": "Customer email 'No one else was involved.'"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "sources_say": "Email attachments damage_photos.zip and repair_quote.pdf, both from Thomas Petit regarding policy VER-1004 (his vehicle); mailroom stored both and instructed to count them as received. For C2 the required documents are photos of the damage and repair quote (accident report only when a third party is involved — none here), so both required documents are provided",
+        "match": true,
+        "evidence": "Customer email 'Attached: damage_photos.zip, repair_quote.pdf'; mailroom note 'damage_photos.zip, repair_quote.pdf ... count as received'; contract Article 4.3 C2 required documents <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "The email states 'Coming back from a friend's birthday party, where I had a few drinks, I lost control and hit a fence' — an admission of alcohol consumption before driving, which is a possible exclusion signal under contract Article 3.1 ('the driver had alcohol above the legal limit'); the handler should have flagged it instead of recording null",
+        "match": false,
+        "evidence": "Customer email 'where I had a few drinks'; contract Article 3.1 alcohol exclusion and 'When a claim shows a possible exclusion, it is referred to a claims handler' <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>"
+      }
+    ],
+    "summary": "All recorded facts match the email and documents except exclusion_signal: the customer admitted to 'a few drinks' before the crash, a possible alcohol exclusion (contract Article 3.1) that must be referred to a handler under Article 7.2, so the staged automatic payment should not be approved.",
+    "unreadable": false
+  }
+}

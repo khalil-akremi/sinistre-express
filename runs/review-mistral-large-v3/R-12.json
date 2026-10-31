@@ -1,0 +1,163 @@
+{
+  "review_id": "R-12",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1001\",\n      \"sources_say\": \"Customer email states 'Policy number: VER-1001'; Policy Schedule in the claims system is policy_id VER-1001, holder Claire Martin\",\n      \"match\": true,\n      \"evidence\": \"Customer email (2026-10-30, Claire Martin, 'Policy number: VER-1001'); Policy Schedule JSON for VER-1001\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C4\",\n      \"sources_say\": \"The incident is a whole-vehicle theft (police receipt: 'RECEIPT OF A THEFT COMPLAINT (vehicle theft)'); Policy Schedule lists coverage C4 'Theft'; contract Article 2 covers C4 'Theft of the whole insured vehicle'\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf (title and complaint type); Policy Schedule coverages; contract.pdf Article 2, page 2\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-29\",\n      \"sources_say\": \"Police report: 'Date of the theft: 29/10/2026, between 21:00 and 23:45'\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf, 'Date of the theft: 29/10/2026'\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-30\",\n      \"sources_say\": \"Email received 2026-10-30 ('filed a complaint at the police station this morning'); police receipt: 'Complaint filed on: 30/10/2026 at 09:25'\",\n      \"match\": true,\n      \"evidence\": \"Customer email header date 2026-10-30; police_report.pdf 'Complaint filed on: 30/10/2026'\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"0\",\n      \"sources_say\": \"No repair quote or invoice exists — the vehicle was stolen whole, not damaged; contract states 'For theft (C4), the amount of the claim is the market value of the vehicle', so repair cost is not the basis (Article 1 defines repair cost from a quote/invoice, which does not exist here)\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf (theft of whole vehicle, no repair); contract.pdf Article 2 page 2 ('For theft (C4), the amount of the claim is the market value of the vehicle')\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": \"false\",\n      \"sources_say\": \"The vehicle was stolen by an unknown person while parked; the policyholder is the victim, not at fault; no other driver is mentioned anywhere\",\n      \"match\": true,\n      \"evidence\": \"Customer email ('My car was stolen from the street where I live'); police_report.pdf (theft complaint, no suspect/driver identified)\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": \"false\",\n      \"sources_say\": \"No third party appears in the email or the police report — the theft is by an unidentified person; the playbook's commercial-vehicle rule is not triggered because no other driver/vehicle is involved\",\n      \"match\": true,\n      \"evidence\": \"Customer email and police_report.pdf contain no mention of any other person or vehicle; handler playbook rule requires 'the other driver' to be a commercial vehicle\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": \"false\",\n      \"sources_say\": \"Police report identifies no suspect; complaint is against unknown\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf (complainant Claire Martin, no identified perpetrator)\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": \"[\\\"police_report\\\"]\",\n      \"sources_say\": \"police_report.pdf is attached to the email and belongs to this policyholder and vehicle: Complainant 'Claire Martin', Vehicle 'Peugeot 208 (2021)', matching Policy Schedule holder Claire Martin / Peugeot 208 (2021); contract Article 4.3 requires exactly 'Police report' for C4 Theft\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf (Complainant: Claire Martin; Vehicle: Peugeot 208 (2021)); customer email attachment list; contract.pdf Article 4.3 page 2 (C4 Theft required documents: Police report)\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": \"null\",\n      \"sources_say\": \"No exclusion indicator in the email or police report: keys kept by complainant, signs of break-in reported, vehicle entered in stolen-vehicle register; none of Article 3 exclusions (alcohol/drugs, no licence, racing, intentional damage by policyholder, wear/mechanical failure) is suggested — licence date 2012-05-14 shows a valid long-held licence\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf ('Keys: both keys kept by the complainant', 'Signs of break-in reported'); contract.pdf Article 3 page 2; Policy Schedule licence_date 2012-05-14\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"Deadline: theft on 2026-10-29 discovered/reported 2026-10-30, within the 2-day theft deadline of contract Article 4.1 (contract.pdf page 2). Coverage: C4 Theft is listed in the Policy Schedule, so Article 2/7.3 referral does not apply. Documents: the required C4 document (police report) is provided and matches the policyholder and vehicle (Article 4.3). Exclusions: none indicated (Article 3), so no Article 7.2 referral. Playbook: the commercial-vehicle referral rule is not triggered because no third party/other driver is involved (email and police report mention none). No Article 7 referral applies, so automatic payment is allowed; claim amount for C4 is the market value €14,000 per Article 2, with the C4 deductible 10% min €500 = €1,400, giving payout €12,600, and no assessor is required since Article 6.1 applies only to C2/C3 damage claims (contract.pdf pages 2-3).\"\n  },\n  \"summary\": \"All recorded facts match the customer email and police report, the claim is a covered C4 theft reported within the 2-day deadline with the required police report, no exclusion or playbook referral rule applies, so the staged payment of €12,600 (market value €14,000 minus €1,400 deductible) should be approved.\"\n}\n```",
+  "questions": [],
+  "thread_id": "bdbd9e31-10c3-4b34-aa2e-a38953077f0a",
+  "cost": {
+    "failed": false,
+    "input_tokens": 79765,
+    "cached_tokens": 66816,
+    "output_tokens": 2790,
+    "input_cost": "0.01126868",
+    "output_cost": "0.00569671",
+    "total": "0.01696539"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 32.6,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1001",
+        "sources_say": "Customer email states 'Policy number: VER-1001'; Policy Schedule in the claims system is policy_id VER-1001, holder Claire Martin",
+        "match": true,
+        "evidence": "Customer email (2026-10-30, Claire Martin, 'Policy number: VER-1001'); Policy Schedule JSON for VER-1001"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C4",
+        "sources_say": "The incident is a whole-vehicle theft (police receipt: 'RECEIPT OF A THEFT COMPLAINT (vehicle theft)'); Policy Schedule lists coverage C4 'Theft'; contract Article 2 covers C4 'Theft of the whole insured vehicle'",
+        "match": true,
+        "evidence": "police_report.pdf (title and complaint type); Policy Schedule coverages; contract.pdf Article 2, page 2"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-29",
+        "sources_say": "Police report: 'Date of the theft: 29/10/2026, between 21:00 and 23:45'",
+        "match": true,
+        "evidence": "police_report.pdf, 'Date of the theft: 29/10/2026'"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-30",
+        "sources_say": "Email received 2026-10-30 ('filed a complaint at the police station this morning'); police receipt: 'Complaint filed on: 30/10/2026 at 09:25'",
+        "match": true,
+        "evidence": "Customer email header date 2026-10-30; police_report.pdf 'Complaint filed on: 30/10/2026'"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "0",
+        "sources_say": "No repair quote or invoice exists — the vehicle was stolen whole, not damaged; contract states 'For theft (C4), the amount of the claim is the market value of the vehicle', so repair cost is not the basis (Article 1 defines repair cost from a quote/invoice, which does not exist here)",
+        "match": true,
+        "evidence": "police_report.pdf (theft of whole vehicle, no repair); contract.pdf Article 2 page 2 ('For theft (C4), the amount of the claim is the market value of the vehicle')"
+      },
+      {
+        "field": "at_fault",
+        "recorded": "false",
+        "sources_say": "The vehicle was stolen by an unknown person while parked; the policyholder is the victim, not at fault; no other driver is mentioned anywhere",
+        "match": true,
+        "evidence": "Customer email ('My car was stolen from the street where I live'); police_report.pdf (theft complaint, no suspect/driver identified)"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": "false",
+        "sources_say": "No third party appears in the email or the police report — the theft is by an unidentified person; the playbook's commercial-vehicle rule is not triggered because no other driver/vehicle is involved",
+        "match": true,
+        "evidence": "Customer email and police_report.pdf contain no mention of any other person or vehicle; handler playbook rule requires 'the other driver' to be a commercial vehicle"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": "false",
+        "sources_say": "Police report identifies no suspect; complaint is against unknown",
+        "match": true,
+        "evidence": "police_report.pdf (complainant Claire Martin, no identified perpetrator)"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": "[\"police_report\"]",
+        "sources_say": "police_report.pdf is attached to the email and belongs to this policyholder and vehicle: Complainant 'Claire Martin', Vehicle 'Peugeot 208 (2021)', matching Policy Schedule holder Claire Martin / Peugeot 208 (2021); contract Article 4.3 requires exactly 'Police report' for C4 Theft",
+        "match": true,
+        "evidence": "police_report.pdf (Complainant: Claire Martin; Vehicle: Peugeot 208 (2021)); customer email attachment list; contract.pdf Article 4.3 page 2 (C4 Theft required documents: Police report)"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": "null",
+        "sources_say": "No exclusion indicator in the email or police report: keys kept by complainant, signs of break-in reported, vehicle entered in stolen-vehicle register; none of Article 3 exclusions (alcohol/drugs, no licence, racing, intentional damage by policyholder, wear/mechanical failure) is suggested — licence date 2012-05-14 shows a valid long-held licence",
+        "match": true,
+        "evidence": "police_report.pdf ('Keys: both keys kept by the complainant', 'Signs of break-in reported'); contract.pdf Article 3 page 2; Policy Schedule licence_date 2012-05-14"
+      }
+    ],
+    "summary": "All recorded facts match the customer email and police report, the claim is a covered C4 theft reported within the 2-day deadline with the required police report, no exclusion or playbook referral rule applies, so the staged payment of €12,600 (market value €14,000 minus €1,400 deductible) should be approved.",
+    "unreadable": false
+  }
+}

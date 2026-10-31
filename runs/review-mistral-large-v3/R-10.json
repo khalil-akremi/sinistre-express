@@ -1,0 +1,151 @@
+{
+  "review_id": "R-10",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1007\",\n      \"sources_say\": \"Email subject/body states 'Policy number: VER-1007'; Policy Schedule policy_id is VER-1007 for holder Emma Rousseau; repair quote names 'Insurer: Veridia Insurance, policy VER-1007'\",\n      \"match\": true,\n      \"evidence\": \"Customer email 2026-10-27; Policy Schedule in claims system; repair_quote.pdf customer block\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C3\",\n      \"sources_say\": \"Email describes a cracked windscreen from a stone on the A6; contract Article 2 lists C3 'Glass breakage' covering windscreen and side windows; C3 is listed in the Policy Schedule coverages\",\n      \"match\": true,\n      \"evidence\": \"Customer email 2026-10-27; contract.pdf Article 2 (page 1-2), C3 row; Policy Schedule coverages include C3\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-26\",\n      \"sources_say\": \"Email: 'A stone thrown up on the A6 motorway on 26 October 2026 cracked my windscreen'\",\n      \"match\": true,\n      \"evidence\": \"Customer email 2026-10-27, incident description\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-27\",\n      \"sources_say\": \"Email received on 2026-10-27 reporting the 2026-10-26 incident; contract Article 4.1 requires reporting within 5 days, so 1 day is within deadline\",\n      \"match\": true,\n      \"evidence\": \"Customer email header date 2026-10-27; contract.pdf Article 4.1 (page 2)\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"1180\",\n      \"sources_say\": \"repair_quote.pdf 'TOTAL INCL. VAT 1 180,00 €' (total excl. VAT 983,33 € + VAT 20 % 196,67 €); contract Article 1 defines repair cost as the total incl. VAT on the quote\",\n      \"match\": true,\n      \"evidence\": \"repair_quote.pdf quote Q-2610-5246 totals block; contract.pdf Article 1 'Repair cost' definition (page 1)\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": \"false\",\n      \"sources_say\": \"Email attributes the damage to a stone thrown up on the motorway, with no collision or fault by the policyholder described; no source indicates Emma Rousseau was at fault\",\n      \"match\": true,\n      \"evidence\": \"Customer email 2026-10-27 ('A stone thrown up on the A6 motorway... cracked my windscreen')\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": \"false\",\n      \"sources_say\": \"Email mentions only a stone thrown up on the A6; no other driver or vehicle is described, so no third party is involved and the playbook commercial-vehicle referral rule is not triggered\",\n      \"match\": true,\n      \"evidence\": \"Customer email 2026-10-27; handler playbook (commercial vehicle referral applies only when the other driver is a commercial vehicle, which the email does not state)\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": \"false\",\n      \"sources_say\": \"No third party is named or identified anywhere in the email or the quote\",\n      \"match\": true,\n      \"evidence\": \"Customer email 2026-10-27; repair_quote.pdf (no third party listed)\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\"],\n      \"sources_say\": \"Email attached repair_quote.pdf and damage_photos.zip; repair_quote.pdf is issued to customer Emma Rousseau for Tesla Model 3 (2023), registration GL-660-ZA, insurer Veridia policy VER-1007; damage_photos.zip is stored by the mailroom and counts as received; contract Article 4.3 requires for C3 exactly 'Photos of the damage; repair quote'\",\n      \"match\": true,\n      \"evidence\": \"Customer email attachments list; repair_quote.pdf customer/vehicle block; mailroom note that damage_photos.zip counts as received; contract.pdf Article 4.3 C3 row (page 2)\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": \"null\",\n      \"sources_say\": \"Nothing in the email or quote indicates alcohol/drugs, invalid licence, racing, intentional damage, or wear/mechanical failure (Article 3 exclusions); a stone chip is none of these\",\n      \"match\": true,\n      \"evidence\": \"Customer email 2026-10-27; repair_quote.pdf; contract.pdf Article 3 (page 2)\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"Coverage C3 Glass breakage is in the Policy Schedule (contract Article 2); reported 2026-10-27, within the 5-day deadline of Article 4.1 (incident 2026-10-26); no Article 3 exclusion signal; required C3 documents (photos + repair quote, Article 4.3) both provided and belonging to policyholder Emma Rousseau / Tesla Model 3 (2023) / VER-1007; repair cost €1,180 incl. VAT is below the €1,500 assessor threshold of Article 6.1 so 'assessor required: no' is correct; deductible €50 per C3 standard deductible (Article 2/5), payout €1,130 = 1180 - 50 under Article 6.2; the playbook commercial-vehicle referral rule does not apply because the email states no other driver or commercial vehicle was involved.\"\n  },\n  \"summary\": \"All recorded facts match the email, the repair quote, the Policy Schedule and the contract, the claim was reported within 5 days with no exclusion and both required C3 documents provided, and no playbook referral rule is triggered, so the staged payment of €1,130 (repair cost €1,180 incl. VAT minus €50 C3 deductible) should be approved.\"\n}\n```",
+  "questions": [],
+  "thread_id": "bbc3d960-50d4-47e4-82e4-ab3668fca2ed",
+  "cost": {
+    "failed": false,
+    "input_tokens": 40911,
+    "cached_tokens": 31744,
+    "output_tokens": 2355,
+    "input_cost": "0.00677468",
+    "output_cost": "0.00481070",
+    "total": "0.01158538"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 35.7,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1007",
+        "sources_say": "Email subject/body states 'Policy number: VER-1007'; Policy Schedule policy_id is VER-1007 for holder Emma Rousseau; repair quote names 'Insurer: Veridia Insurance, policy VER-1007'",
+        "match": true,
+        "evidence": "Customer email 2026-10-27; Policy Schedule in claims system; repair_quote.pdf customer block"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C3",
+        "sources_say": "Email describes a cracked windscreen from a stone on the A6; contract Article 2 lists C3 'Glass breakage' covering windscreen and side windows; C3 is listed in the Policy Schedule coverages",
+        "match": true,
+        "evidence": "Customer email 2026-10-27; contract.pdf Article 2 (page 1-2), C3 row; Policy Schedule coverages include C3"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-26",
+        "sources_say": "Email: 'A stone thrown up on the A6 motorway on 26 October 2026 cracked my windscreen'",
+        "match": true,
+        "evidence": "Customer email 2026-10-27, incident description"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-27",
+        "sources_say": "Email received on 2026-10-27 reporting the 2026-10-26 incident; contract Article 4.1 requires reporting within 5 days, so 1 day is within deadline",
+        "match": true,
+        "evidence": "Customer email header date 2026-10-27; contract.pdf Article 4.1 (page 2)"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "1180",
+        "sources_say": "repair_quote.pdf 'TOTAL INCL. VAT 1 180,00 €' (total excl. VAT 983,33 € + VAT 20 % 196,67 €); contract Article 1 defines repair cost as the total incl. VAT on the quote",
+        "match": true,
+        "evidence": "repair_quote.pdf quote Q-2610-5246 totals block; contract.pdf Article 1 'Repair cost' definition (page 1)"
+      },
+      {
+        "field": "at_fault",
+        "recorded": "false",
+        "sources_say": "Email attributes the damage to a stone thrown up on the motorway, with no collision or fault by the policyholder described; no source indicates Emma Rousseau was at fault",
+        "match": true,
+        "evidence": "Customer email 2026-10-27 ('A stone thrown up on the A6 motorway... cracked my windscreen')"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": "false",
+        "sources_say": "Email mentions only a stone thrown up on the A6; no other driver or vehicle is described, so no third party is involved and the playbook commercial-vehicle referral rule is not triggered",
+        "match": true,
+        "evidence": "Customer email 2026-10-27; handler playbook (commercial vehicle referral applies only when the other driver is a commercial vehicle, which the email does not state)"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": "false",
+        "sources_say": "No third party is named or identified anywhere in the email or the quote",
+        "match": true,
+        "evidence": "Customer email 2026-10-27; repair_quote.pdf (no third party listed)"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "sources_say": "Email attached repair_quote.pdf and damage_photos.zip; repair_quote.pdf is issued to customer Emma Rousseau for Tesla Model 3 (2023), registration GL-660-ZA, insurer Veridia policy VER-1007; damage_photos.zip is stored by the mailroom and counts as received; contract Article 4.3 requires for C3 exactly 'Photos of the damage; repair quote'",
+        "match": true,
+        "evidence": "Customer email attachments list; repair_quote.pdf customer/vehicle block; mailroom note that damage_photos.zip counts as received; contract.pdf Article 4.3 C3 row (page 2)"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": "null",
+        "sources_say": "Nothing in the email or quote indicates alcohol/drugs, invalid licence, racing, intentional damage, or wear/mechanical failure (Article 3 exclusions); a stone chip is none of these",
+        "match": true,
+        "evidence": "Customer email 2026-10-27; repair_quote.pdf; contract.pdf Article 3 (page 2)"
+      }
+    ],
+    "summary": "All recorded facts match the email, the repair quote, the Policy Schedule and the contract, the claim was reported within 5 days with no exclusion and both required C3 documents provided, and no playbook referral rule is triggered, so the staged payment of €1,130 (repair cost €1,180 incl. VAT minus €50 C3 deductible) should be approved.",
+    "unreadable": false
+  }
+}

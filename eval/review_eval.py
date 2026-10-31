@@ -30,6 +30,7 @@ from core.review import build_review_task, parse_verdict
 
 ROOT = Path(__file__).resolve().parent.parent
 CASES_FILE = ROOT / "data" / "review_cases.json"
+REVIEW_MAX_STEPS = 20  # 12 was too tight: one review stopped halfway and asked to continue
 VAN_RULE = ("When the other driver is a commercial vehicle (van, truck, lorry, delivery vehicle), "
             "refer the claim to a handler so Veridia can recover the money from their insurer.")
 # words that show the Reviewer found the planted mistake (searched in its issues)
@@ -80,7 +81,7 @@ async def main_async(args: argparse.Namespace) -> None:
             started = time.monotonic()
             try:
                 ids = [(await client.chat.upload_file(ROOT / f)).id for f in case["email"].get("files") or []]
-                record |= await asyncio.wait_for(run_agent(client, agent_id, task, 12, caps, file_ids=ids), 300)
+                record |= await asyncio.wait_for(run_agent(client, agent_id, task, REVIEW_MAX_STEPS, caps, file_ids=ids), 300)
             except Exception as exc:  # noqa: BLE001
                 record["error"] = f"{type(exc).__name__}: {exc}"
             record["seconds"] = round(time.monotonic() - started, 1)

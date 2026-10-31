@@ -1,0 +1,152 @@
+{
+  "review_id": "R-03",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1003\",\n      \"sources_say\": \"Customer email states 'Policy number: VER-1003'; Policy Schedule policy_id is VER-1003 for holder Ines Haddad.\",\n      \"match\": true,\n      \"evidence\": \"Customer email subject/body 'Claim - accident - VER-1003' and 'Policy number: VER-1003'; Policy Schedule in claims system.\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"Policy Schedule lists coverage C2 'Collision damage' for VER-1003; email describes damage to the insured car itself after scraping a gate, which is collision damage under Article 2. <cite document_id=\\\"2630#10414\\\" pages=\\\"1\\\" name=\\\"contract.pdf\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule coverages include {\\\"code\\\":\\\"C2\\\",\\\"name\\\":\\\"Collision damage\\\"}; contract Article 2 row C2 'Damage to the insured vehicle after a collision' <cite document_id=\\\"2630#10414\\\" pages=\\\"1\\\" name=\\\"contract.pdf\\\"/>; email: 'I scraped the side of my car against a gate'.\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-28\",\n      \"sources_say\": \"Email: 'I scraped the side of my car against a gate on 28 October 2026.'\",\n      \"match\": true,\n      \"evidence\": \"Customer email received 2026-10-29: incident date 28 October 2026 = 2026-10-28.\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-29\",\n      \"sources_say\": \"Email received on 2026-10-29, one day after the incident, within the 5-day reporting deadline of Article 4.1. <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"Email header 'received on 2026-10-29'; contract Article 4.1 'A claim must be reported within 5 days of the incident' <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>.\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"980\",\n      \"sources_say\": \"repair_quote.pdf total incl. VAT line reads 'TOTAL INCL. VAT 980,00 €', matching Article 1's definition of repair cost as the total including VAT. However, the quote is issued to Mr. Julien Roche for a Renault Clio (2017), registration DX-482-KD — not to Ines Haddad for her Toyota Yaris (2019).\",\n      \"match\": true,\n      \"evidence\": \"repair_quote.pdf (Garage des Lilas, quote Q-2610-5320): 'Total excl. VAT 816,67 € / VAT 20 % 163,33 € / TOTAL INCL. VAT 980,00 €'; contract Article 1: repair cost = total incl. VAT on the quote <cite document_id=\\\"2630#10414\\\" pages=\\\"1\\\" name=\\\"contract.pdf\\\"/>. Amount matches the quote, but see documents_provided for the ownership mismatch.\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": true,\n      \"sources_say\": \"Email: policyholder scraped her own car against a gate with no one else involved, so the authorised driver is at fault; the Article 5.2 not-at-fault waiver therefore does not apply and the €300 C2 deductible stands. <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"Email: 'I scraped the side of my car against a gate... No one else was involved.'; contract Article 5.2 waiver requires not at fault AND third party identified <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>.\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": false,\n      \"sources_say\": \"Email states 'No one else was involved.' Contract Article 1 defines third party as any person other than the authorised driver; a gate is not a person. <cite document_id=\\\"2630#10414\\\" pages=\\\"1\\\" name=\\\"contract.pdf\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"Customer email: 'No one else was involved.'\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": false,\n      \"sources_say\": \"Consistent with no third party involved; also means the C2 accident report signed by both drivers is not required (Article 4.3 requires it only 'when a third party is involved'). <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"Customer email: 'No one else was involved.'; contract Article 4.3 C2 required documents <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>.\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\"],\n      \"sources_say\": \"damage_photos.zip was attached to the email and is counted as received (photos OK). But repair_quote.pdf is NOT a document belonging to this policyholder and vehicle: it names customer 'Mr. Julien Roche', vehicle 'Renault Clio (2017)', registration 'DX-482-KD', whereas the Policy Schedule holder is Ines Haddad with a Toyota Yaris (2019). The required C2 repair quote for the insured vehicle is therefore not validly provided. <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>\",\n      \"match\": false,\n      \"evidence\": \"repair_quote.pdf header: 'Customer Mr. Julien Roche... Vehicle Renault Clio (2017), Registration: DX-482-KD' vs Policy Schedule: holder_name 'Ines Haddad', vehicle 'Toyota Yaris (2019)'; contract Article 4.3 requires for C2 'Photos of the damage; repair quote' <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>.\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"Nothing in the email or quote indicates any Article 3 exclusion (no alcohol/drugs, licence held since 2015-03-20 per Policy Schedule, no racing, damage not intentional, not wear/mechanical failure). <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"Customer email and repair_quote.pdf contain no exclusion indicators; contract Article 3 exclusion list <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>; Policy Schedule licence_date 2015-03-20.\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": false,\n    \"evidence\": \"Deadline OK: reported 2026-10-29, within 5 days of the 2026-10-28 incident (Article 4.1 <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>). No exclusion signal (Article 3). Coverage C2 is in the Policy Schedule (Article 2). Assessor not required: repair cost €980 is not above €1,500 (Article 6.1 <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>). Playbook commercial-vehicle referral rule does not apply: email states no one else was involved, so no commercial third-party vehicle. BUT the staged payment rests on repair_quote.pdf, which belongs to a different customer and vehicle (Mr. Julien Roche, Renault Clio 2017, DX-482-KD) — not policyholder Ines Haddad's Toyota Yaris (2019). The C2-required repair quote for the insured vehicle (Article 4.3) is therefore not validly provided; per Article 4.3 a missing document is requested from the policyholder rather than paid on. A quote for another person's car cannot support a €680 payout on VER-1003.\"\n  },\n  \"summary\": \"All facts match the email except the repair quote, which is issued to Mr. Julien Roche for a Renault Clio (DX-482-KD), not to Ines Haddad for her Toyota Yaris, so the claim must not be paid on this quote — request a valid repair quote for the insured vehicle before approving.\"\n}\n```",
+  "questions": [],
+  "thread_id": "13eeae46-19a3-405c-aaf5-7c958eabf683",
+  "cost": {
+    "failed": false,
+    "input_tokens": 46888,
+    "cached_tokens": 38912,
+    "output_tokens": 3839,
+    "input_cost": "0.00694320",
+    "output_cost": "0.00795320",
+    "total": "0.01489640"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 35.9,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "should_be": "damage_photos.zip was attached to the email and is counted as received (photos OK). But repair_quote.pdf is NOT a document belonging to this policyholder and vehicle: it names customer 'Mr. Julien Roche', vehicle 'Renault Clio (2017)', registration 'DX-482-KD', whereas the Policy Schedule holder is Ines Haddad with a Toyota Yaris (2019). The required C2 repair quote for the insured vehicle is therefore not validly provided. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>",
+        "evidence": "repair_quote.pdf header: 'Customer Mr. Julien Roche... Vehicle Renault Clio (2017), Registration: DX-482-KD' vs Policy Schedule: holder_name 'Ines Haddad', vehicle 'Toyota Yaris (2019)'; contract Article 4.3 requires for C2 'Photos of the damage; repair quote' <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>."
+      },
+      {
+        "field": "payment decision",
+        "recorded": "payment staged",
+        "should_be": "not paid",
+        "evidence": "Deadline OK: reported 2026-10-29, within 5 days of the 2026-10-28 incident (Article 4.1 <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>). No exclusion signal (Article 3). Coverage C2 is in the Policy Schedule (Article 2). Assessor not required: repair cost €980 is not above €1,500 (Article 6.1 <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>). Playbook commercial-vehicle referral rule does not apply: email states no one else was involved, so no commercial third-party vehicle. BUT the staged payment rests on repair_quote.pdf, which belongs to a different customer and vehicle (Mr. Julien Roche, Renault Clio 2017, DX-482-KD) — not policyholder Ines Haddad's Toyota Yaris (2019). The C2-required repair quote for the insured vehicle (Article 4.3) is therefore not validly provided; per Article 4.3 a missing document is requested from the policyholder rather than paid on. A quote for another person's car cannot support a €680 payout on VER-1003."
+      }
+    ],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1003",
+        "sources_say": "Customer email states 'Policy number: VER-1003'; Policy Schedule policy_id is VER-1003 for holder Ines Haddad.",
+        "match": true,
+        "evidence": "Customer email subject/body 'Claim - accident - VER-1003' and 'Policy number: VER-1003'; Policy Schedule in claims system."
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "Policy Schedule lists coverage C2 'Collision damage' for VER-1003; email describes damage to the insured car itself after scraping a gate, which is collision damage under Article 2. <cite document_id=\"2630#10414\" pages=\"1\" name=\"contract.pdf\"/>",
+        "match": true,
+        "evidence": "Policy Schedule coverages include {\"code\":\"C2\",\"name\":\"Collision damage\"}; contract Article 2 row C2 'Damage to the insured vehicle after a collision' <cite document_id=\"2630#10414\" pages=\"1\" name=\"contract.pdf\"/>; email: 'I scraped the side of my car against a gate'."
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-28",
+        "sources_say": "Email: 'I scraped the side of my car against a gate on 28 October 2026.'",
+        "match": true,
+        "evidence": "Customer email received 2026-10-29: incident date 28 October 2026 = 2026-10-28."
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-29",
+        "sources_say": "Email received on 2026-10-29, one day after the incident, within the 5-day reporting deadline of Article 4.1. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>",
+        "match": true,
+        "evidence": "Email header 'received on 2026-10-29'; contract Article 4.1 'A claim must be reported within 5 days of the incident' <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>."
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "980",
+        "sources_say": "repair_quote.pdf total incl. VAT line reads 'TOTAL INCL. VAT 980,00 €', matching Article 1's definition of repair cost as the total including VAT. However, the quote is issued to Mr. Julien Roche for a Renault Clio (2017), registration DX-482-KD — not to Ines Haddad for her Toyota Yaris (2019).",
+        "match": true,
+        "evidence": "repair_quote.pdf (Garage des Lilas, quote Q-2610-5320): 'Total excl. VAT 816,67 € / VAT 20 % 163,33 € / TOTAL INCL. VAT 980,00 €'; contract Article 1: repair cost = total incl. VAT on the quote <cite document_id=\"2630#10414\" pages=\"1\" name=\"contract.pdf\"/>. Amount matches the quote, but see documents_provided for the ownership mismatch."
+      },
+      {
+        "field": "at_fault",
+        "recorded": true,
+        "sources_say": "Email: policyholder scraped her own car against a gate with no one else involved, so the authorised driver is at fault; the Article 5.2 not-at-fault waiver therefore does not apply and the €300 C2 deductible stands. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>",
+        "match": true,
+        "evidence": "Email: 'I scraped the side of my car against a gate... No one else was involved.'; contract Article 5.2 waiver requires not at fault AND third party identified <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>."
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": false,
+        "sources_say": "Email states 'No one else was involved.' Contract Article 1 defines third party as any person other than the authorised driver; a gate is not a person. <cite document_id=\"2630#10414\" pages=\"1\" name=\"contract.pdf\"/>",
+        "match": true,
+        "evidence": "Customer email: 'No one else was involved.'"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": false,
+        "sources_say": "Consistent with no third party involved; also means the C2 accident report signed by both drivers is not required (Article 4.3 requires it only 'when a third party is involved'). <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>",
+        "match": true,
+        "evidence": "Customer email: 'No one else was involved.'; contract Article 4.3 C2 required documents <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>."
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "sources_say": "damage_photos.zip was attached to the email and is counted as received (photos OK). But repair_quote.pdf is NOT a document belonging to this policyholder and vehicle: it names customer 'Mr. Julien Roche', vehicle 'Renault Clio (2017)', registration 'DX-482-KD', whereas the Policy Schedule holder is Ines Haddad with a Toyota Yaris (2019). The required C2 repair quote for the insured vehicle is therefore not validly provided. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>",
+        "match": false,
+        "evidence": "repair_quote.pdf header: 'Customer Mr. Julien Roche... Vehicle Renault Clio (2017), Registration: DX-482-KD' vs Policy Schedule: holder_name 'Ines Haddad', vehicle 'Toyota Yaris (2019)'; contract Article 4.3 requires for C2 'Photos of the damage; repair quote' <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>."
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "Nothing in the email or quote indicates any Article 3 exclusion (no alcohol/drugs, licence held since 2015-03-20 per Policy Schedule, no racing, damage not intentional, not wear/mechanical failure). <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>",
+        "match": true,
+        "evidence": "Customer email and repair_quote.pdf contain no exclusion indicators; contract Article 3 exclusion list <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>; Policy Schedule licence_date 2015-03-20."
+      }
+    ],
+    "summary": "All facts match the email except the repair quote, which is issued to Mr. Julien Roche for a Renault Clio (DX-482-KD), not to Ines Haddad for her Toyota Yaris, so the claim must not be paid on this quote — request a valid repair quote for the insured vehicle before approving.",
+    "unreadable": false
+  }
+}

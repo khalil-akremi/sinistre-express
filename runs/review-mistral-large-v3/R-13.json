@@ -1,0 +1,212 @@
+{
+  "review_id": "R-13",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1002\",\n      \"sources_say\": \"Email signature line 'Policy number: VER-1002'; Policy Schedule policy_id VER-1002, holder Lucas Bernard\",\n      \"match\": true,\n      \"evidence\": \"Customer email (2026-10-15) from Lucas Bernard; Policy Schedule in claims system\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"Collision damage (C2) covers damage to the insured vehicle after a collision; the email describes hitting the car next to him while changing lanes, and C2 is listed in the Policy Schedule coverages\",\n      \"match\": true,\n      \"evidence\": \"Customer email ('hit the car next to me'); contract Article 2 coverage table (contract.pdf, 2630#10414, page 1-2); Policy Schedule coverages C1/C2/C3\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-14\",\n      \"sources_say\": \"Email: 'an accident that happened on 14 October 2026'\",\n      \"match\": true,\n      \"evidence\": \"Customer email received 2026-10-15\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-15\",\n      \"sources_say\": \"Email received on 2026-10-15 reporting the 2026-10-14 accident (1 day later, within the 5-day deadline of contract Article 4.1)\",\n      \"match\": true,\n      \"evidence\": \"Customer email header date 2026-10-15; contract Article 4.1 (contract.pdf, 2630#10414, page 2)\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"2400\",\n      \"sources_say\": \"Email: 'The garage quoted €2,400 to repair my car'; Article 1 defines repair cost as the total incl. VAT on the quote, and repair_quote.pdf is listed as attached and confirmed received by the mailroom\",\n      \"match\": true,\n      \"evidence\": \"Customer email; contract Article 1 definition (contract.pdf, 2630#10414, page 1); mailroom note confirming repair_quote.pdf received\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": true,\n      \"sources_say\": \"Email: 'It was my fault.'\",\n      \"match\": true,\n      \"evidence\": \"Customer email received 2026-10-15\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": true,\n      \"sources_say\": \"Email: 'hit the car next to me. The other driver, Ms. Laurent, and I signed the accident report.'\",\n      \"match\": true,\n      \"evidence\": \"Customer email received 2026-10-15\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": true,\n      \"sources_say\": \"The other driver is named (Ms. Laurent) and co-signed the accident report\",\n      \"match\": true,\n      \"evidence\": \"Customer email received 2026-10-15\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\", \"accident_report\"],\n      \"sources_say\": \"Email attached damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf, and the mailroom confirms all three were received; these are exactly the documents required for C2 when a third party is involved (photos, repair quote, accident report signed by both drivers)\",\n      \"match\": true,\n      \"evidence\": \"Customer email attachment list; mailroom note; contract Article 4.3 required-documents table (contract.pdf, 2630#10414, page 2)\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"No exclusion applies: the email states a misjudged lane change (not intentional damage), no alcohol/drugs mentioned, the policyholder holds a valid licence (licence date 2024-09-02 in the Policy Schedule), no racing/track use, and the damage is collision damage, not wear or mechanical failure\",\n      \"match\": true,\n      \"evidence\": \"Customer email; Policy Schedule licence_date; contract Article 3 exclusions (contract.pdf, 2630#10414, page 2)\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"Deadline: reported 2026-10-15, one day after the 2026-10-14 incident, within the 5-day limit of contract Article 4.1 (contract.pdf, 2630#10414, page 2). Exclusions: none of the Article 3 exclusions is present in the email or documents. Coverage: C2 Collision damage is in the Policy Schedule, so Article 2 and Article 7.3 do not trigger a referral. Documents: all C2-required documents (photos, repair quote, signed accident report) were provided per the email and mailroom note, so Article 4.3 is satisfied. Playbook: the referral rule applies only when the other driver is a commercial vehicle (van, truck, lorry, delivery vehicle); the email says the other vehicle was 'the car next to me' driven by Ms. Laurent, a private car, so the playbook referral rule does not apply. No Article 7 referral condition (late claim, possible exclusion, coverage not in Schedule) is met, so the claim is payable; the assessor booked for 2026-10-18 also satisfies Article 6.1 for repair cost above €1,500.\"\n  },\n  \"summary\": \"All recorded facts match the customer email, the received attachments, the Policy Schedule and the contract, the claim was reported within the 5-day deadline with no exclusion, all C2-required documents were provided, and the playbook's commercial-vehicle referral rule does not apply (the other vehicle was a private car), so the staged payment should be approved.\"\n}\n```",
+  "questions": [],
+  "thread_id": "f97c8113-6ae5-4346-a51b-d1bc057d4042",
+  "cost": {
+    "failed": false,
+    "input_tokens": 227252,
+    "cached_tokens": 198656,
+    "output_tokens": 4592,
+    "input_cost": "0.02935424",
+    "output_cost": "0.00934096",
+    "total": "0.03869520"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 73.0,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1002",
+        "sources_say": "Email signature line 'Policy number: VER-1002'; Policy Schedule policy_id VER-1002, holder Lucas Bernard",
+        "match": true,
+        "evidence": "Customer email (2026-10-15) from Lucas Bernard; Policy Schedule in claims system"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "Collision damage (C2) covers damage to the insured vehicle after a collision; the email describes hitting the car next to him while changing lanes, and C2 is listed in the Policy Schedule coverages",
+        "match": true,
+        "evidence": "Customer email ('hit the car next to me'); contract Article 2 coverage table (contract.pdf, 2630#10414, page 1-2); Policy Schedule coverages C1/C2/C3"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-14",
+        "sources_say": "Email: 'an accident that happened on 14 October 2026'",
+        "match": true,
+        "evidence": "Customer email received 2026-10-15"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-15",
+        "sources_say": "Email received on 2026-10-15 reporting the 2026-10-14 accident (1 day later, within the 5-day deadline of contract Article 4.1)",
+        "match": true,
+        "evidence": "Customer email header date 2026-10-15; contract Article 4.1 (contract.pdf, 2630#10414, page 2)"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "2400",
+        "sources_say": "Email: 'The garage quoted €2,400 to repair my car'; Article 1 defines repair cost as the total incl. VAT on the quote, and repair_quote.pdf is listed as attached and confirmed received by the mailroom",
+        "match": true,
+        "evidence": "Customer email; contract Article 1 definition (contract.pdf, 2630#10414, page 1); mailroom note confirming repair_quote.pdf received"
+      },
+      {
+        "field": "at_fault",
+        "recorded": true,
+        "sources_say": "Email: 'It was my fault.'",
+        "match": true,
+        "evidence": "Customer email received 2026-10-15"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": true,
+        "sources_say": "Email: 'hit the car next to me. The other driver, Ms. Laurent, and I signed the accident report.'",
+        "match": true,
+        "evidence": "Customer email received 2026-10-15"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": true,
+        "sources_say": "The other driver is named (Ms. Laurent) and co-signed the accident report",
+        "match": true,
+        "evidence": "Customer email received 2026-10-15"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote",
+          "accident_report"
+        ],
+        "sources_say": "Email attached damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf, and the mailroom confirms all three were received; these are exactly the documents required for C2 when a third party is involved (photos, repair quote, accident report signed by both drivers)",
+        "match": true,
+        "evidence": "Customer email attachment list; mailroom note; contract Article 4.3 required-documents table (contract.pdf, 2630#10414, page 2)"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "No exclusion applies: the email states a misjudged lane change (not intentional damage), no alcohol/drugs mentioned, the policyholder holds a valid licence (licence date 2024-09-02 in the Policy Schedule), no racing/track use, and the damage is collision damage, not wear or mechanical failure",
+        "match": true,
+        "evidence": "Customer email; Policy Schedule licence_date; contract Article 3 exclusions (contract.pdf, 2630#10414, page 2)"
+      }
+    ],
+    "summary": "All recorded facts match the customer email, the received attachments, the Policy Schedule and the contract, the claim was reported within the 5-day deadline with no exclusion, all C2-required documents were provided, and the playbook's commercial-vehicle referral rule does not apply (the other vehicle was a private car), so the staged payment should be approved.",
+    "unreadable": false
+  }
+}

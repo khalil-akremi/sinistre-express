@@ -1,0 +1,206 @@
+{
+  "review_id": "R-06",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1001\",\n      \"sources_say\": \"Email subject 'Claim - accident - VER-1001' and 'Policy number: VER-1001' from Claire Martin; Policy Schedule policy_id VER-1001, holder Claire Martin\",\n      \"match\": true,\n      \"evidence\": \"Customer email (subject line and policy number line); Policy Schedule in claims system\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"Email: 'I hit a bollard while parking' — damage to the insured vehicle after a collision = C2 Collision damage, which is listed in the Policy Schedule coverages for VER-1001 <cite document_id=\\\"2630#10414\\\" pages=\\\"1-2\\\" name=\\\"contract.pdf\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"Customer email incident description; Policy Schedule coverages include C2; contract Article 2 coverage table (C2 = damage to the insured vehicle after a collision) <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-02\",\n      \"sources_say\": \"Email: 'an accident that happened on 02 October 2026'\",\n      \"match\": true,\n      \"evidence\": \"Customer email body: 'happened on 02 October 2026'\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-03\",\n      \"sources_say\": \"The customer email was received on 2026-10-11, not 2026-10-03. No source shows any report on 2026-10-03; the only report is the email of 2026-10-11, 9 calendar days after the 2026-10-02 incident\",\n      \"match\": false,\n      \"evidence\": \"Email header: 'Customer email received on 2026-10-11'; email body apologises 'sorry for the delay' — the recorded 2026-10-03 contradicts the email receipt date of 2026-10-11\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"650\",\n      \"sources_say\": \"Email: 'The garage quoted €650 to repair my car.' Contract Article 1 defines repair cost as the total incl. VAT on the quote; the quote (repair_quote.pdf) is stored by the mailroom and cannot be opened, so the email figure €650 is the available source\",\n      \"match\": true,\n      \"evidence\": \"Customer email: 'quoted €650'; contract Article 1 repair cost definition (total incl. VAT) <cite document_id=\\\"2630#10414\\\" pages=\\\"1\\\" name=\\\"contract.pdf\\\"/>; mailroom note: repair_quote.pdf received but cannot be opened\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": true,\n      \"sources_say\": \"Email: 'I hit a bollard while parking. Nobody else was involved.' — the policyholder caused the damage herself, so she is at fault\",\n      \"match\": true,\n      \"evidence\": \"Customer email: 'I hit a bollard while parking. Nobody else was involved.'\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": false,\n      \"sources_say\": \"Email: 'Nobody else was involved' — she hit a bollard (property, not a person; contract Article 1 defines third party as any person other than the authorised driver), so no third party was involved\",\n      \"match\": true,\n      \"evidence\": \"Customer email: 'Nobody else was involved'; contract Article 1 third-party definition <cite document_id=\\\"2630#10414\\\" pages=\\\"1\\\" name=\\\"contract.pdf\\\"/>\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": false,\n      \"sources_say\": \"No third party was involved, so there is no third party to identify; false is consistent\",\n      \"match\": true,\n      \"evidence\": \"Customer email: 'Nobody else was involved'\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": \"[\\\"photos\\\", \\\"repair_quote\\\"]\",\n      \"sources_say\": \"Email attachments: damage_photos.zip and repair_quote.pdf; mailroom note: both stored, cannot be opened, count as received. These are exactly the C2 required documents (photos of the damage; repair quote) — the accident report signed by both drivers is only required 'when a third party is involved', which is not the case here. The files cannot be opened, so they are counted as received per the mailroom note, but their contents (policyholder/vehicle match) cannot be verified from an openable source\",\n      \"match\": true,\n      \"evidence\": \"Customer email 'Attached: damage_photos.zip, repair_quote.pdf'; mailroom note 'cannot be opened, count as received'; contract Article 4.3 required documents for C2 <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"Nothing in the email or documents indicates alcohol/drugs, invalid licence, racing/track use, intentional damage, or wear/mechanical failure (Article 3 exclusions). 'Too busy with work' is not an exclusion ground\",\n      \"match\": true,\n      \"evidence\": \"Customer email contains no exclusion trigger; contract Article 3 exclusion list <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": false,\n    \"evidence\": \"The recorded report_date 2026-10-03 is wrong: the email was received on 2026-10-11, i.e. 9 calendar days after the 2026-10-02 incident. Article 4.1 requires reporting within 5 days of the incident <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>, and Article 7.1 states a claim reported after the Article 4.1 deadline must be referred to a Veridia claims handler, who takes the decision (a late claim is never refused automatically, but it must not be paid automatically either) <cite document_id=\\\"2630#10414\\\" pages=\\\"3\\\" name=\\\"contract.pdf\\\"/>. With the correct report date the claim is late, so the staged automatic payment (status pending_approval, payout €350, assessor no) must not proceed — it must be referred to a handler. Other elements check out: C2 is in the Policy Schedule (Article 2), no exclusion signal (Article 3), required C2 documents photos + repair quote were received (Article 4.3), repair cost €650 ≤ €1,500 so no assessor (Article 6.1), and the playbook's commercial-vehicle referral rule does not apply because the email states nobody else was involved (no van/truck/lorry/delivery vehicle).\"\n  },\n  \"summary\": \"Do not approve the automatic payment: the report date was recorded as 2026-10-03 but the claim email was actually received on 2026-10-11, 9 days after the 2026-10-02 incident, beyond the 5-day deadline of Article 4.1, so under Article 7.1 the claim must be referred to a claims handler rather than paid automatically; all other recorded facts match the email and documents.\"\n}\n```",
+  "questions": [],
+  "thread_id": "81ac6c7c-edcd-4692-b3f2-591b1dbb5847",
+  "cost": {
+    "failed": false,
+    "input_tokens": 195584,
+    "cached_tokens": 161536,
+    "output_tokens": 4844,
+    "input_cost": "0.03080256",
+    "output_cost": "0.00990858",
+    "total": "0.04071114"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 61.1,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "report_date",
+        "recorded": "2026-10-03",
+        "should_be": "The customer email was received on 2026-10-11, not 2026-10-03. No source shows any report on 2026-10-03; the only report is the email of 2026-10-11, 9 calendar days after the 2026-10-02 incident",
+        "evidence": "Email header: 'Customer email received on 2026-10-11'; email body apologises 'sorry for the delay' — the recorded 2026-10-03 contradicts the email receipt date of 2026-10-11"
+      },
+      {
+        "field": "payment decision",
+        "recorded": "payment staged",
+        "should_be": "not paid",
+        "evidence": "The recorded report_date 2026-10-03 is wrong: the email was received on 2026-10-11, i.e. 9 calendar days after the 2026-10-02 incident. Article 4.1 requires reporting within 5 days of the incident <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>, and Article 7.1 states a claim reported after the Article 4.1 deadline must be referred to a Veridia claims handler, who takes the decision (a late claim is never refused automatically, but it must not be paid automatically either) <cite document_id=\"2630#10414\" pages=\"3\" name=\"contract.pdf\"/>. With the correct report date the claim is late, so the staged automatic payment (status pending_approval, payout €350, assessor no) must not proceed — it must be referred to a handler. Other elements check out: C2 is in the Policy Schedule (Article 2), no exclusion signal (Article 3), required C2 documents photos + repair quote were received (Article 4.3), repair cost €650 ≤ €1,500 so no assessor (Article 6.1), and the playbook's commercial-vehicle referral rule does not apply because the email states nobody else was involved (no van/truck/lorry/delivery vehicle)."
+      }
+    ],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1001",
+        "sources_say": "Email subject 'Claim - accident - VER-1001' and 'Policy number: VER-1001' from Claire Martin; Policy Schedule policy_id VER-1001, holder Claire Martin",
+        "match": true,
+        "evidence": "Customer email (subject line and policy number line); Policy Schedule in claims system"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "Email: 'I hit a bollard while parking' — damage to the insured vehicle after a collision = C2 Collision damage, which is listed in the Policy Schedule coverages for VER-1001 <cite document_id=\"2630#10414\" pages=\"1-2\" name=\"contract.pdf\"/>",
+        "match": true,
+        "evidence": "Customer email incident description; Policy Schedule coverages include C2; contract Article 2 coverage table (C2 = damage to the insured vehicle after a collision) <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-02",
+        "sources_say": "Email: 'an accident that happened on 02 October 2026'",
+        "match": true,
+        "evidence": "Customer email body: 'happened on 02 October 2026'"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-03",
+        "sources_say": "The customer email was received on 2026-10-11, not 2026-10-03. No source shows any report on 2026-10-03; the only report is the email of 2026-10-11, 9 calendar days after the 2026-10-02 incident",
+        "match": false,
+        "evidence": "Email header: 'Customer email received on 2026-10-11'; email body apologises 'sorry for the delay' — the recorded 2026-10-03 contradicts the email receipt date of 2026-10-11"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "650",
+        "sources_say": "Email: 'The garage quoted €650 to repair my car.' Contract Article 1 defines repair cost as the total incl. VAT on the quote; the quote (repair_quote.pdf) is stored by the mailroom and cannot be opened, so the email figure €650 is the available source",
+        "match": true,
+        "evidence": "Customer email: 'quoted €650'; contract Article 1 repair cost definition (total incl. VAT) <cite document_id=\"2630#10414\" pages=\"1\" name=\"contract.pdf\"/>; mailroom note: repair_quote.pdf received but cannot be opened"
+      },
+      {
+        "field": "at_fault",
+        "recorded": true,
+        "sources_say": "Email: 'I hit a bollard while parking. Nobody else was involved.' — the policyholder caused the damage herself, so she is at fault",
+        "match": true,
+        "evidence": "Customer email: 'I hit a bollard while parking. Nobody else was involved.'"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": false,
+        "sources_say": "Email: 'Nobody else was involved' — she hit a bollard (property, not a person; contract Article 1 defines third party as any person other than the authorised driver), so no third party was involved",
+        "match": true,
+        "evidence": "Customer email: 'Nobody else was involved'; contract Article 1 third-party definition <cite document_id=\"2630#10414\" pages=\"1\" name=\"contract.pdf\"/>"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": false,
+        "sources_say": "No third party was involved, so there is no third party to identify; false is consistent",
+        "match": true,
+        "evidence": "Customer email: 'Nobody else was involved'"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": "[\"photos\", \"repair_quote\"]",
+        "sources_say": "Email attachments: damage_photos.zip and repair_quote.pdf; mailroom note: both stored, cannot be opened, count as received. These are exactly the C2 required documents (photos of the damage; repair quote) — the accident report signed by both drivers is only required 'when a third party is involved', which is not the case here. The files cannot be opened, so they are counted as received per the mailroom note, but their contents (policyholder/vehicle match) cannot be verified from an openable source",
+        "match": true,
+        "evidence": "Customer email 'Attached: damage_photos.zip, repair_quote.pdf'; mailroom note 'cannot be opened, count as received'; contract Article 4.3 required documents for C2 <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "Nothing in the email or documents indicates alcohol/drugs, invalid licence, racing/track use, intentional damage, or wear/mechanical failure (Article 3 exclusions). 'Too busy with work' is not an exclusion ground",
+        "match": true,
+        "evidence": "Customer email contains no exclusion trigger; contract Article 3 exclusion list <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>"
+      }
+    ],
+    "summary": "Do not approve the automatic payment: the report date was recorded as 2026-10-03 but the claim email was actually received on 2026-10-11, 9 days after the 2026-10-02 incident, beyond the 5-day deadline of Article 4.1, so under Article 7.1 the claim must be referred to a claims handler rather than paid automatically; all other recorded facts match the email and documents.",
+    "unreadable": false
+  }
+}
