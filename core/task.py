@@ -28,7 +28,9 @@ MEMORY_GUIDANCE = (
 DOCUMENT_GUIDANCE = (
     "These documents are attached to this message: {files}. Open each one with read_file before "
     "deciding: they may hold facts the email does not give (dates, who was at fault, amounts, the "
-    "other vehicle). If the email and a document disagree, use the document and point out the "
+    "other vehicle). The repair cost is the total including VAT on the quote (the \"total incl. "
+    "VAT\" line; contract, Article 1). If the email and a document disagree, use the document and "
+    "point out the "
     "difference in your report. Count a document as provided only if it belongs to this "
     "policyholder and the insured vehicle; if it does not, do not count it, and ask for a correct "
     "one with request_documents."
