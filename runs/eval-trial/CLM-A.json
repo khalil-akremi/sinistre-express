@@ -1,0 +1,41 @@
+{
+  "case_id": "CLM-A",
+  "claim_ref": "trial-CLM-A",
+  "label": "trial",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Settlement prepared for human approval**\n\nClaim reference: trial-CLM-A. Nothing has been paid. The settlement is staged and needs a Veridia claims handler's approval.\n\n**Facts recorded**\n- Policy VER-1001, holder Claire Martin, vehicle Peugeot 208 (2021), market value €14,000.\n- Incident 12 October 2026 at the Rue de Rivoli crossing. Reported 14 October 2026.\n- A van ran a red light and hit the side of the insured car. The third party, Mr. Dubois, is identified by name and admitted fault.\n- Coverage claimed: C2 collision damage. Repair quote: €1,200.\n- Attachments listed in the email: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf.\n- The insured's licence has been held since 14 May 2012, so about 14 years on the incident date.\n\n**Reasoning**\n- **Coverage:** C2 collision damage is listed in the Policy Schedule, and no excluded or unlisted coverage was shown. <cite document_id=\"2630#10255\" pages=\"1\" name=\"Veridia Motor Contract\"/> (Article 2)\n- **Reporting:** The claim was reported 2 days after the incident, within the 5-day limit. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia Motor Contract\"/> (Article 4.1)\n- **Possible exclusions:** The email shows no alcohol, drugs, racing, intent or wear-related cause, so no exclusion is flagged. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia Motor Contract\"/> (Article 3)\n- **Deductible:** The insured was not at fault and the third party is identified, so the not-at-fault waiver applies and no deductible is charged. The young-driver surcharge does not apply because the licence is more than 3 years old. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia Motor Contract\"/> (Article 5.2 and 5.3)\n- **Assessor:** The repair cost of €1,200 is at or below €1,500, so an independent assessor is not required. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia Motor Contract\"/> (Article 6.1)\n- **Payout:** Compensation is the repair cost, capped at market value, minus the deductible. This gives €1,200 minus €0. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia Motor Contract\"/> (Article 6.2)\n- **Referral:** No referral was needed, since the claim is on time, shows no possible exclusion and is under a listed coverage. <cite document_id=\"2630#10255\" pages=\"3\" name=\"Veridia Motor Contract\"/> (Article 7)\n\n**Amounts** (from the settlement calculation)\n- Deductible: €0\n- Payout: €1,200\n- Independent assessor required: No\n\n**Verification gap**\n- I could not confirm that the three attachments exist in the claims store. The claim was recorded as having them because the email lists them. A handler should check the files before approving payment. If any are missing, the contract requires that they be requested from the policyholder rather than refusing the claim. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia Motor Contract\"/> (Article 4.2 and missing-document rule)\n\n**Notes for the handler**\n- The settlement was staged as \"pending approval\". The task steps did not explicitly ask for this, so please confirm it is the step you want.\n\n**Draft message to the customer**\n\nDear Ms. Martin,\n\nThank you for reporting the accident of 12 October 2026 and for sending your documents. We have recorded your claim under reference trial-CLM-A. Your claim is now with a Veridia claims handler for review. We will confirm the next steps once that review is complete. If we need any further documents, we will let you know.\n\nKind regards,\nVeridia Insurance Claims Team",
+  "questions": [],
+  "thread_id": "6d98009e-71a3-4a9f-bdc0-f80d38721e00",
+  "cost": {
+    "failed": false,
+    "input_tokens": 114382,
+    "cached_tokens": 82413,
+    "output_tokens": 5040,
+    "input_cost": "0.004945480",
+    "output_cost": "0.0025473",
+    "total": "0.007492780"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 34.2,
+  "claim": null,
+  "action_log": [],
+  "error": " | snapshot failed: HTTP Error 404: Not Found"
+}

@@ -1,0 +1,46 @@
+{
+  "case_id": "CLM-B",
+  "claim_ref": "trial-CLM-B",
+  "label": "trial",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status:** Settlement prepared for human approval\n\n**Facts recorded**\n- Policy VER-1002, holder Lucas Bernard. Vehicle: Renault Clio (2023), market value €16,500. Licence held since 2 September 2024, so about 2 years on the incident date.\n- Coverage claimed: C1 Third-party liability, which is in the Policy Schedule.\n- Incident date: 14 October 2026. Reported: 15 October 2026 (1 day after the incident).\n- Fault: the insured admits fault (lane change, misjudged distance).\n- Third party: Ms. Laurent, named. No contact or vehicle details given.\n- Repair cost: €2,400 (per the email; the quote itself is not verified).\n- Attachments listed in the email: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. The claims system recorded them as received, but I could not open their contents.\n\n**Reasoning**\n- **Reporting deadline:** Met. Claims must be reported within 5 days of the incident <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>. A late claim would have gone to a handler (Article 7), but that does not apply here <cite document_id=\"2630#10255\" pages=\"3\" name=\"contract.pdf\"/>.\n- **Coverage:** C1 Third-party liability covers damage the authorised driver causes to a third party <cite document_id=\"2630#10255\" pages=\"1\" name=\"contract.pdf\"/>. The claim is in the Policy Schedule, so Article 7(3) does not apply.\n- **Possible exclusions:** None indicated. The story has no alcohol, drugs, racing, intent, or licence issue <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>.\n- **Documents:** Article 4.3 lists required documents for C2 and C3, not C1 <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>. Nothing is missing for this coverage.\n- **Deductible:** C1 standard deductible is €0 <cite document_id=\"2630#10255\" pages=\"1\" name=\"contract.pdf\"/>. The one-deductible rule and the young-driver surcharge apply only to C2, so neither applies here <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>.\n- **Assessor:** An independent assessor is required only for C2 and C3 damage claims above €1,500 <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>. This is a C1 claim, so no assessor is required.\n- **Payout:** Repair cost, capped at market value, minus the deductible, never negative <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>. The cap is not reached, so the payout is €2,400.\n- **Payment timing:** Payment is made within 15 days after a Veridia claims handler approves the compensation <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>.\n\n**Amounts**\n- Deductible: €0\n- Payout: €2,400 (prepared for approval; not paid)\n- Assessor required: No\n\n**Notes for the handler**\n- The claims subagent recorded the settlement as staged and pending approval. The amounts come from its compute_settlement run. I checked them against the contract text, which the subagent could not open, and they match.\n- Before approval, please confirm that the €2,400 quote is for Ms. Laurent's vehicle, since the email does not say whose car was damaged.\n\n**Draft message to the customer**\n\nDear Mr. Bernard,\n\nThank you for reporting the accident of 14 October 2026 and for sending your documents. We have recorded your claim under policy VER-1002 (claim reference trial-CLM-B). Your claim has now been passed to our claims team for final approval. We will let you know once a decision has been made. If you have any questions in the meantime, please reply to this email.\n\nKind regards,\nVeridia Claims Team",
+  "questions": [],
+  "thread_id": "da0c53b1-0aea-424c-8af2-2421d54ef4f5",
+  "cost": {
+    "failed": false,
+    "input_tokens": 149396,
+    "cached_tokens": 137028,
+    "output_tokens": 6924,
+    "input_cost": "0.003148730",
+    "output_cost": "0.0034970",
+    "total": "0.006645730"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 45.4,
+  "claim": null,
+  "action_log": [],
+  "error": " | snapshot failed: HTTP Error 404: Not Found"
+}
