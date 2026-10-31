@@ -1,0 +1,196 @@
+{
+  "case_id": "DOC-03",
+  "claim_ref": "DOCS-v1-DOC-03",
+  "memory": true,
+  "status": "MessageStatus.success",
+  "reply": "**Status:** Settlement prepared for human approval\n\n**Facts recorded (claim DOCS-v1-DOC-03)**\n- Policy VER-1007, policyholder Emma Rousseau, insured vehicle Tesla Model 3 (2023). The repair quote names the same holder, policy and model.\n- Incident 26 October 2026, a stone thrown up on the A6 motorway cracked the windscreen. Reported 27 October 2026 (the email date).\n- No other vehicle or third party is mentioned, and no one else is at fault.\n- Repair cost: €1,180.00 incl. VAT (France Vitrage Auto quote Q-2610-5246, dated 27/10/2026). This matches the email, which gave no amount.\n- Documents counted as provided: repair_quote.pdf and damage_photos.zip (photos not opened, as instructed).\n- The quote's registration (GL-660-ZA) does not appear in the Policy Schedule as returned by the system. I did not count this as a blocker because the holder and model match, but a handler should check it.\n\n**Reasoning**\n- **Coverage:** Windscreen damage is glass breakage, which is C3, not collision (C2). C3 is in the Policy Schedule, so the claim is not referred for coverage. <cite document_id=\"2630#10414\" pages=\"1\" name=\"Policy contract\"/>\n- **Report timing:** Reported one day after the incident, within the 5-day limit, so it is not late (Article 7.1 referral does not apply).\n- **Exclusions:** None signalled by the email, the quote or the claims system.\n- **Playbook:** The rule on commercial other-party vehicles does not apply because no other vehicle is involved, so I did not refer the claim for that reason.\n- **Deductible:** The C3 standard deductible is €50. <cite document_id=\"2630#10414\" pages=\"1\" name=\"Policy contract\"/>\n- **Payout:** Compensation is the repair cost, capped at market value, minus the deductible. The market value is €32,000, which is well above the cost, so the cap does not apply. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Policy contract\"/>\n- **Assessor:** Not required, because the repair cost is below €1,500. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Policy contract\"/>\n- The settlement is staged as pending human approval. Nothing has been paid.\n\n**Amounts**\n- Repair cost incl. VAT: €1,180.00\n- Deductible (C3): €50.00\n- Payout: €1,130.00\n- Assessor required: No\n\n**Note for the handler:** Please check the registration on the quote (GL-660-ZA) against the vehicle record before approving the payment.\n\n**Draft message to the customer**\n\"Dear Ms Rousseau, thank you for your claim about the windscreen damaged on 26 October 2026, and for the repair quote and photos. Your claim has been accepted for glass breakage cover. After the €50 glass deductible, the amount calculated is €1,130.00. The settlement has been passed to a claims handler for final approval, and we will write to you again once it has been processed. Kind regards, Veridia Claims.\"\n\nI have also created the customer note `customers/VER-1007.md` with one line dated 2026-10-27.",
+  "questions": [],
+  "thread_id": "7acafaa0-1217-4dfe-aafc-a3539437f734",
+  "cost": {
+    "failed": false,
+    "input_tokens": 165145,
+    "cached_tokens": 136035,
+    "output_tokens": 5667,
+    "input_cost": "0.005276600",
+    "output_cost": "0.0028797",
+    "total": "0.008156300"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_memory",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_memory",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "write_memory",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 37.9,
+  "claim": {
+    "claim_ref": "DOCS-v1-DOC-03",
+    "policy_id": "VER-1007",
+    "coverage": "C3",
+    "incident_date": "2026-10-26",
+    "report_date": "2026-10-27",
+    "description": "A stone thrown up on the A6 motorway cracked the insured vehicle's windscreen. No other vehicle or third party is involved.",
+    "repair_cost": 1180,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"repair_quote\", \"photos\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 50,
+    "payout": 1130,
+    "assessor_required": 0,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T14:29:56+00:00",
+    "updated_at": "2026-10-31T14:29:57+00:00"
+  },
+  "action_log": [
+    {
+      "id": 14,
+      "ts": "2026-10-31T14:29:54+00:00",
+      "claim_ref": "DOCS-v1-DOC-03",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1007",
+        "claim_ref": "DOCS-v1-DOC-03"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1007",
+        "holder_name": "Emma Rousseau",
+        "vehicle": "Tesla Model 3 (2023)",
+        "market_value_eur": 32000,
+        "licence_date": "2011-04-08",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "ts": "2026-10-31T14:29:56+00:00",
+      "claim_ref": "DOCS-v1-DOC-03",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "DOCS-v1-DOC-03",
+        "policy_id": "VER-1007",
+        "coverage": "C3",
+        "incident_date": "2026-10-26",
+        "report_date": "2026-10-27",
+        "description": "A stone thrown up on the A6 motorway cracked the insured vehicle's windscreen. No other vehicle or third party is involved.",
+        "repair_cost": 1180,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "repair_quote",
+          "photos"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "DOCS-v1-DOC-03",
+        "status": "open",
+        "checks": {
+          "coverage": "C3 Glass breakage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 16,
+      "ts": "2026-10-31T14:29:57+00:00",
+      "claim_ref": "DOCS-v1-DOC-03",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "DOCS-v1-DOC-03"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "DOCS-v1-DOC-03",
+        "deductible_eur": 50,
+        "payout_eur": 1130,
+        "assessor_required": false,
+        "years_licensed_on_incident_date": 15,
+        "calculation": [
+          "Art. 2 glass deductible: €50",
+          "Art. 6.2 payout = €1180 - €50 = €1130"
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "ts": "2026-10-31T14:29:57+00:00",
+      "claim_ref": "DOCS-v1-DOC-03",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "DOCS-v1-DOC-03"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "DOCS-v1-DOC-03",
+        "status": "pending_approval",
+        "payout_eur": 1130,
+        "deductible_eur": 50,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

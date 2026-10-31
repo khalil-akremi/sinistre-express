@@ -8,7 +8,8 @@ Routes
     POST /api/claims                start the agent on an email -> {"claim_ref": ...}
     GET  /api/claims/<ref>/stream   live timeline (Server-Sent Events)
     GET  /api/claims/<ref>          claim record, agent reply, cost, audit log
-    POST /api/claims/<ref>/approve  the human approval (the agent cannot do this)
+    POST /api/claims/<ref>/approve  the human approval (the agent cannot do this);
+                                    {"override": true} if the Reviewer raised concerns
     GET  /api/memory?policy=<id>    what the agent remembers: playbook rules, customer note
     POST /api/memory/playbook       a handler teaches the agent a rule
     POST /api/memory/reset          back to an empty playbook and no customer notes
@@ -35,6 +36,7 @@ from starlette.responses import FileResponse, JSONResponse, Response, StreamingR
 
 from app.agent import AgentRunner
 from app.memory import MAX_RULE_CHARS, PLAYBOOK, customer_path, rules_of
+from core.review import build_review_task, created_inputs, parse_verdict
 from core.task import build_task
 from mcp.server.mcpserver import MCPServer
 from mcp_server.tools import ClaimsSystem, ToolRefused
@@ -70,6 +72,10 @@ class Run:
     cost: dict | None = None
     error: str | None = None
     seconds: float | None = None
+    email: dict | None = None
+    files: list[Path] = field(default_factory=list)
+    review_state: str = "none"          # none / running / done
+    review: dict | None = None
 
 
 @dataclass
@@ -177,13 +183,41 @@ def sse(event: str, data: dict) -> str:
 
 # --------------------------------------------------------------- routes
 def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRunner,
-                        daily_max: int | None = None, memory=None) -> dict[str, Run]:
-    """`memory` is a memory store (app.memory); None runs the demo without memory."""
+                        daily_max: int | None = None, memory=None, reviewer: AgentRunner | None = None
+                        ) -> dict[str, Run]:
+    """`memory` is a memory store (app.memory); None runs the demo without memory.
+    `reviewer` is a second agent that checks every staged payment; None skips the review."""
     runs: dict[str, Run] = {}
     limits = Limits(daily_max if daily_max is not None else int(os.environ.get("DEMO_DAILY_LIMIT", "30")))
     teach_limits = Limits(int(os.environ.get("DEMO_TEACH_LIMIT", "20")))
     busy = asyncio.Lock()
     cases = {c["case_id"]: c for c in load_cases()}
+
+    async def review(run: Run) -> None:
+        """Second agent, read-only: checks a staged payment before a person can approve it."""
+        log = system.action_log(run.claim_ref)
+        created = created_inputs(log)
+        policy = next((e["result"] for e in log if e["tool"] == "get_policy" and e["ok"]), None)
+        if reviewer is None or created is None or policy is None:
+            return
+        run.review_state = "running"
+        run.events.append({"source": "reviewer", "icon": "🔍",
+                           "text": "A second agent (the Reviewer) is checking the prepared payment"})
+        try:
+            playbook = rules_of(await memory.read(PLAYBOOK)) if memory else []
+            task = build_review_task(run.email, policy, created, system.get_claim(run.claim_ref), playbook)
+            result = await asyncio.wait_for(
+                reviewer(task, lambda item: run.events.append(item | {"source": "reviewer"}), files=run.files),
+                timeout=RUN_TIMEOUT_S)
+            run.review = parse_verdict(result.get("reply")) | {"cost": result.get("cost")}
+        except Exception as exc:  # noqa: BLE001  (fail safe: no review means a person must look)
+            run.review = {"verdict": "concerns", "issues": [], "unreadable": True,
+                          "summary": f"The review could not run ({type(exc).__name__}); check the claim manually."}
+        agrees = run.review["verdict"] == "approve"
+        run.events.append({"source": "reviewer", "icon": "🟢" if agrees else "🟠",
+                           "text": "Reviewer agrees with the payment" if agrees else "Reviewer raised concerns",
+                           "detail": run.review["summary"]})
+        run.review_state = "done"
 
     async def execute(run: Run, task: str, files: list[Path]) -> None:
         async with busy:
@@ -191,6 +225,8 @@ def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRu
                 result = await asyncio.wait_for(runner(task, run.events.append, files=files),
                                                 timeout=RUN_TIMEOUT_S)
                 run.reply, run.cost = result.get("reply"), result.get("cost")
+                if system.get_claim(run.claim_ref)["status"] == "pending_approval":
+                    await review(run)
             except Exception as exc:  # noqa: BLE001  (shown to the user, never crashes the server)
                 run.error = f"{type(exc).__name__}: {exc}"
             finally:
@@ -211,6 +247,7 @@ def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRu
             "cost": run.cost if run else None,
             "error": run.error if run else None,
             "seconds": run.seconds if run else None,
+            "review": run.review if run else None,
             "done": run.done if run else True,
         }
 
@@ -272,11 +309,11 @@ def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRu
                                 status_code=429)
 
         claim_ref = f"DEMO-{datetime.now(timezone.utc):%m%d%H%M%S}-{secrets.token_hex(2).upper()}"
-        run = Run(claim_ref=claim_ref, case_id=case["case_id"])
+        email = make_email(case, body, list(dict.fromkeys(documents)), files)
+        run = Run(claim_ref=claim_ref, case_id=case["case_id"], email=email, files=[available[f] for f in files])
         runs[claim_ref] = run
-        task = build_task(make_email(case, body, list(dict.fromkeys(documents)), files), claim_ref,
-                          memory_namespace=memory.namespace if memory else None)
-        asyncio.create_task(execute(run, task, [available[f] for f in files]))
+        task = build_task(email, claim_ref, memory_namespace=memory.namespace if memory else None)
+        asyncio.create_task(execute(run, task, run.files))
         return JSONResponse({"claim_ref": claim_ref}, status_code=202)
 
     @server.custom_route("/api/claims/{ref}", methods=["GET"], include_in_schema=False)
@@ -317,7 +354,17 @@ def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRu
     async def approve(request: Request) -> Response:
         ref = request.path_params["ref"]
         try:
-            system.approve_settlement(ref, handler_name="Demo claims handler")
+            override = bool((await request.json()).get("override"))
+        except (json.JSONDecodeError, ValueError, AttributeError):
+            override = False
+        run = runs.get(ref)
+        if run and run.review_state == "running":
+            return JSONResponse({"error": "The Reviewer is still checking this claim."}, status_code=409)
+        if run and run.review and run.review["verdict"] == "concerns" and not override:
+            return JSONResponse({"error": "The Reviewer raised concerns. Confirm to approve anyway.",
+                                 "needs_override": True}, status_code=409)
+        try:
+            system.approve_settlement(ref, handler_name="Demo claims handler" + (" (reviewer overridden)" if override else ""))
         except ToolRefused as exc:
             return JSONResponse({"error": str(exc)}, status_code=409)
         return JSONResponse(claim_payload(ref))

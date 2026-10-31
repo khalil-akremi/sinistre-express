@@ -1,0 +1,1305 @@
+[
+  {
+    "review_id": "R-01",
+    "source_case": "DOC-04",
+    "mistake": "Took the email's rough amount (€900) instead of the written quote (€1,640).",
+    "field": "repair_cost",
+    "expected_verdict": "concerns",
+    "email": {
+      "date": "2026-10-28",
+      "from": "Thomas Petit",
+      "subject": "Claim - accident - VER-1004",
+      "body": "Hello Veridia,\n\nI hit a post in an underground car park on 27 October 2026. Nobody else was involved. The garage told me on the phone it would be around €900; the written quote is attached.\n\nKind regards,\nThomas Petit\nPolicy number: VER-1004\n\nAttached: repair_quote.pdf, damage_photos.zip",
+      "attachments": [
+        "damage_photos.zip"
+      ],
+      "files": [
+        "data/documents/DOC-04/repair_quote.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1004",
+      "holder_name": "Thomas Petit",
+      "vehicle": "Volkswagen Golf (2020)",
+      "market_value_eur": 15500,
+      "licence_date": "2008-11-01",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1004",
+      "coverage": "C2",
+      "incident_date": "2026-10-27",
+      "report_date": "2026-10-28",
+      "repair_cost": 900,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-01",
+      "policy_id": "VER-1004",
+      "coverage": "C2",
+      "incident_date": "2026-10-27",
+      "report_date": "2026-10-28",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 900,
+      "at_fault": 1,
+      "third_party_involved": 0,
+      "third_party_identified": 0,
+      "documents_provided": "[\"photos\", \"repair_quote\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 300,
+      "payout": 600,
+      "assessor_required": 0,
+      "assessor_date": null,
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:16+00:00",
+      "updated_at": "2026-10-31T14:39:16+00:00"
+    }
+  },
+  {
+    "review_id": "R-02",
+    "source_case": "DOC-01",
+    "mistake": "Recorded the policyholder as not at fault; the signed report says he is.",
+    "field": "at_fault",
+    "expected_verdict": "concerns",
+    "email": {
+      "date": "2026-10-15",
+      "from": "Lucas Bernard",
+      "subject": "Claim - accident - VER-1002",
+      "body": "Hello Veridia,\n\nI had a collision with another car on the ring road on 14 October 2026 while we were both changing lanes. The other driver and I filled in the accident report together.\n\nKind regards,\nLucas Bernard\nPolicy number: VER-1002\n\nAttached: accident_report_signed.pdf, repair_quote.pdf, damage_photos.zip",
+      "attachments": [
+        "damage_photos.zip"
+      ],
+      "files": [
+        "data/documents/DOC-01/accident_report_signed.pdf",
+        "data/documents/DOC-01/repair_quote.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1002",
+      "holder_name": "Lucas Bernard",
+      "vehicle": "Renault Clio (2023)",
+      "market_value_eur": 16500,
+      "licence_date": "2024-09-02",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        },
+        {
+          "code": "C3",
+          "name": "Glass breakage"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1002",
+      "coverage": "C2",
+      "incident_date": "2026-10-14",
+      "report_date": "2026-10-15",
+      "repair_cost": 2400,
+      "at_fault": false,
+      "third_party_involved": true,
+      "third_party_identified": true,
+      "documents_provided": [
+        "photos",
+        "repair_quote",
+        "accident_report"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-02",
+      "policy_id": "VER-1002",
+      "coverage": "C2",
+      "incident_date": "2026-10-14",
+      "report_date": "2026-10-15",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 2400,
+      "at_fault": 0,
+      "third_party_involved": 1,
+      "third_party_identified": 1,
+      "documents_provided": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 0,
+      "payout": 2400,
+      "assessor_required": 1,
+      "assessor_date": "2026-10-18",
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:16+00:00",
+      "updated_at": "2026-10-31T14:39:16+00:00"
+    }
+  },
+  {
+    "review_id": "R-03",
+    "source_case": "DOC-05",
+    "mistake": "Accepted a repair quote made out to another person and another car.",
+    "field": "documents_provided",
+    "expected_verdict": "concerns",
+    "email": {
+      "date": "2026-10-29",
+      "from": "Ines Haddad",
+      "subject": "Claim - accident - VER-1003",
+      "body": "Hello Veridia,\n\nI scraped the side of my car against a gate on 28 October 2026. No one else was involved. The quote is attached.\n\nKind regards,\nInes Haddad\nPolicy number: VER-1003\n\nAttached: repair_quote.pdf, damage_photos.zip",
+      "attachments": [
+        "damage_photos.zip"
+      ],
+      "files": [
+        "data/documents/DOC-05/repair_quote.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1003",
+      "holder_name": "Ines Haddad",
+      "vehicle": "Toyota Yaris (2019)",
+      "market_value_eur": 9000,
+      "licence_date": "2015-03-20",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        },
+        {
+          "code": "C3",
+          "name": "Glass breakage"
+        },
+        {
+          "code": "C4",
+          "name": "Theft"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1003",
+      "coverage": "C2",
+      "incident_date": "2026-10-28",
+      "report_date": "2026-10-29",
+      "repair_cost": 980,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-03",
+      "policy_id": "VER-1003",
+      "coverage": "C2",
+      "incident_date": "2026-10-28",
+      "report_date": "2026-10-29",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 980,
+      "at_fault": 1,
+      "third_party_involved": 0,
+      "third_party_identified": 0,
+      "documents_provided": "[\"photos\", \"repair_quote\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 300,
+      "payout": 680,
+      "assessor_required": 0,
+      "assessor_date": null,
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:16+00:00",
+      "updated_at": "2026-10-31T14:39:16+00:00"
+    }
+  },
+  {
+    "review_id": "R-04",
+    "source_case": "DOC-02",
+    "mistake": "Ignored the playbook: the other vehicle is a company van, the claim should be referred.",
+    "field": "decision",
+    "expected_verdict": "concerns",
+    "email": {
+      "date": "2026-10-14",
+      "from": "Claire Martin",
+      "subject": "Claim - accident - VER-1001",
+      "body": "Hello Veridia,\n\nAnother vehicle hit the side of my car at the Rue de Rivoli crossing on 12 October 2026. It was not my fault, and the other driver signed the accident report.\n\nKind regards,\nClaire Martin\nPolicy number: VER-1001\n\nAttached: accident_report_signed.pdf, repair_quote.pdf, damage_photos.zip",
+      "attachments": [
+        "damage_photos.zip"
+      ],
+      "files": [
+        "data/documents/DOC-02/accident_report_signed.pdf",
+        "data/documents/DOC-02/repair_quote.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1001",
+      "holder_name": "Claire Martin",
+      "vehicle": "Peugeot 208 (2021)",
+      "market_value_eur": 14000,
+      "licence_date": "2012-05-14",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        },
+        {
+          "code": "C3",
+          "name": "Glass breakage"
+        },
+        {
+          "code": "C4",
+          "name": "Theft"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1001",
+      "coverage": "C2",
+      "incident_date": "2026-10-12",
+      "report_date": "2026-10-14",
+      "repair_cost": 1200,
+      "at_fault": false,
+      "third_party_involved": true,
+      "third_party_identified": true,
+      "documents_provided": [
+        "photos",
+        "repair_quote",
+        "accident_report"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-04",
+      "policy_id": "VER-1001",
+      "coverage": "C2",
+      "incident_date": "2026-10-12",
+      "report_date": "2026-10-14",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 1200,
+      "at_fault": 0,
+      "third_party_involved": 1,
+      "third_party_identified": 1,
+      "documents_provided": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 0,
+      "payout": 1200,
+      "assessor_required": 0,
+      "assessor_date": null,
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:16+00:00",
+      "updated_at": "2026-10-31T14:39:16+00:00"
+    }
+  },
+  {
+    "review_id": "R-05",
+    "source_case": "CLM-16",
+    "mistake": "Missed a possible exclusion: the customer says he had a few drinks before driving.",
+    "field": "exclusion_signal",
+    "expected_verdict": "concerns",
+    "email": {
+      "date": "2026-10-22",
+      "from": "Thomas Petit",
+      "subject": "Claim - accident - VER-1004",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 21 October 2026.\nComing back from a friend's birthday party, where I had a few drinks, I lost control and hit a fence. No one else was involved.\nThe garage quoted €1,800 to repair my car.\n\nKind regards,\nThomas Petit\nPolicy number: VER-1004\n\nAttached: damage_photos.zip, repair_quote.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1004",
+      "holder_name": "Thomas Petit",
+      "vehicle": "Volkswagen Golf (2020)",
+      "market_value_eur": 15500,
+      "licence_date": "2008-11-01",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1004",
+      "coverage": "C2",
+      "incident_date": "2026-10-21",
+      "report_date": "2026-10-22",
+      "repair_cost": 1800,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-05",
+      "policy_id": "VER-1004",
+      "coverage": "C2",
+      "incident_date": "2026-10-21",
+      "report_date": "2026-10-22",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 1800,
+      "at_fault": 1,
+      "third_party_involved": 0,
+      "third_party_identified": 0,
+      "documents_provided": "[\"photos\", \"repair_quote\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 300,
+      "payout": 1500,
+      "assessor_required": 1,
+      "assessor_date": "2026-10-25",
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:16+00:00",
+      "updated_at": "2026-10-31T14:39:16+00:00"
+    }
+  },
+  {
+    "review_id": "R-06",
+    "source_case": "CLM-15",
+    "mistake": "Recorded a wrong report date, hiding a late report (9 days after the incident).",
+    "field": "report_date",
+    "expected_verdict": "concerns",
+    "email": {
+      "date": "2026-10-11",
+      "from": "Claire Martin",
+      "subject": "Claim - accident - VER-1001",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 02 October 2026.\nI hit a bollard while parking. Nobody else was involved. I was too busy with work to report it earlier, sorry for the delay.\nThe garage quoted €650 to repair my car.\n\nKind regards,\nClaire Martin\nPolicy number: VER-1001\n\nAttached: damage_photos.zip, repair_quote.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1001",
+      "holder_name": "Claire Martin",
+      "vehicle": "Peugeot 208 (2021)",
+      "market_value_eur": 14000,
+      "licence_date": "2012-05-14",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        },
+        {
+          "code": "C3",
+          "name": "Glass breakage"
+        },
+        {
+          "code": "C4",
+          "name": "Theft"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1001",
+      "coverage": "C2",
+      "incident_date": "2026-10-02",
+      "report_date": "2026-10-03",
+      "repair_cost": 650,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-06",
+      "policy_id": "VER-1001",
+      "coverage": "C2",
+      "incident_date": "2026-10-02",
+      "report_date": "2026-10-03",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 650,
+      "at_fault": 1,
+      "third_party_involved": 0,
+      "third_party_identified": 0,
+      "documents_provided": "[\"photos\", \"repair_quote\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 300,
+      "payout": 350,
+      "assessor_required": 0,
+      "assessor_date": null,
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:16+00:00",
+      "updated_at": "2026-10-31T14:39:16+00:00"
+    }
+  },
+  {
+    "review_id": "R-07",
+    "source_case": "CLM-A",
+    "mistake": "Recorded the other driver as not identified, so the not-at-fault waiver was lost.",
+    "field": "third_party_identified",
+    "expected_verdict": "concerns",
+    "email": {
+      "date": "2026-10-14",
+      "from": "Claire Martin",
+      "subject": "Claim - accident - VER-1001",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 12 October 2026.\nA van ran a red light and hit the side of my car at the Rue de Rivoli crossing. The van driver, Mr. Dubois, admitted it was his fault and we both signed the accident report.\nThe garage quoted €1,200 to repair my car.\n\nKind regards,\nClaire Martin\nPolicy number: VER-1001\n\nAttached: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf",
+        "accident_report_signed.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1001",
+      "holder_name": "Claire Martin",
+      "vehicle": "Peugeot 208 (2021)",
+      "market_value_eur": 14000,
+      "licence_date": "2012-05-14",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        },
+        {
+          "code": "C3",
+          "name": "Glass breakage"
+        },
+        {
+          "code": "C4",
+          "name": "Theft"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1001",
+      "coverage": "C2",
+      "incident_date": "2026-10-12",
+      "report_date": "2026-10-14",
+      "repair_cost": 1200,
+      "at_fault": false,
+      "third_party_involved": true,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote",
+        "accident_report"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-07",
+      "policy_id": "VER-1001",
+      "coverage": "C2",
+      "incident_date": "2026-10-12",
+      "report_date": "2026-10-14",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 1200,
+      "at_fault": 0,
+      "third_party_involved": 1,
+      "third_party_identified": 0,
+      "documents_provided": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 300,
+      "payout": 900,
+      "assessor_required": 0,
+      "assessor_date": null,
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:16+00:00",
+      "updated_at": "2026-10-31T14:39:16+00:00"
+    }
+  },
+  {
+    "review_id": "R-08",
+    "source_case": "DOC-03",
+    "mistake": "Recorded a windscreen claim as collision (C2) instead of glass (C3).",
+    "field": "coverage",
+    "expected_verdict": "concerns",
+    "email": {
+      "date": "2026-10-27",
+      "from": "Emma Rousseau",
+      "subject": "Claim - broken glass - VER-1007",
+      "body": "Hello Veridia,\n\nA stone thrown up on the A6 motorway on 26 October 2026 cracked my windscreen. I scanned the glass repair quote.\n\nKind regards,\nEmma Rousseau\nPolicy number: VER-1007\n\nAttached: repair_quote.pdf, damage_photos.zip",
+      "attachments": [
+        "damage_photos.zip"
+      ],
+      "files": [
+        "data/documents/DOC-03/repair_quote.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1007",
+      "holder_name": "Emma Rousseau",
+      "vehicle": "Tesla Model 3 (2023)",
+      "market_value_eur": 32000,
+      "licence_date": "2011-04-08",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        },
+        {
+          "code": "C3",
+          "name": "Glass breakage"
+        },
+        {
+          "code": "C4",
+          "name": "Theft"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1007",
+      "coverage": "C2",
+      "incident_date": "2026-10-26",
+      "report_date": "2026-10-27",
+      "repair_cost": 1180,
+      "at_fault": false,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-08",
+      "policy_id": "VER-1007",
+      "coverage": "C2",
+      "incident_date": "2026-10-26",
+      "report_date": "2026-10-27",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 1180,
+      "at_fault": 0,
+      "third_party_involved": 0,
+      "third_party_identified": 0,
+      "documents_provided": "[\"photos\", \"repair_quote\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 300,
+      "payout": 880,
+      "assessor_required": 0,
+      "assessor_date": null,
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:16+00:00",
+      "updated_at": "2026-10-31T14:39:16+00:00"
+    }
+  },
+  {
+    "review_id": "R-09",
+    "source_case": "DOC-01",
+    "mistake": null,
+    "field": null,
+    "expected_verdict": "approve",
+    "email": {
+      "date": "2026-10-15",
+      "from": "Lucas Bernard",
+      "subject": "Claim - accident - VER-1002",
+      "body": "Hello Veridia,\n\nI had a collision with another car on the ring road on 14 October 2026 while we were both changing lanes. The other driver and I filled in the accident report together.\n\nKind regards,\nLucas Bernard\nPolicy number: VER-1002\n\nAttached: accident_report_signed.pdf, repair_quote.pdf, damage_photos.zip",
+      "attachments": [
+        "damage_photos.zip"
+      ],
+      "files": [
+        "data/documents/DOC-01/accident_report_signed.pdf",
+        "data/documents/DOC-01/repair_quote.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1002",
+      "holder_name": "Lucas Bernard",
+      "vehicle": "Renault Clio (2023)",
+      "market_value_eur": 16500,
+      "licence_date": "2024-09-02",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        },
+        {
+          "code": "C3",
+          "name": "Glass breakage"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1002",
+      "coverage": "C2",
+      "incident_date": "2026-10-14",
+      "report_date": "2026-10-15",
+      "repair_cost": 2400,
+      "at_fault": true,
+      "third_party_involved": true,
+      "third_party_identified": true,
+      "documents_provided": [
+        "photos",
+        "repair_quote",
+        "accident_report"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-09",
+      "policy_id": "VER-1002",
+      "coverage": "C2",
+      "incident_date": "2026-10-14",
+      "report_date": "2026-10-15",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 2400,
+      "at_fault": 1,
+      "third_party_involved": 1,
+      "third_party_identified": 1,
+      "documents_provided": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 700,
+      "payout": 1700,
+      "assessor_required": 1,
+      "assessor_date": "2026-10-18",
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:16+00:00",
+      "updated_at": "2026-10-31T14:39:17+00:00"
+    }
+  },
+  {
+    "review_id": "R-10",
+    "source_case": "DOC-03",
+    "mistake": null,
+    "field": null,
+    "expected_verdict": "approve",
+    "email": {
+      "date": "2026-10-27",
+      "from": "Emma Rousseau",
+      "subject": "Claim - broken glass - VER-1007",
+      "body": "Hello Veridia,\n\nA stone thrown up on the A6 motorway on 26 October 2026 cracked my windscreen. I scanned the glass repair quote.\n\nKind regards,\nEmma Rousseau\nPolicy number: VER-1007\n\nAttached: repair_quote.pdf, damage_photos.zip",
+      "attachments": [
+        "damage_photos.zip"
+      ],
+      "files": [
+        "data/documents/DOC-03/repair_quote.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1007",
+      "holder_name": "Emma Rousseau",
+      "vehicle": "Tesla Model 3 (2023)",
+      "market_value_eur": 32000,
+      "licence_date": "2011-04-08",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        },
+        {
+          "code": "C3",
+          "name": "Glass breakage"
+        },
+        {
+          "code": "C4",
+          "name": "Theft"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1007",
+      "coverage": "C3",
+      "incident_date": "2026-10-26",
+      "report_date": "2026-10-27",
+      "repair_cost": 1180,
+      "at_fault": false,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-10",
+      "policy_id": "VER-1007",
+      "coverage": "C3",
+      "incident_date": "2026-10-26",
+      "report_date": "2026-10-27",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 1180,
+      "at_fault": 0,
+      "third_party_involved": 0,
+      "third_party_identified": 0,
+      "documents_provided": "[\"photos\", \"repair_quote\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 50,
+      "payout": 1130,
+      "assessor_required": 0,
+      "assessor_date": null,
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:17+00:00",
+      "updated_at": "2026-10-31T14:39:17+00:00"
+    }
+  },
+  {
+    "review_id": "R-11",
+    "source_case": "DOC-04",
+    "mistake": null,
+    "field": null,
+    "expected_verdict": "approve",
+    "email": {
+      "date": "2026-10-28",
+      "from": "Thomas Petit",
+      "subject": "Claim - accident - VER-1004",
+      "body": "Hello Veridia,\n\nI hit a post in an underground car park on 27 October 2026. Nobody else was involved. The garage told me on the phone it would be around €900; the written quote is attached.\n\nKind regards,\nThomas Petit\nPolicy number: VER-1004\n\nAttached: repair_quote.pdf, damage_photos.zip",
+      "attachments": [
+        "damage_photos.zip"
+      ],
+      "files": [
+        "data/documents/DOC-04/repair_quote.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1004",
+      "holder_name": "Thomas Petit",
+      "vehicle": "Volkswagen Golf (2020)",
+      "market_value_eur": 15500,
+      "licence_date": "2008-11-01",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1004",
+      "coverage": "C2",
+      "incident_date": "2026-10-27",
+      "report_date": "2026-10-28",
+      "repair_cost": 1640,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-11",
+      "policy_id": "VER-1004",
+      "coverage": "C2",
+      "incident_date": "2026-10-27",
+      "report_date": "2026-10-28",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 1640,
+      "at_fault": 1,
+      "third_party_involved": 0,
+      "third_party_identified": 0,
+      "documents_provided": "[\"photos\", \"repair_quote\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 300,
+      "payout": 1340,
+      "assessor_required": 1,
+      "assessor_date": "2026-10-31",
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:17+00:00",
+      "updated_at": "2026-10-31T14:39:17+00:00"
+    }
+  },
+  {
+    "review_id": "R-12",
+    "source_case": "DOC-06",
+    "mistake": null,
+    "field": null,
+    "expected_verdict": "approve",
+    "email": {
+      "date": "2026-10-30",
+      "from": "Claire Martin",
+      "subject": "Claim - theft - VER-1001",
+      "body": "Hello Veridia,\n\nMy car was stolen from the street where I live. I filed a complaint at the police station this morning; the receipt is attached (scanned).\n\nKind regards,\nClaire Martin\nPolicy number: VER-1001\n\nAttached: police_report.pdf",
+      "attachments": [],
+      "files": [
+        "data/documents/DOC-06/police_report.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1001",
+      "holder_name": "Claire Martin",
+      "vehicle": "Peugeot 208 (2021)",
+      "market_value_eur": 14000,
+      "licence_date": "2012-05-14",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        },
+        {
+          "code": "C3",
+          "name": "Glass breakage"
+        },
+        {
+          "code": "C4",
+          "name": "Theft"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1001",
+      "coverage": "C4",
+      "incident_date": "2026-10-29",
+      "report_date": "2026-10-30",
+      "repair_cost": 0,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "police_report"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-12",
+      "policy_id": "VER-1001",
+      "coverage": "C4",
+      "incident_date": "2026-10-29",
+      "report_date": "2026-10-30",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 0,
+      "at_fault": 1,
+      "third_party_involved": 0,
+      "third_party_identified": 0,
+      "documents_provided": "[\"police_report\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 1400,
+      "payout": 12600,
+      "assessor_required": 0,
+      "assessor_date": null,
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:17+00:00",
+      "updated_at": "2026-10-31T14:39:17+00:00"
+    }
+  },
+  {
+    "review_id": "R-13",
+    "source_case": "CLM-B",
+    "mistake": null,
+    "field": null,
+    "expected_verdict": "approve",
+    "email": {
+      "date": "2026-10-15",
+      "from": "Lucas Bernard",
+      "subject": "Claim - accident - VER-1002",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 14 October 2026.\nI misjudged the distance while changing lanes on the ring road and hit the car next to me. It was my fault. The other driver, Ms. Laurent, and I signed the accident report.\nThe garage quoted €2,400 to repair my car.\n\nKind regards,\nLucas Bernard\nPolicy number: VER-1002\n\nAttached: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf",
+        "accident_report_signed.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1002",
+      "holder_name": "Lucas Bernard",
+      "vehicle": "Renault Clio (2023)",
+      "market_value_eur": 16500,
+      "licence_date": "2024-09-02",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        },
+        {
+          "code": "C3",
+          "name": "Glass breakage"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1002",
+      "coverage": "C2",
+      "incident_date": "2026-10-14",
+      "report_date": "2026-10-15",
+      "repair_cost": 2400,
+      "at_fault": true,
+      "third_party_involved": true,
+      "third_party_identified": true,
+      "documents_provided": [
+        "photos",
+        "repair_quote",
+        "accident_report"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-13",
+      "policy_id": "VER-1002",
+      "coverage": "C2",
+      "incident_date": "2026-10-14",
+      "report_date": "2026-10-15",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 2400,
+      "at_fault": 1,
+      "third_party_involved": 1,
+      "third_party_identified": 1,
+      "documents_provided": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 700,
+      "payout": 1700,
+      "assessor_required": 1,
+      "assessor_date": "2026-10-18",
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:17+00:00",
+      "updated_at": "2026-10-31T14:39:17+00:00"
+    }
+  },
+  {
+    "review_id": "R-14",
+    "source_case": "CLM-07",
+    "mistake": null,
+    "field": null,
+    "expected_verdict": "approve",
+    "email": {
+      "date": "2026-10-10",
+      "from": "Claire Martin",
+      "subject": "Claim - broken glass - VER-1001",
+      "body": "Hello Veridia,\n\nI am writing to report a broken glass that happened on 09 October 2026.\nA stone thrown up by a truck on the motorway cracked my windscreen.\nThe garage quoted €480 to repair my car.\n\nKind regards,\nClaire Martin\nPolicy number: VER-1001\n\nAttached: damage_photos.zip, repair_quote.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1001",
+      "holder_name": "Claire Martin",
+      "vehicle": "Peugeot 208 (2021)",
+      "market_value_eur": 14000,
+      "licence_date": "2012-05-14",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        },
+        {
+          "code": "C3",
+          "name": "Glass breakage"
+        },
+        {
+          "code": "C4",
+          "name": "Theft"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1001",
+      "coverage": "C3",
+      "incident_date": "2026-10-09",
+      "report_date": "2026-10-10",
+      "repair_cost": 480,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-14",
+      "policy_id": "VER-1001",
+      "coverage": "C3",
+      "incident_date": "2026-10-09",
+      "report_date": "2026-10-10",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 480,
+      "at_fault": 1,
+      "third_party_involved": 0,
+      "third_party_identified": 0,
+      "documents_provided": "[\"photos\", \"repair_quote\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 50,
+      "payout": 430,
+      "assessor_required": 0,
+      "assessor_date": null,
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:17+00:00",
+      "updated_at": "2026-10-31T14:39:17+00:00"
+    }
+  },
+  {
+    "review_id": "R-15",
+    "source_case": "CLM-01",
+    "mistake": null,
+    "field": null,
+    "expected_verdict": "approve",
+    "email": {
+      "date": "2026-10-04",
+      "from": "Thomas Petit",
+      "subject": "Claim - accident - VER-1004",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 03 October 2026.\nWhile reversing out of a parking space I hit a concrete pillar. Nobody else was involved.\nThe garage quoted €900 to repair my car.\n\nKind regards,\nThomas Petit\nPolicy number: VER-1004\n\nAttached: damage_photos.zip, repair_quote.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1004",
+      "holder_name": "Thomas Petit",
+      "vehicle": "Volkswagen Golf (2020)",
+      "market_value_eur": 15500,
+      "licence_date": "2008-11-01",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1004",
+      "coverage": "C2",
+      "incident_date": "2026-10-03",
+      "report_date": "2026-10-04",
+      "repair_cost": 900,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-15",
+      "policy_id": "VER-1004",
+      "coverage": "C2",
+      "incident_date": "2026-10-03",
+      "report_date": "2026-10-04",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 900,
+      "at_fault": 1,
+      "third_party_involved": 0,
+      "third_party_identified": 0,
+      "documents_provided": "[\"photos\", \"repair_quote\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 300,
+      "payout": 600,
+      "assessor_required": 0,
+      "assessor_date": null,
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:17+00:00",
+      "updated_at": "2026-10-31T14:39:17+00:00"
+    }
+  },
+  {
+    "review_id": "R-16",
+    "source_case": "CLM-06",
+    "mistake": null,
+    "field": null,
+    "expected_verdict": "approve",
+    "email": {
+      "date": "2026-10-10",
+      "from": "Thomas Petit",
+      "subject": "Claim - accident - VER-1004",
+      "body": "Hello Veridia,\n\nI am writing to report an accident that happened on 08 October 2026.\nI hit the car in front of me in a traffic jam. My fault. Mr. Blanc and I signed the accident report.\nThe garage quoted €1,500 to repair my car.\n\nKind regards,\nThomas Petit\nPolicy number: VER-1004\n\nAttached: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf",
+      "attachments": [
+        "damage_photos.zip",
+        "repair_quote.pdf",
+        "accident_report_signed.pdf"
+      ]
+    },
+    "policy": {
+      "policy_id": "VER-1004",
+      "holder_name": "Thomas Petit",
+      "vehicle": "Volkswagen Golf (2020)",
+      "market_value_eur": 15500,
+      "licence_date": "2008-11-01",
+      "coverages": [
+        {
+          "code": "C1",
+          "name": "Third-party liability"
+        },
+        {
+          "code": "C2",
+          "name": "Collision damage"
+        }
+      ]
+    },
+    "created": {
+      "policy_id": "VER-1004",
+      "coverage": "C2",
+      "incident_date": "2026-10-08",
+      "report_date": "2026-10-10",
+      "repair_cost": 1500,
+      "at_fault": true,
+      "third_party_involved": true,
+      "third_party_identified": true,
+      "documents_provided": [
+        "photos",
+        "repair_quote",
+        "accident_report"
+      ],
+      "exclusion_signal": null
+    },
+    "claim": {
+      "claim_ref": "R-16",
+      "policy_id": "VER-1004",
+      "coverage": "C2",
+      "incident_date": "2026-10-08",
+      "report_date": "2026-10-10",
+      "description": "Prepared by the handler agent.",
+      "repair_cost": 1500,
+      "at_fault": 1,
+      "third_party_involved": 1,
+      "third_party_identified": 1,
+      "documents_provided": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+      "exclusion_signal": null,
+      "status": "pending_approval",
+      "blocking_issues": "[]",
+      "deductible": 300,
+      "payout": 1200,
+      "assessor_required": 0,
+      "assessor_date": null,
+      "requested_documents": null,
+      "escalation_reasons": null,
+      "handler_note": null,
+      "approved_by": null,
+      "created_at": "2026-10-31T14:39:17+00:00",
+      "updated_at": "2026-10-31T14:39:17+00:00"
+    }
+  }
+]

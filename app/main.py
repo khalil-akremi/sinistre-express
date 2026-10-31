@@ -43,7 +43,10 @@ def create_server():
     use_memory = configured and os.environ.get("MEMORY_ENABLED", "true").lower() != "false"
     runner = (ComintyRunner(memory_namespace=namespace if use_memory else None)
               if configured else MissingConfigRunner())
-    register_web_routes(server, system, runner, memory=ComintyMemory(namespace) if use_memory else None)
+    reviewer_id = os.environ.get("REVIEWER_AGENT_ID", "").strip()
+    reviewer = ComintyRunner(agent_id=reviewer_id, max_steps=12) if configured and reviewer_id else None
+    register_web_routes(server, system, runner, memory=ComintyMemory(namespace) if use_memory else None,
+                        reviewer=reviewer)
     return server, system
 
 

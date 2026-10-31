@@ -146,6 +146,18 @@ function renderFile(data, { landing = false } = {}) {
   const cost = data.cost ? `€${Number(data.cost.total).toFixed(4)}` : "n/a";
   const approved = claim && claim.status === "approved";
   const canApprove = claim && claim.status === "pending_approval";
+  const review = data.review;
+  const concerns = review && review.verdict === "concerns";
+  const reviewBox = review ? `
+    <section class="review ${concerns ? "review-concerns" : "review-ok"}" aria-label="Second agent's review">
+      <p class="review-head">${concerns ? "Reviewer raised concerns" : "Reviewer agrees"}
+        <span>second agent, different model, read-only</span></p>
+      ${review.summary ? `<p class="review-summary">${escapeHtml(review.summary)}</p>` : ""}
+      ${(review.issues || []).length ? `<ul class="review-issues">${review.issues.map((i) => `
+        <li><strong>${escapeHtml(i.field || "issue")}</strong>: recorded ${escapeHtml(String(i.recorded ?? "?"))},
+          should be ${escapeHtml(String(i.should_be ?? "?"))}
+          ${i.evidence ? `<span>${escapeHtml(i.evidence)}</span>` : ""}</li>`).join("")}</ul>` : ""}
+    </section>` : "";
 
   els.file.innerHTML = `
     <div class="file-sheet">
@@ -157,16 +169,19 @@ function renderFile(data, { landing = false } = {}) {
       ${data.reply ? `<details class="letter" open><summary>Agent report and draft letter</summary>
         <div class="reply">${renderReply(data.reply)}</div></details>` : ""}
       ${data.error ? `<p class="error-box">${escapeHtml(data.error)}</p>` : ""}
-      ${canApprove ? `<button class="approve" id="approve" type="button">Approve payment of ${euro(claim.payout)}</button>
+      ${canApprove ? reviewBox : ""}
+      ${canApprove ? `<button class="approve${concerns ? " override" : ""}" id="approve" type="button">${concerns ? "Approve anyway" : "Approve payment of"} ${euro(claim.payout)}</button>
         <p class="approve-note">Only a person can approve. The agent has no tool for it.</p>` : ""}
     </div>`;
-  if (canApprove) $("approve").addEventListener("click", () => approve(data.claim_ref));
+  if (canApprove) $("approve").addEventListener("click", () => approve(data.claim_ref, concerns));
 }
 
-async function approve(ref) {
+async function approve(ref, override = false) {
   const button = $("approve");
   button.disabled = true;
-  const res = await fetch(`/api/claims/${encodeURIComponent(ref)}/approve`, { method: "POST" });
+  const res = await fetch(`/api/claims/${encodeURIComponent(ref)}/approve`, {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ override }),
+  });
   const data = await res.json();
   if (!res.ok) { button.disabled = false; showQuota(null, data.error); return; }
   addStep({ source: "system", icon: "🖊️", text: "approve_settlement (human)", detail: "approved by Demo claims handler", ok: true });
