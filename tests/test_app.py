@@ -144,3 +144,110 @@ def test_bad_requests_are_refused(desk, payload, message):
     client, _ = desk
     res = client.post("/api/claims", json=payload)
     assert res.status_code == 400 and message in res.json()["error"]
+
+
+# ---------------------------------------------------------------- memory
+from app.memory import PLAYBOOK, InMemoryStore, add_rule, customer_path  # noqa: E402
+
+COMMERCIAL = ("van", "truck")
+
+
+class MemoryFakeAgent(FakeAgent):
+    """Reads the playbook and writes a customer note, like the real agent with memory."""
+
+    def __init__(self, system, store):
+        super().__init__(system)
+        self.store = store
+
+    async def __call__(self, task, on_event):
+        self.tasks.append(task)
+        ref = re.search(r"Use the claim reference (\S+?)\.", task).group(1)
+        case = next(c for c in CASES if f"Subject: {c['email']['subject']}" in task
+                    and c["email"]["from"] in task)
+        facts = case["facts"]
+        rule_applies = "playbook.md" in task and "commercial vehicle" in (await self.store.read(PLAYBOOK)) \
+            and any(word in task.lower() for word in COMMERCIAL)
+        if rule_applies:
+            self.system.get_policy(policy_id=facts["policy_id"], claim_ref=ref)
+            self.system.create_claim(
+                claim_ref=ref, policy_id=facts["policy_id"], coverage=facts["coverage"],
+                incident_date=facts["incident_date"], report_date=facts["report_date"],
+                description="x", repair_cost=facts["repair_cost"], at_fault=facts["at_fault"],
+                third_party_involved=facts["third_party_involved"],
+                third_party_identified=facts["third_party_identified"],
+                documents_provided=facts["documents_provided"])
+            self.system.escalate_to_handler(claim_ref=ref, reasons=["other"],
+                                            summary="Playbook: commercial vehicle involved.")
+        else:
+            replay(self.system, case | {"case_id": ref})
+        self.store.files[customer_path(facts["policy_id"])] = f"- {ref}: handled"
+        return {"reply": "done", "status": "success", "cost": {"total": "0.006"}}
+
+
+@pytest.fixture
+def desk_with_memory(tmp_path):
+    system = ClaimsSystem(tmp_path / "t.db")
+    server = build_server(system, admin_secret="s3cret")
+    store = InMemoryStore("veridia-test")
+    agent = MemoryFakeAgent(system, store)
+    register_web_routes(server, system, agent, daily_max=10, memory=store)
+    with TestClient(server.streamable_http_app()) as client:
+        yield client, agent, store
+
+
+def test_memory_panel_is_hidden_without_memory(desk):
+    client, _ = desk
+    assert client.get("/api/memory").json() == {"enabled": False}
+
+
+def test_task_tells_the_agent_how_to_use_memory(desk_with_memory):
+    client, agent, _ = desk_with_memory
+    wait_done(client, start(client, "CLM-01").json()["claim_ref"])
+    assert "Memory (namespace veridia-test)" in agent.tasks[0]
+    assert "customers/<policy number>.md" in agent.tasks[0]
+
+
+def test_a_taught_rule_changes_the_next_claim(desk_with_memory):
+    client, _, _ = desk_with_memory
+    before = wait_done(client, start(client, "CLM-A").json()["claim_ref"])  # the van
+    assert before["claim"]["status"] == "pending_approval"
+
+    rule = "When the other driver is a commercial vehicle (van, truck), refer the claim to a handler."
+    assert client.post("/api/memory/playbook", json={"rule": rule}).json()["rules"][0].endswith(rule)
+
+    after = wait_done(client, start(client, "CLM-A").json()["claim_ref"])
+    assert after["claim"]["status"] == "escalated"
+    control = wait_done(client, start(client, "CLM-01").json()["claim_ref"])  # a pillar: no van
+    assert control["claim"]["status"] == "pending_approval"
+
+
+def test_customer_note_is_shown_for_the_selected_policy(desk_with_memory):
+    client, _, _ = desk_with_memory
+    ref = start(client, "CLM-B").json()["claim_ref"]
+    wait_done(client, ref)
+    data = client.get("/api/memory?policy=VER-1002").json()
+    assert ref in data["customer_note"]
+    assert client.get("/api/memory?policy=VER-1001").json()["customer_note"] is None
+    assert client.get("/api/memory?policy=../secret").status_code == 400
+
+
+def test_reset_clears_rules_and_notes(desk_with_memory):
+    client, _, store = desk_with_memory
+    client.post("/api/memory/playbook", json={"rule": "Be kind."})
+    wait_done(client, start(client, "CLM-B").json()["claim_ref"])
+    assert client.post("/api/memory/reset").json() == {"rules": []}
+    assert store.files == {PLAYBOOK: store.files[PLAYBOOK]} and "- " not in store.files[PLAYBOOK]
+
+
+@pytest.mark.parametrize("rule", ["", "x" * 301])
+def test_invalid_rules_are_refused(desk_with_memory, rule):
+    client, _, _ = desk_with_memory
+    assert client.post("/api/memory/playbook", json={"rule": rule}).status_code == 400
+
+
+def test_playbook_keeps_only_the_latest_rules():
+    playbook = ""
+    for i in range(15):
+        playbook = add_rule(playbook, f"rule {i}")
+    rules = [line for line in playbook.splitlines() if line.startswith("- ")]
+    assert len(rules) == 12 and rules[-1].endswith("rule 14") and rules[0].endswith("rule 3")

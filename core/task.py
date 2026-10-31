@@ -8,7 +8,19 @@ facts and the expected outcome stay hidden.
 INTEGRATION_ID = "veridia_claims"  # the sub-agent name Cominty gives our integration
 
 
-def build_task(email: dict, claim_ref: str) -> str:
+MEMORY_GUIDANCE = (
+    "\n\nMemory (namespace {namespace}): before deciding, read playbook.md and, if it exists, "
+    "customers/<policy number>.md (for example customers/VER-1002.md). playbook.md holds company "
+    "practice written by human claims handlers: follow its rules unless they contradict the "
+    "contract; when a playbook rule makes you refer a claim, use escalate_to_handler with the "
+    "reason \"other\" and quote the rule. After handling the claim, create or update "
+    "customers/<policy number>.md with one dated line: claim reference, coverage, outcome, "
+    "anything a future handler should know. Do not copy the whole email."
+)
+
+
+def build_task(email: dict, claim_ref: str, memory_namespace: str | None = None) -> str:
+    """The task for one claim. With `memory_namespace`, the agent is told how to use memory."""
     return (
         f'<use agent="{INTEGRATION_ID}"/>\n'
         f"New claim to handle in the Veridia claims system. Use the claim reference {claim_ref}.\n\n"
@@ -24,4 +36,5 @@ def build_task(email: dict, claim_ref: str) -> str:
             if email["attachments"]
             else "No attachment was received with this email."
         )
+        + (MEMORY_GUIDANCE.format(namespace=memory_namespace) if memory_namespace else "")
     )

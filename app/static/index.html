@@ -69,6 +69,30 @@
     </section>
   </main>
 
+  <section class="memory" id="memory" hidden aria-labelledby="memory-title">
+    <div class="memory-head">
+      <h2 id="memory-title">What the agent remembers</h2>
+      <p>Cominty memory, kept between claims. Handlers teach rules; the agent reads them before every claim and writes a note about each customer.</p>
+    </div>
+    <div class="memory-grid">
+      <div class="memory-col">
+        <h3>Handler playbook <span class="scope">shared by all claims</span></h3>
+        <ol class="rules" id="rules"></ol>
+        <label class="field-label" for="rule">Teach the agent a rule</label>
+        <textarea id="rule" rows="3" maxlength="300" placeholder="When the other driver is a commercial vehicle (van, truck), refer the claim to a handler so we can recover the money from their insurer."></textarea>
+        <div class="memory-actions">
+          <button id="teach" class="secondary" type="button">Add to the playbook</button>
+          <button id="reset-memory" class="link" type="button">Clear memory</button>
+        </div>
+        <p class="hint" id="memory-msg" aria-live="polite"></p>
+      </div>
+      <div class="memory-col">
+        <h3>Customer note <span class="scope" id="note-scope"></span></h3>
+        <div class="note" id="customer-note"></div>
+      </div>
+    </div>
+  </section>
+
   <footer class="colophon">
     <p>Built on Cominty Managed Agents: a custom agent with the Veridia contract as knowledge, and the claims system connected over MCP. Amounts come from tested business rules, never from the model.</p>
   </footer>

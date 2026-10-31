@@ -33,7 +33,17 @@ TOOL_LABELS = {
     "read_file": ("📎", "Reading a file"),
     "load_skill": ("🧰", "Loading a skill"),
     "ask_questions": ("❓", "Preparing a question for you"),
+    "memory_read": ("🧠", "Reading its memory"),
+    "memory_write": ("🧠", "Writing to its memory"),
 }
+
+
+def tool_label(name: str) -> tuple[str, str]:
+    if name in TOOL_LABELS:
+        return TOOL_LABELS[name]
+    if "memory" in name:
+        return ("🧠", "Using its memory")
+    return ("🔧", f"Agent tool: {name}")
 
 
 def agent_event(kind: str, status: str, name: str | None = None, text: str | None = None) -> dict | None:
@@ -41,7 +51,7 @@ def agent_event(kind: str, status: str, name: str | None = None, text: str | Non
     if kind == "tool_call":
         if status == "running":
             return None  # show each tool once, when it finishes
-        icon, label = TOOL_LABELS.get(name or "", ("🔧", f"Agent tool: {name}"))
+        icon, label = tool_label(name or "")
         return {"source": "agent", "icon": "⚠️" if status == "error" else icon, "text": label}
     if kind == "update" and text:
         return {"source": "agent", "icon": "💬", "text": text}
@@ -53,19 +63,37 @@ def agent_event(kind: str, status: str, name: str | None = None, text: str | Non
 
 
 # --------------------------------------------------------- real runner
+def clean_secret(value: str | None) -> str | None:
+    """Remove what copy-paste often adds around a secret: spaces, line breaks, quotes."""
+    if value is None:
+        return None
+    return value.strip().strip("\"'").strip()
+
+
 class ComintyRunner:
     """Runs our Veridia Claims Handler through the Cominty SDK."""
 
-    def __init__(self, agent_id: str | None = None, max_steps: int = 25):
-        self.agent_id = agent_id or os.environ["COMINTY_AGENT_ID"]
+    def __init__(self, agent_id: str | None = None, max_steps: int = 25,
+                 memory_namespace: str | None = None):
+        self.agent_id = clean_secret(agent_id or os.environ["COMINTY_AGENT_ID"])
+        self.memory_namespace = memory_namespace
+        self.api_token = clean_secret(os.environ.get("COMINTY_API_KEY"))
+        self.user_id = clean_secret(os.environ.get("COMINTY_USER_ID"))
         self.max_steps = max_steps
 
     async def __call__(self, task: str, on_event: EventSink) -> dict:
-        from cominty_sdk import AsyncCominty, events  # imported here: tests never need it
+        from cominty_sdk import AgentCapabilities, AsyncCominty, MemoryCapability, events
+
+        # Memory is attached per conversation and frozen for it (Cominty capabilities).
+        memory = (MemoryCapability(activation="always", namespace=self.memory_namespace)
+                  if self.memory_namespace else MemoryCapability(activation="never"))
 
         cost = None
-        async with AsyncCominty() as client:
-            run = await client.chat.start(agent_id=self.agent_id, message=task, max_steps=self.max_steps)
+        async with AsyncCominty(api_token=self.api_token, user_id=self.user_id) as client:
+            run = await client.chat.start(
+                agent_id=self.agent_id, message=task, max_steps=self.max_steps,
+                thread_capabilities=AgentCapabilities(memory=memory),
+            )
             started_sent = False
             async with run:
                 async for event in run:

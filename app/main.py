@@ -19,6 +19,7 @@ import os
 from dotenv import load_dotenv
 
 from app.agent import ComintyRunner
+from app.memory import ComintyMemory
 from app.web import register_web_routes
 from mcp.server.transport_security import TransportSecuritySettings
 from mcp_server.db import db_path_from_env
@@ -37,8 +38,12 @@ def create_server():
     load_dotenv()
     system = ClaimsSystem(db_path_from_env())
     server = build_server(system, admin_secret=admin_token())
-    runner = ComintyRunner() if os.environ.get("COMINTY_AGENT_ID") else MissingConfigRunner()
-    register_web_routes(server, system, runner)
+    configured = bool(os.environ.get("COMINTY_AGENT_ID"))
+    namespace = os.environ.get("MEMORY_NAMESPACE", "veridia-claims-desk").strip()
+    use_memory = configured and os.environ.get("MEMORY_ENABLED", "true").lower() != "false"
+    runner = (ComintyRunner(memory_namespace=namespace if use_memory else None)
+              if configured else MissingConfigRunner())
+    register_web_routes(server, system, runner, memory=ComintyMemory(namespace) if use_memory else None)
     return server, system
 
 

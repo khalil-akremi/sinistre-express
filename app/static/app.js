@@ -73,6 +73,7 @@ async function loadCases() {
 
 function fillCase(caseId) {
   const c = cases.find((x) => x.case_id === caseId);
+  loadMemory(c.policy_id);
   els.head.innerHTML = `<strong>${escapeHtml(c.from)}</strong>, ${escapeHtml(c.date)}<br>${escapeHtml(c.subject)}`;
   els.body.value = c.body;
   document.querySelectorAll(".docs input").forEach((box) => { box.checked = c.documents.includes(box.value); });
@@ -173,6 +174,7 @@ async function send() {
     stopClock();
     els.send.disabled = false;
     renderFile(JSON.parse(e.data));
+    loadMemory(currentPolicy());
     fetch("/api/cases").then((r) => r.json()).then((d) => showQuota(d.runs_left_today));
   });
   stream.onerror = () => {
@@ -181,6 +183,61 @@ async function send() {
   };
 }
 
+// ---------------------------------------------------------------- memory
+const currentPolicy = () => (cases.find((x) => x.case_id === els.select.value) || {}).policy_id;
+
+function showMemoryMessage(text, isError) {
+  const msg = $("memory-msg");
+  msg.textContent = text || "";
+  msg.style.color = isError ? "var(--red)" : "";
+}
+
+function renderRules(rules) {
+  $("rules").innerHTML = rules.length
+    ? rules.map((r) => `<li>${escapeHtml(r)}</li>`).join("")
+    : `<li class="empty">No rules yet. Teach one below, then send a claim it applies to.</li>`;
+}
+
+async function loadMemory(policy) {
+  const res = await fetch(`/api/memory${policy ? `?policy=${encodeURIComponent(policy)}` : ""}`);
+  const data = await res.json();
+  if (!data.enabled) return;
+  $("memory").hidden = false;
+  if (!res.ok) { showMemoryMessage(data.error, true); return; }
+  renderRules(data.rules);
+  $("note-scope").textContent = policy ? `for ${policy}` : "";
+  const note = $("customer-note");
+  const text = (data.customer_note || "").replace(/^#.*\n?/gm, "").trim();
+  note.classList.toggle("empty", !text);
+  note.textContent = text || "No note yet. The agent writes one after handling this customer's claim.";
+}
+
+async function teach() {
+  const rule = $("rule").value.trim();
+  if (!rule) { showMemoryMessage("Write a rule first.", true); return; }
+  $("teach").disabled = true;
+  const res = await fetch("/api/memory/playbook", {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ rule }),
+  });
+  const data = await res.json();
+  $("teach").disabled = false;
+  if (!res.ok) { showMemoryMessage(data.error, true); return; }
+  $("rule").value = "";
+  renderRules(data.rules);
+  showMemoryMessage("Added. The agent will read it on the next claim.");
+}
+
+async function resetMemory() {
+  const res = await fetch("/api/memory/reset", { method: "POST" });
+  const data = await res.json();
+  if (!res.ok) { showMemoryMessage(data.error, true); return; }
+  renderRules([]);
+  loadMemory(currentPolicy());
+  showMemoryMessage("Memory cleared.");
+}
+
+$("teach").addEventListener("click", teach);
+$("reset-memory").addEventListener("click", resetMemory);
 els.select.addEventListener("change", () => fillCase(els.select.value));
 els.send.addEventListener("click", send);
 loadCases().catch(() => showQuota(null, "Cannot reach the claims desk. Refresh in a minute: the free server may be waking up."));

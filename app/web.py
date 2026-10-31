@@ -8,6 +8,9 @@ Routes
     GET  /api/claims/<ref>/stream   live timeline (Server-Sent Events)
     GET  /api/claims/<ref>          claim record, agent reply, cost, audit log
     POST /api/claims/<ref>/approve  the human approval (the agent cannot do this)
+    GET  /api/memory?policy=<id>    what the agent remembers: playbook rules, customer note
+    POST /api/memory/playbook       a handler teaches the agent a rule
+    POST /api/memory/reset          back to an empty playbook and no customer notes
 
 The Cominty API key stays on the server. The browser only talks to these routes.
 Every public run spends credits, so runs are rate-limited (one at a time,
@@ -30,6 +33,7 @@ from starlette.requests import Request
 from starlette.responses import FileResponse, JSONResponse, Response, StreamingResponse
 
 from app.agent import AgentRunner
+from app.memory import MAX_RULE_CHARS, PLAYBOOK, customer_path, rules_of
 from core.task import build_task
 from mcp.server.mcpserver import MCPServer
 from mcp_server.tools import ClaimsSystem, ToolRefused
@@ -46,6 +50,7 @@ DOC_FILES = {
 }
 FILE_TO_DOC = {v: k for k, v in DOC_FILES.items()}
 MAX_BODY_CHARS = 2000
+POLICY_RE = re.compile(r"Policy number: (VER-\d{4})")
 RUN_TIMEOUT_S = 360
 STREAM_POLL_S = 0.7
 
@@ -91,8 +96,10 @@ def public_case(case: dict) -> dict:
     """What the browser may see: the email and attachments, never the answer key."""
     email = case["email"]
     body = re.sub(r"\n+Attached:.*\Z", "", email["body"], flags=re.S).rstrip()
+    policy = POLICY_RE.search(email["body"])
     return {
         "case_id": case["case_id"],
+        "policy_id": policy.group(1) if policy else None,
         "title": case["title"],
         "demo": case["demo"],
         "date": email["date"],
@@ -153,9 +160,11 @@ def sse(event: str, data: dict) -> str:
 
 # --------------------------------------------------------------- routes
 def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRunner,
-                        daily_max: int | None = None) -> dict[str, Run]:
+                        daily_max: int | None = None, memory=None) -> dict[str, Run]:
+    """`memory` is a memory store (app.memory); None runs the demo without memory."""
     runs: dict[str, Run] = {}
     limits = Limits(daily_max if daily_max is not None else int(os.environ.get("DEMO_DAILY_LIMIT", "30")))
+    teach_limits = Limits(int(os.environ.get("DEMO_TEACH_LIMIT", "20")))
     busy = asyncio.Lock()
     cases = {c["case_id"]: c for c in load_cases()}
 
@@ -233,7 +242,8 @@ def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRu
         claim_ref = f"DEMO-{datetime.now(timezone.utc):%m%d%H%M%S}-{secrets.token_hex(2).upper()}"
         run = Run(claim_ref=claim_ref, case_id=case["case_id"])
         runs[claim_ref] = run
-        task = build_task(make_email(case, body, list(dict.fromkeys(documents))), claim_ref)
+        task = build_task(make_email(case, body, list(dict.fromkeys(documents))), claim_ref,
+                          memory_namespace=memory.namespace if memory else None)
         asyncio.create_task(execute(run, task))
         return JSONResponse({"claim_ref": claim_ref}, status_code=202)
 
@@ -279,5 +289,50 @@ def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRu
         except ToolRefused as exc:
             return JSONResponse({"error": str(exc)}, status_code=409)
         return JSONResponse(claim_payload(ref))
+
+    @server.custom_route("/api/memory", methods=["GET"], include_in_schema=False)
+    async def read_memory(request: Request) -> Response:
+        if memory is None:
+            return JSONResponse({"enabled": False})
+        policy = request.query_params.get("policy", "")
+        if policy and not re.fullmatch(r"VER-\d{4}", policy):
+            return JSONResponse({"error": "Unknown policy number."}, status_code=400)
+        try:
+            playbook = await memory.read(PLAYBOOK)
+            note = await memory.read(customer_path(policy)) if policy else None
+        except Exception as exc:  # noqa: BLE001
+            return JSONResponse({"error": f"Memory is unavailable: {exc}"}, status_code=502)
+        return JSONResponse({"enabled": True, "namespace": memory.namespace, "policy_id": policy or None,
+                             "rules": rules_of(playbook), "customer_note": note})
+
+    @server.custom_route("/api/memory/playbook", methods=["POST"], include_in_schema=False)
+    async def teach(request: Request) -> Response:
+        if memory is None:
+            return JSONResponse({"error": "Memory is not enabled on this server."}, status_code=404)
+        try:
+            rule = str((await request.json()).get("rule", "")).strip()
+        except (json.JSONDecodeError, ValueError, AttributeError):
+            return JSONResponse({"error": "Invalid JSON."}, status_code=400)
+        if not rule or len(rule) > MAX_RULE_CHARS:
+            return JSONResponse({"error": f"A rule must be 1 to {MAX_RULE_CHARS} characters."}, status_code=400)
+        if not teach_limits.try_take():
+            return JSONResponse({"error": "The demo's daily limit for new rules is reached."}, status_code=429)
+        try:
+            playbook = await memory.teach(rule)
+        except Exception as exc:  # noqa: BLE001
+            return JSONResponse({"error": f"Memory is unavailable: {exc}"}, status_code=502)
+        return JSONResponse({"rules": rules_of(playbook)})
+
+    @server.custom_route("/api/memory/reset", methods=["POST"], include_in_schema=False)
+    async def reset_memory(request: Request) -> Response:
+        if memory is None:
+            return JSONResponse({"error": "Memory is not enabled on this server."}, status_code=404)
+        if busy.locked():
+            return JSONResponse({"error": "Wait until the agent has finished the current claim."}, status_code=409)
+        try:
+            await memory.reset()
+        except Exception as exc:  # noqa: BLE001
+            return JSONResponse({"error": f"Memory is unavailable: {exc}"}, status_code=502)
+        return JSONResponse({"rules": []})
 
     return runs

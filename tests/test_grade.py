@@ -121,3 +121,19 @@ def test_fault_is_not_graded_for_glass(tmp_path):
     result = replay(ClaimsSystem(tmp_path / "t.db"), case, facts_override={"at_fault": False})
     g = grade_case(case, result)
     assert "at_fault" not in g["facts"] and g["facts_ok"]
+
+
+def test_memory_report_counts_rule_followed_and_false_triggers():
+    from eval.memory_eval import expected, render
+
+    rows = []
+    for condition, with_memory in (("without memory", False), ("with memory", True)):
+        for case_id in ("CLM-A", "CLM-03", "CLM-B", "CLM-01"):
+            got = "escalate" if (with_memory and case_id == "CLM-A") else "settle"
+            rows.append({"condition": condition, "case_id": case_id, "relevant": case_id in ("CLM-A", "CLM-03"),
+                         "expected": expected(case_id, with_memory), "got": got,
+                         "ok": got == expected(case_id, with_memory), "cost": 0.005,
+                         "note_written": with_memory})
+    report = render(rows, {})
+    assert "| 2/2 settled" in report and "| 1/2 referred to a handler |" in report
+    assert "| 2/2 | 2/2 |" in report and "| - | 4/4 |" in report
