@@ -1,0 +1,156 @@
+{
+  "case_id": "CLM-19",
+  "claim_ref": "baseline-haiku-CLM-19",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**1. Status: Referred to a claims handler**\n\nThe claims system escalated claim baseline-haiku-CLM-19 with the blocking issue `coverage_not_in_schedule`. No settlement was computed and no payment was staged.\n\n**2. Facts recorded**\n- Policy VER-1004, holder Thomas Petit, Volkswagen Golf (2020), market value €15,500.\n- Policy Schedule coverages: C1 (third-party liability) and C2 (collision damage). C3 (glass breakage) is not on the schedule.\n- Claimed: windscreen damage from a stone impact on the motorway, on 24 October 2026. Reported 25 October 2026.\n- Not at fault; no third party involved.\n- Repair quote: €450.\n- Provided documents: damage_photos.zip and repair_quote.pdf. Both are in the claim file. I could not open them.\n\n**3. Reasoning**\n- **Coverage:** The contract lists glass breakage (windscreen, side and rear windows) as C3, with a standard deductible of €50. <cite document_id=\"2630#10255\" pages=\"1\" name=\"Veridia contract\"/> The policy schedule does not include C3, so the claim cannot be settled on the schedule as it stands. Under Article 7, a claim under a coverage not in the Policy Schedule (Article 2) is referred to a handler. <cite document_id=\"2630#10255\" pages=\"3\"/>\n- **Timeliness:** Reported one day after the incident, within the deadline in Article 4.1. No late-report referral is needed.\n- **Documents:** Photos and a repair quote are the required documents for glass claims. <cite document_id=\"2630#10255\" pages=\"2\"/> Both are in the file, so no document request is needed.\n- **Exclusions:** None flagged.\n- **Article numbers:** The subagent's referral reasoning is based on the system's checks. I did not re-verify the Article 2 and Article 4.1 wording beyond the references in Article 7. The handler should confirm them.\n\n**4. Amounts**\nNot computed. The claim has a blocking issue, so no deductible, payout or assessor decision was made. For the handler's reference only, the contract's standard C3 deductible is €50, but that has not been applied.\n\n**5. Draft message to the customer**\n\n> Dear Mr Petit,\n>\n> Thank you for reporting the windscreen damage from 24 October 2026, and for sending the photos and repair quote. Your claim (reference baseline-haiku-CLM-19) has been passed to a Veridia claims handler, who will review how your policy applies to this loss. We will contact you as soon as we have their decision.\n>\n> Kind regards,\n> Veridia Claims Team",
+  "questions": [],
+  "thread_id": "45361bd9-823e-4683-882e-d5fe8c55aa24",
+  "cost": {
+    "failed": false,
+    "input_tokens": 88675,
+    "cached_tokens": 81730,
+    "output_tokens": 3825,
+    "input_cost": "0.001783375",
+    "output_cost": "0.0019321",
+    "total": "0.003715475"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 26.7,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-19",
+    "policy_id": "VER-1004",
+    "coverage": "C3",
+    "incident_date": "2026-10-24",
+    "report_date": "2026-10-25",
+    "description": "Windscreen cracked by a stone on the motorway while driving the insured car. Repair quote of 450 EUR from the garage.",
+    "repair_cost": 450,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"photos\", \"repair_quote\"]",
+    "exclusion_signal": null,
+    "status": "escalated",
+    "blocking_issues": "[\"coverage_not_in_schedule\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": "[\"coverage_not_in_schedule\"]",
+    "handler_note": "Insured Thomas Petit (VER-1004) reports a windscreen cracked by a stone on the motorway on 2026-10-24, reported 2026-10-25, repair quote 450 EUR. The policy schedule lists only C1 and C2; glass breakage (C3) is not in the schedule, so a handler must decide. Photos and repair quote are attached and on time (5-day deadline met).",
+    "approved_by": null,
+    "created_at": "2026-10-31T09:10:19+00:00",
+    "updated_at": "2026-10-31T09:10:20+00:00"
+  },
+  "action_log": [
+    {
+      "id": 106,
+      "ts": "2026-10-31T09:10:16+00:00",
+      "claim_ref": "baseline-haiku-CLM-19",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1004",
+        "claim_ref": "baseline-haiku-CLM-19"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1004",
+        "holder_name": "Thomas Petit",
+        "vehicle": "Volkswagen Golf (2020)",
+        "market_value_eur": 15500,
+        "licence_date": "2008-11-01",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          }
+        ]
+      }
+    },
+    {
+      "id": 107,
+      "ts": "2026-10-31T09:10:19+00:00",
+      "claim_ref": "baseline-haiku-CLM-19",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-19",
+        "policy_id": "VER-1004",
+        "coverage": "C3",
+        "incident_date": "2026-10-24",
+        "report_date": "2026-10-25",
+        "description": "Windscreen cracked by a stone on the motorway while driving the insured car. Repair quote of 450 EUR from the garage.",
+        "repair_cost": 450,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "photos",
+          "repair_quote"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-19",
+        "status": "open",
+        "checks": {
+          "coverage": "C3 Glass breakage",
+          "coverage_in_policy_schedule": false,
+          "days_to_report": 1,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "coverage_not_in_schedule"
+        ]
+      }
+    },
+    {
+      "id": 108,
+      "ts": "2026-10-31T09:10:20+00:00",
+      "claim_ref": "baseline-haiku-CLM-19",
+      "tool": "escalate_to_handler",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-19",
+        "reasons": [
+          "coverage_not_in_schedule"
+        ],
+        "summary": "Insured Thomas Petit (VER-1004) reports a windscreen cracked by a stone on the motorway on 2026-10-24, reported 2026-10-25, repair quote 450 EUR. The policy schedule lists only C1 and C2; glass breakage (C3) is not in the schedule, so a handler must decide. Photos and repair quote are attached and on time (5-day deadline met)."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-19",
+        "status": "escalated",
+        "reasons": [
+          "coverage_not_in_schedule"
+        ],
+        "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

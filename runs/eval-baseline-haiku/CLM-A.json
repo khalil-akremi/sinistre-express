@@ -1,0 +1,190 @@
+{
+  "case_id": "CLM-A",
+  "claim_ref": "baseline-haiku-CLM-A",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**1. Status:** Settlement prepared for human approval\n\nThe claims system confirms this: `stage_settlement` returned `pending_approval`. The payment is prepared but not paid, and a Veridia claims handler must approve it.\n\n**2. Facts recorded**\n- Claim reference: baseline-haiku-CLM-A. Policy VER-1001, holder Claire Martin, Peugeot 208 (2021), market value €14,000, licence held since 14 May 2012.\n- Incident 12 October 2026. Reported 14 October 2026, which is 2 days after the incident.\n- Coverage: C2 Collision damage, listed in the Policy Schedule.\n- Third party: van driver Mr. Dubois, named in the email. The customer says he admitted fault.\n- Repair cost: €1,200 (repair quote).\n- Documents received: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. None are missing. I did not open them.\n- Possible exclusions: none indicated by the email.\n\n**3. Reasoning**\n- **Reporting deadline:** The report came within the deadline, so no late-report referral is needed. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/> (Article 4.1 sets the deadline; Article 7 covers referral for late claims.)\n- **Coverage:** C2 is in the Policy Schedule, so the claim is not referred for coverage reasons. <cite document_id=\"2630#10255\" pages=\"1\" name=\"contract.pdf\"/> (Article 2)\n- **Exclusions:** The email shows no exclusion signal. The licence has been held for more than 3 years, so the young-driver surcharge does not apply. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/> (Article 5.3)\n- **Deductible waiver:** The waiver applies to C2 when the authorised driver is not at fault and the third party is identified. Both conditions are met on the customer's account, so the deductible is €0. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/> (Article 5.2)\n- **Payout:** Compensation is the repair cost, capped at market value, minus the deductible. That gives €1,200, which is under the €14,000 cap. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/> (Article 6.2)\n- **Assessor:** An independent assessor is required only when repair cost is above €1,500. At €1,200 it is not required. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/> (Article 6.1)\n- **Payment timing:** Payment is due within 15 days after a Veridia claims handler approves the compensation. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/> (Article 6.3)\n\nNote on the contract: the claims subagent could not open the contract file in its sandbox. I checked Articles 5, 6 and 7 directly in the document store, and the wording matches the references above.\n\n**4. Amounts** (from `compute_settlement`)\n- Deductible: €0 (not-at-fault waiver, Article 5.2)\n- Payout: €1,200 (Article 6.2)\n- Assessor required: No (Article 6.1)\n\n**5. Draft message to the customer**\n\nDear Ms. Martin,\n\nThank you for reporting the accident of 12 October 2026 and for sending the photos, the repair quote and the signed accident report. Your claim (reference baseline-haiku-CLM-A) has been reviewed, and a settlement of €1,200 has been prepared for final approval by our claims team. We will contact you once that approval is complete.\n\nKind regards,\nVeridia Claims",
+  "questions": [],
+  "thread_id": "7b62123f-6ab8-4d9e-8839-885af1cecb06",
+  "cost": {
+    "failed": false,
+    "input_tokens": 157991,
+    "cached_tokens": 125018,
+    "output_tokens": 5384,
+    "input_cost": "0.005579280",
+    "output_cost": "0.0027263",
+    "total": "0.008305580"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 38.4,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-A",
+    "policy_id": "VER-1001",
+    "coverage": "C2",
+    "incident_date": "2026-10-12",
+    "report_date": "2026-10-14",
+    "description": "A van ran a red light and struck the side of the insured's car at the Rue de Rivoli crossing. The van driver, Mr. Dubois, admitted fault and both parties signed the accident report.",
+    "repair_cost": 1200,
+    "at_fault": 0,
+    "third_party_involved": 1,
+    "third_party_identified": 1,
+    "documents_provided": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 0,
+    "payout": 1200,
+    "assessor_required": 0,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T08:59:27+00:00",
+    "updated_at": "2026-10-31T08:59:29+00:00"
+  },
+  "action_log": [
+    {
+      "id": 25,
+      "ts": "2026-10-31T08:59:21+00:00",
+      "claim_ref": "baseline-haiku-CLM-A",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1001",
+        "claim_ref": "baseline-haiku-CLM-A"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1001",
+        "holder_name": "Claire Martin",
+        "vehicle": "Peugeot 208 (2021)",
+        "market_value_eur": 14000,
+        "licence_date": "2012-05-14",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "ts": "2026-10-31T08:59:27+00:00",
+      "claim_ref": "baseline-haiku-CLM-A",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-A",
+        "policy_id": "VER-1001",
+        "coverage": "C2",
+        "incident_date": "2026-10-12",
+        "report_date": "2026-10-14",
+        "description": "A van ran a red light and struck the side of the insured's car at the Rue de Rivoli crossing. The van driver, Mr. Dubois, admitted fault and both parties signed the accident report.",
+        "repair_cost": 1200,
+        "at_fault": false,
+        "third_party_involved": true,
+        "third_party_identified": true,
+        "documents_provided": [
+          "photos",
+          "repair_quote",
+          "accident_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-A",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 2,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote",
+            "accident_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 27,
+      "ts": "2026-10-31T08:59:28+00:00",
+      "claim_ref": "baseline-haiku-CLM-A",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-A"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-A",
+        "deductible_eur": 0,
+        "payout_eur": 1200,
+        "assessor_required": false,
+        "years_licensed_on_incident_date": 14,
+        "calculation": [
+          "Art. 5.2 not-at-fault waiver: no deductible",
+          "Art. 6.2 payout = €1200 - €0 = €1200"
+        ]
+      }
+    },
+    {
+      "id": 28,
+      "ts": "2026-10-31T08:59:29+00:00",
+      "claim_ref": "baseline-haiku-CLM-A",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-A"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-A",
+        "status": "pending_approval",
+        "payout_eur": 1200,
+        "deductible_eur": 0,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

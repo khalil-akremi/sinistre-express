@@ -1,0 +1,164 @@
+{
+  "case_id": "CLM-17",
+  "claim_ref": "baseline-haiku-CLM-17",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Referred to a claims handler.** The claims system shows claim baseline-haiku-CLM-17 as escalated with the reason `possible_exclusion` (racing). No settlement was computed or staged.\n\n**Facts recorded**\n- Policy VER-1007, holder Emma Rousseau. Vehicle: Tesla Model 3 (2023), market value €32,000, licence date 2011-04-08 (Policy Schedule, per the claims system).\n- Coverage claimed: C2 collision damage to her own car. C2 is on the Policy Schedule.\n- Incident date: 22 October 2026. Report date: 23 October 2026 (1 day later).\n- Event: during a track day at a racing circuit, she hit the tyre barrier in a corner. Single-vehicle incident; no third party.\n- Repair quote: €5,200 (customer's figure, not a settlement amount).\n- Documents in claim file: damage_photos.zip and repair_quote.pdf. Both are counted as provided, and none are missing. I have not been able to open them.\n\n**Reasoning**\n- **Possible exclusion:** The email says the car was used at a track day at a racing circuit. Article 3 excludes damage where the vehicle was used for racing, speed trials or a track day. <cite document_id=\"2630#10255\" pages=\"2\" name=\"DriveSafe Motor Policy\"/> Article 3 also states that an exclusion is never applied automatically and that a handler decides. <cite document_id=\"2630#10255\" pages=\"2\"/> The claim is therefore referred to a handler under Article 7.2 (possible exclusion). <cite document_id=\"2630#10255\" pages=\"3\"/>\n- **Reporting:** The claim was reported 1 day after the incident, within the 5-day limit in Article 4.1. <cite document_id=\"2630#10255\" pages=\"2\"/> No late-report referral applies.\n- **Coverage:** C2 is in the Policy Schedule, so Article 7.3 (coverage not in schedule) does not apply. The damage is to her own car, which matches C2. The definitions of policyholder and authorised driver in Article 1 are consistent with her being the driver. <cite document_id=\"2630#10255\" pages=\"1\"/>\n- **Documents:** Nothing is missing, so no document request was needed.\n- **Payment:** No payment is staged. A payment can only follow approval by a Veridia claims handler. <cite document_id=\"2630#10255\" pages=\"3\"/>\n\n**Amounts**\n- Not computed. `compute_settlement` was not run because the claim has a blocking issue.\n- Deductible, payout and assessor requirement: not determined. The €5,200 is the customer's quote only.\n\n**Draft message to the customer**\n\n> Dear Ms Rousseau,\n>\n> Thank you for reporting the accident of 22 October 2026 under policy VER-1007, and for sending your photos and repair quote. Your claim has been passed to a Veridia claims handler, who will review it, including the track-day use described in your email. We will come back to you as soon as that review is complete.\n>\n> Kind regards,\n> Veridia Claims",
+  "questions": [],
+  "thread_id": "cb23c28a-9228-4ed0-adf8-3f9fd3a4b590",
+  "cost": {
+    "failed": false,
+    "input_tokens": 75529,
+    "cached_tokens": 66350,
+    "output_tokens": 5149,
+    "input_cost": "0.001987300",
+    "output_cost": "0.0025955",
+    "total": "0.004582800"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 29.0,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-17",
+    "policy_id": "VER-1007",
+    "coverage": "C2",
+    "incident_date": "2026-10-22",
+    "report_date": "2026-10-23",
+    "description": "The insured took her car to a track day at a racing circuit and hit the tyre barrier in a corner. No other vehicle or person was involved according to the email.",
+    "repair_cost": 5200,
+    "at_fault": 1,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"photos\", \"repair_quote\"]",
+    "exclusion_signal": "racing",
+    "status": "escalated",
+    "blocking_issues": "[\"possible_exclusion:racing\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": "[\"possible_exclusion\"]",
+    "handler_note": "Insured Emma Rousseau (VER-1007, Tesla Model 3 2023, C2 collision) reports on 2026-10-23 that on 2026-10-22 she hit a tyre barrier in a corner during a track day at a racing circuit. Single-vehicle incident, no third party; repair quote EUR 5,200; photos and repair quote attached. The claims system flagged a possible racing/track-day exclusion as a blocking issue; a human handler must decide.",
+    "approved_by": null,
+    "created_at": "2026-10-31T09:09:30+00:00",
+    "updated_at": "2026-10-31T09:09:32+00:00"
+  },
+  "action_log": [
+    {
+      "id": 100,
+      "ts": "2026-10-31T09:09:28+00:00",
+      "claim_ref": "baseline-haiku-CLM-17",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1007",
+        "claim_ref": "baseline-haiku-CLM-17"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1007",
+        "holder_name": "Emma Rousseau",
+        "vehicle": "Tesla Model 3 (2023)",
+        "market_value_eur": 32000,
+        "licence_date": "2011-04-08",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 101,
+      "ts": "2026-10-31T09:09:30+00:00",
+      "claim_ref": "baseline-haiku-CLM-17",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-17",
+        "policy_id": "VER-1007",
+        "coverage": "C2",
+        "incident_date": "2026-10-22",
+        "report_date": "2026-10-23",
+        "description": "The insured took her car to a track day at a racing circuit and hit the tyre barrier in a corner. No other vehicle or person was involved according to the email.",
+        "repair_cost": 5200,
+        "at_fault": true,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "photos",
+          "repair_quote"
+        ],
+        "exclusion_signal": "racing"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-17",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": "racing"
+        },
+        "blocking_issues": [
+          "possible_exclusion:racing"
+        ]
+      }
+    },
+    {
+      "id": 102,
+      "ts": "2026-10-31T09:09:32+00:00",
+      "claim_ref": "baseline-haiku-CLM-17",
+      "tool": "escalate_to_handler",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-17",
+        "reasons": [
+          "possible_exclusion"
+        ],
+        "summary": "Insured Emma Rousseau (VER-1007, Tesla Model 3 2023, C2 collision) reports on 2026-10-23 that on 2026-10-22 she hit a tyre barrier in a corner during a track day at a racing circuit. Single-vehicle incident, no third party; repair quote EUR 5,200; photos and repair quote attached. The claims system flagged a possible racing/track-day exclusion as a blocking issue; a human handler must decide."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-17",
+        "status": "escalated",
+        "reasons": [
+          "possible_exclusion"
+        ],
+        "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

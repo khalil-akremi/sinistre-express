@@ -1,0 +1,192 @@
+{
+  "case_id": "CLM-02",
+  "claim_ref": "baseline-haiku-CLM-02",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Settlement prepared for human approval.** The claims system confirmed that `stage_settlement` succeeded with status \"pending_approval\" and a payout of €600. A Veridia claims handler must still approve it before any payment is made.\n\n**Facts recorded**\n- Claim reference: baseline-haiku-CLM-02. Policy VER-1006, policyholder Yanis Moreau, who was the driver. Vehicle market value €11,000. Licence date 15 January 2025.\n- Incident: 4 October 2026, at a roundabout. The customer braked too late and hit the car in front.\n- Report date: 6 October 2026, from the email date.\n- Fault: the customer admits fault.\n- Other party: Mr. Henry, named in the email. No other details were given.\n- Repair quote: €1,300, for the customer's own car, so this is a C2 (collision) claim.\n- Documents provided: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. Their contents were not opened.\n\n**Reasoning**\n- **Reporting:** reported 2 days after the incident, within the 5-day limit. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>\n- **Coverage:** C2 (collision damage) is listed in the Policy Schedule, so it applies. <cite document_id=\"2630#10255\" pages=\"1\" name=\"contract.pdf\"/>\n- **Exclusions:** nothing in the email suggests an exclusion. The email does not mention alcohol, drugs, racing, intent or wear. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>\n- **Documents:** C2 with a third party requires photos, a repair quote and a signed accident report. All three were provided. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>\n- **Deductible:** the standard C2 deductible is €300. <cite document_id=\"2630#10255\" pages=\"1\" name=\"contract.pdf\"/>\n- **Young-driver surcharge:** the licence was held for less than 3 years on the incident date, so an extra €400 applies. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>\n- **Not-at-fault waiver:** does not apply, because the customer admits fault. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>\n- **Referral:** no referral is needed, because the claim is on time, the coverage is in the schedule and there is no possible exclusion. <cite document_id=\"2630#10255\" pages=\"3\" name=\"contract.pdf\"/>\n\n**Amounts (from compute_settlement)**\n- Total deductible: €700 (€300 standard plus €400 young-driver surcharge).\n- Payout: €600 (repair cost €1,300 minus €700).\n- Assessor required: No, because the repair cost is not above €1,500. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>\n- Payment is made within 15 days after a Veridia claims handler approves it. <cite document_id=\"2630#10255\" pages=\"3\" name=\"contract.pdf\"/>\n\n**Note for the handler:** the claims subagent reported that it could not open the contract. I checked the contract directly and the article-level rules above match the amounts it computed.\n\n**Draft message to the customer**\n> Dear Mr. Moreau,\n>\n> Thank you for reporting the accident of 4 October 2026 under policy VER-1006. We have received your damage photos, the repair quote and the signed accident report. Your claim (reference baseline-haiku-CLM-02) is now with our team for final review, and we will write to you again once that review is complete.\n>\n> Kind regards,\n> Veridia Claims",
+  "questions": [],
+  "thread_id": "0f80d145-3e64-4afb-a85b-a07da691d885",
+  "cost": {
+    "failed": false,
+    "input_tokens": 174683,
+    "cached_tokens": 158010,
+    "output_tokens": 6113,
+    "input_cost": "0.003920325",
+    "output_cost": "0.0030992",
+    "total": "0.007019525"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 43.5,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-02",
+    "policy_id": "VER-1006",
+    "coverage": "C2",
+    "incident_date": "2026-10-04",
+    "report_date": "2026-10-06",
+    "description": "The insured braked too late at a roundabout and rear-ended the car in front, driven by Mr. Henry. The insured admits fault; a signed accident report was completed jointly. The garage quoted EUR 1,300 to repair the insured's own vehicle.",
+    "repair_cost": 1300,
+    "at_fault": 1,
+    "third_party_involved": 1,
+    "third_party_identified": 1,
+    "documents_provided": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 700,
+    "payout": 600,
+    "assessor_required": 0,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T09:01:45+00:00",
+    "updated_at": "2026-10-31T09:01:48+00:00"
+  },
+  "action_log": [
+    {
+      "id": 43,
+      "ts": "2026-10-31T09:01:38+00:00",
+      "claim_ref": "baseline-haiku-CLM-02",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1006",
+        "claim_ref": "baseline-haiku-CLM-02"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1006",
+        "holder_name": "Yanis Moreau",
+        "vehicle": "Dacia Sandero (2022)",
+        "market_value_eur": 11000,
+        "licence_date": "2025-01-15",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 44,
+      "ts": "2026-10-31T09:01:45+00:00",
+      "claim_ref": "baseline-haiku-CLM-02",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-02",
+        "policy_id": "VER-1006",
+        "coverage": "C2",
+        "incident_date": "2026-10-04",
+        "report_date": "2026-10-06",
+        "description": "The insured braked too late at a roundabout and rear-ended the car in front, driven by Mr. Henry. The insured admits fault; a signed accident report was completed jointly. The garage quoted EUR 1,300 to repair the insured's own vehicle.",
+        "repair_cost": 1300,
+        "at_fault": true,
+        "third_party_involved": true,
+        "third_party_identified": true,
+        "documents_provided": [
+          "photos",
+          "repair_quote",
+          "accident_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-02",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 2,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote",
+            "accident_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 45,
+      "ts": "2026-10-31T09:01:47+00:00",
+      "claim_ref": "baseline-haiku-CLM-02",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-02"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-02",
+        "deductible_eur": 700,
+        "payout_eur": 600,
+        "assessor_required": false,
+        "years_licensed_on_incident_date": 1,
+        "calculation": [
+          "Art. 2 collision deductible: €300",
+          "Art. 5.3 young driver (1 y < 3): +€400",
+          "Art. 6.2 payout = €1300 - €700 = €600"
+        ]
+      }
+    },
+    {
+      "id": 46,
+      "ts": "2026-10-31T09:01:48+00:00",
+      "claim_ref": "baseline-haiku-CLM-02",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-02"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-02",
+        "status": "pending_approval",
+        "payout_eur": 600,
+        "deductible_eur": 700,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

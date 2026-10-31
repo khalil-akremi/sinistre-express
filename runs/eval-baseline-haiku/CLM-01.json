@@ -1,0 +1,175 @@
+{
+  "case_id": "CLM-01",
+  "claim_ref": "baseline-haiku-CLM-01",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "The claim is staged for human approval: a €600 payout with no assessor needed. I checked the subagent's figures against the contract (company document 2630) and they hold.\n\n**Status: Settlement prepared for human approval**\n\n**Facts recorded**\n- Claim reference: baseline-haiku-CLM-01. Policy VER-1004, Thomas Petit, VW Golf 2020, market value €15,500.\n- Coverage: C2 Collision damage, which is listed in the Policy Schedule.\n- Incident on 3 October 2026, reported on 4 October 2026 (one day later).\n- The customer reversed into a concrete pillar. No third party was involved.\n- Repair quote: €900. Photos (damage_photos.zip) and repair_quote.pdf are on file, so no documents are missing. I could not open either file.\n- The driver is the policyholder, with no sign of a possible exclusion. The licence dates from 2008, so the young-driver surcharge does not apply.\n\n**Reasoning**\n- Coverage: C2 is in the Policy Schedule, so it is covered. <cite document_id=\"2630#10255\" pages=\"1\" name=\"Veridia Motor Insurance Contract\"/>\n- Deductible: C2 standard deductible is €300. No not-at-fault waiver applies, and the young-driver surcharge (Art. 5.3) does not apply because the licence is more than 3 years old. <cite document_id=\"2630#10255\" pages=\"1-2\"/>\n- Reporting: reported one day after the incident, which is within the deadline in Art. 4.1 (I did not re-read the wording of Art. 4.1 myself; the claims system marked it on time). <cite document_id=\"2630#10255\" pages=\"2\"/>\n- Assessor: not required, because the repair cost (€900) is not above €1,500 (Art. 6.1). <cite document_id=\"2630#10255\" pages=\"2\"/>\n- Payout: repair cost, capped at market value, minus the deductible (Art. 6.2). Compensation is never negative. <cite document_id=\"2630#10255\" pages=\"2\"/>\n- Payment is made within 15 days after a Veridia claims handler approves it (Art. 6.3). <cite document_id=\"2630#10255\" pages=\"2-3\"/>\n\n**Amounts** (from the settlement tool)\n- Deductible: €300 (Art. 5 and the C2 standard deductible)\n- Payout: €600 (€900 repair cost minus €300 deductible)\n- Assessor required: No\n\n**Draft message to the customer**\n\n> Dear Mr Petit,\n>\n> Thank you for reporting your claim (reference baseline-haiku-CLM-01) for the incident of 3 October 2026. We have received your damage photos and the €900 repair quote. Your claim has been passed for review, and a settlement proposal is now being checked by our claims team. We will contact you with the outcome as soon as the review is complete.\n>\n> Kind regards,\n> Veridia Claims Team\n\nA human claims handler still needs to approve the €600 before payment is made.",
+  "questions": [],
+  "thread_id": "cb6df177-8645-4aa3-82f4-49f2c8365353",
+  "cost": {
+    "failed": false,
+    "input_tokens": 130100,
+    "cached_tokens": 120813,
+    "output_tokens": 4138,
+    "input_cost": "0.002492980",
+    "output_cost": "0.0020991",
+    "total": "0.004592080"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 30.1,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-01",
+    "policy_id": "VER-1004",
+    "coverage": "C2",
+    "incident_date": "2026-10-03",
+    "report_date": "2026-10-04",
+    "description": "While reversing out of a parking space, the insured vehicle hit a concrete pillar. No other person or vehicle was involved.",
+    "repair_cost": 900,
+    "at_fault": 1,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"photos\", \"repair_quote\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 300,
+    "payout": 600,
+    "assessor_required": 0,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T09:01:08+00:00",
+    "updated_at": "2026-10-31T09:01:10+00:00"
+  },
+  "action_log": [
+    {
+      "id": 39,
+      "ts": "2026-10-31T09:01:04+00:00",
+      "claim_ref": "baseline-haiku-CLM-01",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1004",
+        "claim_ref": "baseline-haiku-CLM-01"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1004",
+        "holder_name": "Thomas Petit",
+        "vehicle": "Volkswagen Golf (2020)",
+        "market_value_eur": 15500,
+        "licence_date": "2008-11-01",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          }
+        ]
+      }
+    },
+    {
+      "id": 40,
+      "ts": "2026-10-31T09:01:08+00:00",
+      "claim_ref": "baseline-haiku-CLM-01",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-01",
+        "policy_id": "VER-1004",
+        "coverage": "C2",
+        "incident_date": "2026-10-03",
+        "report_date": "2026-10-04",
+        "description": "While reversing out of a parking space, the insured vehicle hit a concrete pillar. No other person or vehicle was involved.",
+        "repair_cost": 900,
+        "at_fault": true,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "photos",
+          "repair_quote"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-01",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 41,
+      "ts": "2026-10-31T09:01:09+00:00",
+      "claim_ref": "baseline-haiku-CLM-01",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-01"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-01",
+        "deductible_eur": 300,
+        "payout_eur": 600,
+        "assessor_required": false,
+        "years_licensed_on_incident_date": 17,
+        "calculation": [
+          "Art. 2 collision deductible: €300",
+          "Art. 6.2 payout = €900 - €300 = €600"
+        ]
+      }
+    },
+    {
+      "id": 42,
+      "ts": "2026-10-31T09:01:10+00:00",
+      "claim_ref": "baseline-haiku-CLM-01",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-01"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-01",
+        "status": "pending_approval",
+        "payout_eur": 600,
+        "deductible_eur": 300,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

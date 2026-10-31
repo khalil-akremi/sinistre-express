@@ -1,0 +1,165 @@
+{
+  "case_id": "CLM-13",
+  "claim_ref": "baseline-haiku-CLM-13",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Waiting for documents.** The claim is open in the Veridia claims system under reference baseline-haiku-CLM-13. No settlement was computed or staged, because the repair quote is missing.\n\n**Facts recorded**\n- Policy VER-1001, policyholder Claire Martin, vehicle Peugeot 208 (2021).\n- Coverage: C3 Glass breakage, which is listed in the Policy Schedule.\n- Incident date 19 October 2026. Report date 20 October 2026 (email date), which is 1 day after the incident.\n- Windscreen cracked during a cold night. No third party involved. No exclusion signal identified.\n- Documents provided: damage_photos.zip (counted as photos, not opened).\n- Documents missing: repair quote. The customer has said she will obtain one.\n- Repair cost: not yet known.\n\n**Reasoning**\n- **Coverage:** Glass breakage is covered under C3, which is in the Policy Schedule. The windscreen is a listed glass item in the coverage table <cite document_id=\"2630#10255\" pages=\"1\"/>. Because C3 is in the Policy Schedule, the claim is not referred for a coverage gap (Article 2). The system also reported no possible exclusion.\n- **Reporting:** The claim was reported within the deadline, so it is not late (Article 4.1). <cite document_id=\"2630#10255\" pages=\"3\"/>\n- **Documents:** C3 glass claims require photos of the damage and a repair quote <cite document_id=\"2630#10255\" pages=\"2\"/>. The photos were received, but the repair quote is missing. This blocks settlement, so I requested it from the customer.\n- **Referral:** The claim does not meet any referral condition in Article 7 (late report, possible exclusion, or coverage not in the Policy Schedule), so no escalation was made. <cite document_id=\"2630#10255\" pages=\"3\"/>\n\n**Amounts:** Not computed. The repair quote is required before the deductible and payout can be calculated.\n\n**Draft message to the customer**\n\n> Dear Ms Martin,\n>\n> Thank you for reporting the windscreen damage from 19 October 2026 and for sending the photos, which we have received.\n>\n> To continue your claim, please send us the repair quote from your garage once you have it.\n>\n> Kind regards,\n> Veridia Claims\n\n**Note:** The claims sub-agent could not show the article numbers for the document requirements. The article references above are from my check of the contract. Please confirm the document-requirements clause before relying on it.",
+  "questions": [],
+  "thread_id": "b345572a-e712-460d-b74d-84a4edb1ed8a",
+  "cost": {
+    "failed": false,
+    "input_tokens": 88255,
+    "cached_tokens": 81516,
+    "output_tokens": 3559,
+    "input_cost": "0.001753535",
+    "output_cost": "0.0017991",
+    "total": "0.003552635"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 23.9,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-13",
+    "policy_id": "VER-1001",
+    "coverage": "C3",
+    "incident_date": "2026-10-19",
+    "report_date": "2026-10-20",
+    "description": "The policyholder's windscreen cracked during a cold night. No third party is involved. A garage quote is still to come.",
+    "repair_cost": 0,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"photos\"]",
+    "exclusion_signal": null,
+    "status": "awaiting_documents",
+    "blocking_issues": "[\"missing_document:repair_quote\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": "[\"repair_quote\"]",
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T09:07:23+00:00",
+    "updated_at": "2026-10-31T09:07:24+00:00"
+  },
+  "action_log": [
+    {
+      "id": 88,
+      "ts": "2026-10-31T09:07:21+00:00",
+      "claim_ref": "baseline-haiku-CLM-13",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1001",
+        "claim_ref": "baseline-haiku-CLM-13"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1001",
+        "holder_name": "Claire Martin",
+        "vehicle": "Peugeot 208 (2021)",
+        "market_value_eur": 14000,
+        "licence_date": "2012-05-14",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 89,
+      "ts": "2026-10-31T09:07:23+00:00",
+      "claim_ref": "baseline-haiku-CLM-13",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-13",
+        "policy_id": "VER-1001",
+        "coverage": "C3",
+        "incident_date": "2026-10-19",
+        "report_date": "2026-10-20",
+        "description": "The policyholder's windscreen cracked during a cold night. No third party is involved. A garage quote is still to come.",
+        "repair_cost": 0,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "photos"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-13",
+        "status": "open",
+        "checks": {
+          "coverage": "C3 Glass breakage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [
+            "repair_quote"
+          ],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "missing_document:repair_quote"
+        ]
+      }
+    },
+    {
+      "id": 90,
+      "ts": "2026-10-31T09:07:24+00:00",
+      "claim_ref": "baseline-haiku-CLM-13",
+      "tool": "request_documents",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-13",
+        "documents": [
+          "repair_quote"
+        ],
+        "message_to_customer": "Dear Ms Martin, thank you for reporting the windscreen damage on 19 October 2026 and for the photos, which we have received. To continue your claim, please send us the repair quote from your garage once you have it. Kind regards, Veridia Claims"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-13",
+        "status": "awaiting_documents",
+        "documents_requested": [
+          "repair_quote"
+        ],
+        "message_recorded": "Dear Ms Martin, thank you for reporting the windscreen damage on 19 October 2026 and for the photos, which we have received. To continue your claim, please send us the repair quote from your garage once you have it. Kind regards, Veridia Claims"
+      }
+    }
+  ],
+  "snapshot_error": null
+}

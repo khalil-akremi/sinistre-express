@@ -1,0 +1,211 @@
+{
+  "case_id": "CLM-B",
+  "claim_ref": "baseline-haiku-CLM-B",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**1. Status: Settlement prepared for human approval**\n\nThe claims system shows claim baseline-haiku-CLM-B as staged with status \"pending_approval\" and a payout of €1,700. Nothing has been paid. A human claims handler must approve it.\n\n**2. Facts recorded**\n- Policy VER-1002, holder Lucas Bernard, vehicle Renault Clio (2023), market value €16,500, licence date 2 September 2024.\n- Coverages on the Policy Schedule: C1 third-party liability, C2 collision damage, C3 glass breakage.\n- Incident on 14 October 2026. Reported on 15 October 2026, one day after the incident.\n- The policyholder was driving. He admits fault for changing lanes on the ring road and hitting the car next to him.\n- Third party: Ms. Laurent, named in the email. The accident report was signed by both drivers.\n- Repair quote: €2,400, described in the email as the cost to \"repair my car\" (his own vehicle).\n- Documents provided: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. The claims system reports no documents missing.\n\n**3. Reasoning**\n- **Coverage type:** The email says the €2,400 quote is for his own car, so the claim is recorded under C2 (collision damage). <cite document_id=\"2630#10255\" pages=\"1\" name=\"contract.pdf\"/>\n- **Reporting:** Reported within 5 days of the incident, so it is on time. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>\n- **Exclusions:** The claims system found no possible exclusion. The email gives no sign of alcohol, drugs, racing, intent or wear. The driver's licence is under three years old, which the system treats as a young-driver surcharge rather than an exclusion. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>\n- **Referral:** No referral is needed because the claim is on time, has no possible exclusion and is under a coverage on the schedule. <cite document_id=\"2630#10255\" pages=\"3\" name=\"contract.pdf\"/>\n- **Deductible, payout and assessor:** Calculated by the claims system as described below. The article numbers for these (Art. 2, 5.3, 6.1, 6.2) are as reported by the claims system. I have not checked them against the contract text.\n\n**Point for the human handler:** The email says he hit \"the car next to\" him, so Ms. Laurent's car may also have been damaged. Any damage to her car would be a separate C1 third-party liability matter. The customer has not claimed for it, and no quote for her car was provided. It is outside this file, but it should be checked.\n\n**4. Amounts**\n- Standard collision deductible: €300.\n- Young-driver surcharge (licensed under 3 years): +€400.\n- Total deductible: **€700**.\n- Payout: €2,400 − €700 = **€1,700**.\n- Independent assessor: **required**, because the payout is above €1,500. An assessor visit has been booked for 18 October 2026.\n\nNote: the first attempt to stage the settlement failed because the assessor was not yet booked. After the booking, the second attempt succeeded.\n\n**5. Draft message to the customer**\n\n> Dear Mr. Bernard,\n>\n> Thank you for reporting the accident of 14 October 2026 under policy VER-1002. We have received your signed accident report, the repair quote and the damage photos. Your claim is now being reviewed under your collision cover. An independent assessor will visit your vehicle on 18 October 2026 to check the repair work. Please let us know if you are unable to attend.\n>\n> Kind regards,\n> Veridia Claims Team",
+  "questions": [],
+  "thread_id": "8b10a7f7-4d51-4e88-9751-539f93296a57",
+  "cost": {
+    "failed": false,
+    "input_tokens": 114535,
+    "cached_tokens": 104877,
+    "output_tokens": 5882,
+    "input_cost": "0.002385070",
+    "output_cost": "0.0029683",
+    "total": "0.005353370"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 36.1,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-B",
+    "policy_id": "VER-1002",
+    "coverage": "C2",
+    "incident_date": "2026-10-14",
+    "report_date": "2026-10-15",
+    "description": "Policyholder states he misjudged the distance while changing lanes on the ring road and hit the car next to him, and that the fault was his. The €2,400 garage quote is stated in the email to be for his own car. The other driver, Ms. Laurent, is named and the accident report was signed by both drivers.",
+    "repair_cost": 2400,
+    "at_fault": 1,
+    "third_party_involved": 1,
+    "third_party_identified": 1,
+    "documents_provided": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 700,
+    "payout": 1700,
+    "assessor_required": 1,
+    "assessor_date": "2026-10-18",
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T08:59:57+00:00",
+    "updated_at": "2026-10-31T09:00:01+00:00"
+  },
+  "action_log": [
+    {
+      "id": 29,
+      "ts": "2026-10-31T08:59:53+00:00",
+      "claim_ref": "baseline-haiku-CLM-B",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1002",
+        "claim_ref": "baseline-haiku-CLM-B"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1002",
+        "holder_name": "Lucas Bernard",
+        "vehicle": "Renault Clio (2023)",
+        "market_value_eur": 16500,
+        "licence_date": "2024-09-02",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          }
+        ]
+      }
+    },
+    {
+      "id": 30,
+      "ts": "2026-10-31T08:59:57+00:00",
+      "claim_ref": "baseline-haiku-CLM-B",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-B",
+        "policy_id": "VER-1002",
+        "coverage": "C2",
+        "incident_date": "2026-10-14",
+        "report_date": "2026-10-15",
+        "description": "Policyholder states he misjudged the distance while changing lanes on the ring road and hit the car next to him, and that the fault was his. The €2,400 garage quote is stated in the email to be for his own car. The other driver, Ms. Laurent, is named and the accident report was signed by both drivers.",
+        "repair_cost": 2400,
+        "at_fault": true,
+        "third_party_involved": true,
+        "third_party_identified": true,
+        "documents_provided": [
+          "photos",
+          "repair_quote",
+          "accident_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-B",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote",
+            "accident_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 31,
+      "ts": "2026-10-31T08:59:58+00:00",
+      "claim_ref": "baseline-haiku-CLM-B",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-B"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-B",
+        "deductible_eur": 700,
+        "payout_eur": 1700,
+        "assessor_required": true,
+        "years_licensed_on_incident_date": 2,
+        "calculation": [
+          "Art. 2 collision deductible: €300",
+          "Art. 5.3 young driver (2 y < 3): +€400",
+          "Art. 6.2 payout = €2400 - €700 = €1700",
+          "Art. 6.1 amount above €1500: assessor required"
+        ]
+      }
+    },
+    {
+      "id": 32,
+      "ts": "2026-10-31T09:00:00+00:00",
+      "claim_ref": "baseline-haiku-CLM-B",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-B"
+      },
+      "ok": false,
+      "result": {
+        "error": "An assessor is required (Art. 6.1). Book one with schedule_assessor first."
+      }
+    },
+    {
+      "id": 33,
+      "ts": "2026-10-31T09:00:00+00:00",
+      "claim_ref": "baseline-haiku-CLM-B",
+      "tool": "schedule_assessor",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-B"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-B",
+        "assessor_visit_date": "2026-10-18",
+        "message": "Independent assessor booked (Art. 6.1)."
+      }
+    },
+    {
+      "id": 34,
+      "ts": "2026-10-31T09:00:01+00:00",
+      "claim_ref": "baseline-haiku-CLM-B",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-B"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-B",
+        "status": "pending_approval",
+        "payout_eur": 1700,
+        "deductible_eur": 700,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

@@ -1,0 +1,152 @@
+{
+  "case_id": "CLM-12",
+  "claim_ref": "baseline-haiku-CLM-12",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Waiting for documents**\n\nThe claim is recorded under reference baseline-haiku-CLM-12. The claims system shows that photos of the damage are required and missing, so settlement has not been calculated or staged. I also could not open the Veridia contract (company document source 2630) from this session, so the contract article references below are not cited.\n\n**Facts recorded**\n- Policy VER-1004, policyholder Thomas Petit, 2020 Volkswagen Golf (market value €15,500, licence date 2008-11-01).\n- Coverage: C2 Collision damage, listed in the Policy Schedule.\n- Incident date 18 October 2026; reported 19 October 2026 (one day later).\n- The policyholder scraped a low wall while parking. No third party was involved. No photos were taken.\n- Repair quote of €700 received as repair_quote.pdf (not opened, counted as provided).\n- The policyholder is the driver; the email does not say otherwise.\n\n**Reasoning**\n- **Reporting deadline:** The system shows a 5-day limit. The claim was reported on day 1, so it is on time. Article not cited (contract not accessible).\n- **Coverage:** Damage to the customer's own car falls under C2 (collision), which is in the Policy Schedule. No coverage referral is needed.\n- **Possible exclusion:** None flagged by the system. The story does not suggest one.\n- **Missing photos:** The system lists photos as a required document for this claim and marks them as missing. This is a blocking issue, so `request_documents` was called and the customer was asked for photos. Article not cited (contract not accessible).\n- **Assessor:** Not yet determined. `compute_settlement` runs only once no blocking issue remains.\n\n**Amounts**\n- None computed. Deductible, payout and assessor requirement will follow once the photos are received.\n\n**Actions taken**\n- `create_claim`, `get_policy`, `request_documents` were used.\n- `stage_settlement` was not called, and no settlement is pending approval.\n\n**Draft message to the customer (already sent via request_documents)**\n\"Dear Mr Petit, thank you for reporting your claim under policy VER-1004 and for the repair quote. To continue handling your claim, please send us photos of the damage to your Volkswagen Golf. Kind regards, Veridia Claims.\"\n\n**Next step:** When the photos arrive, re-check the claim, run `compute_settlement`, and then `stage_settlement` if there are no blocking issues. A human handler may also want to confirm the contract articles, since they could not be cited in this session.",
+  "questions": [],
+  "thread_id": "d121cfa8-220a-4cde-bb2c-209d30c60fa0",
+  "cost": {
+    "failed": false,
+    "input_tokens": 71466,
+    "cached_tokens": 65444,
+    "output_tokens": 3545,
+    "input_cost": "0.001536265",
+    "output_cost": "0.0017830",
+    "total": "0.003319265"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 22.3,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-12",
+    "policy_id": "VER-1004",
+    "coverage": "C2",
+    "incident_date": "2026-10-18",
+    "report_date": "2026-10-19",
+    "description": "The insured driver scraped a low wall while parking their Volkswagen Golf. No other person or vehicle was involved. No photos were taken. The garage quote for repair is EUR 700.",
+    "repair_cost": 700,
+    "at_fault": 1,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"repair_quote\"]",
+    "exclusion_signal": null,
+    "status": "awaiting_documents",
+    "blocking_issues": "[\"missing_document:photos\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": "[\"photos\"]",
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T09:07:02+00:00",
+    "updated_at": "2026-10-31T09:07:04+00:00"
+  },
+  "action_log": [
+    {
+      "id": 85,
+      "ts": "2026-10-31T09:06:59+00:00",
+      "claim_ref": "baseline-haiku-CLM-12",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1004",
+        "claim_ref": "baseline-haiku-CLM-12"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1004",
+        "holder_name": "Thomas Petit",
+        "vehicle": "Volkswagen Golf (2020)",
+        "market_value_eur": 15500,
+        "licence_date": "2008-11-01",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          }
+        ]
+      }
+    },
+    {
+      "id": 86,
+      "ts": "2026-10-31T09:07:02+00:00",
+      "claim_ref": "baseline-haiku-CLM-12",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-12",
+        "policy_id": "VER-1004",
+        "coverage": "C2",
+        "incident_date": "2026-10-18",
+        "report_date": "2026-10-19",
+        "description": "The insured driver scraped a low wall while parking their Volkswagen Golf. No other person or vehicle was involved. No photos were taken. The garage quote for repair is EUR 700.",
+        "repair_cost": 700,
+        "at_fault": true,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "repair_quote"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-12",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [
+            "photos"
+          ],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "missing_document:photos"
+        ]
+      }
+    },
+    {
+      "id": 87,
+      "ts": "2026-10-31T09:07:04+00:00",
+      "claim_ref": "baseline-haiku-CLM-12",
+      "tool": "request_documents",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-12",
+        "documents": [
+          "photos"
+        ],
+        "message_to_customer": "Dear Mr Petit, thank you for reporting your claim under policy VER-1004 and for the repair quote. To continue handling your claim, please send us photos of the damage to your Volkswagen Golf. Kind regards, Veridia Claims."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-12",
+        "status": "awaiting_documents",
+        "documents_requested": [
+          "photos"
+        ],
+        "message_recorded": "Dear Mr Petit, thank you for reporting your claim under policy VER-1004 and for the repair quote. To continue handling your claim, please send us photos of the damage to your Volkswagen Golf. Kind regards, Veridia Claims."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

@@ -1,0 +1,195 @@
+{
+  "case_id": "CLM-04",
+  "claim_ref": "baseline-haiku-CLM-04",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Settlement prepared for human approval.** The claims system shows the settlement as \"pending_approval\" (EUR 1,900). It is not paid until a claims handler approves it.\n\n**Facts recorded**\n- Policy VER-1005, holder Sarah Lefebvre, Citroën C3 (2014), market value EUR 2,200, licence date 2010-06-30.\n- Coverage claimed: C2 Collision damage, which is in the Policy Schedule.\n- Incident date: 6 October 2026. Reported: 9 October 2026 (3 days later).\n- Event: the policyholder skidded on a wet road into a ditch. No other vehicle or person was involved.\n- Repair quote: EUR 2,600.\n- Documents received: damage_photos.zip and repair_quote.pdf. Both are counted as provided; I did not open them.\n\n**Reasoning**\n- C2 covers damage to the insured vehicle after a collision. <cite document_id=\"2630#10255\" pages=\"1\" name=\"Veridia Motor Insurance Contract\"/>\n- The claim was reported within the 5-day deadline (3 days), so it is not a late claim. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia Motor Insurance Contract\"/>\n- No possible exclusion was identified. The skid on a wet road does not match any exclusion in Article 3, and exclusions are never applied automatically in any case. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia Motor Insurance Contract\"/>\n- No documents are missing, so no document request was needed. The policyholder is the driver, as the email does not say otherwise.\n- The claim has no blocking issues, so it proceeds to settlement and is not referred to a handler. <cite document_id=\"2630#10255\" pages=\"3\" name=\"Veridia Motor Insurance Contract\"/>\n- Payment is made within 15 days after a Veridia claims handler approves the compensation. <cite document_id=\"2630#10255\" pages=\"3\" name=\"Veridia Motor Insurance Contract\"/>\n\n**Amounts** (from the claims system's settlement calculation only)\n- Deductible: EUR 300 (C2 standard deductible).\n- Payout: EUR 1,900. The payout is capped at the market value of EUR 2,200, less the deductible.\n- Assessor required: yes, because the amount is above EUR 1,500 (Art. 6.1). An assessor is booked for 12 October 2026.\n\n**Draft message to the customer**\n\nDear Ms Lefebvre,\n\nThank you for reporting the accident on 6 October 2026 and for sending your photos and the repair quote. We have recorded your claim under collision cover.\n\nAn independent assessor will visit your car on 12 October 2026 to inspect the damage. Please make sure the car is accessible on that date.\n\nOnce the assessment is complete, your claim will be reviewed by a claims handler before any payment is made. We will write to you with the outcome.\n\nKind regards,\nVeridia Claims Team\n\n*Note: The article numbers for the payout cap (Art. 6.2) and assessor requirement (Art. 6.1) come from the claims handler's report. I verified Articles 3, 4, 7 and the coverage table in the contract, but did not separately check Articles 6.1 and 6.2.*",
+  "questions": [],
+  "thread_id": "3d756ce2-df44-4139-b96c-65954100a626",
+  "cost": {
+    "failed": false,
+    "input_tokens": 104039,
+    "cached_tokens": 94775,
+    "output_tokens": 4984,
+    "input_cost": "0.002284125",
+    "output_cost": "0.0025109",
+    "total": "0.004795025"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 31.3,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-04",
+    "policy_id": "VER-1005",
+    "coverage": "C2",
+    "incident_date": "2026-10-06",
+    "report_date": "2026-10-09",
+    "description": "The policyholder skidded on a wet road and went into a ditch in her own vehicle. No other vehicle was involved. The garage quoted EUR 2,600 for repairs.",
+    "repair_cost": 2600,
+    "at_fault": 1,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"photos\", \"repair_quote\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 300,
+    "payout": 1900,
+    "assessor_required": 1,
+    "assessor_date": "2026-10-12",
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T09:02:54+00:00",
+    "updated_at": "2026-10-31T09:02:57+00:00"
+  },
+  "action_log": [
+    {
+      "id": 52,
+      "ts": "2026-10-31T09:02:50+00:00",
+      "claim_ref": "baseline-haiku-CLM-04",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1005",
+        "claim_ref": "baseline-haiku-CLM-04"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1005",
+        "holder_name": "Sarah Lefebvre",
+        "vehicle": "Citroen C3 (2014)",
+        "market_value_eur": 2200,
+        "licence_date": "2010-06-30",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 53,
+      "ts": "2026-10-31T09:02:54+00:00",
+      "claim_ref": "baseline-haiku-CLM-04",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-04",
+        "policy_id": "VER-1005",
+        "coverage": "C2",
+        "incident_date": "2026-10-06",
+        "report_date": "2026-10-09",
+        "description": "The policyholder skidded on a wet road and went into a ditch in her own vehicle. No other vehicle was involved. The garage quoted EUR 2,600 for repairs.",
+        "repair_cost": 2600,
+        "at_fault": true,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "photos",
+          "repair_quote"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-04",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 3,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 54,
+      "ts": "2026-10-31T09:02:55+00:00",
+      "claim_ref": "baseline-haiku-CLM-04",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-04"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-04",
+        "deductible_eur": 300,
+        "payout_eur": 1900,
+        "assessor_required": true,
+        "years_licensed_on_incident_date": 16,
+        "calculation": [
+          "Art. 2 collision deductible: €300",
+          "Art. 6.2 capped at market value €2200",
+          "Art. 6.2 payout = €2200 - €300 = €1900",
+          "Art. 6.1 amount above €1500: assessor required"
+        ]
+      }
+    },
+    {
+      "id": 55,
+      "ts": "2026-10-31T09:02:57+00:00",
+      "claim_ref": "baseline-haiku-CLM-04",
+      "tool": "schedule_assessor",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-04"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-04",
+        "assessor_visit_date": "2026-10-12",
+        "message": "Independent assessor booked (Art. 6.1)."
+      }
+    },
+    {
+      "id": 56,
+      "ts": "2026-10-31T09:02:57+00:00",
+      "claim_ref": "baseline-haiku-CLM-04",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-04"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-04",
+        "status": "pending_approval",
+        "payout_eur": 1900,
+        "deductible_eur": 300,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

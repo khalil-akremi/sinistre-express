@@ -1,0 +1,181 @@
+{
+  "case_id": "CLM-10",
+  "claim_ref": "baseline-haiku-CLM-10",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**1. Status:** Settlement prepared for human approval\n\n**2. Facts recorded**\n- Claim reference: baseline-haiku-CLM-10\n- Policy VER-1003, insured Ines Haddad, Toyota Yaris (2019), market value €9,000.\n- Coverage: C4 Theft, which is in the Policy Schedule.\n- Incident date 16 October 2026, reported 17 October 2026.\n- Theft of the whole vehicle from a supermarket car park. No other party involved. No repair cost, since this is a theft.\n- Documents: police_report.pdf was received and counted as provided. It could not be opened, so its contents were not reviewed.\n- No possible exclusion was identified in the email.\n\n**3. Reasoning**\n- Theft of the whole vehicle is covered under C4 <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia Contract\"/>.\n- The claim amount for theft is the vehicle's market value <cite document_id=\"2630#10255\" pages=\"2\"/>.\n- The claim was reported one day after the incident, within the 2-day limit for theft <cite document_id=\"2630#10255\" pages=\"2\"/>.\n- The required document for C4 is a police report, and one was received <cite document_id=\"2630#10255\" pages=\"2\"/>.\n- No exclusion under Article 3 was indicated, so the claim does not need referral <cite document_id=\"2630#10255\" pages=\"2\"/>.\n- Payout calculation: the claims system applied the deductible and payout rules in Articles 2 and 6.2. I checked the deductible and reporting rules against the contract but did not separately verify Article 6.2.\n- Caveat: a handler should review the police report before approving payment, since it could not be opened.\n\n**4. Amounts**\n- Deductible: €900 (10% of €9,000, above the €500 minimum) <cite document_id=\"2630#10255\" pages=\"2\"/>\n- Payout: €8,100\n- Assessor required: No\n\n**5. Draft message to the customer**\n\"Dear Ms Haddad, thank you for reporting the theft of your Toyota Yaris on 16 October 2026 and for sending the police report. Your claim (baseline-haiku-CLM-10) has been recorded and is now being reviewed by our claims team. We will contact you if we need anything further. Kind regards, Veridia Claims.\"\n\n**Actions performed in the claims system**\n1. get_policy (VER-1003)\n2. create_claim (C4, incident 2026-10-16, reported 2026-10-17, police report recorded)\n3. compute_settlement (deductible €900, payout €8,100, no assessor)\n4. stage_settlement (status: pending approval; a human claims handler must approve before payment)\n\nNo documents were requested, no escalation was made, and no assessor was booked.",
+  "questions": [],
+  "thread_id": "c268718a-a83b-48b2-9d6b-11c6a9733d47",
+  "cost": {
+    "failed": false,
+    "input_tokens": 119035,
+    "cached_tokens": 110405,
+    "output_tokens": 4194,
+    "input_cost": "0.002309225",
+    "output_cost": "0.0021215",
+    "total": "0.004430725"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 30.0,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-10",
+    "policy_id": "VER-1003",
+    "coverage": "C4",
+    "incident_date": "2026-10-16",
+    "report_date": "2026-10-17",
+    "description": "The insured's car disappeared from a supermarket car park on 16 October 2026. The insured reported the theft to the police the same day.",
+    "repair_cost": 0,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"police_report\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 900,
+    "payout": 8100,
+    "assessor_required": 0,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T09:05:53+00:00",
+    "updated_at": "2026-10-31T09:05:54+00:00"
+  },
+  "action_log": [
+    {
+      "id": 77,
+      "ts": "2026-10-31T09:05:50+00:00",
+      "claim_ref": "baseline-haiku-CLM-10",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1003",
+        "claim_ref": "baseline-haiku-CLM-10"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1003",
+        "holder_name": "Ines Haddad",
+        "vehicle": "Toyota Yaris (2019)",
+        "market_value_eur": 9000,
+        "licence_date": "2015-03-20",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 78,
+      "ts": "2026-10-31T09:05:53+00:00",
+      "claim_ref": "baseline-haiku-CLM-10",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-10",
+        "policy_id": "VER-1003",
+        "coverage": "C4",
+        "incident_date": "2026-10-16",
+        "report_date": "2026-10-17",
+        "description": "The insured's car disappeared from a supermarket car park on 16 October 2026. The insured reported the theft to the police the same day.",
+        "repair_cost": 0,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "police_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-10",
+        "status": "open",
+        "checks": {
+          "coverage": "C4 Theft",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 2,
+          "reported_on_time": true,
+          "required_documents": [
+            "police_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 79,
+      "ts": "2026-10-31T09:05:54+00:00",
+      "claim_ref": "baseline-haiku-CLM-10",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-10"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-10",
+        "deductible_eur": 900,
+        "payout_eur": 8100,
+        "assessor_required": false,
+        "years_licensed_on_incident_date": 11,
+        "calculation": [
+          "Art. 2 theft: claim = market value €9000; deductible = max(10%, €500) = €900",
+          "Art. 6.2 payout = €9000 - €900 = €8100"
+        ]
+      }
+    },
+    {
+      "id": 80,
+      "ts": "2026-10-31T09:05:54+00:00",
+      "claim_ref": "baseline-haiku-CLM-10",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-10"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-10",
+        "status": "pending_approval",
+        "payout_eur": 8100,
+        "deductible_eur": 900,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

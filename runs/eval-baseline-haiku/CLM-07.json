@@ -1,0 +1,173 @@
+{
+  "case_id": "CLM-07",
+  "claim_ref": "baseline-haiku-CLM-07",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**1. Status:** Settlement prepared for human approval\n\n**2. Facts recorded**\n- Claim reference: baseline-haiku-CLM-07. Policy VER-1001, customer Claire Martin (Peugeot 208, 2021).\n- Coverage: C3 Glass breakage, which is in the Policy Schedule.\n- Incident date: 9 October 2026 (a stone from a truck on the motorway cracked the windscreen). Reported: 10 October 2026, one day later.\n- Repair quote: €480. Documents provided: damage_photos.zip and repair_quote.pdf. None are missing.\n- No third party was identified or involved. No possible exclusion was flagged.\n\n**3. Reasoning**\n- The windscreen is the customer's own car, so this is glass damage under C3, not third-party liability (C1). A stone from a truck is not a third party the customer caused harm to. <cite document_id=\"2630\" name=\"Veridia contract\"/>\n- Reporting: reported one day after the incident, within the 5-day deadline. <cite document_id=\"2630\" name=\"Veridia contract\"/>\n- Documents: the photos and repair quote are on file, so no document request is needed.\n- Deductible of €50 applies to glass claims (Art. 2). <cite document_id=\"2630\" name=\"Veridia contract\"/>\n- Payout of €430 (€480 minus €50) under Art. 6.2. <cite document_id=\"2630\" name=\"Veridia contract\"/>\n- No assessor is required.\n- Payment is staged for approval only. A human claims handler must approve it before anything is paid.\n\n**4. Amounts**\n- Deductible: €50 (Art. 2)\n- Payout: €430 (Art. 6.2)\n- Assessor required: No\n\n**Claims system actions performed:** get_policy, create_claim, compute_settlement, and stage_settlement (status: pending_approval).\n\n**5. Draft message to the customer**\n\nDear Ms Martin,\n\nThank you for reporting the windscreen damage from 9 October 2026 and for sending your photos and repair quote. We have recorded your claim under glass breakage cover. After the €50 glass deductible, the amount calculated for your claim is €430. Your claim has now been passed to our claims team for final approval, and we will write to you again once it has been reviewed. If you have any questions in the meantime, please reply to this email.\n\nKind regards,\nVeridia Claims",
+  "questions": [],
+  "thread_id": "5a6c2822-897f-4ff6-8e77-6b4682aa3b0e",
+  "cost": {
+    "failed": false,
+    "input_tokens": 83080,
+    "cached_tokens": 76291,
+    "output_tokens": 3766,
+    "input_cost": "0.001757435",
+    "output_cost": "0.0018942",
+    "total": "0.003651635"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 22.7,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-07",
+    "policy_id": "VER-1001",
+    "coverage": "C3",
+    "incident_date": "2026-10-09",
+    "report_date": "2026-10-10",
+    "description": "The customer's windscreen cracked after a stone thrown up by a truck hit it on the motorway. The customer reports a repair quote of EUR 480.",
+    "repair_cost": 480,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"photos\", \"repair_quote\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 50,
+    "payout": 430,
+    "assessor_required": 0,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T09:04:32+00:00",
+    "updated_at": "2026-10-31T09:04:34+00:00"
+  },
+  "action_log": [
+    {
+      "id": 65,
+      "ts": "2026-10-31T09:04:30+00:00",
+      "claim_ref": "baseline-haiku-CLM-07",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1001",
+        "claim_ref": "baseline-haiku-CLM-07"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1001",
+        "holder_name": "Claire Martin",
+        "vehicle": "Peugeot 208 (2021)",
+        "market_value_eur": 14000,
+        "licence_date": "2012-05-14",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 66,
+      "ts": "2026-10-31T09:04:32+00:00",
+      "claim_ref": "baseline-haiku-CLM-07",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-07",
+        "policy_id": "VER-1001",
+        "coverage": "C3",
+        "incident_date": "2026-10-09",
+        "report_date": "2026-10-10",
+        "description": "The customer's windscreen cracked after a stone thrown up by a truck hit it on the motorway. The customer reports a repair quote of EUR 480.",
+        "repair_cost": 480,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "photos",
+          "repair_quote"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-07",
+        "status": "open",
+        "checks": {
+          "coverage": "C3 Glass breakage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 67,
+      "ts": "2026-10-31T09:04:33+00:00",
+      "claim_ref": "baseline-haiku-CLM-07",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-07"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-07",
+        "deductible_eur": 50,
+        "payout_eur": 430,
+        "assessor_required": false,
+        "years_licensed_on_incident_date": 14,
+        "calculation": [
+          "Art. 2 glass deductible: €50",
+          "Art. 6.2 payout = €480 - €50 = €430"
+        ]
+      }
+    },
+    {
+      "id": 68,
+      "ts": "2026-10-31T09:04:34+00:00",
+      "claim_ref": "baseline-haiku-CLM-07",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-07"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-07",
+        "status": "pending_approval",
+        "payout_eur": 430,
+        "deductible_eur": 50,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

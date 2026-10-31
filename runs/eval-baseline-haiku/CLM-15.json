@@ -1,0 +1,164 @@
+{
+  "case_id": "CLM-15",
+  "claim_ref": "baseline-haiku-CLM-15",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Referred to a claims handler**\n\nThe claim reference is baseline-haiku-CLM-15. The claims system has escalated the claim to a Veridia claims handler. No settlement was calculated or staged, so no payment is pending.\n\n**Facts recorded**\n- Policy VER-1001, customer Claire Martin, vehicle Peugeot 208 (2021). Coverage C2 (collision) is listed in the Policy Schedule.\n- Incident: 2 October 2026. Reported: 11 October 2026 (9 days later).\n- Single-vehicle incident: the customer hit a bollard while parking. No third party was involved.\n- The policyholder was driving and is at fault.\n- Repair quote: €650 for the customer's own car.\n- Documents received: damage_photos.zip and repair_quote.pdf. Both were counted as provided and were not opened.\n- No exclusion is indicated by the story. The licence date on the policy is 14 May 2012.\n\n**Reasoning**\n- **Late report:** Claims must be reported within 5 days of the incident. This report came 9 days after, so it is late <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia Contract\"/>. Late claims are never refused automatically. They go to a claims handler <cite document_id=\"2630#10255\" pages=\"3\" name=\"Veridia Contract\"/>. This is the only blocking issue.\n- **Coverage:** C2 is in the Policy Schedule, so no coverage-gap referral is needed <cite document_id=\"2630#10255\" pages=\"1\" name=\"Veridia Contract\"/>.\n- **Documents:** The required documents (photos and repair quote) are present, so no document request was needed <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia Contract\"/>.\n- **Exclusions:** None indicated <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia Contract\"/>.\n- **Settlement:** Because of the late report, the claim is not clean. I did not run compute_settlement or stage_settlement.\n\n**Amounts**\nNot computed. The claim was blocked before settlement, and no deductible, payout or assessor decision has been made.\n\n**System actions performed**\n1. `get_policy` for VER-1001 (returned policy and vehicle details).\n2. `create_claim` (C2, incident 2 Oct, reported 11 Oct, €650, at fault, no third party). Result: open, blocking issue `late_report`.\n3. `escalate_to_handler` (reason: late_report). Result: referred to a handler, who will decide.\n4. Not performed: `request_documents` (nothing missing), `compute_settlement`, `schedule_assessor`, and `stage_settlement` (blocked by the late report).\n\n**Draft message to the customer**\n\n> Dear Ms Martin,\n>\n> Thank you for reporting the damage to your Peugeot 208 from 2 October 2026. We have received your photos and the garage's repair quote.\n>\n> Because the report was received after the reporting deadline, your claim has been passed to a Veridia claims handler, who will review it and contact you. No decision has been made yet.\n>\n> Kind regards,\n> Veridia Claims\n\n**Note for the handler:** The subagent could not open the contract in its sandbox, so its first pass did not cite articles. I checked the contract directly and the references above are confirmed.",
+  "questions": [],
+  "thread_id": "a81faec1-5c60-42df-8af3-d9deb502bcaf",
+  "cost": {
+    "failed": false,
+    "input_tokens": 123948,
+    "cached_tokens": 111168,
+    "output_tokens": 5171,
+    "input_cost": "0.002874530",
+    "output_cost": "0.0026030",
+    "total": "0.005477530"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 33.0,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-15",
+    "policy_id": "VER-1001",
+    "coverage": "C2",
+    "incident_date": "2026-10-02",
+    "report_date": "2026-10-11",
+    "description": "The insured driver hit a bollard while parking. No other vehicle or person was involved. The customer reports the delay was due to work commitments.",
+    "repair_cost": 650,
+    "at_fault": 1,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"photos\", \"repair_quote\"]",
+    "exclusion_signal": null,
+    "status": "escalated",
+    "blocking_issues": "[\"late_report\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": "[\"late_report\"]",
+    "handler_note": "Claire Martin (VER-1001) reports a C2 collision with a bollard while parking on 02 Oct 2026, with no third party involved. The report was received 11 Oct 2026, 9 days after the incident, against a 5-day reporting deadline; the customer cites work commitments. Photos and the repair quote (EUR 650) were received and no documents are missing. Human decision needed on the late report; no settlement computed or staged.",
+    "approved_by": null,
+    "created_at": "2026-10-31T09:08:34+00:00",
+    "updated_at": "2026-10-31T09:08:36+00:00"
+  },
+  "action_log": [
+    {
+      "id": 94,
+      "ts": "2026-10-31T09:08:27+00:00",
+      "claim_ref": "baseline-haiku-CLM-15",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1001",
+        "claim_ref": "baseline-haiku-CLM-15"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1001",
+        "holder_name": "Claire Martin",
+        "vehicle": "Peugeot 208 (2021)",
+        "market_value_eur": 14000,
+        "licence_date": "2012-05-14",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 95,
+      "ts": "2026-10-31T09:08:34+00:00",
+      "claim_ref": "baseline-haiku-CLM-15",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-15",
+        "policy_id": "VER-1001",
+        "coverage": "C2",
+        "incident_date": "2026-10-02",
+        "report_date": "2026-10-11",
+        "description": "The insured driver hit a bollard while parking. No other vehicle or person was involved. The customer reports the delay was due to work commitments.",
+        "repair_cost": 650,
+        "at_fault": true,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "photos",
+          "repair_quote"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-15",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 9,
+          "reporting_deadline_days": 5,
+          "reported_on_time": false,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "late_report"
+        ]
+      }
+    },
+    {
+      "id": 96,
+      "ts": "2026-10-31T09:08:36+00:00",
+      "claim_ref": "baseline-haiku-CLM-15",
+      "tool": "escalate_to_handler",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-15",
+        "reasons": [
+          "late_report"
+        ],
+        "summary": "Claire Martin (VER-1001) reports a C2 collision with a bollard while parking on 02 Oct 2026, with no third party involved. The report was received 11 Oct 2026, 9 days after the incident, against a 5-day reporting deadline; the customer cites work commitments. Photos and the repair quote (EUR 650) were received and no documents are missing. Human decision needed on the late report; no settlement computed or staged."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-15",
+        "status": "escalated",
+        "reasons": [
+          "late_report"
+        ],
+        "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

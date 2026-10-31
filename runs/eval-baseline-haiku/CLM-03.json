@@ -1,0 +1,196 @@
+{
+  "case_id": "CLM-03",
+  "claim_ref": "baseline-haiku-CLM-03",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**1. Status:** Settlement prepared for human approval\n\nThe claims system shows the settlement as pending approval. Nothing has been paid.\n\n**2. Facts recorded**\n- Claim reference: baseline-haiku-CLM-03. Policy: VER-1007, Emma Rousseau, Tesla Model 3 (2023), market value €32,000.\n- Incident on 5 October 2026, reported on 6 October 2026 (1 day after the incident, within the 5-day deadline).\n- The customer's parked car was hit by a reversing delivery truck. The driver, Mr. Costa, is named and reportedly accepted responsibility on a signed accident report.\n- Coverage: C2 Collision damage, which is in the Policy Schedule.\n- Repair quote: €4,800.\n- Documents provided: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. I could not open these files, so the assessment relies on their names and the system's document checks. No documents are missing.\n- Licence held since 2011, so the young-driver surcharge does not apply.\n- No possible exclusion identified.\n\n**3. Reasoning**\n- The customer's own car was damaged, so this is a C2 claim, not C1. The Policy Schedule includes C2 (Policy Schedule / contract Article 2).\n- The claim was reported within the deadline, so it does not need referral for lateness (Article 4.1).\n- The authorised driver is not at fault and the third party is identified by name, so the not-at-fault waiver applies and no deductible is charged (Article 5.2).\n- The repair cost of €4,800 is above €1,500, so an independent assessor must inspect the vehicle (Article 6.1). The system has booked the assessor for 9 October 2026.\n- Compensation is the repair cost, capped at market value, minus the deductible (Article 6.2). Payment follows approval by a Veridia claims handler (Article 6.3).\n- The claim is clean, so the settlement was staged for human approval rather than referred.\n\n**4. Amounts**\n- Deductible: €0 (Article 5.2, not-at-fault waiver)\n- Payout: €4,800 (Article 6.2), pending human approval\n- Assessor required: Yes (Article 6.1). Visit booked for 9 October 2026.\n\n**5. Draft message to the customer**\n\nDear Ms. Rousseau,\n\nThank you for reporting the incident of 5 October 2026 and for sending your documents. Your claim (reference baseline-haiku-CLM-03) is being processed. An independent assessor has been booked to visit your vehicle on 9 October 2026. Once the assessment is complete, our claims team will review the settlement.\n\nKind regards,\nVeridia Claims\n\n**Tool calls made:** get_policy, create_claim, compute_settlement, schedule_assessor, stage_settlement. All succeeded.",
+  "questions": [],
+  "thread_id": "88e4ff45-828a-4858-a737-e8f7b4028d27",
+  "cost": {
+    "failed": false,
+    "input_tokens": 99410,
+    "cached_tokens": 91736,
+    "output_tokens": 4153,
+    "input_cost": "0.001971210",
+    "output_cost": "0.0020954",
+    "total": "0.004066610"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 27.9,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-03",
+    "policy_id": "VER-1007",
+    "coverage": "C2",
+    "incident_date": "2026-10-05",
+    "report_date": "2026-10-06",
+    "description": "The insured's parked car was damaged when a delivery truck reversed into it. The truck driver, Mr. Costa, is identified by name and reportedly accepted responsibility on a signed accident report.",
+    "repair_cost": 4800,
+    "at_fault": 0,
+    "third_party_involved": 1,
+    "third_party_identified": 1,
+    "documents_provided": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 0,
+    "payout": 4800,
+    "assessor_required": 1,
+    "assessor_date": "2026-10-09",
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T09:02:22+00:00",
+    "updated_at": "2026-10-31T09:02:25+00:00"
+  },
+  "action_log": [
+    {
+      "id": 47,
+      "ts": "2026-10-31T09:02:19+00:00",
+      "claim_ref": "baseline-haiku-CLM-03",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1007",
+        "claim_ref": "baseline-haiku-CLM-03"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1007",
+        "holder_name": "Emma Rousseau",
+        "vehicle": "Tesla Model 3 (2023)",
+        "market_value_eur": 32000,
+        "licence_date": "2011-04-08",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 48,
+      "ts": "2026-10-31T09:02:22+00:00",
+      "claim_ref": "baseline-haiku-CLM-03",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-03",
+        "policy_id": "VER-1007",
+        "coverage": "C2",
+        "incident_date": "2026-10-05",
+        "report_date": "2026-10-06",
+        "description": "The insured's parked car was damaged when a delivery truck reversed into it. The truck driver, Mr. Costa, is identified by name and reportedly accepted responsibility on a signed accident report.",
+        "repair_cost": 4800,
+        "at_fault": false,
+        "third_party_involved": true,
+        "third_party_identified": true,
+        "documents_provided": [
+          "photos",
+          "repair_quote",
+          "accident_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-03",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote",
+            "accident_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 49,
+      "ts": "2026-10-31T09:02:22+00:00",
+      "claim_ref": "baseline-haiku-CLM-03",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-03"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-03",
+        "deductible_eur": 0,
+        "payout_eur": 4800,
+        "assessor_required": true,
+        "years_licensed_on_incident_date": 15,
+        "calculation": [
+          "Art. 5.2 not-at-fault waiver: no deductible",
+          "Art. 6.2 payout = €4800 - €0 = €4800",
+          "Art. 6.1 amount above €1500: assessor required"
+        ]
+      }
+    },
+    {
+      "id": 50,
+      "ts": "2026-10-31T09:02:25+00:00",
+      "claim_ref": "baseline-haiku-CLM-03",
+      "tool": "schedule_assessor",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-03"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-03",
+        "assessor_visit_date": "2026-10-09",
+        "message": "Independent assessor booked (Art. 6.1)."
+      }
+    },
+    {
+      "id": 51,
+      "ts": "2026-10-31T09:02:25+00:00",
+      "claim_ref": "baseline-haiku-CLM-03",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-03"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-03",
+        "status": "pending_approval",
+        "payout_eur": 4800,
+        "deductible_eur": 0,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

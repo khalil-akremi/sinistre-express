@@ -1,0 +1,158 @@
+{
+  "case_id": "CLM-18",
+  "claim_ref": "baseline-haiku-CLM-18",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status:** Referred to a claims handler\n\n**Facts recorded**\n- Claim reference: baseline-haiku-CLM-18. Policy VER-1002, policyholder Lucas Bernard.\n- Vehicle: Renault Clio (2023), market value €16,500.\n- Incident: theft from the train station car park on 23 October 2026. Reported 24 October 2026.\n- Coverage claimed: C4 (theft of the whole vehicle). No repair cost.\n- Documents: police_report.pdf received and counted as provided (not opened).\n- No third party involved. The policyholder is assumed to be the driver.\n\n**Reasoning**\n- The Policy Schedule lists only C1 (third-party liability), C2 (collision) and C3 (glass). Theft (C4) is not on it, so the claim cannot be settled automatically. The claims system returned `coverage_not_in_schedule` as a blocking issue. <cite document_id=\"2630#10255\" pages=\"1\" name=\"Veridia contract\"/> <cite document_id=\"2630#10255\" pages=\"3\"/> (Article 7, point 3: claims under a coverage not in the Policy Schedule are referred to a claims handler.)\n- The report is on time: one day after the incident, within the reporting deadline (Article 4.1). <cite document_id=\"2630#10255\" pages=\"3\"/>\n- The police report is the document required for theft, and it was received, so no documents were requested.\n- The story shows no exclusion signal, so none was flagged.\n- The claim was referred to a human handler, not refused. No settlement was computed and no payment was staged.\n\n**Amounts**\n- Not computed. The claim is blocked by the coverage question, so compute_settlement and stage_settlement were not run.\n\n**Draft message to the customer**\n> Dear Mr Bernard,\n>\n> Thank you for reporting the theft of your Renault Clio on 23 October 2026 and for sending the police report. Your claim has been passed to a Veridia claims handler, who will review it and get back to you. We appreciate your patience while this is reviewed.\n>\n> Kind regards,\n> Veridia Claims Team",
+  "questions": [],
+  "thread_id": "6fcb23bf-29cf-4a8e-89ce-6eb7290a380b",
+  "cost": {
+    "failed": false,
+    "input_tokens": 89434,
+    "cached_tokens": 82196,
+    "output_tokens": 3607,
+    "input_cost": "0.001832010",
+    "output_cost": "0.0018217",
+    "total": "0.003653710"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 22.4,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-18",
+    "policy_id": "VER-1002",
+    "coverage": "C4",
+    "incident_date": "2026-10-23",
+    "report_date": "2026-10-24",
+    "description": "The policyholder reports that his car was stolen from the train station car park on 23 October 2026. A police report was filed.",
+    "repair_cost": 0,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"police_report\"]",
+    "exclusion_signal": null,
+    "status": "escalated",
+    "blocking_issues": "[\"coverage_not_in_schedule\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": "[\"coverage_not_in_schedule\"]",
+    "handler_note": "Policyholder Lucas Bernard (VER-1002) reports theft of his Renault Clio (2023) from a train station car park on 2026-10-23, reported 2026-10-24 (on time). The claim is for C4 theft, which is not in the Policy Schedule (schedule lists C1, C2, C3). Police report attached; no exclusion signal identified. A human handler needs to decide on coverage.",
+    "approved_by": null,
+    "created_at": "2026-10-31T09:09:54+00:00",
+    "updated_at": "2026-10-31T09:09:56+00:00"
+  },
+  "action_log": [
+    {
+      "id": 103,
+      "ts": "2026-10-31T09:09:52+00:00",
+      "claim_ref": "baseline-haiku-CLM-18",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1002",
+        "claim_ref": "baseline-haiku-CLM-18"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1002",
+        "holder_name": "Lucas Bernard",
+        "vehicle": "Renault Clio (2023)",
+        "market_value_eur": 16500,
+        "licence_date": "2024-09-02",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          }
+        ]
+      }
+    },
+    {
+      "id": 104,
+      "ts": "2026-10-31T09:09:54+00:00",
+      "claim_ref": "baseline-haiku-CLM-18",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-18",
+        "policy_id": "VER-1002",
+        "coverage": "C4",
+        "incident_date": "2026-10-23",
+        "report_date": "2026-10-24",
+        "description": "The policyholder reports that his car was stolen from the train station car park on 23 October 2026. A police report was filed.",
+        "repair_cost": 0,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "police_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-18",
+        "status": "open",
+        "checks": {
+          "coverage": "C4 Theft",
+          "coverage_in_policy_schedule": false,
+          "days_to_report": 1,
+          "reporting_deadline_days": 2,
+          "reported_on_time": true,
+          "required_documents": [
+            "police_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "coverage_not_in_schedule"
+        ]
+      }
+    },
+    {
+      "id": 105,
+      "ts": "2026-10-31T09:09:56+00:00",
+      "claim_ref": "baseline-haiku-CLM-18",
+      "tool": "escalate_to_handler",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-18",
+        "reasons": [
+          "coverage_not_in_schedule"
+        ],
+        "summary": "Policyholder Lucas Bernard (VER-1002) reports theft of his Renault Clio (2023) from a train station car park on 2026-10-23, reported 2026-10-24 (on time). The claim is for C4 theft, which is not in the Policy Schedule (schedule lists C1, C2, C3). Police report attached; no exclusion signal identified. A human handler needs to decide on coverage."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-18",
+        "status": "escalated",
+        "reasons": [
+          "coverage_not_in_schedule"
+        ],
+        "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

@@ -1,0 +1,191 @@
+{
+  "case_id": "CLM-11",
+  "claim_ref": "baseline-haiku-CLM-11",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Settlement prepared for human approval**\n\nThe claims system confirms the settlement was staged as pending approval. A Veridia claims handler still needs to approve it before any payment is made. I checked the subagent's article references against the contract, and they match.\n\n**Facts recorded**\n- Policy VER-1005, policyholder Sarah Lefebvre, vehicle Citroën C3 (2014), market value €2,200.\n- Claim type: theft (C4). C4 is listed in the Policy Schedule.\n- Incident date 17 October 2026. Email and report date 19 October 2026.\n- The car was stolen from the customer's street. No third party is involved.\n- Attached: police_report.pdf, counted as provided. I did not open it.\n- The email does not state when the theft was discovered. I have assumed the same day as the incident.\n- No possible exclusion is visible in the email.\n\n**Reasoning**\n- **Coverage:** C4 theft is listed in the Policy Schedule, so no referral is needed. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia DriveSafe Motor Policy\"/>\n- **Reporting deadline:** A theft must be reported within 2 days of discovery. Reporting on 19 October is within that window if discovery was on 17 October, so the claim is on time. <cite document_id=\"2630#10255\" pages=\"2\" /> Because the discovery date is not stated, a human should confirm it.\n- **Documents:** C4 theft requires a police report, which was provided. Nothing is missing. <cite document_id=\"2630#10255\" pages=\"2\" />\n- **Exclusions:** None of the Article 3 exclusions appears in the email. <cite document_id=\"2630#10255\" pages=\"2\" />\n- **Amount basis:** For theft, the claim amount is the market value of the vehicle. <cite document_id=\"2630#10255\" pages=\"2\" />\n- **Deductible:** The theft deductible is 10% of the claim, with a minimum of €500. Ten percent of €2,200 is €220, so the €500 minimum applies. One deductible applies per claim. <cite document_id=\"2630#10255\" pages=\"2\" /> <cite document_id=\"2630#10255\" pages=\"2\" />\n- **Assessor:** Assessors are required only for damage claims (C2 and C3) with a repair cost above €1,500. This is a theft, so no assessor is needed. <cite document_id=\"2630#10255\" pages=\"3\" />\n- **Payment timing:** Payment is made within 15 days after a Veridia claims handler approves the compensation. <cite document_id=\"2630#10255\" pages=\"3\" />\n\n**Amounts**\n- Deductible: €500\n- Payout: €1,700 (€2,200 market value minus €500 deductible), pending human approval\n- Assessor required: No\n\n**Draft message to the customer**\n\n> Dear Ms. Lefebvre,\n>\n> Thank you for reporting the theft of your Citroën C3 on 17 October 2026 and for providing the police report. We have received the documents needed for your claim (reference baseline-haiku-CLM-11). Your claim is now with our claims team for review. We will contact you with the next steps once the review is complete.\n>\n> Kind regards,\n> Veridia Claims",
+  "questions": [],
+  "thread_id": "02bd2290-db5f-42ac-9371-bbd8bb75c950",
+  "cost": {
+    "failed": false,
+    "input_tokens": 158601,
+    "cached_tokens": 145745,
+    "output_tokens": 5200,
+    "input_cost": "0.003240050",
+    "output_cost": "0.0026420",
+    "total": "0.005882050"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 38.0,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-11",
+    "policy_id": "VER-1005",
+    "coverage": "C4",
+    "incident_date": "2026-10-17",
+    "report_date": "2026-10-19",
+    "description": "The insured's car (Citroen C3, 2014) was stolen from her street on 17 October 2026. A police report was attached. No third party is involved.",
+    "repair_cost": 0,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"police_report\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 500,
+    "payout": 1700,
+    "assessor_required": 0,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T09:06:28+00:00",
+    "updated_at": "2026-10-31T09:06:30+00:00"
+  },
+  "action_log": [
+    {
+      "id": 81,
+      "ts": "2026-10-31T09:06:21+00:00",
+      "claim_ref": "baseline-haiku-CLM-11",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1005",
+        "claim_ref": "baseline-haiku-CLM-11"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1005",
+        "holder_name": "Sarah Lefebvre",
+        "vehicle": "Citroen C3 (2014)",
+        "market_value_eur": 2200,
+        "licence_date": "2010-06-30",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 82,
+      "ts": "2026-10-31T09:06:28+00:00",
+      "claim_ref": "baseline-haiku-CLM-11",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-11",
+        "policy_id": "VER-1005",
+        "coverage": "C4",
+        "incident_date": "2026-10-17",
+        "report_date": "2026-10-19",
+        "description": "The insured's car (Citroen C3, 2014) was stolen from her street on 17 October 2026. A police report was attached. No third party is involved.",
+        "repair_cost": 0,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "police_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-11",
+        "status": "open",
+        "checks": {
+          "coverage": "C4 Theft",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 2,
+          "reporting_deadline_days": 2,
+          "reported_on_time": true,
+          "required_documents": [
+            "police_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 83,
+      "ts": "2026-10-31T09:06:29+00:00",
+      "claim_ref": "baseline-haiku-CLM-11",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-11"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-11",
+        "deductible_eur": 500,
+        "payout_eur": 1700,
+        "assessor_required": false,
+        "years_licensed_on_incident_date": 16,
+        "calculation": [
+          "Art. 2 theft: claim = market value €2200; deductible = max(10%, €500) = €500",
+          "Art. 6.2 payout = €2200 - €500 = €1700"
+        ]
+      }
+    },
+    {
+      "id": 84,
+      "ts": "2026-10-31T09:06:30+00:00",
+      "claim_ref": "baseline-haiku-CLM-11",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-11"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-11",
+        "status": "pending_approval",
+        "payout_eur": 1700,
+        "deductible_eur": 500,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

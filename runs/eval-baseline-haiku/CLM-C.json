@@ -1,0 +1,197 @@
+{
+  "case_id": "CLM-C",
+  "claim_ref": "baseline-haiku-CLM-C",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status:** Referred to a claims handler. The police report has also been requested from the customer.\n\n**Claim reference:** baseline-haiku-CLM-C\n\n**Facts recorded**\n- Policyholder: Ines Haddad, policy VER-1003, Toyota Yaris (2019), market value €9,000, licence held since 2015-03-20.\n- Coverage claimed: C4 Theft. It is listed in the Policy Schedule.\n- Incident: theft from the street in front of her building on 2026-10-15, while she was travelling.\n- Report date: 2026-10-19 (email date), 4 days after the incident.\n- No police report yet. No documents attached. No third party involved.\n\n**Reasoning**\n- **Coverage:** C4 Theft is in the Policy Schedule, so the claim falls under a covered coverage. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia contract\"/> (Article 2 requires the coverage to be listed in the Policy Schedule.)\n- **Late report:** Theft must be reported within 2 days of its discovery. The email is dated 4 days after the theft, and the discovery date is not stated. If the theft was discovered on 15 October, the claim is late. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia contract\"/> (Article 4.1.) A late claim is never refused automatically; it goes to a claims handler. <cite document_id=\"2630#10255\" pages=\"3\" name=\"Veridia contract\"/> (Article 7.1.)\n- **Missing document:** Theft (C4) requires a police report. The customer has not filed one. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia contract\"/> (Article 4.3.) A missing document is requested from the policyholder, not used to refuse the claim. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia contract\"/> (Article 4.3.) The police report was requested through the claims system.\n- **Possible exclusion:** None indicated by the email. The story does not show alcohol, licence, racing, intentional damage or wear. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia contract\"/> (Article 3.) Exclusions are never applied automatically in any case. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia contract\"/> (Article 3.)\n- **Money:** Not computed. The claim has a blocking issue (late report), so no settlement was calculated or staged. Nothing has been approved or paid.\n\n**Amounts**\n- Not computed. For reference only, the contract sets theft at 10% of the claim, minimum €500, with the claim amount equal to market value. <cite document_id=\"2630#10255\" pages=\"2\" name=\"Veridia contract\"/> A handler will confirm the figures once the claim is reviewed.\n\n**Actions in the claims system**\n- `get_policy` (VER-1003): policy details returned as above.\n- `create_claim` (C4, incident 2026-10-15, reported 2026-10-19): claim opened. Blocking issues: `late_report` and `missing_document:police_report`.\n- `escalate_to_handler` (late_report, other): referred to a Veridia claims handler. Do not settle.\n- `request_documents` (police_report): requested from the customer. Claim status is escalated.\n- Not performed: `compute_settlement`, `stage_settlement`, `schedule_assessor`.\n\n**Note:** The subagent's first pass cited contract articles it could not verify. I checked the contract directly and the references above are confirmed.\n\n**Draft message to the customer**\n\n> Dear Ms Haddad,\n>\n> Thank you for reporting the theft of your Toyota Yaris on 15 October 2026 under policy VER-1003. Your claim has been passed to a Veridia claims handler, who will review the report date. Please file a police report for the theft and send us a copy as soon as you can. We will contact you once the review is complete.\n>\n> Kind regards,\n> Veridia Claims",
+  "questions": [],
+  "thread_id": "8f2652c3-fc1b-4398-845e-7b97d55a8348",
+  "cost": {
+    "failed": false,
+    "input_tokens": 150754,
+    "cached_tokens": 139487,
+    "output_tokens": 5525,
+    "input_cost": "0.002967545",
+    "output_cost": "0.0027989",
+    "total": "0.005766445"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 36.3,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-C",
+    "policy_id": "VER-1003",
+    "coverage": "C4",
+    "incident_date": "2026-10-15",
+    "report_date": "2026-10-19",
+    "description": "The insured reports that her car (Toyota Yaris 2019) was stolen from the street in front of her building on 15 October 2026. She reported it on 19 October after returning from travel and has not yet filed a police report.",
+    "repair_cost": 0,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[]",
+    "exclusion_signal": null,
+    "status": "escalated",
+    "blocking_issues": "[\"late_report\", \"missing_document:police_report\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": "[\"police_report\"]",
+    "escalation_reasons": "[\"late_report\", \"other\"]",
+    "handler_note": "Theft claim (C4) on policy VER-1003 for a Toyota Yaris 2019. The car was reportedly stolen on 2026-10-15 and reported on 2026-10-19, which is 4 days against a 2-day reporting deadline. No police report has been filed yet and none was attached. Please decide on the late report and the missing police report.",
+    "approved_by": null,
+    "created_at": "2026-10-31T09:00:30+00:00",
+    "updated_at": "2026-10-31T09:00:43+00:00"
+  },
+  "action_log": [
+    {
+      "id": 35,
+      "ts": "2026-10-31T09:00:28+00:00",
+      "claim_ref": "baseline-haiku-CLM-C",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1003",
+        "claim_ref": "baseline-haiku-CLM-C"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1003",
+        "holder_name": "Ines Haddad",
+        "vehicle": "Toyota Yaris (2019)",
+        "market_value_eur": 9000,
+        "licence_date": "2015-03-20",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 36,
+      "ts": "2026-10-31T09:00:30+00:00",
+      "claim_ref": "baseline-haiku-CLM-C",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-C",
+        "policy_id": "VER-1003",
+        "coverage": "C4",
+        "incident_date": "2026-10-15",
+        "report_date": "2026-10-19",
+        "description": "The insured reports that her car (Toyota Yaris 2019) was stolen from the street in front of her building on 15 October 2026. She reported it on 19 October after returning from travel and has not yet filed a police report.",
+        "repair_cost": 0,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-C",
+        "status": "open",
+        "checks": {
+          "coverage": "C4 Theft",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 4,
+          "reporting_deadline_days": 2,
+          "reported_on_time": false,
+          "required_documents": [
+            "police_report"
+          ],
+          "missing_documents": [
+            "police_report"
+          ],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "late_report",
+          "missing_document:police_report"
+        ]
+      }
+    },
+    {
+      "id": 37,
+      "ts": "2026-10-31T09:00:33+00:00",
+      "claim_ref": "baseline-haiku-CLM-C",
+      "tool": "escalate_to_handler",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-C",
+        "reasons": [
+          "late_report",
+          "other"
+        ],
+        "summary": "Theft claim (C4) on policy VER-1003 for a Toyota Yaris 2019. The car was reportedly stolen on 2026-10-15 and reported on 2026-10-19, which is 4 days against a 2-day reporting deadline. No police report has been filed yet and none was attached. Please decide on the late report and the missing police report."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-C",
+        "status": "escalated",
+        "reasons": [
+          "late_report",
+          "other"
+        ],
+        "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+      }
+    },
+    {
+      "id": 38,
+      "ts": "2026-10-31T09:00:43+00:00",
+      "claim_ref": "baseline-haiku-CLM-C",
+      "tool": "request_documents",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-C",
+        "documents": [
+          "police_report"
+        ],
+        "message_to_customer": "Dear Ms Haddad, thank you for reporting the theft of your Toyota Yaris under policy VER-1003. To continue your claim, please file a police report for the theft and send us a copy as soon as possible. Kind regards, Veridia Claims"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-C",
+        "status": "escalated",
+        "documents_requested": [
+          "police_report"
+        ],
+        "message_recorded": "Dear Ms Haddad, thank you for reporting the theft of your Toyota Yaris under policy VER-1003. To continue your claim, please file a police report for the theft and send us a copy as soon as possible. Kind regards, Veridia Claims"
+      }
+    }
+  ],
+  "snapshot_error": null
+}

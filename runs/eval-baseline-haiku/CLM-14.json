@@ -1,0 +1,182 @@
+{
+  "case_id": "CLM-14",
+  "claim_ref": "baseline-haiku-CLM-14",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status:** Waiting for documents\n\n**Facts recorded**\n- Claim reference: baseline-haiku-CLM-14. Policy: VER-1007, policyholder Emma Rousseau.\n- Vehicle: Tesla Model 3 (2023), market value €32,000. Coverages on the Policy Schedule: C1, C2, C3, C4.\n- Incident date 20 October 2026; report date 22 October 2026 (2 days later).\n- Incident: a motorbike scratched the insured car in slow traffic. The rider, Mr. Leroy, is named and reportedly admitted it. No accident report form was available at the time.\n- Repair quote: €1,250, for the customer's own car.\n- Driving licence held since 8 April 2011 (more than 3 years).\n- Provided documents: damage_photos.zip and repair_quote.pdf (counted as provided, not opened).\n- Claim opened in the system under C2 (collision damage). A document request for the accident report has been sent to the customer.\n\n**Reasoning**\n- **Coverage:** C2 covers damage to the insured vehicle after a collision, and C2 is in the Policy Schedule. <cite document_id=\"2630#10255\" pages=\"1-2\" name=\"DriveSafe Motor Policy\"/>\n- **Reporting:** The claim was reported within 5 days, so it is not late. <cite document_id=\"2630#10255\" pages=\"2\" /> Late-claim referral (Article 7.1) does not apply. <cite document_id=\"2630#10255\" pages=\"3\" />\n- **Required documents:** For C2, photos, a repair quote, and an accident report signed by both drivers are required when a third party is involved. A third party is involved here (Mr. Leroy). The accident report is missing, so it must be requested. <cite document_id=\"2630#10255\" pages=\"2\" /> A claim with a missing document is not refused; the document is requested from the policyholder. <cite document_id=\"2630#10255\" pages=\"2\" />\n- **Possible exclusions:** None are suggested by the email. No alcohol, licence, racing, intentional, or wear-related facts appear. <cite document_id=\"2630#10255\" pages=\"2\" />\n- **Referral:** No referral condition is met at this stage (no late report, no possible exclusion, coverage is in the schedule). <cite document_id=\"2630#10255\" pages=\"3\" />\n- **Not-at-fault waiver:** This could apply if the policyholder is not at fault and the third party is identified. The email implies the rider was at fault, but it does not state this directly, so I have not relied on it. This should be confirmed when the accident report is received. <cite document_id=\"2630#10255\" pages=\"2\" />\n- **Young-driver surcharge:** Not applicable, because the licence has been held for more than 3 years. <cite document_id=\"2630#10255\" pages=\"2\" />\n- **Settlement:** Not computed or staged. The claims system blocks settlement until the accident report is received.\n\n**Amounts**\n- Deductible: not computed (compute_settlement not run because of the missing document).\n- Payout: not computed.\n- Assessor: the repair quote (€1,250) is at or below the €1,500 threshold, so an independent assessor does not appear to be required. This is subject to confirmation by compute_settlement. <cite document_id=\"2630#10255\" pages=\"3\" />\n\n**Next steps for the human handler**\n- Wait for the signed accident report from both drivers.\n- On receipt, run compute_settlement and, if the claim remains clean, stage_settlement for approval.\n- If the customer cannot provide the report, refer the claim for a decision.\n\n**Draft message to the customer**\n\nDear Ms. Rousseau,\n\nThank you for reporting the incident of 20 October 2026 involving Mr. Leroy's motorbike, and for sending your repair quote and photos. To continue with your claim, please send us the accident report form, signed by both drivers. Once we receive it, we will review your claim and let you know the next steps.\n\nKind regards,\nVeridia Claims",
+  "questions": [],
+  "thread_id": "3eafef15-dd08-4b2b-a086-4148b331973a",
+  "cost": {
+    "failed": false,
+    "input_tokens": 143309,
+    "cached_tokens": 131451,
+    "output_tokens": 5764,
+    "input_cost": "0.003036385",
+    "output_cost": "0.0029268",
+    "total": "0.005963185"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 39.3,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-14",
+    "policy_id": "VER-1007",
+    "coverage": "C2",
+    "incident_date": "2026-10-20",
+    "report_date": "2026-10-22",
+    "description": "In slow traffic on 20 October 2026, a motorbike rider (Mr. Leroy) scratched the insured's car. The rider reportedly admitted the contact; no accident report form was completed at the scene. Repair quote is for the insured's own vehicle.",
+    "repair_cost": 1250,
+    "at_fault": 0,
+    "third_party_involved": 1,
+    "third_party_identified": 1,
+    "documents_provided": "[\"photos\", \"repair_quote\"]",
+    "exclusion_signal": null,
+    "status": "awaiting_documents",
+    "blocking_issues": "[\"missing_document:accident_report\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": "[\"accident_report\"]",
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T09:07:52+00:00",
+    "updated_at": "2026-10-31T09:07:53+00:00"
+  },
+  "action_log": [
+    {
+      "id": 91,
+      "ts": "2026-10-31T09:07:47+00:00",
+      "claim_ref": "baseline-haiku-CLM-14",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1007",
+        "claim_ref": "baseline-haiku-CLM-14"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1007",
+        "holder_name": "Emma Rousseau",
+        "vehicle": "Tesla Model 3 (2023)",
+        "market_value_eur": 32000,
+        "licence_date": "2011-04-08",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 92,
+      "ts": "2026-10-31T09:07:52+00:00",
+      "claim_ref": "baseline-haiku-CLM-14",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-14",
+        "policy_id": "VER-1007",
+        "coverage": "C2",
+        "incident_date": "2026-10-20",
+        "report_date": "2026-10-22",
+        "description": "In slow traffic on 20 October 2026, a motorbike rider (Mr. Leroy) scratched the insured's car. The rider reportedly admitted the contact; no accident report form was completed at the scene. Repair quote is for the insured's own vehicle.",
+        "repair_cost": 1250,
+        "at_fault": false,
+        "third_party_involved": true,
+        "third_party_identified": true,
+        "documents_provided": [
+          "photos",
+          "repair_quote"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-14",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 2,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote",
+            "accident_report"
+          ],
+          "missing_documents": [
+            "accident_report"
+          ],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "missing_document:accident_report"
+        ]
+      }
+    },
+    {
+      "id": 93,
+      "ts": "2026-10-31T09:07:53+00:00",
+      "claim_ref": "baseline-haiku-CLM-14",
+      "tool": "request_documents",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-14",
+        "documents": [
+          "accident_report"
+        ],
+        "message_to_customer": "Dear Ms. Rousseau, thank you for reporting your claim for the incident of 20 October 2026. To continue processing, we need the accident report form for this incident. If you can, please send it, including the rider's details (Mr. Leroy). Kind regards, Veridia Claims."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-14",
+        "status": "awaiting_documents",
+        "documents_requested": [
+          "accident_report"
+        ],
+        "message_recorded": "Dear Ms. Rousseau, thank you for reporting your claim for the incident of 20 October 2026. To continue processing, we need the accident report form for this incident. If you can, please send it, including the rider's details (Mr. Leroy). Kind regards, Veridia Claims."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

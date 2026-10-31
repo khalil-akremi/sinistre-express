@@ -1,0 +1,176 @@
+{
+  "case_id": "CLM-09",
+  "claim_ref": "baseline-haiku-CLM-09",
+  "label": "baseline-haiku",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "The claim **baseline-haiku-CLM-09** is prepared for human approval. The payment is staged as pending approval and has not been paid.\n\n**1. Status:** Settlement prepared for human approval\n\n**2. Facts recorded**\n- Policy VER-1007, holder Emma Rousseau, Tesla Model 3 (2023), market value €32,000. Licence held since 2011-04-08.\n- Coverage claimed: C4 Theft, which is in the Policy Schedule.\n- Incident on 11 October 2026 (car stolen from a public car park). Reported on 12 October 2026.\n- Document received: police_report.pdf. Counted as provided, but not opened.\n- No third party, no fault question, and no exclusion signal in the email.\n\n**3. Reasoning**\n- **Coverage:** Theft of the whole vehicle is covered under C4 (Article 1 coverage table; Article 2: for theft the claim amount is the market value).\n- **Reporting deadline:** A theft must be reported within 2 days of its discovery (Article 4.1). It was reported one day after the incident, so it is on time.\n- **Documents:** The police report is present. Nothing is missing, so no document request is needed.\n- **Exclusions:** None suggested by the story (Article 3).\n- **Referral:** None required. Articles 7.1 to 7.3 are not triggered.\n- **Payment timing:** Payment is made within 15 days after a Veridia claims handler approves it (Article 6).\n\n**4. Amounts (from compute_settlement)**\n- Deductible: €3,200 (greater of 10% or €500, Article 2)\n- Payout: €28,800 (value minus deductible, Article 6.2)\n- Assessor required: No\n\n**5. Draft message to the customer**\n> Dear Ms Rousseau,\n>\n> Thank you for reporting the theft of your Tesla Model 3 on 11 October 2026 and for sending your police report. We have received your claim (reference baseline-haiku-CLM-09) and it is now under review by our claims team. We will contact you with the next steps as soon as possible.\n>\n> Kind regards,\n> Veridia Claims\n\n**System actions performed**\n- `get_policy` (VER-1007): returned the policy schedule above.\n- `create_claim`: claim opened under C4, on time, no missing documents, no blocking issues.\n- `compute_settlement`: deductible €3,200, payout €28,800, no assessor required.\n- `stage_settlement`: status is pending_approval. A human handler still needs to approve the payment.\n\nI checked the deadline and referral rules against the contract directly. I did not independently verify the payout calculation or the documents list in Article 4.3.",
+  "questions": [],
+  "thread_id": "e9619de0-b8d9-4e95-9172-ef759b1f1741",
+  "cost": {
+    "failed": false,
+    "input_tokens": 99243,
+    "cached_tokens": 91952,
+    "output_tokens": 3773,
+    "input_cost": "0.001931795",
+    "output_cost": "0.0019047",
+    "total": "0.003836495"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 24.9,
+  "claim": {
+    "claim_ref": "baseline-haiku-CLM-09",
+    "policy_id": "VER-1007",
+    "coverage": "C4",
+    "incident_date": "2026-10-11",
+    "report_date": "2026-10-12",
+    "description": "The customer's car was stolen from a public car park on the night of 11 October 2026. A police complaint was filed on the morning of 12 October 2026.",
+    "repair_cost": 0,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"police_report\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 3200,
+    "payout": 28800,
+    "assessor_required": 0,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T09:05:26+00:00",
+    "updated_at": "2026-10-31T09:05:27+00:00"
+  },
+  "action_log": [
+    {
+      "id": 73,
+      "ts": "2026-10-31T09:05:24+00:00",
+      "claim_ref": "baseline-haiku-CLM-09",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1007",
+        "claim_ref": "baseline-haiku-CLM-09"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1007",
+        "holder_name": "Emma Rousseau",
+        "vehicle": "Tesla Model 3 (2023)",
+        "market_value_eur": 32000,
+        "licence_date": "2011-04-08",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 74,
+      "ts": "2026-10-31T09:05:26+00:00",
+      "claim_ref": "baseline-haiku-CLM-09",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-09",
+        "policy_id": "VER-1007",
+        "coverage": "C4",
+        "incident_date": "2026-10-11",
+        "report_date": "2026-10-12",
+        "description": "The customer's car was stolen from a public car park on the night of 11 October 2026. A police complaint was filed on the morning of 12 October 2026.",
+        "repair_cost": 0,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "police_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-09",
+        "status": "open",
+        "checks": {
+          "coverage": "C4 Theft",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 2,
+          "reported_on_time": true,
+          "required_documents": [
+            "police_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 75,
+      "ts": "2026-10-31T09:05:27+00:00",
+      "claim_ref": "baseline-haiku-CLM-09",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-09"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-09",
+        "deductible_eur": 3200,
+        "payout_eur": 28800,
+        "assessor_required": false,
+        "years_licensed_on_incident_date": 15,
+        "calculation": [
+          "Art. 2 theft: claim = market value €32000; deductible = max(10%, €500) = €3200",
+          "Art. 6.2 payout = €32000 - €3200 = €28800"
+        ]
+      }
+    },
+    {
+      "id": 76,
+      "ts": "2026-10-31T09:05:27+00:00",
+      "claim_ref": "baseline-haiku-CLM-09",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "baseline-haiku-CLM-09"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "baseline-haiku-CLM-09",
+        "status": "pending_approval",
+        "payout_eur": 28800,
+        "deductible_eur": 3200,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}
