@@ -76,7 +76,7 @@ def grade_case(case: dict, result: dict) -> dict:
     expected_tools = set(expected["expected_actions"])
     done_tools = set(succeeded)
     missing = sorted(expected_tools - done_tools)
-    extra = sorted(done_tools - expected_tools)
+    extra = sorted(done_tools - expected_tools - set(expected.get("optional_actions", [])))
     order_ok = _before(succeeded, "schedule_assessor", "stage_settlement") and \
         _before(succeeded, "compute_settlement", "stage_settlement")
     trajectory_ok = not missing and not extra and order_ok
@@ -147,7 +147,8 @@ def applicable_fields(facts: dict) -> list[str]:
         fields.remove("at_fault")
     if facts["coverage"] == "C4":
         fields.remove("repair_cost")
-    return fields
+    # e.g. the amount on a quote for someone else's car: no single right value
+    return [f for f in fields if f not in facts.get("ungraded", [])]
 
 
 def grade_facts(facts: dict, created: dict) -> dict[str, bool]:

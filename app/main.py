@@ -30,7 +30,7 @@ from mcp_server.tools import ClaimsSystem
 class MissingConfigRunner:
     """Used when the Cominty settings are absent: explains instead of crashing."""
 
-    async def __call__(self, task, on_event):  # noqa: ARG002
+    async def __call__(self, task, on_event, files=None):  # noqa: ARG002
         raise RuntimeError("COMINTY_AGENT_ID / COMINTY_API_KEY / COMINTY_USER_ID are not configured on the server.")
 
 

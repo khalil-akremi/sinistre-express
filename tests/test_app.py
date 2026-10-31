@@ -9,6 +9,7 @@ Run:  uv run pytest
 import json
 import re
 import time
+from pathlib import Path
 
 import pytest
 from starlette.testclient import TestClient
@@ -18,6 +19,8 @@ from mcp_server.server import build_server
 from mcp_server.tools import ClaimsSystem
 from tests.test_grade import CASES, replay
 
+DOC_CASES = json.loads((Path(__file__).resolve().parent.parent / "data" / "doc_cases.json").read_text(encoding="utf-8"))
+
 FILE_TO_DOC = {"damage_photos.zip": "photos", "repair_quote.pdf": "repair_quote",
                "accident_report_signed.pdf": "accident_report", "police_report.pdf": "police_report"}
 
@@ -26,9 +29,11 @@ class FakeAgent:
     def __init__(self, system: ClaimsSystem):
         self.system = system
         self.tasks: list[str] = []
+        self.files: list[list] = []
 
-    async def __call__(self, task, on_event):
+    async def __call__(self, task, on_event, files=None):
         self.tasks.append(task)
+        self.files.append(files)
         on_event({"source": "agent", "icon": "📄", "text": "Searching the contract (RAG)"})
         ref = re.search(r"Use the claim reference (\S+?)\.", task).group(1)
         case = next(c for c in CASES if f"Subject: {c['email']['subject']}" in task
@@ -85,7 +90,7 @@ def test_page_and_assets_are_served(desk):
 def test_cases_never_leak_the_answer_key(desk):
     client, _ = desk
     data = client.get("/api/cases").json()
-    assert len(data["cases"]) == len(CASES)
+    assert len(data["cases"]) == len(CASES) + len(DOC_CASES)
     raw = json.dumps(data)
     assert "expected" not in raw and "facts" not in raw and "payout" not in raw
     assert "Attached:" not in data["cases"][0]["body"]  # documents are checkboxes instead
@@ -159,7 +164,7 @@ class MemoryFakeAgent(FakeAgent):
         super().__init__(system)
         self.store = store
 
-    async def __call__(self, task, on_event):
+    async def __call__(self, task, on_event, files=None):
         self.tasks.append(task)
         ref = re.search(r"Use the claim reference (\S+?)\.", task).group(1)
         case = next(c for c in CASES if f"Subject: {c['email']['subject']}" in task
@@ -251,3 +256,43 @@ def test_playbook_keeps_only_the_latest_rules():
         playbook = add_rule(playbook, f"rule {i}")
     rules = [line for line in playbook.splitlines() if line.startswith("- ")]
     assert len(rules) == 12 and rules[-1].endswith("rule 14") and rules[0].endswith("rule 3")
+
+
+# ---------------------------------------------------------- documents (M8)
+def test_document_claims_list_their_files_without_the_answers(desk):
+    client, _ = desk
+    doc = next(c for c in client.get("/api/cases").json()["cases"] if c["case_id"] == "DOC-03")
+    assert doc["files"] == [{"name": "repair_quote.pdf", "url": "/documents/DOC-03/repair_quote.pdf", "scanned": True}]
+    assert doc["documents"] == ["photos"] and "1,180" not in doc["body"] and "1 180" not in doc["body"]
+    assert "Attached:" not in doc["body"]
+
+
+def test_sample_documents_are_served_and_nothing_else(desk):
+    client, _ = desk
+    res = client.get("/documents/DOC-02/accident_report_signed.pdf")
+    assert res.status_code == 200 and res.content.startswith(b"%PDF")
+    assert client.get("/documents/DOC-02/repair_quote.pdf").status_code == 200
+    for bad in ("/documents/DOC-02/police_report.pdf", "/documents/CLM-A/repair_quote.pdf",
+                "/documents/DOC-02/..%2F..%2F.env", "/documents/NOPE/repair_quote.pdf"):
+        assert client.get(bad).status_code == 404, bad
+
+
+def test_ticked_files_are_uploaded_and_announced_to_the_agent(desk):
+    client, agent = desk
+    pub = next(c for c in client.get("/api/cases").json()["cases"] if c["case_id"] == "DOC-02")
+    res = client.post("/api/claims", json={"case_id": "DOC-02", "body": pub["body"], "documents": ["photos"],
+                                            "files": ["repair_quote.pdf"]})
+    assert res.status_code == 202
+    wait_done(client, res.json()["claim_ref"])
+    assert [f.name for f in agent.files[-1]] == ["repair_quote.pdf"]
+    task = agent.tasks[-1]
+    assert "attached to this message: repair_quote.pdf. Open each one with read_file" in task
+    assert "The mailroom also received these attachments" in task and "damage_photos.zip" in task
+    assert "Attached: repair_quote.pdf, damage_photos.zip" in task
+
+
+def test_unknown_files_are_refused(desk):
+    client, _ = desk
+    res = client.post("/api/claims", json={"case_id": "DOC-02", "body": "x", "documents": [],
+                                            "files": ["../../.env"]})
+    assert res.status_code == 400 and "Unknown file" in res.json()["error"]

@@ -62,10 +62,12 @@ async function loadCases() {
   const data = await res.json();
   cases = data.cases;
   const demos = cases.filter((c) => c.demo);
-  const others = cases.filter((c) => !c.demo);
+  const withFiles = cases.filter((c) => c.files.length);
+  const others = cases.filter((c) => !c.demo && !c.files.length);
   const option = (c) => `<option value="${c.case_id}">${escapeHtml(c.title)}</option>`;
   els.select.innerHTML =
     `<optgroup label="Demo claims">${demos.map(option).join("")}</optgroup>` +
+    (withFiles.length ? `<optgroup label="Claims with real documents (PDF, scans)">${withFiles.map(option).join("")}</optgroup>` : "") +
     `<optgroup label="Test set">${others.map(option).join("")}</optgroup>`;
   showQuota(data.runs_left_today);
   fillCase(cases[0].case_id);
@@ -76,8 +78,24 @@ function fillCase(caseId) {
   loadMemory(c.policy_id);
   els.head.innerHTML = `<strong>${escapeHtml(c.from)}</strong>, ${escapeHtml(c.date)}<br>${escapeHtml(c.subject)}`;
   els.body.value = c.body;
-  document.querySelectorAll(".docs input").forEach((box) => { box.checked = c.documents.includes(box.value); });
+  const fileNames = c.files.map((f) => f.name);
+  document.querySelectorAll(".docs input").forEach((box) => {
+    box.checked = c.documents.includes(box.value);
+    // a document uploaded as a real file is not also offered as a mailroom item
+    box.closest("label").hidden = fileNames.includes(DOC_FILE[box.value]);
+  });
+  $("docs-legend").textContent = c.files.length ? "Also received by the mailroom (not readable)" : "Documents received";
+  $("files-box").hidden = !c.files.length;
+  $("files").innerHTML = c.files.map((f) => `
+    <label class="file-row"><input type="checkbox" value="${escapeHtml(f.name)}" checked>
+      <span>${escapeHtml(f.name)}${f.scanned ? ' <em class="scan-tag">scan</em>' : ""}</span>
+      <a href="${f.url}" target="_blank" rel="noopener">open</a></label>`).join("");
+  $("skill").hidden = !c.skill;
+  $("skill").textContent = c.skill ? `Tests whether the agent can ${c.skill}.` : "";
 }
+
+const DOC_FILE = { photos: "damage_photos.zip", repair_quote: "repair_quote.pdf",
+  accident_report: "accident_report_signed.pdf", police_report: "police_report.pdf" };
 
 function showQuota(left, error) {
   els.quota.classList.toggle("error", Boolean(error));
@@ -157,11 +175,12 @@ async function approve(ref) {
 
 // ------------------------------------------------------------------ send
 async function send() {
-  const documents = [...document.querySelectorAll(".docs input:checked")].map((b) => b.value);
+  const documents = [...document.querySelectorAll(".docs label:not([hidden]) input:checked")].map((b) => b.value);
+  const files = [...document.querySelectorAll("#files input:checked")].map((b) => b.value);
   els.send.disabled = true;
   const res = await fetch("/api/claims", {
     method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ case_id: els.select.value, body: els.body.value, documents }),
+    body: JSON.stringify({ case_id: els.select.value, body: els.body.value, documents, files }),
   });
   const data = await res.json();
   if (!res.ok) { els.send.disabled = false; showQuota(null, data.error); return; }

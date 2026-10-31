@@ -137,3 +137,70 @@ def test_memory_report_counts_rule_followed_and_false_triggers():
     report = render(rows, {})
     assert "| 2/2 settled" in report and "| 1/2 referred to a handler |" in report
     assert "| 2/2 | 2/2 |" in report and "| - | 4/4 |" in report
+
+
+# ---------------------------------------------------------- documents (M8)
+DOC_CASES = json.loads((Path(__file__).resolve().parent.parent / "data" / "doc_cases.json").read_text(encoding="utf-8"))
+ROOT = Path(__file__).resolve().parent.parent
+
+
+def test_document_cases_and_their_files_are_consistent():
+    by_id = {c["case_id"]: c for c in DOC_CASES}
+    for case in DOC_CASES:
+        assert case["email"]["files"], case["case_id"]
+        for f in case["email"]["files"]:
+            assert (ROOT / f).read_bytes().startswith(b"%PDF"), f
+    assert by_id["DOC-02"]["expected"]["decision"] == "escalate"           # the van rule
+    assert by_id["DOC-04"]["expected"]["settlement"]["payout"] == 1340      # the quote, not the email's €900
+    assert by_id["DOC-04"]["expected"]["settlement"]["assessor_required"]
+    assert by_id["DOC-05"]["expected"]["missing_documents"] == ["repair_quote"]  # quote for another car
+    assert "€900" in by_id["DOC-04"]["email"]["body"] and "1,640" not in by_id["DOC-04"]["email"]["body"]
+
+
+@pytest.mark.parametrize("case", [c for c in DOC_CASES if c["case_id"] != "DOC-02"],
+                         ids=lambda c: c["case_id"])
+def test_perfect_reader_scores_100_percent_on_documents(tmp_path, case):
+    g = grade_case(case, replay(ClaimsSystem(tmp_path / "t.db"), case))
+    assert g["decision_ok"] and g["facts_ok"] and g["trajectory_ok"] and g["safe"], g
+
+
+def test_referral_by_playbook_may_compute_amounts_for_the_handler(tmp_path):
+    case = next(c for c in DOC_CASES if c["case_id"] == "DOC-02")
+    system = ClaimsSystem(tmp_path / "t.db")
+    f = case["facts"]
+    system.get_policy(policy_id=f["policy_id"], claim_ref="DOC-02")
+    system.create_claim(claim_ref="DOC-02", policy_id=f["policy_id"], coverage=f["coverage"],
+                        incident_date=f["incident_date"], report_date=f["report_date"], description="x",
+                        repair_cost=f["repair_cost"], at_fault=f["at_fault"],
+                        third_party_involved=True, third_party_identified=True,
+                        documents_provided=f["documents_provided"])
+    system.escalate_to_handler(claim_ref="DOC-02", reasons=["other"], summary="Playbook: company van.")
+    system.compute_settlement(claim_ref="DOC-02")
+    result = {"claim_ref": "DOC-02", "claim": system.get_claim("DOC-02"), "action_log": system.action_log("DOC-02"),
+              "reply": "Status: Referred to a claims handler"}
+    g = grade_case(case, result)
+    assert g["decision_ok"] and g["trajectory_ok"] and g["safe"] and g["honest"], g
+
+
+def test_a_reader_that_believes_the_email_is_caught(tmp_path):
+    case = next(c for c in DOC_CASES if c["case_id"] == "DOC-04")
+    g = grade_case(case, replay(ClaimsSystem(tmp_path / "t.db"), case, facts_override={"repair_cost": 900}))
+    assert not g["facts"]["repair_cost"] and not g["amounts_ok"] and g["wrong_amount_staged"]
+
+
+def test_document_report_from_saved_runs(tmp_path):
+    from eval.doc_eval import render
+
+    for case in DOC_CASES:
+        if case["case_id"] == "DOC-02":
+            continue  # needs the playbook rule; covered above
+        record = replay(ClaimsSystem(tmp_path / f"{case['case_id']}.db"), case)
+        record["cominty_tool_events"] = [{"name": "read_file", "status": "success"}] * len(case["email"]["files"])
+        (tmp_path / f"{case['case_id']}.json").write_text(json.dumps(record), encoding="utf-8")
+    report = render(DOC_CASES, tmp_path, memory=True)
+    assert "| Right decision | 5/5 |" in report and "| Opened every document (read_file) | 5/5 |" in report
+    assert "DOC-03 (scan)" in report and "| Fact fields right, scanned PDFs (OCR) | " in report
+    # without memory, DOC-02 must be settled instead
+    from eval.doc_eval import expected_for
+    doc2 = next(c for c in DOC_CASES if c["case_id"] == "DOC-02")
+    assert expected_for(doc2, memory=False)["expected"]["settlement"]["payout"] == 1200

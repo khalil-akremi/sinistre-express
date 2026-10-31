@@ -85,8 +85,10 @@ def fetch_snapshot(server: str, secret: str, claim_ref: str) -> tuple[dict | Non
 
 
 async def run_agent(client: AsyncCominty, agent_id: str, task: str, max_steps: int,
-                    capabilities=None) -> dict:
+                    capabilities=None, file_ids: list[str] | None = None) -> dict:
     extra = {"thread_capabilities": capabilities} if capabilities is not None else {}
+    if file_ids:
+        extra["file_ids"] = file_ids
     run = await client.chat.start(agent_id=agent_id, message=task, max_steps=max_steps, **extra)
     cost, tool_events = None, []
     async with run:

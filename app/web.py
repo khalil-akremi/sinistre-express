@@ -4,6 +4,7 @@ Routes
     GET  /                          the web page
     GET  /static/<file>             CSS and JavaScript
     GET  /api/cases                 sample claims (emails only, never the answers)
+    GET  /documents/<case>/<file>   a sample document (PDF) the agent can read
     POST /api/claims                start the agent on an email -> {"claim_ref": ...}
     GET  /api/claims/<ref>/stream   live timeline (Server-Sent Events)
     GET  /api/claims/<ref>          claim record, agent reply, cost, audit log
@@ -41,6 +42,7 @@ from mcp_server.tools import ClaimsSystem, ToolRefused
 ROOT = Path(__file__).resolve().parent.parent
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 CASES_FILE = ROOT / "data" / "cases.json"
+DOC_CASES_FILE = ROOT / "data" / "doc_cases.json"     # claims that come with real documents
 
 DOC_FILES = {
     "photos": "damage_photos.zip",
@@ -49,6 +51,7 @@ DOC_FILES = {
     "police_report": "police_report.pdf",
 }
 FILE_TO_DOC = {v: k for k, v in DOC_FILES.items()}
+FILES_BY_SCAN = {"quote": "repair_quote.pdf", "report": "accident_report_signed.pdf", "police": "police_report.pdf"}
 MAX_BODY_CHARS = 2000
 POLICY_RE = re.compile(r"Policy number: (VER-\d{4})")
 RUN_TIMEOUT_S = 360
@@ -89,7 +92,15 @@ class Limits:
 
 # ------------------------------------------------------------- helpers
 def load_cases() -> list[dict]:
-    return json.loads(CASES_FILE.read_text(encoding="utf-8"))
+    cases = json.loads(CASES_FILE.read_text(encoding="utf-8"))
+    if DOC_CASES_FILE.exists():
+        cases += json.loads(DOC_CASES_FILE.read_text(encoding="utf-8"))
+    return cases
+
+
+def case_files(case: dict) -> dict[str, Path]:
+    """Documents uploaded with this sample claim: file name -> path on disk."""
+    return {Path(f).name: ROOT / f for f in case["email"].get("files") or []}
 
 
 def public_case(case: dict) -> dict:
@@ -101,22 +112,28 @@ def public_case(case: dict) -> dict:
         "case_id": case["case_id"],
         "policy_id": policy.group(1) if policy else None,
         "title": case["title"],
-        "demo": case["demo"],
+        "demo": case.get("demo", False),
+        "skill": case.get("skill"),
         "date": email["date"],
         "from": email["from"],
         "subject": email["subject"],
         "body": body,
         "documents": [FILE_TO_DOC[f] for f in email["attachments"]],
+        "files": [{"name": name, "url": f"/documents/{case['case_id']}/{name}",
+                   "scanned": any(name == FILES_BY_SCAN.get(k) for k in case.get("scanned", []))}
+                  for name in case_files(case)],
     }
 
 
-def make_email(case: dict, body: str, documents: list[str]) -> dict:
-    """Rebuild an email from a sample, the edited text and the ticked documents."""
-    files = [DOC_FILES[d] for d in documents]
-    full_body = body.rstrip() + (f"\n\nAttached: {', '.join(files)}" if files else "")
+def make_email(case: dict, body: str, documents: list[str], files: list[str] = ()) -> dict:
+    """Rebuild an email from a sample, the edited text, the ticked mailroom documents
+    and the ticked files (documents uploaded with the message, which the agent reads)."""
+    stored = [DOC_FILES[d] for d in documents]
+    listed = list(files) + stored
+    full_body = body.rstrip() + (f"\n\nAttached: {', '.join(listed)}" if listed else "")
     email = case["email"]
     return {"date": email["date"], "from": email["from"], "subject": email["subject"],
-            "body": full_body, "attachments": files}
+            "body": full_body, "attachments": stored, "files": list(files)}
 
 
 def log_item(entry: dict) -> dict:
@@ -168,10 +185,11 @@ def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRu
     busy = asyncio.Lock()
     cases = {c["case_id"]: c for c in load_cases()}
 
-    async def execute(run: Run, task: str) -> None:
+    async def execute(run: Run, task: str, files: list[Path]) -> None:
         async with busy:
             try:
-                result = await asyncio.wait_for(runner(task, run.events.append), timeout=RUN_TIMEOUT_S)
+                result = await asyncio.wait_for(runner(task, run.events.append, files=files),
+                                                timeout=RUN_TIMEOUT_S)
                 run.reply, run.cost = result.get("reply"), result.get("cost")
             except Exception as exc:  # noqa: BLE001  (shown to the user, never crashes the server)
                 run.error = f"{type(exc).__name__}: {exc}"
@@ -208,6 +226,15 @@ def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRu
             return JSONResponse({"error": "not found"}, status_code=404)
         return FileResponse(path)
 
+    @server.custom_route("/documents/{case_id}/{name}", methods=["GET"], include_in_schema=False)
+    async def document(request: Request) -> Response:
+        case = cases.get(request.path_params["case_id"])
+        path = case_files(case).get(request.path_params["name"]) if case else None
+        if path is None or not path.is_file():  # only the sample documents, nothing else on disk
+            return JSONResponse({"error": "not found"}, status_code=404)
+        return FileResponse(path, media_type="application/pdf",
+                            headers={"Content-Disposition": f'inline; filename="{path.name}"'})
+
     @server.custom_route("/api/cases", methods=["GET"], include_in_schema=False)
     async def list_cases(request: Request) -> Response:
         return JSONResponse({
@@ -225,6 +252,7 @@ def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRu
         case = cases.get(str(payload.get("case_id", "")))
         body = str(payload.get("body", "")).strip()
         documents = payload.get("documents", [])
+        files = payload.get("files", [])
         if case is None:
             return JSONResponse({"error": "Choose one of the sample claims."}, status_code=400)
         if not body or len(body) > MAX_BODY_CHARS:
@@ -232,6 +260,10 @@ def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRu
                                 status_code=400)
         if not isinstance(documents, list) or any(d not in DOC_FILES for d in documents):
             return JSONResponse({"error": "Unknown document type."}, status_code=400)
+        available = case_files(case)
+        if not isinstance(files, list) or any(f not in available for f in files):
+            return JSONResponse({"error": "Unknown file for this claim."}, status_code=400)
+        files = list(dict.fromkeys(files))
         if busy.locked():
             return JSONResponse({"error": "The agent is already handling a claim. Try again in a minute."},
                                 status_code=429)
@@ -242,9 +274,9 @@ def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRu
         claim_ref = f"DEMO-{datetime.now(timezone.utc):%m%d%H%M%S}-{secrets.token_hex(2).upper()}"
         run = Run(claim_ref=claim_ref, case_id=case["case_id"])
         runs[claim_ref] = run
-        task = build_task(make_email(case, body, list(dict.fromkeys(documents))), claim_ref,
+        task = build_task(make_email(case, body, list(dict.fromkeys(documents)), files), claim_ref,
                           memory_namespace=memory.namespace if memory else None)
-        asyncio.create_task(execute(run, task))
+        asyncio.create_task(execute(run, task, [available[f] for f in files]))
         return JSONResponse({"claim_ref": claim_ref}, status_code=202)
 
     @server.custom_route("/api/claims/{ref}", methods=["GET"], include_in_schema=False)

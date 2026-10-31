@@ -12,15 +12,16 @@ from __future__ import annotations
 
 import os
 from collections.abc import Awaitable, Callable
+from pathlib import Path
 from typing import Protocol
 
 EventSink = Callable[[dict], None]
 
 
 class AgentRunner(Protocol):
-    def __call__(self, task: str, on_event: EventSink) -> Awaitable[dict]:
-        """Run the agent on `task`, call `on_event` for each progress event,
-        and return {"reply": str, "cost": dict | None, "status": str}."""
+    def __call__(self, task: str, on_event: EventSink, files: list[Path] | None = None) -> Awaitable[dict]:
+        """Run the agent on `task` with `files` attached, call `on_event` for each
+        progress event, and return {"reply": str, "cost": dict | None, "status": str}."""
 
 
 # ---------------------------------------------------------- event mapping
@@ -30,7 +31,7 @@ TOOL_LABELS = {
     "company_doc_read_full_text": ("📄", "Reading the contract"),
     "subagent": ("🤝", "Handing work to the Veridia claims sub-agent"),
     "execute": ("🧪", "Running code in the sandbox"),
-    "read_file": ("📎", "Reading a file"),
+    "read_file": ("📎", "Reading an attached document"),
     "load_skill": ("🧰", "Loading a skill"),
     "ask_questions": ("❓", "Preparing a question for you"),
     "memory_read": ("🧠", "Reading its memory"),
@@ -81,7 +82,7 @@ class ComintyRunner:
         self.user_id = clean_secret(os.environ.get("COMINTY_USER_ID"))
         self.max_steps = max_steps
 
-    async def __call__(self, task: str, on_event: EventSink) -> dict:
+    async def __call__(self, task: str, on_event: EventSink, files: list[Path] | None = None) -> dict:
         from cominty_sdk import AgentCapabilities, AsyncCominty, MemoryCapability, events
 
         # Memory is attached per conversation and frozen for it (Cominty capabilities).
@@ -90,9 +91,15 @@ class ComintyRunner:
 
         cost = None
         async with AsyncCominty(api_token=self.api_token, user_id=self.user_id) as client:
+            # An uploaded file can be attached to one conversation only ("Bad file_ids"
+            # when reused), so the documents are uploaded for every run.
+            file_ids = []
+            for path in files or []:
+                on_event({"source": "agent", "icon": "📤", "text": f"Attaching {path.name} to the conversation"})
+                file_ids.append((await client.chat.upload_file(Path(path))).id)
             run = await client.chat.start(
                 agent_id=self.agent_id, message=task, max_steps=self.max_steps,
-                thread_capabilities=AgentCapabilities(memory=memory),
+                thread_capabilities=AgentCapabilities(memory=memory), file_ids=file_ids or None,
             )
             started_sent = False
             async with run:

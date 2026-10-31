@@ -26,6 +26,7 @@
 
       <label class="field-label" for="case-select">Sample claim</label>
       <select id="case-select"></select>
+      <p class="skill" id="skill" hidden></p>
 
       <div class="email-head" id="email-head"></div>
 
@@ -34,11 +35,17 @@
       <p class="hint">Edit anything. Try adding “I had a few drinks before driving”.</p>
 
       <fieldset class="docs">
-        <legend class="field-label">Documents received</legend>
+        <legend class="field-label" id="docs-legend">Documents received</legend>
         <label><input type="checkbox" value="photos"> Damage photos</label>
         <label><input type="checkbox" value="repair_quote"> Repair quote</label>
         <label><input type="checkbox" value="accident_report"> Signed accident report</label>
         <label><input type="checkbox" value="police_report"> Police report</label>
+      </fieldset>
+
+      <fieldset class="files" id="files-box" hidden>
+        <legend class="field-label">Documents the agent will open</legend>
+        <div id="files"></div>
+        <p class="hint">Real PDFs, uploaded with the email. Scans have no text layer: the agent reads them with OCR.</p>
       </fieldset>
 
       <button id="send" class="primary" type="button">Send to the agent</button>

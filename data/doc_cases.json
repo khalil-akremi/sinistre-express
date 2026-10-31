@@ -1,0 +1,351 @@
+[
+  {
+    "case_id": "DOC-01",
+    "title": "Fault only in the accident report",
+    "skill": "read a typed accident report",
+    "scanned": [],
+    "email": {
+      "date": "2026-10-15",
+      "from": "Lucas Bernard",
+      "subject": "Claim - accident - VER-1002",
+      "body": "Hello Veridia,\n\nI had a collision with another car on the ring road on 14 October 2026 while we were both changing lanes. The other driver and I filled in the accident report together.\n\nKind regards,\nLucas Bernard\nPolicy number: VER-1002\n\nAttached: accident_report_signed.pdf, repair_quote.pdf, damage_photos.zip",
+      "attachments": [
+        "damage_photos.zip"
+      ],
+      "files": [
+        "data/documents/DOC-01/accident_report_signed.pdf",
+        "data/documents/DOC-01/repair_quote.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "DOC-01",
+      "policy_id": "VER-1002",
+      "coverage": "C2",
+      "incident_date": "2026-10-14",
+      "report_date": "2026-10-15",
+      "repair_cost": 2400,
+      "at_fault": true,
+      "third_party_involved": true,
+      "third_party_identified": true,
+      "documents_provided": [
+        "photos",
+        "repair_quote",
+        "accident_report"
+      ],
+      "exclusion_signal": null,
+      "ungraded": []
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "schedule_assessor",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 700,
+        "payout": 1700,
+        "assessor_required": true,
+        "breakdown": [
+          "Art. 2 collision deductible: €300",
+          "Art. 5.3 young driver (2 y < 3): +€400",
+          "Art. 6.2 payout = €2400 - €700 = €1700",
+          "Art. 6.1 amount above €1500: assessor required"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "DOC-02",
+    "title": "Company van only stated in the report",
+    "skill": "notice a fact that triggers a playbook rule",
+    "scanned": [],
+    "email": {
+      "date": "2026-10-14",
+      "from": "Claire Martin",
+      "subject": "Claim - accident - VER-1001",
+      "body": "Hello Veridia,\n\nAnother vehicle hit the side of my car at the Rue de Rivoli crossing on 12 October 2026. It was not my fault, and the other driver signed the accident report.\n\nKind regards,\nClaire Martin\nPolicy number: VER-1001\n\nAttached: accident_report_signed.pdf, repair_quote.pdf, damage_photos.zip",
+      "attachments": [
+        "damage_photos.zip"
+      ],
+      "files": [
+        "data/documents/DOC-02/accident_report_signed.pdf",
+        "data/documents/DOC-02/repair_quote.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "DOC-02",
+      "policy_id": "VER-1001",
+      "coverage": "C2",
+      "incident_date": "2026-10-12",
+      "report_date": "2026-10-14",
+      "repair_cost": 1200,
+      "at_fault": false,
+      "third_party_involved": true,
+      "third_party_identified": true,
+      "documents_provided": [
+        "photos",
+        "repair_quote",
+        "accident_report"
+      ],
+      "exclusion_signal": null,
+      "ungraded": []
+    },
+    "expected": {
+      "decision": "escalate",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "escalate_to_handler"
+      ],
+      "optional_actions": [
+        "compute_settlement"
+      ],
+      "forbidden_actions": [
+        "stage_settlement"
+      ],
+      "missing_documents": [],
+      "escalation_reasons": [
+        "other"
+      ],
+      "settlement": null,
+      "settlement_without_rule": {
+        "deductible": 0,
+        "payout": 1200,
+        "assessor_required": false,
+        "breakdown": [
+          "Art. 5.2 not-at-fault waiver: no deductible",
+          "Art. 6.2 payout = €1200 - €0 = €1200"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "DOC-03",
+    "title": "Repair amount only in a scanned quote",
+    "skill": "read a scanned document (OCR)",
+    "scanned": [
+      "quote"
+    ],
+    "email": {
+      "date": "2026-10-27",
+      "from": "Emma Rousseau",
+      "subject": "Claim - broken glass - VER-1007",
+      "body": "Hello Veridia,\n\nA stone thrown up on the A6 motorway on 26 October 2026 cracked my windscreen. I scanned the glass repair quote.\n\nKind regards,\nEmma Rousseau\nPolicy number: VER-1007\n\nAttached: repair_quote.pdf, damage_photos.zip",
+      "attachments": [
+        "damage_photos.zip"
+      ],
+      "files": [
+        "data/documents/DOC-03/repair_quote.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "DOC-03",
+      "policy_id": "VER-1007",
+      "coverage": "C3",
+      "incident_date": "2026-10-26",
+      "report_date": "2026-10-27",
+      "repair_cost": 1180,
+      "at_fault": false,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null,
+      "ungraded": []
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 50,
+        "payout": 1130,
+        "assessor_required": false,
+        "breakdown": [
+          "Art. 2 glass deductible: €50",
+          "Art. 6.2 payout = €1180 - €50 = €1130"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "DOC-04",
+    "title": "The email amount is wrong",
+    "skill": "trust the issued document over the email, and say so",
+    "scanned": [],
+    "email": {
+      "date": "2026-10-28",
+      "from": "Thomas Petit",
+      "subject": "Claim - accident - VER-1004",
+      "body": "Hello Veridia,\n\nI hit a post in an underground car park on 27 October 2026. Nobody else was involved. The garage told me on the phone it would be around €900; the written quote is attached.\n\nKind regards,\nThomas Petit\nPolicy number: VER-1004\n\nAttached: repair_quote.pdf, damage_photos.zip",
+      "attachments": [
+        "damage_photos.zip"
+      ],
+      "files": [
+        "data/documents/DOC-04/repair_quote.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "DOC-04",
+      "policy_id": "VER-1004",
+      "coverage": "C2",
+      "incident_date": "2026-10-27",
+      "report_date": "2026-10-28",
+      "repair_cost": 1640,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos",
+        "repair_quote"
+      ],
+      "exclusion_signal": null,
+      "ungraded": []
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "schedule_assessor",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 300,
+        "payout": 1340,
+        "assessor_required": true,
+        "breakdown": [
+          "Art. 2 collision deductible: €300",
+          "Art. 6.2 payout = €1640 - €300 = €1340",
+          "Art. 6.1 amount above €1500: assessor required"
+        ]
+      }
+    }
+  },
+  {
+    "case_id": "DOC-05",
+    "title": "Quote for another person's car",
+    "skill": "check that a document belongs to this claim",
+    "scanned": [],
+    "email": {
+      "date": "2026-10-29",
+      "from": "Ines Haddad",
+      "subject": "Claim - accident - VER-1003",
+      "body": "Hello Veridia,\n\nI scraped the side of my car against a gate on 28 October 2026. No one else was involved. The quote is attached.\n\nKind regards,\nInes Haddad\nPolicy number: VER-1003\n\nAttached: repair_quote.pdf, damage_photos.zip",
+      "attachments": [
+        "damage_photos.zip"
+      ],
+      "files": [
+        "data/documents/DOC-05/repair_quote.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "DOC-05",
+      "policy_id": "VER-1003",
+      "coverage": "C2",
+      "incident_date": "2026-10-28",
+      "report_date": "2026-10-29",
+      "repair_cost": 0,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "photos"
+      ],
+      "exclusion_signal": null,
+      "ungraded": [
+        "repair_cost"
+      ]
+    },
+    "expected": {
+      "decision": "request_documents",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "request_documents"
+      ],
+      "forbidden_actions": [
+        "stage_settlement"
+      ],
+      "missing_documents": [
+        "repair_quote"
+      ],
+      "escalation_reasons": [],
+      "settlement": null
+    }
+  },
+  {
+    "case_id": "DOC-06",
+    "title": "Theft date only in a scanned police receipt",
+    "skill": "read a scanned official form (OCR)",
+    "scanned": [
+      "police"
+    ],
+    "email": {
+      "date": "2026-10-30",
+      "from": "Claire Martin",
+      "subject": "Claim - theft - VER-1001",
+      "body": "Hello Veridia,\n\nMy car was stolen from the street where I live. I filed a complaint at the police station this morning; the receipt is attached (scanned).\n\nKind regards,\nClaire Martin\nPolicy number: VER-1001\n\nAttached: police_report.pdf",
+      "attachments": [],
+      "files": [
+        "data/documents/DOC-06/police_report.pdf"
+      ]
+    },
+    "facts": {
+      "claim_ref": "DOC-06",
+      "policy_id": "VER-1001",
+      "coverage": "C4",
+      "incident_date": "2026-10-29",
+      "report_date": "2026-10-30",
+      "repair_cost": 0,
+      "at_fault": true,
+      "third_party_involved": false,
+      "third_party_identified": false,
+      "documents_provided": [
+        "police_report"
+      ],
+      "exclusion_signal": null,
+      "ungraded": []
+    },
+    "expected": {
+      "decision": "settle",
+      "expected_actions": [
+        "get_policy",
+        "create_claim",
+        "compute_settlement",
+        "stage_settlement"
+      ],
+      "forbidden_actions": [],
+      "missing_documents": [],
+      "escalation_reasons": [],
+      "settlement": {
+        "deductible": 1400,
+        "payout": 12600,
+        "assessor_required": false,
+        "breakdown": [
+          "Art. 2 theft: claim = market value €14000; deductible = max(10%, €500) = €1400",
+          "Art. 6.2 payout = €14000 - €1400 = €12600"
+        ]
+      }
+    }
+  }
+]

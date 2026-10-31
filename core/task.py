@@ -5,6 +5,8 @@ is always asked the same way. Only the customer email is given: the true
 facts and the expected outcome stay hidden.
 """
 
+from pathlib import Path
+
 INTEGRATION_ID = "veridia_claims"  # the sub-agent name Cominty gives our integration
 
 
@@ -23,8 +25,33 @@ MEMORY_GUIDANCE = (
 )
 
 
+DOCUMENT_GUIDANCE = (
+    "These documents are attached to this message: {files}. Open each one with read_file before "
+    "deciding: they may hold facts the email does not give (dates, who was at fault, amounts, the "
+    "other vehicle). If the email and a document disagree, use the document and point out the "
+    "difference in your report. Count a document as provided only if it belongs to this "
+    "policyholder and the insured vehicle; if it does not, do not count it, and ask for a correct "
+    "one with request_documents."
+)
+
+
 def build_task(email: dict, claim_ref: str, memory_namespace: str | None = None) -> str:
-    """The task for one claim. With `memory_namespace`, the agent is told how to use memory."""
+    """The task for one claim.
+
+    `email["attachments"]` are files the mailroom stored (the agent cannot open them);
+    `email["files"]`, if present, are documents uploaded with the message (the agent reads them).
+    With `memory_namespace`, the agent is told how to use memory.
+    """
+    files = [Path(f).name for f in email.get("files") or []]
+    stored = email["attachments"]
+    if stored:
+        mailroom = ("The mailroom " + ("also " if files else "") + "received these attachments and stored "
+                    f"them in the claim file: {', '.join(stored)}. Count them as provided documents "
+                    "(you cannot open them).")
+    else:
+        mailroom = "" if files else "No attachment was received with this email."
+    attachments = " ".join(part for part in (
+        DOCUMENT_GUIDANCE.format(files=", ".join(files)) if files else "", mailroom) if part)
     return (
         f'<use agent="{INTEGRATION_ID}"/>\n'
         f"New claim to handle in the Veridia claims system. Use the claim reference {claim_ref}.\n\n"
@@ -33,12 +60,6 @@ def build_task(email: dict, claim_ref: str, memory_namespace: str | None = None)
         f"Subject: {email['subject']}\n\n"
         f"{email['body']}\n"
         f"--- End of email ---\n\n"
-        + (
-            "The mailroom received these attachments and stored them in the claim file: "
-            f"{', '.join(email['attachments'])}. Count them as provided documents "
-            "(you cannot open them)."
-            if email["attachments"]
-            else "No attachment was received with this email."
-        )
+        + attachments
         + (MEMORY_GUIDANCE.format(namespace=memory_namespace) if memory_namespace else "")
     )
