@@ -9,7 +9,8 @@ from xml.sax.saxutils import escape
 from starlette.testclient import TestClient
 
 from app.web import register_web_routes
-from core.report import build_report_task, claim_rows, read_xlsx, summarise, to_csv, verify_workbook
+from core.report import (build_report_task, claim_rows, read_xlsx, summarise, to_csv, verify_briefing,
+                         verify_workbook)
 from mcp_server.server import build_server
 from mcp_server.tools import ClaimsSystem
 from tests.test_app import FakeAgent, desk, start, wait_done  # noqa: F401  (desk is a fixture)
@@ -128,7 +129,7 @@ def test_report_route_builds_checks_and_serves_the_workbook(tmp_path):
             if data["done"]:
                 break
             time.sleep(0.05)
-        assert data["claims"] == 1 and data["checks"]["passed"] == data["checks"]["total"], data
+        assert data["claims"] == 1 and data["checks"]["passed"] == data["checks"]["total"] == 7, data
         assert "veridia-claims-" in reporter.calls[0][1] and "DEMO-" in reporter.calls[0][2]
         res = client.get(data["file_url"])
         day = datetime.now(timezone.utc).date().isoformat()
@@ -146,3 +147,12 @@ def test_admin_claim_list_needs_the_secret(tmp_path):
     with TestClient(build_server(system, admin_secret="s3cret").streamable_http_app()) as client:
         assert client.get("/admin/wrong/claims").status_code == 404
         assert len(client.get("/admin/s3cret/claims?since=2000-01-01").json()["claims"]) == 3
+
+
+def test_the_briefing_may_only_mention_real_amounts_and_claims(tmp_path):
+    rows = claim_rows(claims_db(tmp_path).list_claims())
+    good = ("3 claims today. Decide first: DEMO-1, payout of €1,700 waiting for approval (deductible €700). "
+            "Nothing approved yet (€0).")
+    assert verify_briefing(good, rows)["ok"]
+    bad = verify_briefing("DEMO-1 will be paid €1,750. DEMO-9 is also waiting, 2,400 EUR.", rows)
+    assert not bad["ok"] and "1,750" in bad["detail"] and "DEMO-9" in bad["detail"] and "2,400" in bad["detail"]

@@ -14,6 +14,7 @@ from __future__ import annotations
 import csv
 import io
 import json
+import re
 import zipfile
 from xml.etree import ElementTree
 
@@ -103,8 +104,7 @@ column widths. Keep claim_ref in column A and payout_eur as numbers.
 claim where the reviewer raised concerns), with the reason.
 
 Then reply with a briefing of at most 6 short lines for the claims manager: what happened today and what \
-needs a decision first. For reference, our system computed these figures; your workbook must agree: \
-{summary}"""
+needs a decision first. Our system computed these figures from the same CSV, for reference: {summary}"""
 
 
 def build_report_task(day: str, rows: list[dict], csv_name: str) -> str:
@@ -204,3 +204,22 @@ def verify_workbook(data: bytes, rows: list[dict]) -> dict:
     check(f"Every claim needing a person is in Needs attention ({len(attention)})", listed == attention,
           f"missing: {', '.join(sorted(attention - listed))}" if listed != attention else "")
     return {"checks": checks, "passed": sum(c["ok"] for c in checks), "total": len(checks)}
+
+
+def verify_briefing(text: str | None, rows: list[dict]) -> dict:
+    """The briefing is free text: check what can be checked. Every euro amount and every claim
+    reference it mentions must exist in the claims system (amounts: payouts, deductibles, totals)."""
+    text = text or ""
+    s = summarise(rows)
+    known_amounts = {float(v) for r in rows for v in (r["payout_eur"], r["deductible_eur"]) if v != ""} | \
+        {float(s["payments_waiting_approval_eur"]), float(s["payments_approved_eur"]), 0.0}
+    amounts = [m.group(1) for m in re.finditer(r"(?:€|EUR\s?)\s?(\d[\d,. ]*\d|\d)", text)] + \
+        [m.group(1) for m in re.finditer(r"(\d[\d,. ]*\d|\d)\s?(?:€|EUR)", text)]
+    unknown_amounts = sorted({a for a in amounts if _number(a.replace(" ", "")) not in known_amounts})
+    refs = set(re.findall(r"\b(?:DEMO|DOCS|MEM|CLM|R)-[A-Za-z0-9-]+\b", text))
+    unknown_refs = sorted(refs - {r["claim_ref"] for r in rows})
+    ok = not unknown_amounts and not unknown_refs
+    detail = "; ".join(filter(None, [f"amounts not in the system: {', '.join(unknown_amounts)}" if unknown_amounts else "",
+                                     f"unknown claims: {', '.join(unknown_refs)}" if unknown_refs else ""]))
+    return {"name": "Briefing: every amount and claim it mentions exists in the claims system",
+            "ok": ok, "detail": detail}

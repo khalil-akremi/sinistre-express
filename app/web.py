@@ -39,7 +39,8 @@ from starlette.responses import FileResponse, JSONResponse, Response, StreamingR
 
 from app.agent import AgentRunner
 from app.memory import MAX_RULE_CHARS, PLAYBOOK, customer_path, rules_of
-from core.report import build_report_task, claim_rows, report_filename, to_csv, verify_workbook
+from core.report import (build_report_task, claim_rows, report_filename, to_csv, verify_briefing,
+                         verify_workbook)
 from core.review import build_review_task, created_inputs, parse_verdict
 from core.task import build_task
 from mcp.server.mcpserver import MCPServer
@@ -455,6 +456,9 @@ def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRu
                 else:
                     report.file_name, report.file = result["files"][0]
                     report.checks = verify_workbook(report.file, rows)
+                    report.checks["checks"].append(verify_briefing(report.briefing, rows))
+                    report.checks["passed"] = sum(c["ok"] for c in report.checks["checks"])
+                    report.checks["total"] = len(report.checks["checks"])
                     report.events.append({"source": "system", "icon": "🔎",
                                           "text": f"Workbook checked against the claims system: "
                                                   f"{report.checks['passed']}/{report.checks['total']} checks passed"})

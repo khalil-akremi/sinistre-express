@@ -307,7 +307,7 @@ async function makeReport() {
       (rep.error ? `<p class="error-box">${escapeHtml(rep.error)}</p>` : "") +
       (rep.file_url ? `<a class="download" href="${rep.file_url}">Download ${escapeHtml(rep.file_name || "the report")}</a>` : "") +
       (rep.checks ? `<h3>Checked against the claims system: ${rep.checks.passed}/${rep.checks.total}</h3>${checks}` : "") +
-      (rep.briefing ? `<h3>Briefing for the claims manager</h3><div class="reply">${renderReply(rep.briefing)}</div>` : "");
+      (rep.briefing ? `<h3>Briefing for the claims manager</h3><p class="hint">Written by the AI. Amounts and claim references are checked against the claims system; the sentences are not.</p><div class="reply">${renderReply(rep.briefing)}</div>` : "");
   };
   poll();
 }

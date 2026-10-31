@@ -20,7 +20,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from app.agent import ComintyReportRunner
-from core.report import build_report_task, claim_rows, report_filename, summarise, to_csv, verify_workbook
+from core.report import (build_report_task, claim_rows, report_filename, summarise, to_csv, verify_briefing,
+                         verify_workbook)
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -53,6 +54,8 @@ async def main_async(since: str) -> None:
     name, data = result["files"][0]
     (out / report_filename(since)).write_bytes(data)
     checks = verify_workbook(data, rows)
+    checks["checks"].append(verify_briefing(result["reply"], rows))
+    checks["passed"], checks["total"] = sum(c["ok"] for c in checks["checks"]), len(checks["checks"])
     (out / "checks.json").write_text(json.dumps(checks, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"\nWorkbook {name} saved in {out.relative_to(ROOT)}. Checks: {checks['passed']}/{checks['total']}")
     for c in checks["checks"]:
