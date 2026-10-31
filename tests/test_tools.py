@@ -191,3 +191,19 @@ def test_parallel_request_and_escalate(system):
                         message_to_customer="Please send it.")
             pool.submit(system.escalate_to_handler, claim_ref=ref, reasons=["late_report"], summary="Late.")
         assert system.get_claim(ref)["status"] == "escalated", ref
+
+
+def test_computing_after_escalating_keeps_the_claim_escalated(system):
+    """Found by the memory experiment (v2): the agent referred a clean claim because
+    of a playbook rule, then computed the amounts for the handler. That call used to
+    reset the status to settlement_computed, which would have let it be staged."""
+    open_claim(system)  # a clean claim, no blocking issues
+    system.escalate_to_handler(claim_ref="T-1", reasons=["other"], summary="Playbook rule.")
+    s = system.compute_settlement(claim_ref="T-1")
+    assert s["payout_eur"] == 600
+    claim = system.get_claim("T-1")
+    assert claim["status"] == "escalated" and claim["payout"] == 600  # figures kept for the handler
+    with pytest.raises(ToolRefused, match="Refused"):
+        system.stage_settlement(claim_ref="T-1")
+    with pytest.raises(ToolRefused):
+        system.schedule_assessor(claim_ref="T-1")

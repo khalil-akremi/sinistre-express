@@ -288,13 +288,18 @@ class ClaimsSystem:
             third_party_identified=claim.third_party_identified,
             years_licensed=years,
         )
-        self._update_claim(
-            claim_ref,
-            status="settlement_computed",
-            deductible=s.deductible,
-            payout=s.payout,
-            assessor_required=int(s.assessor_required),
-        )
+        # Computing the amounts must never un-escalate a claim: a referred claim
+        # keeps "escalated" (so stage_settlement still refuses it) and the handler
+        # still gets the figures. One atomic statement, like request_documents.
+        conn = self._conn()
+        with conn:
+            conn.execute(
+                "UPDATE claims SET deductible = ?, payout = ?, assessor_required = ?, updated_at = ?, "
+                "status = CASE WHEN status = 'escalated' THEN 'escalated' ELSE 'settlement_computed' END "
+                "WHERE claim_ref = ?",
+                (s.deductible, s.payout, int(s.assessor_required), _now(), claim_ref),
+            )
+        conn.close()
         return {
             "claim_ref": claim_ref,
             "deductible_eur": s.deductible,
