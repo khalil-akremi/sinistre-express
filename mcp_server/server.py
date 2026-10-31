@@ -70,8 +70,9 @@ def build_server(system: ClaimsSystem, admin_secret: str = "local") -> MCPServer
         claim_ref: ClaimRef,
         policy_id: Annotated[str, Field(description="Policy number, e.g. 'VER-1002'.")],
         coverage: Annotated[CoverageCode, Field(description=(
-            "C1 third-party liability, C2 collision damage to the insured car, "
-            "C3 glass breakage, C4 theft of the whole car."))],
+            "C2 collision damage to the insured car (also when another driver is involved or at fault), "
+            "C3 glass breakage, C4 theft of the whole car. C1 third-party liability is not handled by "
+            "this desk and is refused."))],
         incident_date: Annotated[str, Field(description="Date of the incident, YYYY-MM-DD.")],
         report_date: Annotated[str, Field(description="Date the customer reported it (the email date), YYYY-MM-DD.")],
         description: Annotated[str, Field(description="One or two neutral sentences summarising what happened.")],
@@ -79,7 +80,9 @@ def build_server(system: ClaimsSystem, admin_secret: str = "local") -> MCPServer
             "Repair cost in euros from the repair quote. Use 0 for theft or if no quote was given."))],
         at_fault: Annotated[bool, Field(description="True if the insured driver caused the incident.")],
         third_party_involved: Annotated[bool, Field(description="True if another person or vehicle was involved.")],
-        third_party_identified: Annotated[bool, Field(description="True if that other driver or person is identified by name.")],
+        third_party_identified: Annotated[bool, Field(description=(
+            "True if the other driver or person is named in the email or documents, or signed the "
+            "accident report. False only if they are unknown (e.g. drove off, not named)."))],
         documents_provided: Annotated[list[DocumentType], Field(description=(
             "Documents actually attached to the email. Never include a document that is not attached."))],
         exclusion_signal: Annotated[str | None, Field(description=(

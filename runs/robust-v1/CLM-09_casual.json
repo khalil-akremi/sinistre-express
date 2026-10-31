@@ -1,0 +1,181 @@
+{
+  "case_id": "CLM-09_casual",
+  "claim_ref": "RBv1-CLM-09_casual",
+  "label": "RBv1",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**1. Status: Settlement prepared for human approval**\n\nThe claims system confirmed `stage_settlement` with status *pending_approval*. The payment is prepared but not paid. A human claims handler must approve it.\n\n**2. Facts recorded**\n- Claim reference: RBv1-CLM-09_casual\n- Policy VER-1007, holder Emma Rousseau (matches the email). Vehicle: Tesla Model 3 (2023), market value €32,000.\n- Coverage: C4 Theft, which is in the Policy Schedule.\n- Incident: theft of the whole vehicle from a public parking, the night of 2026-10-11 (\"last nite\" in an email dated 2026-10-12). The exact time is not stated.\n- Reported: 2026-10-12, the day after the incident.\n- Third party: none. Repair cost: €0 (not applicable to theft).\n- Documents: police_report.pdf, counted as provided per the mailroom note. I did not open it.\n\n**3. Reasoning**\n- **Coverage:** C4 Theft covers \"theft of the whole insured vehicle\" (Article 2, coverage table). It is in the Policy Schedule, so no referral is needed under Article 7.3.\n- **Reporting deadline:** A theft must be reported within 2 days of its discovery (Article 4.1). The claim was reported one day after the incident, so it is not late (Article 7.1 does not apply).\n- **Required documents:** For C4, the police report is required (Article 4.3). It was provided, so no document request is needed.\n- **Exclusions:** None indicated. The email does not mention alcohol, drugs, licence issues, racing, or intentional damage (Article 3). Nothing in the story suggests one, so no doubt is raised.\n- **Blocking issues:** None. The claim does not need a human referral under Article 7.\n- **Contract note:** The subagent reported that it could not find the contract in the sandbox. I checked the Veridia contract in the company document store and confirmed the articles above. The contract's wording matches the handling described.\n\n**4. Amounts (from compute_settlement only)**\n- Deductible: €3,200 (10% of €32,000, above the €500 minimum; Article 2 table, C4)\n- Payout: €28,800 (€32,000 market value minus €3,200 deductible; the claim amount for theft is the market value, Article 2)\n- Assessor required: No\n\n**5. Draft message to the customer**\n\n> Dear Ms Rousseau,\n>\n> Thank you for reporting the theft of your Tesla Model 3 and for sending the police report. We have received your claim (reference RBv1-CLM-09_casual), and it is now with our claims team for final approval. We will contact you as soon as a decision has been made.\n>\n> Kind regards,\n> Veridia Claims Team\n\n**Actions performed in the claims system:** `get_policy` (success), `create_claim` (success, no blocking issues), `compute_settlement` (success), `stage_settlement` (success, pending approval). No document request, referral, or assessor was needed.",
+  "questions": [],
+  "thread_id": "561e0018-d9cc-4309-a834-e00ffe3147bf",
+  "cost": {
+    "failed": false,
+    "input_tokens": 147318,
+    "cached_tokens": 133867,
+    "output_tokens": 4938,
+    "input_cost": "0.003204045",
+    "output_cost": "0.0024998",
+    "total": "0.005703845"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 39.5,
+  "claim": {
+    "claim_ref": "RBv1-CLM-09_casual",
+    "policy_id": "VER-1007",
+    "coverage": "C4",
+    "incident_date": "2026-10-11",
+    "report_date": "2026-10-12",
+    "description": "The insured reports that her car was stolen overnight from a public parking. She reported it to the police the morning after; the police report is attached.",
+    "repair_cost": 0,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"police_report\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 3200,
+    "payout": 28800,
+    "assessor_required": 0,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T16:44:39+00:00",
+    "updated_at": "2026-10-31T16:44:41+00:00"
+  },
+  "action_log": [
+    {
+      "id": 55,
+      "ts": "2026-10-31T16:44:28+00:00",
+      "claim_ref": "RBv1-CLM-09_casual",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1007",
+        "claim_ref": "RBv1-CLM-09_casual"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1007",
+        "holder_name": "Emma Rousseau",
+        "vehicle": "Tesla Model 3 (2023)",
+        "market_value_eur": 32000,
+        "licence_date": "2011-04-08",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 56,
+      "ts": "2026-10-31T16:44:39+00:00",
+      "claim_ref": "RBv1-CLM-09_casual",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-09_casual",
+        "policy_id": "VER-1007",
+        "coverage": "C4",
+        "incident_date": "2026-10-11",
+        "report_date": "2026-10-12",
+        "description": "The insured reports that her car was stolen overnight from a public parking. She reported it to the police the morning after; the police report is attached.",
+        "repair_cost": 0,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "police_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-09_casual",
+        "status": "open",
+        "checks": {
+          "coverage": "C4 Theft",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 2,
+          "reported_on_time": true,
+          "required_documents": [
+            "police_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 57,
+      "ts": "2026-10-31T16:44:40+00:00",
+      "claim_ref": "RBv1-CLM-09_casual",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-09_casual"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-09_casual",
+        "deductible_eur": 3200,
+        "payout_eur": 28800,
+        "assessor_required": false,
+        "years_licensed_on_incident_date": 15,
+        "calculation": [
+          "Art. 2 theft: claim = market value €32000; deductible = max(10%, €500) = €3200",
+          "Art. 6.2 payout = €32000 - €3200 = €28800"
+        ]
+      }
+    },
+    {
+      "id": 58,
+      "ts": "2026-10-31T16:44:41+00:00",
+      "claim_ref": "RBv1-CLM-09_casual",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-09_casual"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-09_casual",
+        "status": "pending_approval",
+        "payout_eur": 28800,
+        "deductible_eur": 3200,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

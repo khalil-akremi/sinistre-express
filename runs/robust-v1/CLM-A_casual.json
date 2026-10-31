@@ -1,0 +1,180 @@
+{
+  "case_id": "CLM-A_casual",
+  "claim_ref": "RBv1-CLM-A_casual",
+  "label": "RBv1",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Settlement prepared for human approval**\n\nThe claims system shows the settlement is staged as `pending_approval`. Nothing has been paid. A claims handler must approve it.\n\n**Facts recorded**\n- Policy VER-1001, policyholder Claire Martin, Peugeot 208 (2021), market value €14,000. Licence held since 2012-05-14.\n- Coverage claimed: C2 collision damage to her own vehicle. C2 is in the policy schedule.\n- Incident date: 2026-10-12 (inferred from \"on Monday\", the most recent Monday before the 2026-10-14 email). **The email does not state the date. Please confirm it.**\n- Report date: 2026-10-14.\n- Location: rue de Rivoli. The other party is a van driver, \"Mr Dubois\", identified by surname only. His full identity, registration and insurer are not in the file.\n- Customer states the other driver admitted fault. Our records show the policyholder was not at fault.\n- Repair quote: €1,200 for her own car.\n- Documents received: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. No documents are missing.\n- Possible exclusion: none found. The email does not suggest alcohol, licence issues, racing, intentional damage or wear.\n\n**Reasoning**\n- **Coverage (C2):** Collision damage covers damage to the insured's own vehicle after a collision. <cite document_id=\"2630#10414\" pages=\"1\" name=\"Veridia contract\"/>\n- **Deductible:** The not-at-fault waiver removes the deductible for C2 when the authorised driver is not at fault and the third party is identified. The claims system applied the waiver (Art. 5.2), so the deductible is €0. <cite document_id=\"2630#10414\" pages=\"2\"/> **Judgment point for the handler:** the third party is identified by surname only. Please confirm that meets the \"identified\" requirement.\n- **Young-driver surcharge:** Not applicable. The licence has been held for more than 3 years. <cite document_id=\"2630#10414\" pages=\"2\"/>\n- **Assessor:** Not required. An assessor is needed only when the repair cost is above €1,500 (Art. 6.1); this is €1,200. <cite document_id=\"2630#10414\" pages=\"2\"/>\n- **Payout:** Compensation is the repair cost, capped at market value, minus the deductible (Art. 6.2): €1,200 − €0 = €1,200. <cite document_id=\"2630#10414\" pages=\"2\"/>\n- **Payment timing:** Payment is made within 15 days after a claims handler approves it (Art. 6.3). <cite document_id=\"2630#10414\" pages=\"2-3\"/>\n- **Reporting deadline:** The claim was reported two days after the incident, within the 5-day window (Art. 4.1 as applied by the system). I did not verify the Article 4.1 wording myself. <cite document_id=\"2630#10414\" pages=\"2-3\"/>\n- **Referral:** No referral criteria apply (late report, possible exclusion, or uncovered coverage). <cite document_id=\"2630#10414\" pages=\"3\"/>\n\n**Amounts**\n- Deductible: €0 (not-at-fault waiver)\n- Payout: €1,200\n- Assessor required: No\n\n**Actions taken in the claims system**\n1. `get_policy` for VER-1001 under reference RBv1-CLM-A_casual.\n2. `create_claim` (C2, incident 2026-10-12, reported 2026-10-14). No missing documents, no exclusions, no blocking issues.\n3. `compute_settlement`: deductible €0, payout €1,200, assessor not required.\n4. `stage_settlement`: status `pending_approval`.\n\nNot needed: `request_documents`, `escalate_to_handler`, `schedule_assessor`.\n\n**Draft message to the customer**\n\n> Dear Ms Martin,\n>\n> Thank you for your email and for sending the photos, repair quote and signed accident report for your claim RBv1-CLM-A_casual. Your claim has been prepared and is now awaiting review by one of our claims handlers. We will write to you again once that review is complete.\n>\n> Kind regards,\n> Veridia Claims Team",
+  "questions": [],
+  "thread_id": "0f845887-1be5-4391-8ffd-423399a2d503",
+  "cost": {
+    "failed": false,
+    "input_tokens": 117759,
+    "cached_tokens": 107742,
+    "output_tokens": 6055,
+    "input_cost": "0.002494295",
+    "output_cost": "0.0030506",
+    "total": "0.005544895"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 35.9,
+  "claim": {
+    "claim_ref": "RBv1-CLM-A_casual",
+    "policy_id": "VER-1001",
+    "coverage": "C2",
+    "incident_date": "2026-10-12",
+    "report_date": "2026-10-14",
+    "description": "A van went through a red light and collided with the insured's Peugeot 208 at rue de Rivoli. The van driver, Mr Dubois, reportedly admitted fault; both parties signed the accident report.",
+    "repair_cost": 1200,
+    "at_fault": 0,
+    "third_party_involved": 1,
+    "third_party_identified": 1,
+    "documents_provided": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 0,
+    "payout": 1200,
+    "assessor_required": 0,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T16:42:14+00:00",
+    "updated_at": "2026-10-31T16:42:16+00:00"
+  },
+  "action_log": [
+    {
+      "id": 39,
+      "ts": "2026-10-31T16:42:08+00:00",
+      "claim_ref": "RBv1-CLM-A_casual",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1001",
+        "claim_ref": "RBv1-CLM-A_casual"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1001",
+        "holder_name": "Claire Martin",
+        "vehicle": "Peugeot 208 (2021)",
+        "market_value_eur": 14000,
+        "licence_date": "2012-05-14",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 40,
+      "ts": "2026-10-31T16:42:14+00:00",
+      "claim_ref": "RBv1-CLM-A_casual",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-A_casual",
+        "policy_id": "VER-1001",
+        "coverage": "C2",
+        "incident_date": "2026-10-12",
+        "report_date": "2026-10-14",
+        "description": "A van went through a red light and collided with the insured's Peugeot 208 at rue de Rivoli. The van driver, Mr Dubois, reportedly admitted fault; both parties signed the accident report.",
+        "repair_cost": 1200,
+        "at_fault": false,
+        "third_party_involved": true,
+        "third_party_identified": true,
+        "documents_provided": [
+          "photos",
+          "repair_quote",
+          "accident_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-A_casual",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 2,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote",
+            "accident_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 41,
+      "ts": "2026-10-31T16:42:15+00:00",
+      "claim_ref": "RBv1-CLM-A_casual",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-A_casual"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-A_casual",
+        "deductible_eur": 0,
+        "payout_eur": 1200,
+        "assessor_required": false,
+        "years_licensed_on_incident_date": 14,
+        "calculation": [
+          "Art. 5.2 not-at-fault waiver: no deductible",
+          "Art. 6.2 payout = €1200 - €0 = €1200"
+        ]
+      }
+    },
+    {
+      "id": 42,
+      "ts": "2026-10-31T16:42:16+00:00",
+      "claim_ref": "RBv1-CLM-A_casual",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-A_casual"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-A_casual",
+        "status": "pending_approval",
+        "payout_eur": 1200,
+        "deductible_eur": 0,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

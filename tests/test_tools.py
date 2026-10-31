@@ -207,3 +207,12 @@ def test_computing_after_escalating_keeps_the_claim_escalated(system):
         system.stage_settlement(claim_ref="T-1")
     with pytest.raises(ToolRefused):
         system.schedule_assessor(claim_ref="T-1")
+
+
+
+def test_c1_is_refused_with_a_way_to_correct_it(system):
+    """Found twice (trial2, robustness v1): a collision with a named other driver recorded as C1
+    staged €2,400 with no deductible instead of €1,700. The tool now refuses C1."""
+    with pytest.raises(ToolRefused, match="use C2 for collision damage to the insured car"):
+        open_claim(system, coverage="C1")
+    assert open_claim(system, coverage="C2")["status"] == "open"  # the agent corrects itself

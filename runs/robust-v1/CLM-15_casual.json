@@ -1,0 +1,164 @@
+{
+  "case_id": "CLM-15_casual",
+  "claim_ref": "RBv1-CLM-15_casual",
+  "label": "RBv1",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status:** Referred to a claims handler\n\n**Facts recorded**\n- Claim reference: RBv1-CLM-15_casual. Policy VER-1001, policyholder Claire Martin, who was the driver.\n- Vehicle: Peugeot 208 (2021), market value 14,000 EUR.\n- Coverage: C2 Collision damage, which is in the Policy Schedule.\n- Incident: Friday 2 October 2026. Reported: 11 October 2026 (email date), 9 days later.\n- Event: hit a bollard while parking. Single vehicle, no third party.\n- Documents on file: damage_photos.zip and repair_quote.pdf. Nothing is missing, so no document request is needed.\n- Repair quote: 650 EUR, for the customer's own car.\n- Exclusion signals: none in the email (no alcohol, drugs, racing, or intentional damage).\n\n**Reasoning**\n- **Coverage:** The damage is to her own car, so it falls under C2 collision cover, which is in her Policy Schedule. <cite document_id=\"2630#10414\" pages=\"2\" name=\"DriveSafe Motor Policy\"/>\n- **Late report:** A claim must be reported within 5 days of the incident. The report came 9 days after the incident, so it is late. <cite document_id=\"2630#10414\" pages=\"2\" name=\"DriveSafe Motor Policy\"/>\n- **Referral:** A claim reported after the Article 4.1 deadline is referred to a claims handler. A late claim is never refused automatically. <cite document_id=\"2630#10414\" pages=\"3\" name=\"DriveSafe Motor Policy\"/>\n- **Exclusions:** None signalled, so no exclusion referral is needed. Exclusions are never applied automatically in any case. <cite document_id=\"2630#10414\" pages=\"2\" name=\"DriveSafe Motor Policy\"/>\n\n**Amounts**\n- Not computed. The claim was referred, so no settlement was calculated and no payment was staged. No deductible, payout, or assessor decision has been made.\n\n**Claims system actions taken:** get_policy, create_claim, and escalate_to_handler. stage_settlement was not called, which is correct for a referred claim.\n\n**Draft message to the customer**\n\n> Dear Ms Martin,\n>\n> Thank you for your email about the incident on 2 October 2026, and for sending the photos and repair quote. We have received everything we need.\n>\n> Your claim has been passed to one of our claims handlers, because it was reported after the time limit set in your policy. They will review the details and contact you with the next steps. We will let you know as soon as there is an update.\n>\n> Kind regards,\n> Veridia Claims Team",
+  "questions": [],
+  "thread_id": "7ec0003c-f009-467f-bc6b-b2af2bd8db1b",
+  "cost": {
+    "failed": false,
+    "input_tokens": 90886,
+    "cached_tokens": 82762,
+    "output_tokens": 4237,
+    "input_cost": "0.002002995",
+    "output_cost": "0.0021409",
+    "total": "0.004143895"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 25.8,
+  "claim": {
+    "claim_ref": "RBv1-CLM-15_casual",
+    "policy_id": "VER-1001",
+    "coverage": "C2",
+    "incident_date": "2026-10-02",
+    "report_date": "2026-10-11",
+    "description": "The policyholder hit a bollard while parking her insured Peugeot 208. No other person or vehicle was involved. Damage photos and a repair quote of 650 EUR were provided.",
+    "repair_cost": 650,
+    "at_fault": 1,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"photos\", \"repair_quote\"]",
+    "exclusion_signal": null,
+    "status": "escalated",
+    "blocking_issues": "[\"late_report\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": "[\"late_report\"]",
+    "handler_note": "Policyholder Claire Martin (VER-1001) reports hitting a bollard while parking on 2026-10-02, a single-vehicle collision damage claim under C2 with a 650 EUR repair quote. The report was made on 2026-10-11, 9 days after the incident, against a 5-day reporting deadline, so the claim is blocked by late_report. All required documents (photos, repair quote) were provided; no exclusion signal was found.",
+    "approved_by": null,
+    "created_at": "2026-10-31T17:59:19+00:00",
+    "updated_at": "2026-10-31T17:59:21+00:00"
+  },
+  "action_log": [
+    {
+      "id": 97,
+      "ts": "2026-10-31T17:59:16+00:00",
+      "claim_ref": "RBv1-CLM-15_casual",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1001",
+        "claim_ref": "RBv1-CLM-15_casual"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1001",
+        "holder_name": "Claire Martin",
+        "vehicle": "Peugeot 208 (2021)",
+        "market_value_eur": 14000,
+        "licence_date": "2012-05-14",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 98,
+      "ts": "2026-10-31T17:59:19+00:00",
+      "claim_ref": "RBv1-CLM-15_casual",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-15_casual",
+        "policy_id": "VER-1001",
+        "coverage": "C2",
+        "incident_date": "2026-10-02",
+        "report_date": "2026-10-11",
+        "description": "The policyholder hit a bollard while parking her insured Peugeot 208. No other person or vehicle was involved. Damage photos and a repair quote of 650 EUR were provided.",
+        "repair_cost": 650,
+        "at_fault": true,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "photos",
+          "repair_quote"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-15_casual",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 9,
+          "reporting_deadline_days": 5,
+          "reported_on_time": false,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "late_report"
+        ]
+      }
+    },
+    {
+      "id": 99,
+      "ts": "2026-10-31T17:59:21+00:00",
+      "claim_ref": "RBv1-CLM-15_casual",
+      "tool": "escalate_to_handler",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-15_casual",
+        "reasons": [
+          "late_report"
+        ],
+        "summary": "Policyholder Claire Martin (VER-1001) reports hitting a bollard while parking on 2026-10-02, a single-vehicle collision damage claim under C2 with a 650 EUR repair quote. The report was made on 2026-10-11, 9 days after the incident, against a 5-day reporting deadline, so the claim is blocked by late_report. All required documents (photos, repair quote) were provided; no exclusion signal was found."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-15_casual",
+        "status": "escalated",
+        "reasons": [
+          "late_report"
+        ],
+        "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

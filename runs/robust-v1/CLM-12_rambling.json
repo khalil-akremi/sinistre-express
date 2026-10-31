@@ -1,0 +1,162 @@
+{
+  "case_id": "CLM-12_rambling",
+  "claim_ref": "RBv1-CLM-12_rambling",
+  "label": "RBv1",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Waiting for documents**\n\nThe claims system shows claim RBv1-CLM-12_rambling as `awaiting_documents`. I did not call compute_settlement, stage_settlement or escalate_to_handler, because photos are missing and the claim is not yet clean.\n\n**Facts recorded**\n- Policy VER-1004, policyholder Thomas Petit. Vehicle: Volkswagen Golf (2020), market value €15,500. Licence date 2008-11-01.\n- Coverage C2 (collision damage) is listed in the Policy Schedule.\n- Incident 2026-10-18 (Sunday). Reported 2026-10-19.\n- Side scrape against a low wall while manoeuvring in a car park. Single vehicle, no third party, no photos taken, no assessor verification yet.\n- Provided document: repair_quote.pdf (customer states €700).\n\n**Reasoning**\n- **Coverage:** C2 applies because it is in the Policy Schedule (Art. 2; the Schedule prevails over the General Conditions). The damage is to the customer's own car, so C2 is the right coverage, not C1.\n- **Reporting:** Reported one day after the incident, within the system's limit.\n- **Exclusions:** None found in the email or returned by the system. The email does not suggest alcohol, speeding or other exclusion triggers.\n- **Documents:** The system requires photos of the damage, which are missing. request_documents was sent to the customer, as required.\n- **Amounts:** Not computed. The €300 standard C2 deductible (Art. 2) and the assessor threshold will be applied once compute_settlement runs after the photos arrive. The €700 figure is the customer's statement. The VAT-inclusive total on the quote (Art. 1, \"Repair cost\") has not been verified.\n\n**Amounts:** Not computed yet.\n\n**Notes for the handler**\n- The contract file I have shows only Art. 1 and Art. 2. The subagent cited Art. 7 (referral of unlisted coverages), but I could not confirm its text. Please check it against the full contract.\n- Photos are the only open item. The damage has not been assessed, so the assessor requirement is still unknown.\n\n**Draft message to the customer (already sent via request_documents)**\n> Dear Mr Petit, thank you for your claim under policy VER-1004. To continue, could you please send us photos of the damaged side of your Golf (and of the car park wall if possible), as required for collision claims? Once received, we will proceed with your file. Kind regards, Veridia Claims.",
+  "questions": [],
+  "thread_id": "80c9e5e5-3334-4c0f-91ee-8f44396649a9",
+  "cost": {
+    "failed": false,
+    "input_tokens": 106889,
+    "cached_tokens": 98048,
+    "output_tokens": 4520,
+    "input_cost": "0.002289555",
+    "output_cost": "0.0022880",
+    "total": "0.004577555"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 28.7,
+  "claim": {
+    "claim_ref": "RBv1-CLM-12_rambling",
+    "policy_id": "VER-1004",
+    "coverage": "C2",
+    "incident_date": "2026-10-18",
+    "report_date": "2026-10-19",
+    "description": "The insured's Golf was scraped on the side against a low wall while manoeuvring in a car park entrance. No other vehicle or person was involved. No photos were taken; the damage has not been verified by an assessor.",
+    "repair_cost": 700,
+    "at_fault": 1,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"repair_quote\"]",
+    "exclusion_signal": null,
+    "status": "awaiting_documents",
+    "blocking_issues": "[\"missing_document:photos\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": "[\"photos\"]",
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T16:47:19+00:00",
+    "updated_at": "2026-10-31T16:47:21+00:00"
+  },
+  "action_log": [
+    {
+      "id": 73,
+      "ts": "2026-10-31T16:47:17+00:00",
+      "claim_ref": "RBv1-CLM-12_rambling",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1004",
+        "claim_ref": "RBv1-CLM-12_rambling"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1004",
+        "holder_name": "Thomas Petit",
+        "vehicle": "Volkswagen Golf (2020)",
+        "market_value_eur": 15500,
+        "licence_date": "2008-11-01",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          }
+        ]
+      }
+    },
+    {
+      "id": 74,
+      "ts": "2026-10-31T16:47:19+00:00",
+      "claim_ref": "RBv1-CLM-12_rambling",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-12_rambling",
+        "policy_id": "VER-1004",
+        "coverage": "C2",
+        "incident_date": "2026-10-18",
+        "report_date": "2026-10-19",
+        "description": "The insured's Golf was scraped on the side against a low wall while manoeuvring in a car park entrance. No other vehicle or person was involved. No photos were taken; the damage has not been verified by an assessor.",
+        "repair_cost": 700,
+        "at_fault": true,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "repair_quote"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-12_rambling",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [
+            "photos"
+          ],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "missing_document:photos"
+        ]
+      }
+    },
+    {
+      "id": 75,
+      "ts": "2026-10-31T16:47:21+00:00",
+      "claim_ref": "RBv1-CLM-12_rambling",
+      "tool": "request_documents",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-12_rambling",
+        "documents": [
+          "photos"
+        ],
+        "message_to_customer": "Dear Mr Petit, thank you for your claim under policy VER-1004. To continue, could you please send us photos of the damaged side of your Golf (and of the car park wall if possible), as required for collision claims? Once received, we will proceed with your file. Kind regards, Veridia Claims."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-12_rambling",
+        "status": "awaiting_documents",
+        "documents_requested": [
+          "photos"
+        ],
+        "message_recorded": "Dear Mr Petit, thank you for your claim under policy VER-1004. To continue, could you please send us photos of the damaged side of your Golf (and of the car park wall if possible), as required for collision claims? Once received, we will proceed with your file. Kind regards, Veridia Claims."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

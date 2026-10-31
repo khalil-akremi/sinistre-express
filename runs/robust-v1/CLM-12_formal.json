@@ -1,0 +1,157 @@
+{
+  "case_id": "CLM-12_formal",
+  "claim_ref": "RBv1-CLM-12_formal",
+  "label": "RBv1",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Waiting for documents.** The claims system shows claim RBv1-CLM-12_formal as `awaiting_documents`. A request for photographs has been sent to the customer. No settlement has been computed or staged, and the claim has not been referred to a handler.\n\n**Facts recorded**\n- Policy VER-1004, holder Thomas Petit, Volkswagen Golf (2020), market value €15,500.\n- Coverage claimed: C2 Collision damage, to the insured's own car. C2 is in the Policy Schedule.\n- Incident date: 18 October 2026. Reported: 19 October 2026, one day later.\n- The insured scraped his own car against a low wall while parking. No other party was involved.\n- The insured was the driver, and the email names no other driver.\n- Repair quote of €700 received (repair_quote.pdf).\n- Photographs: not provided. The customer says he did not take any.\n- No exclusion signal in the story (no alcohol, licence, racing, intent or wear issue).\n\n**Reasoning**\n- **Coverage:** C2 covers damage to the insured vehicle after a collision, and C2 is in the Policy Schedule. This is the coverage claimed. <cite document_id=\"2630#10414\" pages=\"1\"/>\n- **Timeliness:** The claim was reported within the reporting deadline in Article 4.1, so it does not need referral under Article 7. The claims system also confirms `reported_on_time: true`. <cite document_id=\"2630#10414\" pages=\"3\"/>\n- **Documents:** For C2, the contract requires photographs of the damage and a repair quote. The repair quote is provided, but the photographs are missing. This is a blocking issue, so the request for documents was made. <cite document_id=\"2630#10414\" pages=\"2\"/>\n- **Exclusions:** None found in the story or flagged by the system, so no referral under Article 7 (possible exclusion, Article 3) is needed. <cite document_id=\"2630#10414\" pages=\"3\"/>\n- **Third-party liability:** Not applicable. The damage is to the insured's own car, so C1 does not apply.\n- **Settlement:** Not computed. Settlement is only calculated once the claim has no blocking issues. Payment would be made within 15 days after a Veridia claims handler approves the compensation. <cite document_id=\"2630#10414\" pages=\"3\"/>\n\n**Amounts:** None computed. The deductible, payout and assessor decision will be determined once the photographs have been received and the claim re-checked. For reference, the standard C2 deductible in the contract is €300, but this has not been applied to any figure. <cite document_id=\"2630#10414\" pages=\"1\"/>\n\n**Draft message to the customer (as sent)**\n\"Dear Mr Petit, thank you for your claim for policy VER-1004 and for the €700 repair quote, which we have received. To continue handling your claim, please send us photographs of the damage to your vehicle. Yours faithfully, Veridia Claims.\"\n\n**Note for the claims team:** The subagent's report did not include contract article numbers because it could not read the contract. I checked the contract myself and added the citations above. The subagent's record shows the claim open with `missing_document:photos` and the request sent. Once the photographs arrive, the claim should be re-checked, then compute_settlement and stage_settlement run.",
+  "questions": [],
+  "thread_id": "9bbb47c4-74d6-4a65-98dd-b60082eb3295",
+  "cost": {
+    "failed": false,
+    "input_tokens": 92190,
+    "cached_tokens": 83714,
+    "output_tokens": 4946,
+    "input_cost": "0.002070990",
+    "output_cost": "0.0024961",
+    "total": "0.004567090"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 29.9,
+  "claim": {
+    "claim_ref": "RBv1-CLM-12_formal",
+    "policy_id": "VER-1004",
+    "coverage": "C2",
+    "incident_date": "2026-10-18",
+    "report_date": "2026-10-19",
+    "description": "While parking, the insured scraped his own vehicle (Volkswagen Golf) against a low wall. No other party was involved. No photographs were taken; a garage repair quote of €700 is attached.",
+    "repair_cost": 700,
+    "at_fault": 1,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"repair_quote\"]",
+    "exclusion_signal": null,
+    "status": "awaiting_documents",
+    "blocking_issues": "[\"missing_document:photos\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": "[\"photos\"]",
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T16:46:17+00:00",
+    "updated_at": "2026-10-31T16:46:18+00:00"
+  },
+  "action_log": [
+    {
+      "id": 67,
+      "ts": "2026-10-31T16:46:14+00:00",
+      "claim_ref": "RBv1-CLM-12_formal",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1004",
+        "claim_ref": "RBv1-CLM-12_formal"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1004",
+        "holder_name": "Thomas Petit",
+        "vehicle": "Volkswagen Golf (2020)",
+        "market_value_eur": 15500,
+        "licence_date": "2008-11-01",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          }
+        ]
+      }
+    },
+    {
+      "id": 68,
+      "ts": "2026-10-31T16:46:17+00:00",
+      "claim_ref": "RBv1-CLM-12_formal",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-12_formal",
+        "policy_id": "VER-1004",
+        "coverage": "C2",
+        "incident_date": "2026-10-18",
+        "report_date": "2026-10-19",
+        "description": "While parking, the insured scraped his own vehicle (Volkswagen Golf) against a low wall. No other party was involved. No photographs were taken; a garage repair quote of €700 is attached.",
+        "repair_cost": 700,
+        "at_fault": true,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "repair_quote"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-12_formal",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [
+            "photos"
+          ],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "missing_document:photos"
+        ]
+      }
+    },
+    {
+      "id": 69,
+      "ts": "2026-10-31T16:46:18+00:00",
+      "claim_ref": "RBv1-CLM-12_formal",
+      "tool": "request_documents",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-12_formal",
+        "documents": [
+          "photos"
+        ],
+        "message_to_customer": "Dear Mr Petit, thank you for your claim for policy VER-1004 and for the €700 repair quote, which we have received. To continue handling your claim, please send us photographs of the damage to your vehicle. Yours faithfully, Veridia Claims."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-12_formal",
+        "status": "awaiting_documents",
+        "documents_requested": [
+          "photos"
+        ],
+        "message_recorded": "Dear Mr Petit, thank you for your claim for policy VER-1004 and for the €700 repair quote, which we have received. To continue handling your claim, please send us photographs of the damage to your vehicle. Yours faithfully, Veridia Claims."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

@@ -1,0 +1,156 @@
+{
+  "case_id": "CLM-16_casual",
+  "claim_ref": "RBv1-CLM-16_casual",
+  "label": "RBv1",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Claim reference:** RBv1-CLM-16_casual\n\n**Status: Referred to a claims handler**\n\nThe claim is recorded in the Veridia claims system as open and referred to a handler. No settlement was computed or staged, and no assessor was booked.\n\n**Facts recorded**\n- Policyholder: Thomas Petit, policy VER-1004. Coverages C1 (third-party liability) and C2 (collision damage) are in the Policy Schedule.\n- Vehicle: 2020 VW Golf, market value €15,500. Licence held since 2008-11-01.\n- Incident: evening of 2026-10-21. This is inferred from \"last nite\" in an email dated 2026-10-22.\n- Report date: 2026-10-22.\n- Description: the customer lost control of his own car and hit a fence. No other party was involved.\n- Repair quote: €1,800 from the garage. The quote is for his own car, so it falls under C2.\n- Documents provided: damage_photos.zip and repair_quote.pdf. I did not open them, so I have not verified their contents.\n- Exclusion signal: the email says he \"had a couple of beers\" before the incident. The system flagged this as a possible alcohol exclusion.\n\n**Reasoning**\n- **Reporting deadline:** The claim was reported one day after the incident, within the 5-day limit. No late-report referral applies. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Policy contract\"/>\n- **Coverage:** C2 is in the Policy Schedule, so no coverage-not-in-schedule referral applies. <cite document_id=\"2630#10414\" pages=\"1\" name=\"Policy contract\"/>\n- **Documents:** The required documents are present, so no document request is needed. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Policy contract\"/>\n- **Possible exclusion:** Article 3(1) excludes cover where the driver had alcohol above the legal limit. The email does not state his blood alcohol level, so this cannot be decided from the email. The contract states that an exclusion is never applied automatically and that a claims handler decides. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Policy contract\"/>\n- **Referral:** Article 7(2) requires referral to a handler when a possible exclusion is shown. The claim was referred for that reason. A claim is never refused automatically. <cite document_id=\"2630#10414\" pages=\"3\" name=\"Policy contract\"/>\n\n**Amounts**\n- Not computed. Settlement calculation is only run for claims without blocking issues, and this claim has one.\n- Standard C2 deductible from the schedule: €300. This is for reference only and is not a payout figure. <cite document_id=\"2630#10414\" pages=\"1\" name=\"Policy contract\"/>\n- Assessor: not booked. This decision is for the handler.\n\n**Draft message to the customer**\nDear Mr Petit,\n\nThank you for reporting your accident and for sending the photos and the garage quote. Your claim has been passed to a Veridia claims handler, who will review the circumstances you described before any decision is made. We may contact you if we need more information.\n\nKind regards,\nVeridia Claims Team\n\n**Tools used in the claims system:** get_policy, create_claim, escalate_to_handler. compute_settlement and stage_settlement were not called, because the claim has a blocking issue.",
+  "questions": [],
+  "thread_id": "0cbca483-6733-4c47-9b47-2391feda50c0",
+  "cost": {
+    "failed": false,
+    "input_tokens": 90614,
+    "cached_tokens": 82669,
+    "output_tokens": 4421,
+    "input_cost": "0.001985365",
+    "output_cost": "0.0022385",
+    "total": "0.004223865"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 26.8,
+  "claim": {
+    "claim_ref": "RBv1-CLM-16_casual",
+    "policy_id": "VER-1004",
+    "coverage": "C2",
+    "incident_date": "2026-10-21",
+    "report_date": "2026-10-22",
+    "description": "The insured lost control of his own vehicle in the evening of 2026-10-21 (inferred from \"last nite\") and hit a fence. No other party or vehicle was involved. The insured states he had a couple of beers before driving.",
+    "repair_cost": 1800,
+    "at_fault": 1,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"photos\", \"repair_quote\"]",
+    "exclusion_signal": "alcohol",
+    "status": "escalated",
+    "blocking_issues": "[\"possible_exclusion:alcohol\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": "[\"possible_exclusion\"]",
+    "handler_note": "Insured Thomas Petit (VER-1004, C2 collision) reports losing control of his own VW Golf on the evening of 2026-10-21 (inferred) and hitting a fence, with no third party. He states he \"had a couple of beers\" before driving, which may engage the alcohol exclusion. Reported on time (1 day); photos and 1800 EUR repair quote attached. Requires a human decision on the alcohol exclusion before any settlement.",
+    "approved_by": null,
+    "created_at": "2026-10-31T16:48:35+00:00",
+    "updated_at": "2026-10-31T16:48:37+00:00"
+  },
+  "action_log": [
+    {
+      "id": 82,
+      "ts": "2026-10-31T16:48:33+00:00",
+      "claim_ref": "RBv1-CLM-16_casual",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1004",
+        "claim_ref": "RBv1-CLM-16_casual"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1004",
+        "holder_name": "Thomas Petit",
+        "vehicle": "Volkswagen Golf (2020)",
+        "market_value_eur": 15500,
+        "licence_date": "2008-11-01",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          }
+        ]
+      }
+    },
+    {
+      "id": 83,
+      "ts": "2026-10-31T16:48:35+00:00",
+      "claim_ref": "RBv1-CLM-16_casual",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-16_casual",
+        "policy_id": "VER-1004",
+        "coverage": "C2",
+        "incident_date": "2026-10-21",
+        "report_date": "2026-10-22",
+        "description": "The insured lost control of his own vehicle in the evening of 2026-10-21 (inferred from \"last nite\") and hit a fence. No other party or vehicle was involved. The insured states he had a couple of beers before driving.",
+        "repair_cost": 1800,
+        "at_fault": true,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "photos",
+          "repair_quote"
+        ],
+        "exclusion_signal": "alcohol"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-16_casual",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": "alcohol"
+        },
+        "blocking_issues": [
+          "possible_exclusion:alcohol"
+        ]
+      }
+    },
+    {
+      "id": 84,
+      "ts": "2026-10-31T16:48:37+00:00",
+      "claim_ref": "RBv1-CLM-16_casual",
+      "tool": "escalate_to_handler",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-16_casual",
+        "reasons": [
+          "possible_exclusion"
+        ],
+        "summary": "Insured Thomas Petit (VER-1004, C2 collision) reports losing control of his own VW Golf on the evening of 2026-10-21 (inferred) and hitting a fence, with no third party. He states he \"had a couple of beers\" before driving, which may engage the alcohol exclusion. Reported on time (1 day); photos and 1800 EUR repair quote attached. Requires a human decision on the alcohol exclusion before any settlement."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-16_casual",
+        "status": "escalated",
+        "reasons": [
+          "possible_exclusion"
+        ],
+        "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

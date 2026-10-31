@@ -187,6 +187,15 @@ class ClaimsSystem:
     ) -> dict:
         if coverage not in COVERAGE_NAMES:
             raise ToolRefused(f"coverage must be one of {list(COVERAGE_NAMES)}, got {coverage!r}.")
+        if coverage == Coverage.THIRD_PARTY.value:
+            # Found twice in evaluations (trial2, robustness v1): a collision with a named other
+            # driver was recorded as C1, so a payment with no deductible was staged. This desk
+            # only handles damage to the insured car; the tool refuses C1 instead of hoping.
+            raise ToolRefused(
+                "C1 (third-party liability) pays for damage the policyholder caused to OTHER people, and "
+                "is handled by the liability team, not this desk. Claims here are for the insured car: "
+                "use C2 for collision damage to the insured car (also when another driver is involved), "
+                "C3 for glass, C4 for theft.")
         unknown_docs = [d for d in documents_provided if d not in DOCUMENT_TYPES]
         if unknown_docs:
             raise ToolRefused(f"Unknown document types {unknown_docs}. Allowed: {list(DOCUMENT_TYPES)}.")

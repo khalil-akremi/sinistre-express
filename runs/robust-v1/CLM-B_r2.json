@@ -1,0 +1,226 @@
+{
+  "case_id": "CLM-B_r2",
+  "claim_ref": "RBv1-CLM-B_r2",
+  "label": "RBv1",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status:** Settlement prepared for human approval\n\n**Facts recorded (claim RBv1-CLM-B_r2)**\n- Policy VER-1002, policyholder Lucas Bernard, Renault Clio (2023), market value €16,500, driving licence date 2 September 2024.\n- Coverage C2 (collision damage) is listed in the Policy Schedule.\n- Incident on 14 October 2026 on the ring road. Reported 15 October 2026.\n- The insured admits fault for changing lanes. Ms. Laurent is identified by name, and both drivers signed the accident report.\n- Repair quote: €2,400, as stated in the email.\n- Documents provided: damage photos, repair quote, signed accident report. No documents are missing.\n\n**Reasoning**\n- Coverage: C2 is in the Policy Schedule, and C2 covers damage to the insured's own vehicle <cite document_id=\"2630#10414\" pages=\"1\" name=\"contract.pdf\"/>.\n- Exclusions: nothing in the email suggests one. The licence is valid, so no exclusion applies <cite document_id=\"2630#10414\" pages=\"2\"/>.\n- Reporting: reported one day after the incident, within the 5-day limit <cite document_id=\"2630#10414\" pages=\"2\"/>.\n- Documents: C2 requires photos, a repair quote, and a signed accident report when a third party is involved. All three were provided <cite document_id=\"2630#10414\" pages=\"2\"/>.\n- Not-at-fault waiver: does not apply, because the insured is at fault <cite document_id=\"2630#10414\" pages=\"2\"/>.\n- Young-driver surcharge: applies. The licence was held for under 3 years on the incident date, so a €400 surcharge is added <cite document_id=\"2630#10414\" pages=\"2\"/>.\n- Assessor: required, because the repair cost is above €1,500 <cite document_id=\"2630#10414\" pages=\"2-3\"/>.\n- Payout: repair cost less deductible, capped at market value and never negative <cite document_id=\"2630#10414\" pages=\"2-3\"/>.\n- No blocking issues were found, so no referral was needed <cite document_id=\"2630#10414\" pages=\"3\"/>.\n\n**Amounts**\n- Deductible: €700 (€300 standard collision deductible plus €400 young-driver surcharge).\n- Payout: €1,700 (€2,400 − €700). This is within the €16,500 market value cap.\n- Assessor required: yes. A visit was booked for 18 October 2026.\n- Payment: staged and pending human approval. It has not been approved or paid.\n\n**Points for the handler to check**\n- The €2,400 figure comes from the email. The repair quote could not be opened, so the VAT-inclusive total should be confirmed against it, as the contract defines repair cost that way <cite document_id=\"2630#10414\" pages=\"1\"/>.\n- The email describes damage to the other driver's car, but the quote is for the customer's own car. Any third-party liability claim (C1) for Ms. Laurent's car is not covered by this claim and has not been assessed.\n- The first staging attempt failed because it ran before the assessor booking was complete. It succeeded on retry, and the claim log records both attempts.\n\n**Draft message to the customer**\n\nDear Mr. Bernard,\n\nThank you for reporting the accident of 14 October 2026 (claim RBv1-CLM-B_r2). We have received your damage photos, repair quote and signed accident report. An independent assessor has been booked to inspect your vehicle on 18 October 2026. Our team is now reviewing your claim, and we will write to you again once that review is complete.\n\nKind regards,\nVeridia Claims Team",
+  "questions": [],
+  "thread_id": "3206541e-5335-4d93-ada7-647d9d97c762",
+  "cost": {
+    "failed": false,
+    "input_tokens": 190589,
+    "cached_tokens": 175897,
+    "output_tokens": 6709,
+    "input_cost": "0.003897870",
+    "output_cost": "0.0034098",
+    "total": "0.007307670"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 42.8,
+  "claim": {
+    "claim_ref": "RBv1-CLM-B_r2",
+    "policy_id": "VER-1002",
+    "coverage": "C2",
+    "incident_date": "2026-10-14",
+    "report_date": "2026-10-15",
+    "description": "The insured driver misjudged the distance while changing lanes on the ring road and hit the vehicle next to him. The insured accepts fault. Third party Ms. Laurent is identified and the accident report was signed by both drivers.",
+    "repair_cost": 2400,
+    "at_fault": 1,
+    "third_party_involved": 1,
+    "third_party_identified": 1,
+    "documents_provided": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 700,
+    "payout": 1700,
+    "assessor_required": 1,
+    "assessor_date": "2026-10-18",
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T18:01:29+00:00",
+    "updated_at": "2026-10-31T18:01:32+00:00"
+  },
+  "action_log": [
+    {
+      "id": 111,
+      "ts": "2026-10-31T18:01:26+00:00",
+      "claim_ref": "RBv1-CLM-B_r2",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1002",
+        "claim_ref": "RBv1-CLM-B_r2"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1002",
+        "holder_name": "Lucas Bernard",
+        "vehicle": "Renault Clio (2023)",
+        "market_value_eur": 16500,
+        "licence_date": "2024-09-02",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          }
+        ]
+      }
+    },
+    {
+      "id": 112,
+      "ts": "2026-10-31T18:01:29+00:00",
+      "claim_ref": "RBv1-CLM-B_r2",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-B_r2",
+        "policy_id": "VER-1002",
+        "coverage": "C2",
+        "incident_date": "2026-10-14",
+        "report_date": "2026-10-15",
+        "description": "The insured driver misjudged the distance while changing lanes on the ring road and hit the vehicle next to him. The insured accepts fault. Third party Ms. Laurent is identified and the accident report was signed by both drivers.",
+        "repair_cost": 2400,
+        "at_fault": true,
+        "third_party_involved": true,
+        "third_party_identified": true,
+        "documents_provided": [
+          "photos",
+          "repair_quote",
+          "accident_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-B_r2",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote",
+            "accident_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 113,
+      "ts": "2026-10-31T18:01:30+00:00",
+      "claim_ref": "RBv1-CLM-B_r2",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-B_r2"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-B_r2",
+        "deductible_eur": 700,
+        "payout_eur": 1700,
+        "assessor_required": true,
+        "years_licensed_on_incident_date": 2,
+        "calculation": [
+          "Art. 2 collision deductible: €300",
+          "Art. 5.3 young driver (2 y < 3): +€400",
+          "Art. 6.2 payout = €2400 - €700 = €1700",
+          "Art. 6.1 amount above €1500: assessor required"
+        ]
+      }
+    },
+    {
+      "id": 114,
+      "ts": "2026-10-31T18:01:31+00:00",
+      "claim_ref": "RBv1-CLM-B_r2",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-B_r2"
+      },
+      "ok": false,
+      "result": {
+        "error": "An assessor is required (Art. 6.1). Book one with schedule_assessor first."
+      }
+    },
+    {
+      "id": 115,
+      "ts": "2026-10-31T18:01:31+00:00",
+      "claim_ref": "RBv1-CLM-B_r2",
+      "tool": "schedule_assessor",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-B_r2"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-B_r2",
+        "assessor_visit_date": "2026-10-18",
+        "message": "Independent assessor booked (Art. 6.1)."
+      }
+    },
+    {
+      "id": 116,
+      "ts": "2026-10-31T18:01:32+00:00",
+      "claim_ref": "RBv1-CLM-B_r2",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-B_r2"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-B_r2",
+        "status": "pending_approval",
+        "payout_eur": 1700,
+        "deductible_eur": 700,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

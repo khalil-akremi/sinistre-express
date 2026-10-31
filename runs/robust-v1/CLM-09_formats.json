@@ -1,0 +1,196 @@
+{
+  "case_id": "CLM-09_formats",
+  "claim_ref": "RBv1-CLM-09_formats",
+  "label": "RBv1",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status:** Settlement prepared for human approval\n\nThe claims system confirms `stage_settlement` succeeded, and the payment is now \"pending approval\". A human claims handler must approve it before anything is paid.\n\n**Facts recorded**\n- Claim reference: RBv1-CLM-09_formats. Policy VER-1007, Emma Rousseau, Tesla Model 3 (2023).\n- Incident: night of 11 October 2026, public car park. Reported 12 October 2026.\n- Coverage: C4 Theft.\n- Police report (police_report.pdf) is attached. I counted it as provided but could not open it.\n- No third party is involved. Repair cost is not applicable to theft.\n- No documents are missing.\n\n**Reasoning**\n- **Coverage:** Theft (C4) is listed in the Policy Schedule, so it applies. <cite document_id=\"2630#10414\" pages=\"1-2\" name=\"contract.pdf\"/>\n- **Exclusions:** Nothing in the email points to an exclusion. The licence date on the schedule (2011) is well before the incident, and the system found no possible exclusion. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>\n- **Reporting deadline:** A theft must be reported within 2 days of discovery. The claim was reported on 12 October, one day after the incident, so it is on time. The email does not state a discovery date, but the report falls within 2 days of both the incident and the police complaint. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>\n- **Required documents:** A police report is required for theft, and it is provided. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>\n- **Amount:** For theft, the claim amount is the vehicle's market value. Compensation is the claim amount minus the deductible, and it is never negative. <cite document_id=\"2630#10414\" pages=\"2-3\" name=\"contract.pdf\"/>\n- **Referral:** No referral was needed. The claim has no late report, no possible exclusion and no coverage gap. <cite document_id=\"2630#10414\" pages=\"3\" name=\"contract.pdf\"/>\n\n**Amounts (from compute_settlement)**\n- Market value (claim amount): €32,000\n- Deductible (10%, minimum €500): €3,200\n- Payout: €28,800\n- Assessor required: No. Assessors apply only to C2/C3 damage claims above €1,500. <cite document_id=\"2630#10414\" pages=\"3\" name=\"contract.pdf\"/>\n\n**Draft message to the customer**\n\n> Dear Ms Rousseau,\n>\n> Thank you for your email about the theft of your vehicle on the night of 11 October 2026, and for the police report. We have received your claim (reference RBv1-CLM-09_formats), and it is now being processed. A claims handler will review the file and confirm the next steps with you. We will keep you informed.\n>\n> Kind regards,\n> Veridia Claims Team",
+  "questions": [],
+  "thread_id": "14aad3b1-a316-4cc1-98e9-794c0af54ff5",
+  "cost": {
+    "failed": false,
+    "input_tokens": 157687,
+    "cached_tokens": 145690,
+    "output_tokens": 5175,
+    "input_cost": "0.003229900",
+    "output_cost": "0.0026365",
+    "total": "0.005866400"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 35.9,
+  "claim": {
+    "claim_ref": "RBv1-CLM-09_formats",
+    "policy_id": "VER-1007",
+    "coverage": "C4",
+    "incident_date": "2026-10-11",
+    "report_date": "2026-10-12",
+    "description": "Customer reports theft of the insured vehicle (Tesla Model 3, 2023) from a public car park during the night of 11 October 2026. A police complaint was filed on 12 October 2026.",
+    "repair_cost": 0,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"police_report\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 3200,
+    "payout": 28800,
+    "assessor_required": 0,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T16:45:51+00:00",
+    "updated_at": "2026-10-31T16:45:52+00:00"
+  },
+  "action_log": [
+    {
+      "id": 63,
+      "ts": "2026-10-31T16:45:48+00:00",
+      "claim_ref": "RBv1-CLM-09_formats",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1007",
+        "claim_ref": "RBv1-CLM-09_formats"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1007",
+        "holder_name": "Emma Rousseau",
+        "vehicle": "Tesla Model 3 (2023)",
+        "market_value_eur": 32000,
+        "licence_date": "2011-04-08",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 64,
+      "ts": "2026-10-31T16:45:51+00:00",
+      "claim_ref": "RBv1-CLM-09_formats",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-09_formats",
+        "policy_id": "VER-1007",
+        "coverage": "C4",
+        "incident_date": "2026-10-11",
+        "report_date": "2026-10-12",
+        "description": "Customer reports theft of the insured vehicle (Tesla Model 3, 2023) from a public car park during the night of 11 October 2026. A police complaint was filed on 12 October 2026.",
+        "repair_cost": 0,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "police_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-09_formats",
+        "status": "open",
+        "checks": {
+          "coverage": "C4 Theft",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 2,
+          "reported_on_time": true,
+          "required_documents": [
+            "police_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 65,
+      "ts": "2026-10-31T16:45:51+00:00",
+      "claim_ref": "RBv1-CLM-09_formats",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-09_formats"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-09_formats",
+        "deductible_eur": 3200,
+        "payout_eur": 28800,
+        "assessor_required": false,
+        "years_licensed_on_incident_date": 15,
+        "calculation": [
+          "Art. 2 theft: claim = market value €32000; deductible = max(10%, €500) = €3200",
+          "Art. 6.2 payout = €32000 - €3200 = €28800"
+        ]
+      }
+    },
+    {
+      "id": 66,
+      "ts": "2026-10-31T16:45:52+00:00",
+      "claim_ref": "RBv1-CLM-09_formats",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-09_formats"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-09_formats",
+        "status": "pending_approval",
+        "payout_eur": 28800,
+        "deductible_eur": 3200,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

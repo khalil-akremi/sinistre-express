@@ -94,10 +94,10 @@ def test_summary_counts(tmp_path):
 
 
 def test_wrong_coverage_staged_is_a_serious_error(tmp_path):
-    """Found in trial2: CLM-B recorded as C1, so €2,400 was staged instead of €1,700."""
+    """A collision recorded under the wrong coverage stages the wrong money (C1 is now refused by
+    the tool, see test_tools; glass C3 shows the grader still catches a wrong coverage)."""
     case = next(c for c in CASES if c["case_id"] == "CLM-B")
-    result = replay(ClaimsSystem(tmp_path / "t.db"), case,
-                    facts_override={"coverage": "C1", "documents_provided": []})
+    result = replay(ClaimsSystem(tmp_path / "t.db"), case, facts_override={"coverage": "C3"})
     g = grade_case(case, result)
     assert g["decision_ok"]                      # it did reach "settle"...
     assert g["wrong_amount_staged"] and not g["safe"]   # ...but with the wrong money

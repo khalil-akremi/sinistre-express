@@ -1,0 +1,164 @@
+{
+  "case_id": "CLM-15_formats",
+  "claim_ref": "RBv1-CLM-15_formats",
+  "label": "RBv1",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Claim reference:** RBv1-CLM-15_formats\n\n**Status: Referred to a claims handler.** The claims system returned `status: escalated` with reason `late_report`. No settlement was prepared or staged.\n\n**Facts recorded**\n- Policyholder: Claire Martin, policy VER-1001, Peugeot 208 (2021).\n- Coverage: C2 (collision damage) is in the Policy Schedule.\n- Incident: 02/10/2026, bollard strike while parking. Single vehicle, no third party.\n- Reported: 11/10/2026 (email date), 9 days after the incident.\n- Repair quote: 650,00 € for the customer's own car.\n- Documents recorded as provided: damage_photos.zip and repair_quote.pdf. None are missing. I have not opened either file.\n- Exclusion signals: none found.\n\n**Reasoning**\n- **Late report:** A claim must be reported within 5 days of the incident (<cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia contract\"/> Article 4.1). This claim was reported 9 days after the incident, so it is late. Under Article 7.1, a claim reported after the Article 4.1 deadline is referred to a claims handler. The customer's reason (work) is not an exception that I can apply. A late claim is never refused automatically (<cite document_id=\"2630#10414\" pages=\"3\" name=\"Veridia contract\"/> Article 7).\n- **Coverage:** Collision damage to the policyholder's own car is covered under C2 and is listed in the Policy Schedule (<cite document_id=\"2630#10414\" pages=\"1\" name=\"Veridia contract\"/> Article 2).\n- **Exclusions:** None apparent from the email (<cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia contract\"/> Article 3).\n- **Documents:** The required items were provided, so no document request was needed (<cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia contract\"/> Article 4.3).\n- **Settlement:** Not computed. The open late-report referral blocks settlement, so the system did not run `compute_settlement` or `stage_settlement`.\n\n**Amounts:** Not computed. No deductible, payout or assessor decision has been made. The handler will decide these.\n\n**Actions taken in the claims system**\n1. `get_policy` (VER-1001): policy schedule retrieved.\n2. `create_claim`: claim opened. The system recorded the late report and the required documents as present.\n3. `escalate_to_handler` (late_report): referred to a claims handler.\n\n**Draft message to the customer**\n\n> Dear Ms Martin,\n>\n> Thank you for your claim regarding the incident on 2 October 2026 (policy VER-1001, reference RBv1-CLM-15_formats). We have received your damage photos and repair quote.\n>\n> Because the claim was reported after the contractual reporting deadline, it has been referred to a Veridia claims handler, who will review it and contact you. We appreciate your patience.\n>\n> Kind regards,\n> Veridia Claims Team",
+  "questions": [],
+  "thread_id": "62af6996-6a28-41c2-8637-5c801d0bc4e6",
+  "cost": {
+    "failed": false,
+    "input_tokens": 89652,
+    "cached_tokens": 82192,
+    "output_tokens": 4076,
+    "input_cost": "0.001857395",
+    "output_cost": "0.0020576",
+    "total": "0.003914995"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 25.9,
+  "claim": {
+    "claim_ref": "RBv1-CLM-15_formats",
+    "policy_id": "VER-1001",
+    "coverage": "C2",
+    "incident_date": "2026-10-02",
+    "report_date": "2026-10-11",
+    "description": "The insured's car struck a bollard while parking. No third party was involved. The customer reports the delay was due to work commitments.",
+    "repair_cost": 650,
+    "at_fault": 1,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"photos\", \"repair_quote\"]",
+    "exclusion_signal": null,
+    "status": "escalated",
+    "blocking_issues": "[\"late_report\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": "[\"late_report\"]",
+    "handler_note": "Own-car collision (C2) with a bollard on 2026-10-02, no third party, repair quote 650 EUR. Reported on 2026-10-11, 9 days later, against a 5-day reporting deadline. The customer cites work commitments as the reason for the delay. Required documents (photos, repair quote) were received. A human handler needs to decide on the late report.",
+    "approved_by": null,
+    "created_at": "2026-10-31T18:00:19+00:00",
+    "updated_at": "2026-10-31T18:00:21+00:00"
+  },
+  "action_log": [
+    {
+      "id": 103,
+      "ts": "2026-10-31T18:00:18+00:00",
+      "claim_ref": "RBv1-CLM-15_formats",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1001",
+        "claim_ref": "RBv1-CLM-15_formats"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1001",
+        "holder_name": "Claire Martin",
+        "vehicle": "Peugeot 208 (2021)",
+        "market_value_eur": 14000,
+        "licence_date": "2012-05-14",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 104,
+      "ts": "2026-10-31T18:00:19+00:00",
+      "claim_ref": "RBv1-CLM-15_formats",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-15_formats",
+        "policy_id": "VER-1001",
+        "coverage": "C2",
+        "incident_date": "2026-10-02",
+        "report_date": "2026-10-11",
+        "description": "The insured's car struck a bollard while parking. No third party was involved. The customer reports the delay was due to work commitments.",
+        "repair_cost": 650,
+        "at_fault": true,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "photos",
+          "repair_quote"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-15_formats",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 9,
+          "reporting_deadline_days": 5,
+          "reported_on_time": false,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "late_report"
+        ]
+      }
+    },
+    {
+      "id": 105,
+      "ts": "2026-10-31T18:00:21+00:00",
+      "claim_ref": "RBv1-CLM-15_formats",
+      "tool": "escalate_to_handler",
+      "arguments": {
+        "claim_ref": "RBv1-CLM-15_formats",
+        "reasons": [
+          "late_report"
+        ],
+        "summary": "Own-car collision (C2) with a bollard on 2026-10-02, no third party, repair quote 650 EUR. Reported on 2026-10-11, 9 days later, against a 5-day reporting deadline. The customer cites work commitments as the reason for the delay. Required documents (photos, repair quote) were received. A human handler needs to decide on the late report."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "RBv1-CLM-15_formats",
+        "status": "escalated",
+        "reasons": [
+          "late_report"
+        ],
+        "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+      }
+    }
+  ],
+  "snapshot_error": null
+}
