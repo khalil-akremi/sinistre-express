@@ -1,0 +1,121 @@
+{
+  "review_id": "R-15",
+  "agent_id": "94xHRD8WcmrX",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1004\",\n      \"sources_say\": \"Policy Schedule shows policy_id: VER-1004\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule in the claims system\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"Policy Schedule lists coverage C2 (Collision damage) for this policy\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule in the claims system\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-03\",\n      \"sources_say\": \"Customer email states the accident happened on 03 October 2026\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-04\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-04\",\n      \"sources_say\": \"Customer email received on 2026-10-04\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-04\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": 900,\n      \"sources_say\": \"Customer email and repair_quote.pdf state the garage quoted €900 to repair the car. Article 1 defines 'repair cost' as the total amount including VAT on the quote.\",\n      \"match\": true,\n      \"evidence\": \"Customer email and Article 1 of the Veridia contract\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": true,\n      \"sources_say\": \"Customer email states the policyholder was reversing and hit a concrete pillar, implying fault. No third party was involved.\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-04\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": false,\n      \"sources_say\": \"Customer email states 'Nobody else was involved'\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-04\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": false,\n      \"sources_say\": \"Customer email states 'Nobody else was involved'\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-04\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\"],\n      \"sources_say\": \"Mailroom records show damage_photos.zip and repair_quote.pdf were received. Article 4.3 for C2 requires 'Photos of the damage' and 'repair quote' as documents.\",\n      \"match\": true,\n      \"evidence\": \"Mailroom records and Article 4.3 of the Veridia contract\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"No evidence of exclusions (e.g., alcohol, invalid licence, intentional damage, wear/mechanical failure) in the email or documents.\",\n      \"match\": true,\n      \"evidence\": \"Customer email and Article 3 of the Veridia contract\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"Reporting deadline: Claim reported on 2026-10-04, within 5 days of the incident (Article 4.1). No exclusions apply (Article 3). Coverage C2 is listed in the Policy Schedule (Article 2). Required documents (photos, repair_quote) were provided (Article 4.3). No playbook rule triggers a referral to a handler (Article 7).\"\n  },\n  \"summary\": \"All recorded facts match the sources, and the claim should be paid according to the Veridia contract and handler playbook.\"\n}\n```",
+  "questions": [],
+  "thread_id": "9e29e612-c262-4696-9971-5597be1026d0",
+  "cost": {
+    "failed": false,
+    "input_tokens": 36868,
+    "cached_tokens": 32976,
+    "output_tokens": 1135,
+    "input_cost": "0.00114824",
+    "output_cost": "0.0007110",
+    "total": "0.00185924"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 13.1,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1004",
+        "sources_say": "Policy Schedule shows policy_id: VER-1004",
+        "match": true,
+        "evidence": "Policy Schedule in the claims system"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "Policy Schedule lists coverage C2 (Collision damage) for this policy",
+        "match": true,
+        "evidence": "Policy Schedule in the claims system"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-03",
+        "sources_say": "Customer email states the accident happened on 03 October 2026",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-04"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-04",
+        "sources_say": "Customer email received on 2026-10-04",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-04"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": 900,
+        "sources_say": "Customer email and repair_quote.pdf state the garage quoted €900 to repair the car. Article 1 defines 'repair cost' as the total amount including VAT on the quote.",
+        "match": true,
+        "evidence": "Customer email and Article 1 of the Veridia contract"
+      },
+      {
+        "field": "at_fault",
+        "recorded": true,
+        "sources_say": "Customer email states the policyholder was reversing and hit a concrete pillar, implying fault. No third party was involved.",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-04"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": false,
+        "sources_say": "Customer email states 'Nobody else was involved'",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-04"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": false,
+        "sources_say": "Customer email states 'Nobody else was involved'",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-04"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "sources_say": "Mailroom records show damage_photos.zip and repair_quote.pdf were received. Article 4.3 for C2 requires 'Photos of the damage' and 'repair quote' as documents.",
+        "match": true,
+        "evidence": "Mailroom records and Article 4.3 of the Veridia contract"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "No evidence of exclusions (e.g., alcohol, invalid licence, intentional damage, wear/mechanical failure) in the email or documents.",
+        "match": true,
+        "evidence": "Customer email and Article 3 of the Veridia contract"
+      }
+    ],
+    "summary": "All recorded facts match the sources, and the claim should be paid according to the Veridia contract and handler playbook.",
+    "unreadable": false
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "review_id": "R-01",
+  "agent_id": "94xHRD8WcmrX",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1004\",\n      \"sources_say\": \"Policy number in the Policy Schedule matches VER-1004.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule (from the claims system)\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"C2 (Collision damage) is listed in the Policy Schedule.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule (from the claims system) and Article 2 of the Veridia contract\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-27\",\n      \"sources_say\": \"Email states the incident occurred on 27 October 2026.\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-28\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-28\",\n      \"sources_say\": \"Email was received on 2026-10-28, which is the report date.\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-28\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": 900,\n      \"sources_say\": \"The repair quote shows a total of €1,640.00 incl. VAT. The recorded repair cost of €900 does not match the quote.\",\n      \"match\": false,\n      \"evidence\": \"repair_quote.pdf (total incl. VAT: €1,640.00)\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": true,\n      \"sources_say\": \"The customer states they hit a post and implies they are at fault.\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-28\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": false,\n      \"sources_say\": \"The customer states 'nobody else was involved.'\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-28\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": false,\n      \"sources_say\": \"No third party was involved, so this field is correctly recorded.\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-28\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\"],\n      \"sources_say\": \"The email mentions 'damage_photos.zip' and 'repair_quote.pdf' as attached. The mailroom also confirms receipt of 'damage_photos.zip'.\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-28 and file upload report\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"No exclusion is evident from the email or documents.\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-28 and repair_quote.pdf\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": false,\n    \"evidence\": \"The recorded repair cost (€900) does not match the quote (€1,640.00 incl. VAT). The claim must be referred to a handler for verification and correction.\"\n  },\n  \"summary\": \"The claim cannot be approved due to a mismatch in the repair cost. Refer the claim to a handler for verification.\"\n}\n```",
+  "questions": [],
+  "thread_id": "7264f34d-9dde-4795-b9e1-3fc77cbc00ba",
+  "cost": {
+    "failed": false,
+    "input_tokens": 95077,
+    "cached_tokens": 69216,
+    "output_tokens": 1279,
+    "input_cost": "0.00506034",
+    "output_cost": "0.0008268",
+    "total": "0.00588714"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "error",
+      "error": "Tool execution error: page_label='4' was not found for document_id='2630#10414' : Available pages [\"1\", \"2\", \"3\"]"
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 26.5,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "repair_cost",
+        "recorded": 900,
+        "should_be": "The repair quote shows a total of €1,640.00 incl. VAT. The recorded repair cost of €900 does not match the quote.",
+        "evidence": "repair_quote.pdf (total incl. VAT: €1,640.00)"
+      },
+      {
+        "field": "payment decision",
+        "recorded": "payment staged",
+        "should_be": "not paid",
+        "evidence": "The recorded repair cost (€900) does not match the quote (€1,640.00 incl. VAT). The claim must be referred to a handler for verification and correction."
+      }
+    ],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1004",
+        "sources_say": "Policy number in the Policy Schedule matches VER-1004.",
+        "match": true,
+        "evidence": "Policy Schedule (from the claims system)"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "C2 (Collision damage) is listed in the Policy Schedule.",
+        "match": true,
+        "evidence": "Policy Schedule (from the claims system) and Article 2 of the Veridia contract"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-27",
+        "sources_say": "Email states the incident occurred on 27 October 2026.",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-28"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-28",
+        "sources_say": "Email was received on 2026-10-28, which is the report date.",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-28"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": 900,
+        "sources_say": "The repair quote shows a total of €1,640.00 incl. VAT. The recorded repair cost of €900 does not match the quote.",
+        "match": false,
+        "evidence": "repair_quote.pdf (total incl. VAT: €1,640.00)"
+      },
+      {
+        "field": "at_fault",
+        "recorded": true,
+        "sources_say": "The customer states they hit a post and implies they are at fault.",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-28"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": false,
+        "sources_say": "The customer states 'nobody else was involved.'",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-28"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": false,
+        "sources_say": "No third party was involved, so this field is correctly recorded.",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-28"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "sources_say": "The email mentions 'damage_photos.zip' and 'repair_quote.pdf' as attached. The mailroom also confirms receipt of 'damage_photos.zip'.",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-28 and file upload report"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "No exclusion is evident from the email or documents.",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-28 and repair_quote.pdf"
+      }
+    ],
+    "summary": "The claim cannot be approved due to a mismatch in the repair cost. Refer the claim to a handler for verification.",
+    "unreadable": false
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "review_id": "R-08",
+  "agent_id": "94xHRD8WcmrX",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1007\",\n      \"sources_say\": \"Policy number VER-1007 is stated in the customer email and matches the Policy Schedule.\",\n      \"match\": true,\n      \"evidence\": \"Customer email and Policy Schedule in the claims system\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"The recorded coverage is C2 (Collision damage), but the incident involves glass breakage. The Policy Schedule shows C3 (Glass breakage) as an active coverage for this policyholder.\",\n      \"match\": false,\n      \"evidence\": \"Policy Schedule (source: contract.pdf, page 2) states C3 (Glass breakage) is active for VER-1007, not C2.\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-26\",\n      \"sources_say\": \"The incident date is 26 October 2026, as stated in the customer email.\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-27\",\n      \"sources_say\": \"The claim was reported on 27 October 2026, as stated in the customer email.\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": 1180,\n      \"sources_say\": \"The repair quote shows a total of €1,180 incl. VAT, which matches the recorded repair cost.\",\n      \"match\": true,\n      \"evidence\": \"repair_quote.pdf\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": false,\n      \"sources_say\": \"The customer email does not mention fault, but the incident involves a stone thrown up on the motorway, which suggests no fault on the policyholder's part. The recorded value is consistent with the email.\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": false,\n      \"sources_say\": \"The customer email does not mention any third party being involved in the incident.\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": false,\n      \"sources_say\": \"No third party is involved, so this field is not applicable.\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\"],\n      \"sources_say\": \"The customer email mentions 'damage_photos.zip' and 'repair_quote.pdf' as attached documents. The mailroom also has 'damage_photos.zip' stored.\",\n      \"match\": true,\n      \"evidence\": \"Customer email and mailroom records\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"No exclusion is mentioned in the email or documents, and none is apparent.\",\n      \"match\": true,\n      \"evidence\": \"Customer email and repair_quote.pdf\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": false,\n    \"evidence\": \"The recorded coverage (C2) does not match the actual coverage applicable for the incident (C3, Glass breakage). The handler playbook (Article 7) states that a claim under a coverage not in the Policy Schedule must be referred to a claims handler. Additionally, the recorded coverage (C2) is incorrect, as the incident involves glass breakage, not collision damage.\"\n  },\n  \"summary\": \"The claim should not be paid automatically because the recorded coverage (C2) does not match the actual coverage (C3) for glass breakage, and the handler playbook requires referral to a claims handler in such cases.\"\n}\n```",
+  "questions": [],
+  "thread_id": "453c2d5a-4c47-49e4-bd2c-c87dcd11fc60",
+  "cost": {
+    "failed": false,
+    "input_tokens": 36075,
+    "cached_tokens": 31584,
+    "output_tokens": 1139,
+    "input_cost": "0.00123151",
+    "output_cost": "0.0007164",
+    "total": "0.00194791"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 13.7,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "should_be": "The recorded coverage is C2 (Collision damage), but the incident involves glass breakage. The Policy Schedule shows C3 (Glass breakage) as an active coverage for this policyholder.",
+        "evidence": "Policy Schedule (source: contract.pdf, page 2) states C3 (Glass breakage) is active for VER-1007, not C2."
+      },
+      {
+        "field": "payment decision",
+        "recorded": "payment staged",
+        "should_be": "not paid",
+        "evidence": "The recorded coverage (C2) does not match the actual coverage applicable for the incident (C3, Glass breakage). The handler playbook (Article 7) states that a claim under a coverage not in the Policy Schedule must be referred to a claims handler. Additionally, the recorded coverage (C2) is incorrect, as the incident involves glass breakage, not collision damage."
+      }
+    ],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1007",
+        "sources_say": "Policy number VER-1007 is stated in the customer email and matches the Policy Schedule.",
+        "match": true,
+        "evidence": "Customer email and Policy Schedule in the claims system"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "The recorded coverage is C2 (Collision damage), but the incident involves glass breakage. The Policy Schedule shows C3 (Glass breakage) as an active coverage for this policyholder.",
+        "match": false,
+        "evidence": "Policy Schedule (source: contract.pdf, page 2) states C3 (Glass breakage) is active for VER-1007, not C2."
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-26",
+        "sources_say": "The incident date is 26 October 2026, as stated in the customer email.",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-27",
+        "sources_say": "The claim was reported on 27 October 2026, as stated in the customer email.",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": 1180,
+        "sources_say": "The repair quote shows a total of €1,180 incl. VAT, which matches the recorded repair cost.",
+        "match": true,
+        "evidence": "repair_quote.pdf"
+      },
+      {
+        "field": "at_fault",
+        "recorded": false,
+        "sources_say": "The customer email does not mention fault, but the incident involves a stone thrown up on the motorway, which suggests no fault on the policyholder's part. The recorded value is consistent with the email.",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": false,
+        "sources_say": "The customer email does not mention any third party being involved in the incident.",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": false,
+        "sources_say": "No third party is involved, so this field is not applicable.",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "sources_say": "The customer email mentions 'damage_photos.zip' and 'repair_quote.pdf' as attached documents. The mailroom also has 'damage_photos.zip' stored.",
+        "match": true,
+        "evidence": "Customer email and mailroom records"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "No exclusion is mentioned in the email or documents, and none is apparent.",
+        "match": true,
+        "evidence": "Customer email and repair_quote.pdf"
+      }
+    ],
+    "summary": "The claim should not be paid automatically because the recorded coverage (C2) does not match the actual coverage (C3) for glass breakage, and the handler playbook requires referral to a claims handler in such cases.",
+    "unreadable": false
+  }
+}

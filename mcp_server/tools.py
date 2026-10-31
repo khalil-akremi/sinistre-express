@@ -412,6 +412,16 @@ class ClaimsSystem:
     def get_claim(self, claim_ref: str) -> dict:
         return dict(self._claim_row(claim_ref))
 
+    def list_claims(self, since: str | None = None) -> list[dict]:
+        """All claims (optionally created on or after `since`, ISO date), with the holder's name."""
+        conn = self._conn()
+        rows = conn.execute(
+            "SELECT c.*, p.holder_name FROM claims c JOIN policies p ON p.policy_id = c.policy_id "
+            "WHERE c.created_at >= ? ORDER BY c.created_at", (since or "",)
+        ).fetchall()
+        conn.close()
+        return [dict(r) for r in rows]
+
     def action_log(self, claim_ref: str | None = None) -> list[dict]:
         conn = self._conn()
         if claim_ref:

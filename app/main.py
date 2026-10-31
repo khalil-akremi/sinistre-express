@@ -18,7 +18,7 @@ import os
 
 from dotenv import load_dotenv
 
-from app.agent import ComintyRunner
+from app.agent import ComintyReportRunner, ComintyRunner
 from app.memory import ComintyMemory
 from app.web import register_web_routes
 from mcp.server.transport_security import TransportSecuritySettings
@@ -45,8 +45,9 @@ def create_server():
               if configured else MissingConfigRunner())
     reviewer_id = os.environ.get("REVIEWER_AGENT_ID", "").strip()
     reviewer = ComintyRunner(agent_id=reviewer_id, max_steps=20) if configured and reviewer_id else None
+    reporter = ComintyReportRunner() if configured else None
     register_web_routes(server, system, runner, memory=ComintyMemory(namespace) if use_memory else None,
-                        reviewer=reviewer)
+                        reviewer=reviewer, reporter=reporter)
     return server, system
 
 

@@ -1,0 +1,146 @@
+{
+  "review_id": "R-14",
+  "agent_id": "94xHRD8WcmrX",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1008\",\n      \"sources_say\": \"Matches the Policy Schedule for Hugo Garcia.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule in contract.pdf\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C3\",\n      \"sources_say\": \"C3 (Glass breakage) is listed in the Policy Schedule under coverages.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule in contract.pdf\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-10\",\n      \"sources_say\": \"Matches the date provided in the customer email.\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-12\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-12\",\n      \"sources_say\": \"Matches the date the email was received.\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-12\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": 320,\n      \"sources_say\": \"The repair cost is recorded as €320 in the email and aligns with the repair quote.\",\n      \"match\": true,\n      \"evidence\": \"Customer email and repair_quote.pdf (attached)\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": false,\n      \"sources_say\": \"No indication of fault as the damage was caused by an unknown third party or event.\",\n      \"match\": true,\n      \"evidence\": \"Customer email states 'nothing was taken from the car' and no third party is identified.\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": false,\n      \"sources_say\": \"No third party is mentioned as being involved in the incident.\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": false,\n      \"sources_say\": \"No third party is identified in the email or documents.\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\"],\n      \"sources_say\": \"The claim includes damage photos and a repair quote, as stated in the email.\",\n      \"match\": true,\n      \"evidence\": \"Customer email mentions 'damage_photos.zip' and 'repair_quote.pdf' (attached).\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"No exclusion is indicated in the email or documents.\",\n      \"match\": true,\n      \"evidence\": \"Customer email and no mention of exclusions in the provided facts.\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"The claim is under coverage C3 (Glass breakage), which is listed in the Policy Schedule. The incident was reported within 5 days (reported on 2026-10-12 for an incident on 2026-10-10). No exclusions apply, and no playbook rule requires referral to a handler. The deductible is €50, and the payout is €270, which aligns with the policy terms.\"\n  },\n  \"summary\": \"All recorded facts match the customer email and documents, and the claim should be paid as it meets all policy conditions and reporting requirements.\"\n}\n```",
+  "questions": [],
+  "thread_id": "6f4e1949-199e-4cda-b707-aaa3accda5df",
+  "cost": {
+    "failed": false,
+    "input_tokens": 61683,
+    "cached_tokens": 54656,
+    "output_tokens": 1228,
+    "input_cost": "0.00203529",
+    "output_cost": "0.0008052",
+    "total": "0.00284049"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "error",
+      "error": "Tool execution error: Document document_id='2630' was not found"
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 18.0,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1008",
+        "sources_say": "Matches the Policy Schedule for Hugo Garcia.",
+        "match": true,
+        "evidence": "Policy Schedule in contract.pdf"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C3",
+        "sources_say": "C3 (Glass breakage) is listed in the Policy Schedule under coverages.",
+        "match": true,
+        "evidence": "Policy Schedule in contract.pdf"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-10",
+        "sources_say": "Matches the date provided in the customer email.",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-12"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-12",
+        "sources_say": "Matches the date the email was received.",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-12"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": 320,
+        "sources_say": "The repair cost is recorded as €320 in the email and aligns with the repair quote.",
+        "match": true,
+        "evidence": "Customer email and repair_quote.pdf (attached)"
+      },
+      {
+        "field": "at_fault",
+        "recorded": false,
+        "sources_say": "No indication of fault as the damage was caused by an unknown third party or event.",
+        "match": true,
+        "evidence": "Customer email states 'nothing was taken from the car' and no third party is identified."
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": false,
+        "sources_say": "No third party is mentioned as being involved in the incident.",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": false,
+        "sources_say": "No third party is identified in the email or documents.",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "sources_say": "The claim includes damage photos and a repair quote, as stated in the email.",
+        "match": true,
+        "evidence": "Customer email mentions 'damage_photos.zip' and 'repair_quote.pdf' (attached)."
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "No exclusion is indicated in the email or documents.",
+        "match": true,
+        "evidence": "Customer email and no mention of exclusions in the provided facts."
+      }
+    ],
+    "summary": "All recorded facts match the customer email and documents, and the claim should be paid as it meets all policy conditions and reporting requirements.",
+    "unreadable": false
+  }
+}

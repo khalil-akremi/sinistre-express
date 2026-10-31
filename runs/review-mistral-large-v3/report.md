@@ -3,10 +3,10 @@
 | | Result |
 |---|---|
 | Planted mistakes caught | 8/8 |
-| … pointing at the right problem | 7/8 |
+| … pointing at the right problem | 8/8 |
 | False alarms on correct claims | 0/8 |
-| Unreadable answers (counted as concerns) | 1 |
-| Average cost, time per review | €0.0249, 49 s |
+| Unreadable answers (counted as concerns) | 0 |
+| Average cost, time per review | €0.0235, 47 s |
 
 | File | Planted mistake | Verdict | Right problem | Reviewer's summary |
 |---|---|---|---|---|
@@ -16,7 +16,7 @@
 | R-04 (DOC-02) | Ignored the playbook: the other vehicle is a company van, the claim should be referred. | ✅ concerns | ✅ | Every recorded fact matches the email, the signed accident report and the repair quote, and the claim is in time, covered under C2, fully documented and exclusi |
 | R-05 (CLM-16) | Missed a possible exclusion: the customer says he had a few drinks before driving. | ✅ concerns | ✅ | All recorded facts match the email and documents except exclusion_signal: the customer admitted to 'a few drinks' before the crash, a possible alcohol exclusion |
 | R-06 (CLM-15) | Recorded a wrong report date, hiding a late report (9 days after the incident). | ✅ concerns | ✅ | Do not approve the automatic payment: the report date was recorded as 2026-10-03 but the claim email was actually received on 2026-10-11, 9 days after the 2026- |
-| R-07 (CLM-05) | Recorded the other driver as not identified, so the not-at-fault waiver was lost. | ✅ concerns | ❌ | The review could not be read; check the claim manually. |
+| R-07 (CLM-05) | Recorded the other driver as not identified, so the not-at-fault waiver was lost. | ✅ concerns | ✅ | The claim is payable (C2 covered, reported within 5 days, all required documents received, no exclusion, playbook commercial-vehicle rule not triggered), but th |
 | R-08 (DOC-03) | Recorded a windscreen claim as collision (C2) instead of glass (C3). | ✅ concerns | ✅ | All facts match the email and the repair quote, and the claim is payable (in time, covered under C3 glass breakage, documents provided, no exclusion, playbook c |
 | R-09 (DOC-01) | none (correct claim) | ✅ approve | — | Every recorded fact matches the customer email, the signed accident report and the repair quote, the claim is within the 5-day reporting deadline, C2 coverage i |
 | R-10 (DOC-03) | none (correct claim) | ✅ approve | — | All recorded facts match the email, the repair quote, the Policy Schedule and the contract, the claim was reported within 5 days with no exclusion and both requ |

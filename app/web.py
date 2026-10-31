@@ -13,6 +13,9 @@ Routes
     GET  /api/memory?policy=<id>    what the agent remembers: playbook rules, customer note
     POST /api/memory/playbook       a handler teaches the agent a rule
     POST /api/memory/reset          back to an empty playbook and no customer notes
+    POST /api/report                daily claims report by a built-in Cominty agent -> {"report_id"}
+    GET  /api/report/<id>           its progress, briefing and the checks of the workbook
+    GET  /api/report/<id>/file      the Excel workbook
 
 The Cominty API key stays on the server. The browser only talks to these routes.
 Every public run spends credits, so runs are rate-limited (one at a time,
@@ -36,6 +39,7 @@ from starlette.responses import FileResponse, JSONResponse, Response, StreamingR
 
 from app.agent import AgentRunner
 from app.memory import MAX_RULE_CHARS, PLAYBOOK, customer_path, rules_of
+from core.report import build_report_task, claim_rows, report_filename, to_csv, verify_workbook
 from core.review import build_review_task, created_inputs, parse_verdict
 from core.task import build_task
 from mcp.server.mcpserver import MCPServer
@@ -76,6 +80,23 @@ class Run:
     files: list[Path] = field(default_factory=list)
     review_state: str = "none"          # none / running / done
     review: dict | None = None
+
+
+@dataclass
+class Report:
+    report_id: str
+    day: str
+    started: float = field(default_factory=time.monotonic)
+    events: list[dict] = field(default_factory=list)
+    done: bool = False
+    claims: int = 0
+    briefing: str | None = None
+    checks: dict | None = None
+    file_name: str | None = None
+    file: bytes | None = None
+    cost: dict | None = None
+    error: str | None = None
+    seconds: float | None = None
 
 
 @dataclass
@@ -183,8 +204,8 @@ def sse(event: str, data: dict) -> str:
 
 # --------------------------------------------------------------- routes
 def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRunner,
-                        daily_max: int | None = None, memory=None, reviewer: AgentRunner | None = None
-                        ) -> dict[str, Run]:
+                        daily_max: int | None = None, memory=None, reviewer: AgentRunner | None = None,
+                        reporter=None) -> dict[str, Run]:
     """`memory` is a memory store (app.memory); None runs the demo without memory.
     `reviewer` is a second agent that checks every staged payment; None skips the review."""
     runs: dict[str, Run] = {}
@@ -192,6 +213,7 @@ def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRu
     teach_limits = Limits(int(os.environ.get("DEMO_TEACH_LIMIT", "20")))
     busy = asyncio.Lock()
     cases = {c["case_id"]: c for c in load_cases()}
+    reports: dict[str, Report] = {}
 
     async def review(run: Run) -> None:
         """Second agent, read-only: checks a staged payment before a person can approve it."""
@@ -415,5 +437,70 @@ def register_web_routes(server: MCPServer, system: ClaimsSystem, runner: AgentRu
         except Exception as exc:  # noqa: BLE001
             return JSONResponse({"error": f"Memory is unavailable: {exc}"}, status_code=502)
         return JSONResponse({"rules": []})
+
+    # ------------------------------------------------------------ daily report
+    async def make_report(report: Report) -> None:
+        async with busy:
+            try:
+                claims = system.list_claims(since=report.day)
+                rows = claim_rows(claims, {ref: r.review for ref, r in runs.items() if r.review})
+                report.claims = len(rows)
+                csv_name = f"veridia-claims-{report.day}.csv"
+                result = await asyncio.wait_for(
+                    reporter(build_report_task(report.day, rows, csv_name), csv_name, to_csv(rows),
+                             report.events.append), timeout=RUN_TIMEOUT_S)
+                report.briefing, report.cost = result.get("reply"), result.get("cost")
+                if not result.get("files"):
+                    report.error = "The agent did not return an Excel file."
+                else:
+                    report.file_name, report.file = result["files"][0]
+                    report.checks = verify_workbook(report.file, rows)
+                    report.events.append({"source": "system", "icon": "🔎",
+                                          "text": f"Workbook checked against the claims system: "
+                                                  f"{report.checks['passed']}/{report.checks['total']} checks passed"})
+            except Exception as exc:  # noqa: BLE001
+                report.error = f"{type(exc).__name__}: {exc}"
+            finally:
+                report.seconds = round(time.monotonic() - report.started, 1)
+                report.done = True
+
+    def report_payload(report: Report) -> dict:
+        return {"report_id": report.report_id, "day": report.day, "done": report.done, "claims": report.claims,
+                "events": report.events, "briefing": report.briefing, "checks": report.checks,
+                "file_url": f"/api/report/{report.report_id}/file" if report.file else None,
+                "file_name": report.file_name, "cost": report.cost, "error": report.error,
+                "seconds": report.seconds}
+
+    @server.custom_route("/api/report", methods=["POST"], include_in_schema=False)
+    async def start_report(request: Request) -> Response:
+        if reporter is None:
+            return JSONResponse({"error": "The daily report is not configured on this server."}, status_code=404)
+        day = datetime.now(timezone.utc).date().isoformat()
+        if not system.list_claims(since=day):
+            return JSONResponse({"error": "No claims handled today yet: send a few claims first."}, status_code=409)
+        if busy.locked():
+            return JSONResponse({"error": "The agent is busy with a claim. Try again in a minute."}, status_code=429)
+        if not limits.try_take():
+            return JSONResponse({"error": "The demo's daily limit is reached. Please try again tomorrow."},
+                                status_code=429)
+        report = Report(report_id=secrets.token_hex(6), day=day)
+        reports[report.report_id] = report
+        asyncio.create_task(make_report(report))
+        return JSONResponse({"report_id": report.report_id}, status_code=202)
+
+    @server.custom_route("/api/report/{report_id}", methods=["GET"], include_in_schema=False)
+    async def get_report(request: Request) -> Response:
+        report = reports.get(request.path_params["report_id"])
+        if report is None:
+            return JSONResponse({"error": "Unknown report (the server may have restarted)."}, status_code=404)
+        return JSONResponse(report_payload(report))
+
+    @server.custom_route("/api/report/{report_id}/file", methods=["GET"], include_in_schema=False)
+    async def report_file(request: Request) -> Response:
+        report = reports.get(request.path_params["report_id"])
+        if report is None or report.file is None:
+            return JSONResponse({"error": "not found"}, status_code=404)
+        return Response(report.file, media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        headers={"Content-Disposition": f'attachment; filename="{report_filename(report.day)}"'})
 
     return runs

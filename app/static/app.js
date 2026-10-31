@@ -278,3 +278,37 @@ $("reset-memory").addEventListener("click", resetMemory);
 els.select.addEventListener("change", () => fillCase(els.select.value));
 els.send.addEventListener("click", send);
 loadCases().catch(() => showQuota(null, "Cannot reach the claims desk. Refresh in a minute: the free server may be waking up."));
+
+
+// ---------------------------------------------------------------- daily report
+async function makeReport() {
+  const button = $("make-report");
+  button.disabled = true;
+  $("report-msg").textContent = "";
+  $("report-steps").innerHTML = "";
+  $("report-result").innerHTML = "";
+  const res = await fetch("/api/report", { method: "POST" });
+  const data = await res.json();
+  if (!res.ok) { button.disabled = false; $("report-msg").textContent = data.error; return; }
+  $("report-msg").textContent = "The built-in agent is building the report (about a minute)…";
+  const poll = async () => {
+    const r = await fetch(`/api/report/${data.report_id}`);
+    const rep = await r.json();
+    if (!r.ok) { button.disabled = false; $("report-msg").textContent = rep.error; return; }
+    $("report-steps").innerHTML = rep.events.map((e) =>
+      `<li>${escapeHtml(`${e.icon} ${e.text}`)}</li>`).join("");
+    if (!rep.done) { setTimeout(poll, 2000); return; }
+    button.disabled = false;
+    $("report-msg").textContent = `${rep.claims} claims, ${rep.seconds} s` +
+      (rep.cost ? `, cost €${Number(rep.cost.total).toFixed(4)}` : "") + ".";
+    const checks = rep.checks ? `<ul class="checks">${rep.checks.checks.map((c) =>
+      `<li class="${c.ok ? "ok" : "ko"}">${c.ok ? "✅" : "❌"} ${escapeHtml(c.name)}${c.detail && !c.ok ? ` <span>${escapeHtml(c.detail)}</span>` : ""}</li>`).join("")}</ul>` : "";
+    $("report-result").innerHTML =
+      (rep.error ? `<p class="error-box">${escapeHtml(rep.error)}</p>` : "") +
+      (rep.file_url ? `<a class="download" href="${rep.file_url}">Download ${escapeHtml(rep.file_name || "the report")}</a>` : "") +
+      (rep.checks ? `<h3>Checked against the claims system: ${rep.checks.passed}/${rep.checks.total}</h3>${checks}` : "") +
+      (rep.briefing ? `<h3>Briefing for the claims manager</h3><div class="reply">${renderReply(rep.briefing)}</div>` : "");
+  };
+  poll();
+}
+$("make-report").addEventListener("click", makeReport);

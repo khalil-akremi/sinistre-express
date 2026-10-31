@@ -1,0 +1,132 @@
+{
+  "review_id": "R-16",
+  "agent_id": "94xHRD8WcmrX",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1004\",\n      \"sources_say\": \"Policy Schedule lists policy_id as VER-1004 for Thomas Petit.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"Policy Schedule lists coverage C2 (Collision damage) for this policy.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-08\",\n      \"sources_say\": \"Customer email states the accident happened on 08 October 2026.\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-10\",\n      \"sources_say\": \"Customer email was received on 2026-10-10.\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": 1500,\n      \"sources_say\": \"Customer email and repair_quote.pdf state the repair cost as €1,500 (including VAT).\",\n      \"match\": true,\n      \"evidence\": \"Customer email and repair_quote.pdf\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": true,\n      \"sources_say\": \"Customer email explicitly states 'My fault.'\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": true,\n      \"sources_say\": \"Customer email states 'I hit the car in front of me' and mentions Mr. Blanc (a third party).\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": true,\n      \"sources_say\": \"Customer email mentions Mr. Blanc as the third party involved.\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\", \"accident_report\"],\n      \"sources_say\": \"Mailroom confirms receipt of damage_photos.zip, repair_quote.pdf, and accident_report_signed.pdf. These correspond to 'photos', 'repair_quote', and 'accident_report'.\",\n      \"match\": true,\n      \"evidence\": \"Mailroom records and Policy Schedule (Article 4.3 for C2)\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"No evidence of exclusions (e.g., alcohol, drugs, invalid license, intentional damage, or mechanical failure) in the email or documents.\",\n      \"match\": true,\n      \"evidence\": \"Customer email and documents\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"The claim meets all reporting and documentation requirements (Article 4.1 and 4.3). Coverage C2 is valid (Article 2). No exclusions apply (Article 3). The repair cost (€1,500) is within the limit for automatic processing (no assessor required per Article 6.1). The deductible is €300 (Article 5.2 does not waive it because the policyholder is at fault).\"\n  },\n  \"summary\": \"All recorded facts match the sources, and the claim should be paid automatically under coverage C2 with a €300 deductible.\"\n}\n```",
+  "questions": [],
+  "thread_id": "a23cc481-4a31-4d00-a01b-fa4b62c98b81",
+  "cost": {
+    "failed": false,
+    "input_tokens": 32365,
+    "cached_tokens": 25744,
+    "output_tokens": 1113,
+    "input_cost": "0.00148601",
+    "output_cost": "0.0007110",
+    "total": "0.00219701"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 11.0,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1004",
+        "sources_say": "Policy Schedule lists policy_id as VER-1004 for Thomas Petit.",
+        "match": true,
+        "evidence": "Policy Schedule"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "Policy Schedule lists coverage C2 (Collision damage) for this policy.",
+        "match": true,
+        "evidence": "Policy Schedule"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-08",
+        "sources_say": "Customer email states the accident happened on 08 October 2026.",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-10",
+        "sources_say": "Customer email was received on 2026-10-10.",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": 1500,
+        "sources_say": "Customer email and repair_quote.pdf state the repair cost as €1,500 (including VAT).",
+        "match": true,
+        "evidence": "Customer email and repair_quote.pdf"
+      },
+      {
+        "field": "at_fault",
+        "recorded": true,
+        "sources_say": "Customer email explicitly states 'My fault.'",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": true,
+        "sources_say": "Customer email states 'I hit the car in front of me' and mentions Mr. Blanc (a third party).",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": true,
+        "sources_say": "Customer email mentions Mr. Blanc as the third party involved.",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote",
+          "accident_report"
+        ],
+        "sources_say": "Mailroom confirms receipt of damage_photos.zip, repair_quote.pdf, and accident_report_signed.pdf. These correspond to 'photos', 'repair_quote', and 'accident_report'.",
+        "match": true,
+        "evidence": "Mailroom records and Policy Schedule (Article 4.3 for C2)"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "No evidence of exclusions (e.g., alcohol, drugs, invalid license, intentional damage, or mechanical failure) in the email or documents.",
+        "match": true,
+        "evidence": "Customer email and documents"
+      }
+    ],
+    "summary": "All recorded facts match the sources, and the claim should be paid automatically under coverage C2 with a €300 deductible.",
+    "unreadable": false
+  }
+}

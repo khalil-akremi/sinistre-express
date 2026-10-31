@@ -1,0 +1,106 @@
+{
+  "review_id": "R-10",
+  "agent_id": "94xHRD8WcmrX",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1007\",\n      \"sources_say\": \"Policy Schedule and repair_quote.pdf both list policy number VER-1007.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule and repair_quote.pdf\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C3\",\n      \"sources_say\": \"Policy Schedule lists 'Glass breakage (C3)' as a coverage.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-26\",\n      \"sources_say\": \"Customer email states the incident occurred on 26 October 2026.\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-27\",\n      \"sources_say\": \"Customer email was received on 2026-10-27.\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": 1180,\n      \"sources_say\": \"repair_quote.pdf shows a total of 1 180,00 € (including VAT).\",\n      \"match\": true,\n      \"evidence\": \"repair_quote.pdf\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": false,\n      \"sources_say\": \"No indication of fault in the customer email, repair_quote.pdf, or Policy Schedule.\",\n      \"match\": true,\n      \"evidence\": \"Customer email, repair_quote.pdf, Policy Schedule\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": false,\n      \"sources_say\": \"No mention of a third party in the customer email, repair_quote.pdf, or Policy Schedule.\",\n      \"match\": true,\n      \"evidence\": \"Customer email, repair_quote.pdf, Policy Schedule\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": false,\n      \"sources_say\": \"No third party is mentioned or identified.\",\n      \"match\": true,\n      \"evidence\": \"Customer email, repair_quote.pdf, Policy Schedule\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\"],\n      \"sources_say\": \"Customer email mentions 'damage_photos.zip' and 'repair_quote.pdf' as attached.\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"No exclusion is mentioned or flagged in the sources.\",\n      \"match\": true,\n      \"evidence\": \"Customer email, repair_quote.pdf, Policy Schedule\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"The incident is covered under 'Glass breakage (C3)', no exclusions apply, the claim was reported within a reasonable timeframe, and no playbook rule (e.g., referral to a handler) is triggered.\"\n  },\n  \"summary\": \"All recorded facts match the sources, and the claim should be paid as the incident is covered and no exclusions or playbook rules apply.\"\n}\n```",
+  "questions": [],
+  "thread_id": "5147bcce-a079-4080-b521-4f461df8e93b",
+  "cost": {
+    "failed": false,
+    "input_tokens": 16681,
+    "cached_tokens": 14880,
+    "output_tokens": 852,
+    "input_cost": "0.00051135",
+    "output_cost": "0.0005160",
+    "total": "0.00102735"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 9.0,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1007",
+        "sources_say": "Policy Schedule and repair_quote.pdf both list policy number VER-1007.",
+        "match": true,
+        "evidence": "Policy Schedule and repair_quote.pdf"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C3",
+        "sources_say": "Policy Schedule lists 'Glass breakage (C3)' as a coverage.",
+        "match": true,
+        "evidence": "Policy Schedule"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-26",
+        "sources_say": "Customer email states the incident occurred on 26 October 2026.",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-27",
+        "sources_say": "Customer email was received on 2026-10-27.",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": 1180,
+        "sources_say": "repair_quote.pdf shows a total of 1 180,00 € (including VAT).",
+        "match": true,
+        "evidence": "repair_quote.pdf"
+      },
+      {
+        "field": "at_fault",
+        "recorded": false,
+        "sources_say": "No indication of fault in the customer email, repair_quote.pdf, or Policy Schedule.",
+        "match": true,
+        "evidence": "Customer email, repair_quote.pdf, Policy Schedule"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": false,
+        "sources_say": "No mention of a third party in the customer email, repair_quote.pdf, or Policy Schedule.",
+        "match": true,
+        "evidence": "Customer email, repair_quote.pdf, Policy Schedule"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": false,
+        "sources_say": "No third party is mentioned or identified.",
+        "match": true,
+        "evidence": "Customer email, repair_quote.pdf, Policy Schedule"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "sources_say": "Customer email mentions 'damage_photos.zip' and 'repair_quote.pdf' as attached.",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "No exclusion is mentioned or flagged in the sources.",
+        "match": true,
+        "evidence": "Customer email, repair_quote.pdf, Policy Schedule"
+      }
+    ],
+    "summary": "All recorded facts match the sources, and the claim should be paid as the incident is covered and no exclusions or playbook rules apply.",
+    "unreadable": false
+  }
+}

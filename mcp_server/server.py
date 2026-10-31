@@ -160,6 +160,17 @@ def build_server(system: ClaimsSystem, admin_secret: str = "local") -> MCPServer
             claim = None
         return JSONResponse({"claim": claim, "action_log": system.action_log(claim_ref)})
 
+    @server.custom_route("/admin/{token}/claims", methods=["GET"], include_in_schema=False)
+    async def claim_list(request):
+        """Read-only list of claims created since ?since=YYYY-MM-DD (for the daily report script)."""
+        import secrets
+
+        from starlette.responses import JSONResponse
+
+        if not secrets.compare_digest(request.path_params["token"], admin_secret):
+            return JSONResponse({"error": "not found"}, status_code=404)
+        return JSONResponse({"claims": system.list_claims(request.query_params.get("since"))})
+
     return server
 
 

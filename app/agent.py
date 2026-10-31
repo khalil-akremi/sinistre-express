@@ -32,7 +32,7 @@ TOOL_LABELS = {
     "subagent": ("🤝", "Handing work to the Veridia claims sub-agent"),
     "execute": ("🧪", "Running code in the sandbox"),
     "read_file": ("📎", "Reading an attached document"),
-    "load_skill": ("🧰", "Loading a skill"),
+    "load_skill": ("🧰", "Loading a skill (e.g. Spreadsheet)"),
     "ask_questions": ("❓", "Preparing a question for you"),
     "memory_read": ("🧠", "Reading its memory"),
     "memory_write": ("🧠", "Writing to its memory"),
@@ -123,3 +123,53 @@ class ComintyRunner:
             "status": str(reply.status),
             "cost": cost.model_dump(mode="json") if cost is not None else None,
         }
+
+
+# ------------------------------------------------------ the daily report runner
+BUILTIN_CHAT_AGENT = "__cominty_agents::agent.chat"
+
+
+class ComintyReportRunner:
+    """A built-in Cominty agent (Chat) with skills on, and nothing else: no claims
+    system, no memory, no web. It gets the CSV, returns a workbook and a briefing."""
+
+    def __init__(self, agent_id: str = BUILTIN_CHAT_AGENT, max_steps: int = 25):
+        self.agent_id = agent_id
+        self.api_token = clean_secret(os.environ.get("COMINTY_API_KEY"))
+        self.user_id = clean_secret(os.environ.get("COMINTY_USER_ID"))
+        self.max_steps = max_steps
+
+    async def __call__(self, task: str, csv_name: str, csv_text: str, on_event: EventSink) -> dict:
+        from cominty_sdk import (AgentCapabilities, AsyncCominty, McpCapability, MemoryCapability,
+                                 SkillsCapability, WebCapability, events)
+
+        caps = AgentCapabilities(skills=SkillsCapability(activation="always"), mcp=McpCapability(activation="never"),
+                                 memory=MemoryCapability(activation="never"), web=WebCapability(activation="never"))
+        cost, files = None, []
+        async with AsyncCominty(api_token=self.api_token, user_id=self.user_id) as client:
+            on_event({"source": "agent", "icon": "📤", "text": f"Attaching {csv_name} (today's claims)"})
+            uploaded = await client.chat.upload_file(csv_text.encode("utf-8"), filename=csv_name)
+            run = await client.chat.start(agent_id=self.agent_id, message=task, file_ids=[uploaded.id],
+                                          max_steps=self.max_steps, thread_capabilities=caps)
+            async with run:
+                async for event in run:
+                    item = None
+                    if isinstance(event, events.SettingUpSandbox):
+                        item = agent_event("sandbox", event.status)
+                    elif isinstance(event, events.ToolCall):
+                        item = agent_event("tool_call", event.status, name=event.data.name)
+                    elif isinstance(event, events.IntermediaryUpdate):
+                        item = agent_event("update", event.status, text=event.data.message)
+                    elif isinstance(event, events.Result):
+                        cost = event.data.cost
+                        files += list(getattr(event.data, "files", None) or [])
+                    if item:
+                        on_event(item)
+                reply = await run.result()
+            unique = {f.id: f for f in files + list(getattr(reply, "files", None) or [])}
+            produced = []
+            for f in unique.values():
+                if getattr(f, "origin", "agent") == "agent" and str(getattr(f, "name", "")).lower().endswith(".xlsx"):
+                    produced.append((f.name, await client.chat.download_file(f.id)))
+        return {"reply": reply.content, "files": produced,
+                "cost": cost.model_dump(mode="json") if cost is not None else None}

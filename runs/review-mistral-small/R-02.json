@@ -1,0 +1,151 @@
+{
+  "review_id": "R-02",
+  "agent_id": "94xHRD8WcmrX",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1002\",\n      \"sources_say\": \"Policy Schedule lists policy_id: VER-1002\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule in the claims system\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"Policy Schedule lists coverage: C2 (Collision damage)\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule in the claims system\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-14\",\n      \"sources_say\": \"Accident report states date of accident: 14/10/2026\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-15\",\n      \"sources_say\": \"Customer email received on 2026-10-15 reporting the incident\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-15\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"2400\",\n      \"sources_say\": \"Repair quote shows total incl. VAT: 2400.00 €\",\n      \"match\": true,\n      \"evidence\": \"repair_quote.pdf\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": \"false\",\n      \"sources_say\": \"Accident report states: 'I accept that the accident is my fault' (Driver A), but the policyholder is Driver A. However, the claim states 'at_fault: false'.\",\n      \"match\": false,\n      \"evidence\": \"Contradiction between accident_report_signed.pdf (Driver A admits fault) and recorded fact (at_fault: false)\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": \"true\",\n      \"sources_say\": \"Accident report lists Vehicle B (Renault Mégane) with driver Julie Laurent, confirming a third party was involved\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": \"true\",\n      \"sources_say\": \"Accident report provides registration, insurer, and driver details for Vehicle B\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": \"[\\\"photos\\\", \\\"repair_quote\\\", \\\"accident_report\\\"]\",\n      \"sources_say\": \"Customer email mentions 'damage_photos.zip' (photos), 'repair_quote.pdf', and 'accident_report_signed.pdf' (accident report) as attached\",\n      \"match\": true,\n      \"evidence\": \"Customer email and attached documents\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": \"null\",\n      \"sources_say\": \"No indication of exclusions in the accident report, email, or repair quote\",\n      \"match\": true,\n      \"evidence\": \"All reviewed documents\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": false,\n    \"evidence\": \"The recorded fact 'at_fault: false' contradicts the accident report, where the policyholder (Driver A) admits fault. This is a material discrepancy that requires referral to a handler per Article 7 (possible exclusion or contradiction in facts).\"\n  },\n  \"summary\": \"The claim cannot be paid automatically due to a contradiction between the recorded fact 'at_fault: false' and the signed accident report, which admits fault. Refer to a claims handler for resolution.\"\n}\n```",
+  "questions": [],
+  "thread_id": "78deaaf5-fcea-4947-8b82-49e8d95ada58",
+  "cost": {
+    "failed": false,
+    "input_tokens": 34241,
+    "cached_tokens": 17984,
+    "output_tokens": 1221,
+    "input_cost": "0.00285006",
+    "output_cost": "0.0007866",
+    "total": "0.00363666"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 16.6,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "at_fault",
+        "recorded": "false",
+        "should_be": "Accident report states: 'I accept that the accident is my fault' (Driver A), but the policyholder is Driver A. However, the claim states 'at_fault: false'.",
+        "evidence": "Contradiction between accident_report_signed.pdf (Driver A admits fault) and recorded fact (at_fault: false)"
+      },
+      {
+        "field": "payment decision",
+        "recorded": "payment staged",
+        "should_be": "not paid",
+        "evidence": "The recorded fact 'at_fault: false' contradicts the accident report, where the policyholder (Driver A) admits fault. This is a material discrepancy that requires referral to a handler per Article 7 (possible exclusion or contradiction in facts)."
+      }
+    ],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1002",
+        "sources_say": "Policy Schedule lists policy_id: VER-1002",
+        "match": true,
+        "evidence": "Policy Schedule in the claims system"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "Policy Schedule lists coverage: C2 (Collision damage)",
+        "match": true,
+        "evidence": "Policy Schedule in the claims system"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-14",
+        "sources_say": "Accident report states date of accident: 14/10/2026",
+        "match": true,
+        "evidence": "accident_report_signed.pdf"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-15",
+        "sources_say": "Customer email received on 2026-10-15 reporting the incident",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-15"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "2400",
+        "sources_say": "Repair quote shows total incl. VAT: 2400.00 €",
+        "match": true,
+        "evidence": "repair_quote.pdf"
+      },
+      {
+        "field": "at_fault",
+        "recorded": "false",
+        "sources_say": "Accident report states: 'I accept that the accident is my fault' (Driver A), but the policyholder is Driver A. However, the claim states 'at_fault: false'.",
+        "match": false,
+        "evidence": "Contradiction between accident_report_signed.pdf (Driver A admits fault) and recorded fact (at_fault: false)"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": "true",
+        "sources_say": "Accident report lists Vehicle B (Renault Mégane) with driver Julie Laurent, confirming a third party was involved",
+        "match": true,
+        "evidence": "accident_report_signed.pdf"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": "true",
+        "sources_say": "Accident report provides registration, insurer, and driver details for Vehicle B",
+        "match": true,
+        "evidence": "accident_report_signed.pdf"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+        "sources_say": "Customer email mentions 'damage_photos.zip' (photos), 'repair_quote.pdf', and 'accident_report_signed.pdf' (accident report) as attached",
+        "match": true,
+        "evidence": "Customer email and attached documents"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": "null",
+        "sources_say": "No indication of exclusions in the accident report, email, or repair quote",
+        "match": true,
+        "evidence": "All reviewed documents"
+      }
+    ],
+    "summary": "The claim cannot be paid automatically due to a contradiction between the recorded fact 'at_fault: false' and the signed accident report, which admits fault. Refer to a claims handler for resolution.",
+    "unreadable": false
+  }
+}

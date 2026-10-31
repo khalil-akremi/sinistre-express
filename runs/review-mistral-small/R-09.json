@@ -1,0 +1,140 @@
+{
+  "review_id": "R-09",
+  "agent_id": "94xHRD8WcmrX",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1002\",\n      \"sources_say\": \"Policy Schedule and accident report both list policy number VER-1002 for Lucas Bernard.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule and accident_report_signed.pdf\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"Policy Schedule lists C2 (Collision damage) as an active coverage for this policyholder.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-14\",\n      \"sources_say\": \"Accident report states the incident occurred on 14/10/2026.\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-15\",\n      \"sources_say\": \"Customer email was received on 2026-10-15, reporting the incident.\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"2400\",\n      \"sources_say\": \"Repair quote shows a total including VAT of €2,400.\",\n      \"match\": true,\n      \"evidence\": \"repair_quote.pdf\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": \"true\",\n      \"sources_say\": \"Accident report states: 'I accept that the accident is my fault.'\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": \"true\",\n      \"sources_say\": \"Accident report lists another vehicle (Renault Mégane) and driver (Julie Laurent) involved.\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": \"true\",\n      \"sources_say\": \"Accident report provides the name, insurer, policy number (partial), and registration of the third party.\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": \"[\\\"photos\\\", \\\"repair_quote\\\", \\\"accident_report\\\"]\",\n      \"sources_say\": \"Customer email and mailroom report list: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. All required documents for C2 are provided.\",\n      \"match\": true,\n      \"evidence\": \"Customer email, mailroom report, accident_report_signed.pdf, repair_quote.pdf\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": \"null\",\n      \"sources_say\": \"No exclusion is visible in the accident report or other documents.\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": false,\n    \"evidence\": \"The policyholder is at fault (C2 coverage). Article 5.2 states that for C2, no deductible applies only when the authorised driver is NOT at fault AND the third party is identified. Here, the policyholder is at fault, so the standard deductible of €300 applies (not the young-driver surcharge, as the licence date is 2024-09-02, meaning the driver held a licence for less than 3 years). The claims system calculated the payout as €1,700 (€2,400 - €700 deductible), but this is incorrect: the deductible should be €300, resulting in a payout of €2,100. However, the assessor requirement (Article 6.1) is triggered because the repair cost exceeds €1,500, so the claim must be referred to a handler for approval. Additionally, the claim was reported within 5 days (Article 4.1), no exclusion is flagged, and the coverage (C2) is in the Policy Schedule, so the only reason to refer is the assessor requirement.\"\n  },\n  \"summary\": \"Refer this claim to a handler for approval due to the assessor requirement (repair cost > €1,500) and correct the deductible calculation (€300, not €700).\"\n}\n```",
+  "questions": [],
+  "thread_id": "ba96adcd-3393-4541-9386-53bbd755e3cd",
+  "cost": {
+    "failed": false,
+    "input_tokens": 32819,
+    "cached_tokens": 24304,
+    "output_tokens": 1378,
+    "input_cost": "0.00176616",
+    "output_cost": "0.0008712",
+    "total": "0.00263736"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 14.4,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "payment decision",
+        "recorded": "payment staged",
+        "should_be": "not paid",
+        "evidence": "The policyholder is at fault (C2 coverage). Article 5.2 states that for C2, no deductible applies only when the authorised driver is NOT at fault AND the third party is identified. Here, the policyholder is at fault, so the standard deductible of €300 applies (not the young-driver surcharge, as the licence date is 2024-09-02, meaning the driver held a licence for less than 3 years). The claims system calculated the payout as €1,700 (€2,400 - €700 deductible), but this is incorrect: the deductible should be €300, resulting in a payout of €2,100. However, the assessor requirement (Article 6.1) is triggered because the repair cost exceeds €1,500, so the claim must be referred to a handler for approval. Additionally, the claim was reported within 5 days (Article 4.1), no exclusion is flagged, and the coverage (C2) is in the Policy Schedule, so the only reason to refer is the assessor requirement."
+      }
+    ],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1002",
+        "sources_say": "Policy Schedule and accident report both list policy number VER-1002 for Lucas Bernard.",
+        "match": true,
+        "evidence": "Policy Schedule and accident_report_signed.pdf"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "Policy Schedule lists C2 (Collision damage) as an active coverage for this policyholder.",
+        "match": true,
+        "evidence": "Policy Schedule"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-14",
+        "sources_say": "Accident report states the incident occurred on 14/10/2026.",
+        "match": true,
+        "evidence": "accident_report_signed.pdf"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-15",
+        "sources_say": "Customer email was received on 2026-10-15, reporting the incident.",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "2400",
+        "sources_say": "Repair quote shows a total including VAT of €2,400.",
+        "match": true,
+        "evidence": "repair_quote.pdf"
+      },
+      {
+        "field": "at_fault",
+        "recorded": "true",
+        "sources_say": "Accident report states: 'I accept that the accident is my fault.'",
+        "match": true,
+        "evidence": "accident_report_signed.pdf"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": "true",
+        "sources_say": "Accident report lists another vehicle (Renault Mégane) and driver (Julie Laurent) involved.",
+        "match": true,
+        "evidence": "accident_report_signed.pdf"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": "true",
+        "sources_say": "Accident report provides the name, insurer, policy number (partial), and registration of the third party.",
+        "match": true,
+        "evidence": "accident_report_signed.pdf"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+        "sources_say": "Customer email and mailroom report list: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. All required documents for C2 are provided.",
+        "match": true,
+        "evidence": "Customer email, mailroom report, accident_report_signed.pdf, repair_quote.pdf"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": "null",
+        "sources_say": "No exclusion is visible in the accident report or other documents.",
+        "match": true,
+        "evidence": "accident_report_signed.pdf"
+      }
+    ],
+    "summary": "Refer this claim to a handler for approval due to the assessor requirement (repair cost > €1,500) and correct the deductible calculation (€300, not €700).",
+    "unreadable": false
+  }
+}

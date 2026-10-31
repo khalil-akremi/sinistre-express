@@ -1,0 +1,124 @@
+{
+  "review_id": "R-06",
+  "agent_id": "94xHRD8WcmrX",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1001\",\n      \"sources_say\": \"Policy Schedule for VER-1001 matches the recorded policy_id.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule (from the claims system) shows policy_id: VER-1001\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"Coverage C2 (Collision damage) is listed in the Policy Schedule.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule lists coverages: [{'code': 'C1', 'name': 'Third-party liability'}, {'code': 'C2', 'name': 'Collision damage'}, ...]\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-02\",\n      \"sources_say\": \"Customer email states the accident happened on 02 October 2026.\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-11 states: 'I am writing to report an accident that happened on 02 October 2026.'\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-03\",\n      \"sources_say\": \"Customer email was received on 2026-10-11, but the report date is recorded as 2026-10-03 (likely the incident date + 1 day).\",\n      \"match\": false,\n      \"evidence\": \"Customer email subject and body do not explicitly state the report date. The recorded report_date (2026-10-03) is assumed to be the day after the incident (2026-10-02). No explicit source confirms this.\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": 650,\n      \"sources_say\": \"Customer email states the garage quoted €650 to repair the car.\",\n      \"match\": true,\n      \"evidence\": \"Customer email states: 'The garage quoted €650 to repair my car.'\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": true,\n      \"sources_say\": \"Customer email states 'I hit a bollard while parking,' indicating the policyholder is at fault.\",\n      \"match\": true,\n      \"evidence\": \"Customer email states: 'I hit a bollard while parking.'\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": false,\n      \"sources_say\": \"Customer email states 'Nobody else was involved.'\",\n      \"match\": true,\n      \"evidence\": \"Customer email states: 'Nobody else was involved.'\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": false,\n      \"sources_say\": \"No third party was involved, so this field is correctly recorded as false.\",\n      \"match\": true,\n      \"evidence\": \"Customer email states: 'Nobody else was involved.'\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\"],\n      \"sources_say\": \"Customer email mentions attached files: damage_photos.zip and repair_quote.pdf.\",\n      \"match\": true,\n      \"evidence\": \"Customer email states: 'Attached: damage_photos.zip, repair_quote.pdf.'\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"No exclusion is apparent from the email or recorded facts.\",\n      \"match\": true,\n      \"evidence\": \"No source indicates an exclusion applies.\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": false,\n    \"evidence\": \"The claim was reported on 2026-10-03 (recorded as report_date), which is more than 5 days after the incident (2026-10-02). Under Article 4.1, claims must be reported within 5 days. This claim is late and must be referred to a handler (Article 7.1).\"\n  },\n  \"summary\": \"The claim must be referred to a handler due to late reporting, but all recorded facts match the customer email and documents.\"\n}\n```",
+  "questions": [],
+  "thread_id": "82a60fa7-6d48-45c6-93de-46aa59120296",
+  "cost": {
+    "failed": false,
+    "input_tokens": 18237,
+    "cached_tokens": 15216,
+    "output_tokens": 1131,
+    "input_cost": "0.00072114",
+    "output_cost": "0.0006972",
+    "total": "0.00141834"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 10.1,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "report_date",
+        "recorded": "2026-10-03",
+        "should_be": "Customer email was received on 2026-10-11, but the report date is recorded as 2026-10-03 (likely the incident date + 1 day).",
+        "evidence": "Customer email subject and body do not explicitly state the report date. The recorded report_date (2026-10-03) is assumed to be the day after the incident (2026-10-02). No explicit source confirms this."
+      },
+      {
+        "field": "payment decision",
+        "recorded": "payment staged",
+        "should_be": "not paid",
+        "evidence": "The claim was reported on 2026-10-03 (recorded as report_date), which is more than 5 days after the incident (2026-10-02). Under Article 4.1, claims must be reported within 5 days. This claim is late and must be referred to a handler (Article 7.1)."
+      }
+    ],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1001",
+        "sources_say": "Policy Schedule for VER-1001 matches the recorded policy_id.",
+        "match": true,
+        "evidence": "Policy Schedule (from the claims system) shows policy_id: VER-1001"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "Coverage C2 (Collision damage) is listed in the Policy Schedule.",
+        "match": true,
+        "evidence": "Policy Schedule lists coverages: [{'code': 'C1', 'name': 'Third-party liability'}, {'code': 'C2', 'name': 'Collision damage'}, ...]"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-02",
+        "sources_say": "Customer email states the accident happened on 02 October 2026.",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-11 states: 'I am writing to report an accident that happened on 02 October 2026.'"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-03",
+        "sources_say": "Customer email was received on 2026-10-11, but the report date is recorded as 2026-10-03 (likely the incident date + 1 day).",
+        "match": false,
+        "evidence": "Customer email subject and body do not explicitly state the report date. The recorded report_date (2026-10-03) is assumed to be the day after the incident (2026-10-02). No explicit source confirms this."
+      },
+      {
+        "field": "repair_cost",
+        "recorded": 650,
+        "sources_say": "Customer email states the garage quoted €650 to repair the car.",
+        "match": true,
+        "evidence": "Customer email states: 'The garage quoted €650 to repair my car.'"
+      },
+      {
+        "field": "at_fault",
+        "recorded": true,
+        "sources_say": "Customer email states 'I hit a bollard while parking,' indicating the policyholder is at fault.",
+        "match": true,
+        "evidence": "Customer email states: 'I hit a bollard while parking.'"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": false,
+        "sources_say": "Customer email states 'Nobody else was involved.'",
+        "match": true,
+        "evidence": "Customer email states: 'Nobody else was involved.'"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": false,
+        "sources_say": "No third party was involved, so this field is correctly recorded as false.",
+        "match": true,
+        "evidence": "Customer email states: 'Nobody else was involved.'"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "sources_say": "Customer email mentions attached files: damage_photos.zip and repair_quote.pdf.",
+        "match": true,
+        "evidence": "Customer email states: 'Attached: damage_photos.zip, repair_quote.pdf.'"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "No exclusion is apparent from the email or recorded facts.",
+        "match": true,
+        "evidence": "No source indicates an exclusion applies."
+      }
+    ],
+    "summary": "The claim must be referred to a handler due to late reporting, but all recorded facts match the customer email and documents.",
+    "unreadable": false
+  }
+}

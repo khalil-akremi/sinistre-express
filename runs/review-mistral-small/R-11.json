@@ -1,0 +1,113 @@
+{
+  "review_id": "R-11",
+  "agent_id": "94xHRD8WcmrX",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1004\",\n      \"sources_say\": \"Policy number in the customer email: VER-1004 <cite document_id=\\\"2630\\\" pages=\\\"1\\\" name=\\\"Policy Schedule\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"Customer email and Policy Schedule\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"Collision damage (C2) is listed in the Policy Schedule for VER-1004 <cite document_id=\\\"2630\\\" pages=\\\"1\\\" name=\\\"Policy Schedule\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-27\",\n      \"sources_say\": \"Incident date mentioned in the customer email: 27 October 2026 <cite document_id=\\\"2630\\\" pages=\\\"1\\\" name=\\\"Customer email\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-28\",\n      \"sources_say\": \"Email date received: 2026-10-28 <cite document_id=\\\"2630\\\" pages=\\\"1\\\" name=\\\"Customer email\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": 1640,\n      \"sources_say\": \"Total incl. VAT in the repair quote: 1 640,00 € <cite document_id=\\\"2630\\\" pages=\\\"1\\\" name=\\\"repair_quote.pdf\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"repair_quote.pdf\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": true,\n      \"sources_say\": \"Customer email states: 'I hit a post' (policyholder at fault) <cite document_id=\\\"2630\\\" pages=\\\"1\\\" name=\\\"Customer email\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": false,\n      \"sources_say\": \"Customer email states: 'Nobody else was involved' <cite document_id=\\\"2630\\\" pages=\\\"1\\\" name=\\\"Customer email\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": false,\n      \"sources_say\": \"No third party is mentioned in the customer email or documents <cite document_id=\\\"2630\\\" pages=\\\"1\\\" name=\\\"Customer email\\\"/><cite document_id=\\\"2630\\\" pages=\\\"1\\\" name=\\\"repair_quote.pdf\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"Customer email and repair_quote.pdf\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\"],\n      \"sources_say\": \"Customer email mentions 'damage_photos.zip' and 'repair_quote.pdf' as attached <cite document_id=\\\"2630\\\" pages=\\\"1\\\" name=\\\"Customer email\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"No exclusion is mentioned in the customer email, repair quote, or Policy Schedule <cite document_id=\\\"2630\\\" pages=\\\"1\\\" name=\\\"Customer email\\\"/><cite document_id=\\\"2630\\\" pages=\\\"1\\\" name=\\\"repair_quote.pdf\\\"/><cite document_id=\\\"2630\\\" pages=\\\"1\\\" name=\\\"Policy Schedule\\\"/>\",\n      \"match\": true,\n      \"evidence\": \"All sources\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": false,\n    \"evidence\": \"The policyholder is at fault (C2 coverage applies, but collision damage is only covered if the policyholder is not at fault per standard terms). The handler playbook does not apply as there is no third party involved. The claim does not meet the conditions for payment under the recorded facts and Veridia's standard terms.\"\n  },\n  \"summary\": \"The claim should not be paid because the policyholder is at fault and the coverage (C2 - Collision damage) does not apply in this scenario.\"\n}\n```",
+  "questions": [],
+  "thread_id": "fd274f6f-5ee9-46f5-9236-7df6688d8723",
+  "cost": {
+    "failed": false,
+    "input_tokens": 16689,
+    "cached_tokens": 14864,
+    "output_tokens": 1096,
+    "input_cost": "0.00051406",
+    "output_cost": "0.0006624",
+    "total": "0.00117646"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 10.4,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "payment decision",
+        "recorded": "payment staged",
+        "should_be": "not paid",
+        "evidence": "The policyholder is at fault (C2 coverage applies, but collision damage is only covered if the policyholder is not at fault per standard terms). The handler playbook does not apply as there is no third party involved. The claim does not meet the conditions for payment under the recorded facts and Veridia's standard terms."
+      }
+    ],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1004",
+        "sources_say": "Policy number in the customer email: VER-1004 <cite document_id=\"2630\" pages=\"1\" name=\"Policy Schedule\"/>",
+        "match": true,
+        "evidence": "Customer email and Policy Schedule"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "Collision damage (C2) is listed in the Policy Schedule for VER-1004 <cite document_id=\"2630\" pages=\"1\" name=\"Policy Schedule\"/>",
+        "match": true,
+        "evidence": "Policy Schedule"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-27",
+        "sources_say": "Incident date mentioned in the customer email: 27 October 2026 <cite document_id=\"2630\" pages=\"1\" name=\"Customer email\"/>",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-28",
+        "sources_say": "Email date received: 2026-10-28 <cite document_id=\"2630\" pages=\"1\" name=\"Customer email\"/>",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": 1640,
+        "sources_say": "Total incl. VAT in the repair quote: 1 640,00 € <cite document_id=\"2630\" pages=\"1\" name=\"repair_quote.pdf\"/>",
+        "match": true,
+        "evidence": "repair_quote.pdf"
+      },
+      {
+        "field": "at_fault",
+        "recorded": true,
+        "sources_say": "Customer email states: 'I hit a post' (policyholder at fault) <cite document_id=\"2630\" pages=\"1\" name=\"Customer email\"/>",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": false,
+        "sources_say": "Customer email states: 'Nobody else was involved' <cite document_id=\"2630\" pages=\"1\" name=\"Customer email\"/>",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": false,
+        "sources_say": "No third party is mentioned in the customer email or documents <cite document_id=\"2630\" pages=\"1\" name=\"Customer email\"/><cite document_id=\"2630\" pages=\"1\" name=\"repair_quote.pdf\"/>",
+        "match": true,
+        "evidence": "Customer email and repair_quote.pdf"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "sources_say": "Customer email mentions 'damage_photos.zip' and 'repair_quote.pdf' as attached <cite document_id=\"2630\" pages=\"1\" name=\"Customer email\"/>",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "No exclusion is mentioned in the customer email, repair quote, or Policy Schedule <cite document_id=\"2630\" pages=\"1\" name=\"Customer email\"/><cite document_id=\"2630\" pages=\"1\" name=\"repair_quote.pdf\"/><cite document_id=\"2630\" pages=\"1\" name=\"Policy Schedule\"/>",
+        "match": true,
+        "evidence": "All sources"
+      }
+    ],
+    "summary": "The claim should not be paid because the policyholder is at fault and the coverage (C2 - Collision damage) does not apply in this scenario.",
+    "unreadable": false
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "review_id": "R-04",
+  "agent_id": "94xHRD8WcmrX",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1001\",\n      \"sources_say\": \"VER-1001 (Policy Schedule and accident report)\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule and accident_report_signed.pdf confirm the policy number as VER-1001.\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"Collision damage (C2) is listed in the Policy Schedule.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule explicitly lists coverage C2 (Collision damage).\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-12\",\n      \"sources_say\": \"12/10/2026 in the accident report.\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf states the date of the accident as 12/10/2026.\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-14\",\n      \"sources_say\": \"Email received on 2026-10-14.\",\n      \"match\": true,\n      \"evidence\": \"Customer email received on 2026-10-14 confirms the report date.\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"1200\",\n      \"sources_say\": \"Total incl. VAT on the repair quote is 1200.00 €.\",\n      \"match\": true,\n      \"evidence\": \"repair_quote.pdf shows a total incl. VAT of 1200.00 €.\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": \"false\",\n      \"sources_say\": \"Accident report and email confirm Claire Martin was not at fault.\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf and customer email state the other driver was at fault.\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": \"true\",\n      \"sources_say\": \"Third party (Rapid Livraisons SARL) is identified in the accident report.\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf lists Rapid Livraisons SARL as the third party.\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": \"true\",\n      \"sources_say\": \"Third party details (company name, vehicle, insurer) are provided.\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf identifies the third party as Rapid Livraisons SARL, including vehicle and insurer details.\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": \"[\\\"photos\\\", \\\"repair_quote\\\", \\\"accident_report\\\"]\",\n      \"sources_say\": \"accident_report_signed.pdf, repair_quote.pdf, and damage_photos.zip are attached.\",\n      \"match\": true,\n      \"evidence\": \"Customer email and file upload report confirm the presence of accident_report_signed.pdf, repair_quote.pdf, and damage_photos.zip.\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": \"null\",\n      \"sources_say\": \"No exclusion signals in the documents.\",\n      \"match\": true,\n      \"evidence\": \"No exclusion is indicated in the accident report, repair quote, or Policy Schedule.\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": false,\n    \"evidence\": \"The claim involves a commercial vehicle (Ford Transit Custom, a van), which triggers the handler playbook rule for referral to a claims handler (Article 7, point 3 of the contract and handler playbook).\"\n  },\n  \"summary\": \"The recorded facts match the sources, but the claim must be referred to a handler due to the involvement of a commercial vehicle (van), which requires manual review for recovery from the third-party insurer.\"\n}\n```",
+  "questions": [],
+  "thread_id": "e94d41e4-e85f-4235-aafe-f9185f4fd181",
+  "cost": {
+    "failed": false,
+    "input_tokens": 20110,
+    "cached_tokens": 13824,
+    "output_tokens": 1143,
+    "input_cost": "0.00122531",
+    "output_cost": "0.0007116",
+    "total": "0.00193691"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 12.3,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "payment decision",
+        "recorded": "payment staged",
+        "should_be": "not paid",
+        "evidence": "The claim involves a commercial vehicle (Ford Transit Custom, a van), which triggers the handler playbook rule for referral to a claims handler (Article 7, point 3 of the contract and handler playbook)."
+      }
+    ],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1001",
+        "sources_say": "VER-1001 (Policy Schedule and accident report)",
+        "match": true,
+        "evidence": "Policy Schedule and accident_report_signed.pdf confirm the policy number as VER-1001."
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "Collision damage (C2) is listed in the Policy Schedule.",
+        "match": true,
+        "evidence": "Policy Schedule explicitly lists coverage C2 (Collision damage)."
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-12",
+        "sources_say": "12/10/2026 in the accident report.",
+        "match": true,
+        "evidence": "accident_report_signed.pdf states the date of the accident as 12/10/2026."
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-14",
+        "sources_say": "Email received on 2026-10-14.",
+        "match": true,
+        "evidence": "Customer email received on 2026-10-14 confirms the report date."
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "1200",
+        "sources_say": "Total incl. VAT on the repair quote is 1200.00 €.",
+        "match": true,
+        "evidence": "repair_quote.pdf shows a total incl. VAT of 1200.00 €."
+      },
+      {
+        "field": "at_fault",
+        "recorded": "false",
+        "sources_say": "Accident report and email confirm Claire Martin was not at fault.",
+        "match": true,
+        "evidence": "accident_report_signed.pdf and customer email state the other driver was at fault."
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": "true",
+        "sources_say": "Third party (Rapid Livraisons SARL) is identified in the accident report.",
+        "match": true,
+        "evidence": "accident_report_signed.pdf lists Rapid Livraisons SARL as the third party."
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": "true",
+        "sources_say": "Third party details (company name, vehicle, insurer) are provided.",
+        "match": true,
+        "evidence": "accident_report_signed.pdf identifies the third party as Rapid Livraisons SARL, including vehicle and insurer details."
+      },
+      {
+        "field": "documents_provided",
+        "recorded": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+        "sources_say": "accident_report_signed.pdf, repair_quote.pdf, and damage_photos.zip are attached.",
+        "match": true,
+        "evidence": "Customer email and file upload report confirm the presence of accident_report_signed.pdf, repair_quote.pdf, and damage_photos.zip."
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": "null",
+        "sources_say": "No exclusion signals in the documents.",
+        "match": true,
+        "evidence": "No exclusion is indicated in the accident report, repair quote, or Policy Schedule."
+      }
+    ],
+    "summary": "The recorded facts match the sources, but the claim must be referred to a handler due to the involvement of a commercial vehicle (van), which requires manual review for recovery from the third-party insurer.",
+    "unreadable": false
+  }
+}

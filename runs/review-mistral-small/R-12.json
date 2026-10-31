@@ -1,0 +1,105 @@
+{
+  "review_id": "R-12",
+  "agent_id": "94xHRD8WcmrX",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1001\",\n      \"sources_say\": \"The email from Claire Martin states the policy number as VER-1001, and the Policy Schedule confirms this policy ID for Claire Martin.\",\n      \"match\": true,\n      \"evidence\": \"Email and Policy Schedule\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C4\",\n      \"sources_say\": \"The Policy Schedule lists 'Theft' (C4) as one of the coverages for this policy.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-29\",\n      \"sources_say\": \"The police report states the theft occurred on 29/10/2026 between 21:00 and 23:45.\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-30\",\n      \"sources_say\": \"The email from Claire Martin was received on 2026-10-30, and the police report was filed on 30/10/2026.\",\n      \"match\": true,\n      \"evidence\": \"Email and police_report.pdf\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": 0,\n      \"sources_say\": \"The claim is for theft, and the police report confirms the vehicle was stolen. The recorded repair cost is €0, which aligns with the expectation for a theft claim where the vehicle is not recovered or repaired.\",\n      \"match\": true,\n      \"evidence\": \"Policy context and police_report.pdf\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": false,\n      \"sources_say\": \"The policyholder is not at fault in a theft incident as per the police report and the nature of the claim.\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": false,\n      \"sources_say\": \"The police report does not mention any third party involvement in the theft. The theft appears to be a standalone incident.\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": false,\n      \"sources_say\": \"No third party is identified or involved in the theft incident.\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"police_report\"],\n      \"sources_say\": \"The email mentions an attached police report, and the file police_report.pdf is provided. This matches the recorded documents.\",\n      \"match\": true,\n      \"evidence\": \"Email and police_report.pdf\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"No exclusions are apparent in the police report or the email. Theft coverage (C4) is active, and the circumstances do not suggest an exclusion.\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf and Policy Schedule\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"The claim is for theft (C4 coverage), which is included in the Policy Schedule. The police report confirms the theft, and the claim was reported within a reasonable timeframe. No exclusions apply, and no playbook rule requires referral to a handler.\"\n  },\n  \"summary\": \"All recorded facts match the sources, and the claim should be paid as the theft is covered under the policy and all conditions are met.\"\n}\n```",
+  "questions": [],
+  "thread_id": "738569db-608a-45bd-bcfb-ecd24c49bf5b",
+  "cost": {
+    "failed": false,
+    "input_tokens": 16553,
+    "cached_tokens": 13824,
+    "output_tokens": 929,
+    "input_cost": "0.00063411",
+    "output_cost": "0.0005622",
+    "total": "0.00119631"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 9.9,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1001",
+        "sources_say": "The email from Claire Martin states the policy number as VER-1001, and the Policy Schedule confirms this policy ID for Claire Martin.",
+        "match": true,
+        "evidence": "Email and Policy Schedule"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C4",
+        "sources_say": "The Policy Schedule lists 'Theft' (C4) as one of the coverages for this policy.",
+        "match": true,
+        "evidence": "Policy Schedule"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-29",
+        "sources_say": "The police report states the theft occurred on 29/10/2026 between 21:00 and 23:45.",
+        "match": true,
+        "evidence": "police_report.pdf"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-30",
+        "sources_say": "The email from Claire Martin was received on 2026-10-30, and the police report was filed on 30/10/2026.",
+        "match": true,
+        "evidence": "Email and police_report.pdf"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": 0,
+        "sources_say": "The claim is for theft, and the police report confirms the vehicle was stolen. The recorded repair cost is €0, which aligns with the expectation for a theft claim where the vehicle is not recovered or repaired.",
+        "match": true,
+        "evidence": "Policy context and police_report.pdf"
+      },
+      {
+        "field": "at_fault",
+        "recorded": false,
+        "sources_say": "The policyholder is not at fault in a theft incident as per the police report and the nature of the claim.",
+        "match": true,
+        "evidence": "police_report.pdf"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": false,
+        "sources_say": "The police report does not mention any third party involvement in the theft. The theft appears to be a standalone incident.",
+        "match": true,
+        "evidence": "police_report.pdf"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": false,
+        "sources_say": "No third party is identified or involved in the theft incident.",
+        "match": true,
+        "evidence": "police_report.pdf"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "police_report"
+        ],
+        "sources_say": "The email mentions an attached police report, and the file police_report.pdf is provided. This matches the recorded documents.",
+        "match": true,
+        "evidence": "Email and police_report.pdf"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "No exclusions are apparent in the police report or the email. Theft coverage (C4) is active, and the circumstances do not suggest an exclusion.",
+        "match": true,
+        "evidence": "police_report.pdf and Policy Schedule"
+      }
+    ],
+    "summary": "All recorded facts match the sources, and the claim should be paid as the theft is covered under the policy and all conditions are met.",
+    "unreadable": false
+  }
+}

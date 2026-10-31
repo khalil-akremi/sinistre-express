@@ -101,6 +101,21 @@
     </div>
   </section>
 
+  <section class="report" id="report" aria-labelledby="report-title">
+    <div class="memory-head">
+      <h2 id="report-title">Daily claims report</h2>
+      <p>Our system computes the day's figures; a built-in Cominty agent (Chat, with the Spreadsheet skill and no access to the claims system) builds the Excel report and a briefing; our system then checks the workbook against the claims database.</p>
+    </div>
+    <div class="report-grid">
+      <div>
+        <button id="make-report" class="secondary" type="button">Generate today's report</button>
+        <p class="hint" id="report-msg" aria-live="polite"></p>
+        <ol class="report-steps" id="report-steps"></ol>
+      </div>
+      <div id="report-result" class="report-result"></div>
+    </div>
+  </section>
+
   <footer class="colophon">
     <p>Built on Cominty Managed Agents: a custom agent with the Veridia contract as knowledge, and the claims system connected over MCP. Amounts come from tested business rules, never from the model.</p>
   </footer>

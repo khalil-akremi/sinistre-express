@@ -1,0 +1,128 @@
+{
+  "review_id": "R-13",
+  "agent_id": "94xHRD8WcmrX",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1002\",\n      \"sources_say\": \"Policy Schedule confirms policy_id VER-1002 for Lucas Bernard.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule (Policy ID: VER-1002) <cite document_id=\\\"2630#10414_1\\\" pages=\\\"1\\\" name=\\\"DriveSafe Motor Policy\\\"/>\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"Policy Schedule lists C2 (Collision damage) as a purchased coverage.\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule (Coverages: [{\\\"code\\\": \\\"C1\\\", \\\"name\\\": \\\"Third-party liability\\\"}, {\\\"code\\\": \\\"C2\\\", \\\"name\\\": \\\"Collision damage\\\"}, {\\\"code\\\": \\\"C3\\\", \\\"name\\\": \\\"Glass breakage\\\"}]) <cite document_id=\\\"2630#10414_1\\\" pages=\\\"1\\\" name=\\\"DriveSafe Motor Policy\\\"/>\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-14\",\n      \"sources_say\": \"Customer email states the accident happened on 14 October 2026.\",\n      \"match\": true,\n      \"evidence\": \"Customer email (incident date: 2026-10-14) <cite document_id=\\\"2630#10414_1\\\" pages=\\\"1\\\" name=\\\"DriveSafe Motor Policy\\\"/>\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-15\",\n      \"sources_say\": \"Customer email subject line and body confirm the claim was reported on 2026-10-15.\",\n      \"match\": true,\n      \"evidence\": \"Customer email (report date: 2026-10-15) <cite document_id=\\\"2630#10414_1\\\" pages=\\\"1\\\" name=\\\"DriveSafe Motor Policy\\\"/>\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"2400\",\n      \"sources_say\": \"Customer email states the garage quoted €2,400 to repair the car (total including VAT).\",\n      \"match\": true,\n      \"evidence\": \"Customer email (repair cost: €2,400) <cite document_id=\\\"2630#10414_1\\\" pages=\\\"1\\\" name=\\\"DriveSafe Motor Policy\\\"/>\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": \"true\",\n      \"sources_say\": \"Customer email explicitly states 'It was my fault.'\",\n      \"match\": true,\n      \"evidence\": \"Customer email (at_fault: true) <cite document_id=\\\"2630#10414_1\\\" pages=\\\"1\\\" name=\\\"DriveSafe Motor Policy\\\"/>\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": \"true\",\n      \"sources_say\": \"Customer email states a collision with another car and mentions Ms. Laurent as the other driver.\",\n      \"match\": true,\n      \"evidence\": \"Customer email (third party involved: true) <cite document_id=\\\"2630#10414_1\\\" pages=\\\"1\\\" name=\\\"DriveSafe Motor Policy\\\"/>\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": \"true\",\n      \"sources_say\": \"Customer email and the attached accident report (signed by both drivers) confirm the third party is identified as Ms. Laurent.\",\n      \"match\": true,\n      \"evidence\": \"Customer email and accident_report_signed.pdf (third party identified: true) <cite document_id=\\\"2630#10414_1\\\" pages=\\\"1\\\" name=\\\"DriveSafe Motor Policy\\\"/>\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": \"[\\\"photos\\\", \\\"repair_quote\\\", \\\"accident_report\\\"]\",\n      \"sources_say\": \"Customer email mentions attached files: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. These match the recorded documents.\",\n      \"match\": true,\n      \"evidence\": \"Customer email (documents provided: photos, repair_quote, accident_report) <cite document_id=\\\"2630#10414_2\\\" pages=\\\"1\\\" name=\\\"DriveSafe Motor Policy\\\"/>\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": \"null\",\n      \"sources_say\": \"No indication of exclusions in the email or attached documents.\",\n      \"match\": true,\n      \"evidence\": \"Customer email and general conditions (no exclusion signal) <cite document_id=\\\"2630#10414_2\\\" pages=\\\"1-2\\\" name=\\\"DriveSafe Motor Policy\\\"/>\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"1. Reporting deadline: Claim reported on 2026-10-15, within 5 days of the incident (2026-10-14). <cite document_id=\\\"2630#10414_2\\\" pages=\\\"1\\\" name=\\\"DriveSafe Motor Policy\\\"/>\\n2. Exclusions: None detected in the email or documents. <cite document_id=\\\"2630#10414_2\\\" pages=\\\"1-2\\\" name=\\\"DriveSafe MotorPolicy\\\"/>\\n3. Coverage: C2 (Collision damage) is listed in the Policy Schedule. <cite document_id=\\\"2630#10414_1\\\" pages=\\\"1\\\" name=\\\"DriveSafe Motor Policy\\\"/>\\n4. Required documents: Photos, repair_quote, and accident_report are provided. <cite document_id=\\\"2630#10414_2\\\" pages=\\\"1\\\" name=\\\"DriveSafe Motor Policy\\\"/>\\n5. Playbook rules: No rule triggers a referral to a handler (e.g., no commercial third party, no late reporting beyond deadline, no exclusion). <cite document_id=\\\"2630#10414_3\\\" pages=\\\"1\\\" name=\\\"DriveSafe Motor Policy\\\"/>\"\n  },\n  \"summary\": \"All recorded facts match the email and documents, and the claim meets all requirements for payment under coverage C2.\"\n}\n```",
+  "questions": [],
+  "thread_id": "6834f4a5-cab4-4b72-b2c5-a8b7a258a4d1",
+  "cost": {
+    "failed": false,
+    "input_tokens": 32246,
+    "cached_tokens": 25696,
+    "output_tokens": 1778,
+    "input_cost": "0.00147684",
+    "output_cost": "0.0011118",
+    "total": "0.00258864"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 14.1,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1002",
+        "sources_say": "Policy Schedule confirms policy_id VER-1002 for Lucas Bernard.",
+        "match": true,
+        "evidence": "Policy Schedule (Policy ID: VER-1002) <cite document_id=\"2630#10414_1\" pages=\"1\" name=\"DriveSafe Motor Policy\"/>"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "Policy Schedule lists C2 (Collision damage) as a purchased coverage.",
+        "match": true,
+        "evidence": "Policy Schedule (Coverages: [{\"code\": \"C1\", \"name\": \"Third-party liability\"}, {\"code\": \"C2\", \"name\": \"Collision damage\"}, {\"code\": \"C3\", \"name\": \"Glass breakage\"}]) <cite document_id=\"2630#10414_1\" pages=\"1\" name=\"DriveSafe Motor Policy\"/>"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-14",
+        "sources_say": "Customer email states the accident happened on 14 October 2026.",
+        "match": true,
+        "evidence": "Customer email (incident date: 2026-10-14) <cite document_id=\"2630#10414_1\" pages=\"1\" name=\"DriveSafe Motor Policy\"/>"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-15",
+        "sources_say": "Customer email subject line and body confirm the claim was reported on 2026-10-15.",
+        "match": true,
+        "evidence": "Customer email (report date: 2026-10-15) <cite document_id=\"2630#10414_1\" pages=\"1\" name=\"DriveSafe Motor Policy\"/>"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "2400",
+        "sources_say": "Customer email states the garage quoted €2,400 to repair the car (total including VAT).",
+        "match": true,
+        "evidence": "Customer email (repair cost: €2,400) <cite document_id=\"2630#10414_1\" pages=\"1\" name=\"DriveSafe Motor Policy\"/>"
+      },
+      {
+        "field": "at_fault",
+        "recorded": "true",
+        "sources_say": "Customer email explicitly states 'It was my fault.'",
+        "match": true,
+        "evidence": "Customer email (at_fault: true) <cite document_id=\"2630#10414_1\" pages=\"1\" name=\"DriveSafe Motor Policy\"/>"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": "true",
+        "sources_say": "Customer email states a collision with another car and mentions Ms. Laurent as the other driver.",
+        "match": true,
+        "evidence": "Customer email (third party involved: true) <cite document_id=\"2630#10414_1\" pages=\"1\" name=\"DriveSafe Motor Policy\"/>"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": "true",
+        "sources_say": "Customer email and the attached accident report (signed by both drivers) confirm the third party is identified as Ms. Laurent.",
+        "match": true,
+        "evidence": "Customer email and accident_report_signed.pdf (third party identified: true) <cite document_id=\"2630#10414_1\" pages=\"1\" name=\"DriveSafe Motor Policy\"/>"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+        "sources_say": "Customer email mentions attached files: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. These match the recorded documents.",
+        "match": true,
+        "evidence": "Customer email (documents provided: photos, repair_quote, accident_report) <cite document_id=\"2630#10414_2\" pages=\"1\" name=\"DriveSafe Motor Policy\"/>"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": "null",
+        "sources_say": "No indication of exclusions in the email or attached documents.",
+        "match": true,
+        "evidence": "Customer email and general conditions (no exclusion signal) <cite document_id=\"2630#10414_2\" pages=\"1-2\" name=\"DriveSafe Motor Policy\"/>"
+      }
+    ],
+    "summary": "All recorded facts match the email and documents, and the claim meets all requirements for payment under coverage C2.",
+    "unreadable": false
+  }
+}
