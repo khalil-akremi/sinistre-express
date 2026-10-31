@@ -183,7 +183,7 @@ def render_email(s: Scenario, policy: Policy) -> dict:
         s.story,
     ]
     if s.repair_cost and s.coverage in (C2, C3) and "repair_quote" in s.documents:
-        lines.append(f"The garage quoted €{s.repair_cost:,} for the repair.")
+        lines.append(f"The garage quoted €{s.repair_cost:,} to repair my car.")
     lines += [
         "",
         "Kind regards,",
@@ -192,7 +192,7 @@ def render_email(s: Scenario, policy: Policy) -> dict:
     ]
     attachments = [DOC_FILENAMES[d] for d in s.documents]
     if attachments:
-        lines += ["", "Attachments: " + ", ".join(attachments)]
+        lines += ["", "Attached: " + ", ".join(attachments)]
     return {
         "date": report_date.isoformat(),
         "from": policy.holder_name,

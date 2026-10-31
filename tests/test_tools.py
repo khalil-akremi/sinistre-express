@@ -164,3 +164,30 @@ def test_every_call_is_logged_including_refusals(system):
     assert [(e["tool"], e["ok"]) for e in log] == [("create_claim", True), ("stage_settlement", False)]
     assert "Refused" in log[1]["result"]["error"]
     assert log[0]["arguments"]["exclusion_signal"] == "racing"
+
+
+@pytest.mark.parametrize("order", ["request_first", "escalate_first"])
+def test_escalation_wins_whatever_the_order(system, order):
+    """Found in trial3: parallel calls lost the escalation (race condition)."""
+    open_claim(system, coverage="C4", report_date="2026-10-09", documents_provided=[])
+    request = lambda: system.request_documents(  # noqa: E731
+        claim_ref="T-1", documents=["police_report"], message_to_customer="Please send it.")
+    escalate = lambda: system.escalate_to_handler(  # noqa: E731
+        claim_ref="T-1", reasons=["late_report"], summary="Late theft report.")
+    for call in ((request, escalate) if order == "request_first" else (escalate, request)):
+        call()
+    assert system.get_claim("T-1")["status"] == "escalated"
+
+
+def test_parallel_request_and_escalate(system):
+    """Fire both tools at the same time from two threads, many times."""
+    from concurrent.futures import ThreadPoolExecutor
+
+    for i in range(20):
+        ref = f"P-{i}"
+        open_claim(system, claim_ref=ref, coverage="C4", report_date="2026-10-09", documents_provided=[])
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            pool.submit(system.request_documents, claim_ref=ref, documents=["police_report"],
+                        message_to_customer="Please send it.")
+            pool.submit(system.escalate_to_handler, claim_ref=ref, reasons=["late_report"], summary="Late.")
+        assert system.get_claim(ref)["status"] == "escalated", ref

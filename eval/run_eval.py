@@ -49,7 +49,14 @@ def build_task(case: dict, claim_ref: str) -> str:
         f"From: {email['from']}\n"
         f"Subject: {email['subject']}\n\n"
         f"{email['body']}\n"
-        f"--- End of email ---"
+        f"--- End of email ---\n\n"
+        + (
+            "The mailroom received these attachments and stored them in the claim file: "
+            f"{', '.join(email['attachments'])}. Count them as provided documents "
+            "(you cannot open them)."
+            if email["attachments"]
+            else "No attachment was received with this email."
+        )
     )
 
 

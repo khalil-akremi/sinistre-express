@@ -1,0 +1,175 @@
+{
+  "case_id": "CLM-C",
+  "claim_ref": "trial2-CLM-C",
+  "label": "trial2",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Referred to a claims handler**\n\n**Facts recorded**\n- Claim reference: trial2-CLM-C\n- Policy: VER-1003, holder Ines Haddad (Toyota Yaris, 2019)\n- Coverage in the Policy Schedule: C4 Theft (also C1, C2, C3)\n- Incident date: 15 October 2026. Report date: 19 October 2026 (email date)\n- Incident: vehicle stolen from the street in front of the customer's building. The customer was travelling and has not yet reported to the police.\n- Documents attached: none\n- Repair cost: not applicable (theft)\n- Third party involved: none\n- The Policy Schedule returned no excess/deductible, limits or conditions.\n\n**Reasoning**\n- **Coverage is listed.** Theft (C4) is in the Policy Schedule, so it is not referred for coverage reasons. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>\n- **Late report.** A theft must be reported within 2 days of its discovery. The email gives the theft date as 15 October and the report as 19 October, four days later. The discovery date is not stated, so the handler should confirm when the theft was discovered. Either way, the report is at risk of being late. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/> A late claim is referred to a handler and is never refused automatically. <cite document_id=\"2630#10255\" pages=\"3\" name=\"contract.pdf\"/>\n- **Missing document.** A theft claim requires a police report, and none has been filed yet. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>\n- **Possible exclusion.** None is evident from the email. Nothing in the email suggests alcohol, drugs, licence problems or misuse. The email does not mention keys, so key status is unknown. The handler should check it. Any exclusion is decided by a handler, not applied automatically. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>\n- **Claim must state date, place and description.** The email gives the date, the place (the street in front of the building) and a description. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>\n- **No settlement computed.** The late report and missing police report block settlement, so no amount has been calculated. For theft, the claim amount would be the vehicle's market value, but that figure is only applied through compute_settlement once the handler has decided. <cite document_id=\"2630#10255\" pages=\"2\" name=\"contract.pdf\"/>\n\n**Amounts**\nNot computed. Deductible, payout and assessor requirement are left for the handler after the late report and police report are decided.\n\n**Actions taken**\n- Retrieved the Policy Schedule for VER-1003.\n- Opened the claim record for trial2-CLM-C. Flags recorded: late report and missing police report.\n- Escalated to a claims handler, who must decide the late report and the police report before any settlement.\n- No police report was requested from the customer, and no settlement was staged.\n\n**Draft message to the customer**\n\nDear Ms Haddad,\n\nThank you for reporting the theft of your car on 15 October 2026 under policy VER-1003, reference trial2-CLM-C. We have received your claim and passed it to one of our claims handlers, who will review it and contact you.\n\nTo help them, please send us a police report for the theft as soon as you can, and let us know when you first discovered the car was missing. If you have the keys, please also tell us where they are.\n\nKind regards,\nVeridia Claims Team",
+  "questions": [],
+  "thread_id": "b8578dee-660d-491e-ba1d-6b6b6dae3a2d",
+  "cost": {
+    "failed": false,
+    "input_tokens": 107161,
+    "cached_tokens": 98243,
+    "output_tokens": 4427,
+    "input_cost": "0.002245405",
+    "output_cost": "0.0022457",
+    "total": "0.004491105"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 30.0,
+  "claim": {
+    "claim_ref": "trial2-CLM-C",
+    "policy_id": "VER-1003",
+    "coverage": "C4",
+    "incident_date": "2026-10-15",
+    "report_date": "2026-10-19",
+    "description": "The customer reports that her car was stolen from the street in front of her building on 15 October 2026. She was travelling and reported the theft on 19 October 2026. She has not yet filed a police report.",
+    "repair_cost": 0,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[]",
+    "exclusion_signal": null,
+    "status": "escalated",
+    "blocking_issues": "[\"late_report\", \"missing_document:police_report\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": "[\"late_report\", \"other\"]",
+    "handler_note": "Theft (C4, covered in the Policy Schedule) of a 2019 Toyota Yaris reported on 2026-10-19 for an incident on 2026-10-15, i.e. 4 days later against a 2-day reporting deadline. No documents were attached and no police report has been filed yet (police_report is required). Please decide on the late report and on the missing police report before any settlement.",
+    "approved_by": null,
+    "created_at": "2026-10-31T08:17:10+00:00",
+    "updated_at": "2026-10-31T08:17:12+00:00"
+  },
+  "action_log": [
+    {
+      "id": 8,
+      "ts": "2026-10-31T08:17:08+00:00",
+      "claim_ref": "trial2-CLM-C",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1003",
+        "claim_ref": "trial2-CLM-C"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1003",
+        "holder_name": "Ines Haddad",
+        "vehicle": "Toyota Yaris (2019)",
+        "market_value_eur": 9000,
+        "licence_date": "2015-03-20",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "ts": "2026-10-31T08:17:10+00:00",
+      "claim_ref": "trial2-CLM-C",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "trial2-CLM-C",
+        "policy_id": "VER-1003",
+        "coverage": "C4",
+        "incident_date": "2026-10-15",
+        "report_date": "2026-10-19",
+        "description": "The customer reports that her car was stolen from the street in front of her building on 15 October 2026. She was travelling and reported the theft on 19 October 2026. She has not yet filed a police report.",
+        "repair_cost": 0,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "trial2-CLM-C",
+        "status": "open",
+        "checks": {
+          "coverage": "C4 Theft",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 4,
+          "reporting_deadline_days": 2,
+          "reported_on_time": false,
+          "required_documents": [
+            "police_report"
+          ],
+          "missing_documents": [
+            "police_report"
+          ],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "late_report",
+          "missing_document:police_report"
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "ts": "2026-10-31T08:17:12+00:00",
+      "claim_ref": "trial2-CLM-C",
+      "tool": "escalate_to_handler",
+      "arguments": {
+        "claim_ref": "trial2-CLM-C",
+        "reasons": [
+          "late_report",
+          "other"
+        ],
+        "summary": "Theft (C4, covered in the Policy Schedule) of a 2019 Toyota Yaris reported on 2026-10-19 for an incident on 2026-10-15, i.e. 4 days later against a 2-day reporting deadline. No documents were attached and no police report has been filed yet (police_report is required). Please decide on the late report and on the missing police report before any settlement."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "trial2-CLM-C",
+        "status": "escalated",
+        "reasons": [
+          "late_report",
+          "other"
+        ],
+        "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

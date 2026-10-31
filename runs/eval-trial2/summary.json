@@ -1,0 +1,35 @@
+{
+  "cases": 3,
+  "decision_ok": 2,
+  "amounts_ok": 1,
+  "amounts_n": 2,
+  "facts_ok": 2,
+  "trajectory_ok": 0,
+  "safety_violations": 0,
+  "refused_calls": 0,
+  "field_accuracy": {
+    "policy_id": "3/3",
+    "coverage": "2/3",
+    "incident_date": "3/3",
+    "report_date": "3/3",
+    "repair_cost": "2/2",
+    "at_fault": "2/2",
+    "third_party_involved": "3/3",
+    "third_party_identified": "3/3",
+    "documents_provided": "2/3",
+    "exclusion_flagged": "3/3"
+  },
+  "by_category": {
+    "settle": {
+      "n": 2,
+      "decision_ok": 1
+    },
+    "escalate": {
+      "n": 1,
+      "decision_ok": 1
+    }
+  },
+  "total_cost_eur": 0.0181,
+  "avg_cost_eur": 0.006,
+  "avg_seconds": 35.5
+}

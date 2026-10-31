@@ -313,9 +313,19 @@ class ClaimsSystem:
         unknown = [d for d in documents if d not in DOCUMENT_TYPES]
         if unknown:
             raise ToolRefused(f"Unknown document types {unknown}. Allowed: {list(DOCUMENT_TYPES)}.")
-        row = self._claim_row(claim_ref)
-        status = "escalated" if row["status"] == "escalated" else "awaiting_documents"
-        self._update_claim(claim_ref, status=status, requested_documents=json.dumps(documents))
+        # One atomic statement: escalation always wins, whatever the order or timing
+        # of the calls. (A read-then-write here lost escalations when the agent
+        # called request_documents and escalate_to_handler in parallel.)
+        conn = self._conn()
+        with conn:
+            conn.execute(
+                "UPDATE claims SET requested_documents = ?, updated_at = ?, "
+                "status = CASE WHEN status = 'escalated' THEN 'escalated' ELSE 'awaiting_documents' END "
+                "WHERE claim_ref = ?",
+                (json.dumps(documents), _now(), claim_ref),
+            )
+        conn.close()
+        status = self._claim_row(claim_ref)["status"]
         return {
             "claim_ref": claim_ref,
             "status": status,
