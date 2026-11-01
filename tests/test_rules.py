@@ -135,3 +135,10 @@ def test_theft_deadline_is_two_days():
     late = claim(coverage=C4, report_date=date(2026, 10, 4), documents_provided=("police_report",))
     assert expected_outcome(on_time, POLICY).decision == Decision.SETTLE
     assert expected_outcome(late, POLICY).escalation_reasons == ["late_report"]
+
+
+
+def test_waiver_says_it_also_removes_the_young_driver_surcharge():
+    s = compute_settlement(coverage=Coverage.COLLISION, repair_cost=1100, market_value=11000, at_fault=False,
+                           third_party_identified=True, years_licensed=1)
+    assert s.deductible == 0 and "including the Art. 5.3 young-driver surcharge" in s.breakdown[0]

@@ -1,0 +1,152 @@
+{
+  "review_id": "R-13",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1002\",\n      \"sources_say\": \"Customer email ends with 'Policy number: VER-1002'; Policy Schedule from the claims system shows policy_id VER-1002, holder Lucas Bernard, Renault Clio (2023)\",\n      \"match\": true,\n      \"evidence\": \"Customer email signature block; Policy Schedule (claims system)\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"Email describes a collision while changing lanes that damaged the policyholder's own car ('hit the car next to me... quoted €2,400 to repair my car'); C2 'Collision damage - damage to the insured vehicle after a collision' is listed in the Policy Schedule coverages\",\n      \"match\": true,\n      \"evidence\": \"Customer email body; Policy Schedule coverages C1/C2/C3; contract Article 2 coverage table (2630#10414, page 1)\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-14\",\n      \"sources_say\": \"Email: 'an accident that happened on 14 October 2026'\",\n      \"match\": true,\n      \"evidence\": \"Customer email, first paragraph\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-15\",\n      \"sources_say\": \"Email header: received on 2026-10-15, one calendar day after the incident, within the 5-day reporting deadline of contract Article 4.1\",\n      \"match\": true,\n      \"evidence\": \"Customer email header 'received on 2026-10-15'; contract Article 4.1 (2630#10414, page 2)\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": 2400,\n      \"sources_say\": \"Email: 'The garage quoted €2,400 to repair my car'; contract Article 1 defines repair cost as the total incl. VAT on the quote. The quote PDF itself is stored by the mailroom and cannot be opened, so the incl.-VAT line cannot be re-verified, but no source contradicts €2,400\",\n      \"match\": true,\n      \"evidence\": \"Customer email ('€2,400'); contract Article 1 repair-cost definition (2630#10414, page 1); repair_quote.pdf counted as received per mailroom note but not openable\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": true,\n      \"sources_say\": \"Email: 'It was my fault.' — the policyholder states he misjudged the distance while changing lanes\",\n      \"match\": true,\n      \"evidence\": \"Customer email, second paragraph\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": true,\n      \"sources_say\": \"Email: 'hit the car next to me... The other driver, Ms. Laurent, and I signed the accident report' — a third party was involved\",\n      \"match\": true,\n      \"evidence\": \"Customer email, second paragraph\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": true,\n      \"sources_say\": \"Email names the other driver, Ms. Laurent, and states the accident report was signed by both drivers; accident_report_signed.pdf is counted as received by the mailroom (not openable, contents not verifiable, but no source contradicts)\",\n      \"match\": true,\n      \"evidence\": \"Customer email ('The other driver, Ms. Laurent, and I signed the accident report'); mailroom note listing accident_report_signed.pdf as received\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\", \"accident_report\"],\n      \"sources_say\": \"Email lists attachments damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf; the mailroom confirms all three were received (not openable). These are exactly the three documents required for C2 under contract Article 4.3 (photos, repair quote, accident report signed by both drivers when a third party is involved). Contents cannot be opened to confirm they belong to Lucas Bernard / the Renault Clio, but no source contradicts that\",\n      \"match\": true,\n      \"evidence\": \"Customer email attachment list; mailroom note; contract Article 4.3 C2 required-documents table (2630#10414, page 2)\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"No exclusion is stated anywhere: the email describes a misjudged lane change (not intentional damage, Art. 3.4), on a public ring road (not racing/track, Art. 3.3), with no mention of alcohol/drugs (Art. 3.1) or mechanical failure/wear (Art. 3.5); the Policy Schedule shows a licence date of 2024-09-02, so the driver held a valid licence on 2026-10-14 (Art. 3.2 not triggered)\",\n      \"match\": true,\n      \"evidence\": \"Customer email (no exclusion mentioned); contract Article 3 exclusions list (2630#10414, page 2); Policy Schedule licence_date 2024-09-02\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"Reporting deadline: incident 2026-10-14, reported 2026-10-15, within the 5 calendar days of contract Article 4.1 (2630#10414, page 2) — not a late claim, so no Article 7.1 referral. Exclusions: none indicated in the email or documents against Article 3, so no Article 7.2 referral and exclusion_signal null is correct. Coverage: C2 Collision damage is in the Policy Schedule (Article 2), so no Article 7.3 referral. Required documents: all three C2 documents (photos, repair quote, signed accident report) were received per the email and mailroom (Article 4.3). Playbook: the only handler-referral rule triggers when the other driver is a commercial vehicle (van, truck, lorry, delivery vehicle); the email states the other party was 'the car next to me' driven by Ms. Laurent — a private car, not a commercial vehicle — so the playbook rule does not apply and no referral is required on that ground. Article 6.1 requires an assessor because the repair cost (€2,400) is above €1,500, and the system has one booked for 2026-10-18; payment then follows handler approval within 15 days (Article 6.3). Deductible €700 (C2 €300 standard + €400 young-driver surcharge, licence 2024-09-02 < 3 years on 2026-10-14; not-at-fault waiver inapplicable since the policyholder is at fault) and payout €1,700 are computed by the claims system from these facts and are consistent with Articles 5 and 6.2 (cap €16,500 not reached).\"\n  },\n  \"summary\": \"Every recorded fact matches the customer email, the mailroom-confirmed attachments, the Policy Schedule and the Veridia contract; the claim was reported within 5 days, falls under covered C2, has all required documents, no exclusion, and the commercial-vehicle playbook referral rule is not triggered, so the staged payment (deductible €700, payout €1,700, assessor booked) should be approved.\"\n}\n```",
+  "questions": [],
+  "thread_id": "9c4e3eae-a5b0-4c8c-bbda-8987f1ffd14c",
+  "cost": {
+    "failed": false,
+    "input_tokens": 70401,
+    "cached_tokens": 58112,
+    "output_tokens": 5138,
+    "input_cost": "0.01069684",
+    "output_cost": "0.01063251",
+    "total": "0.02132935"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 55.7,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1002",
+        "sources_say": "Customer email ends with 'Policy number: VER-1002'; Policy Schedule from the claims system shows policy_id VER-1002, holder Lucas Bernard, Renault Clio (2023)",
+        "match": true,
+        "evidence": "Customer email signature block; Policy Schedule (claims system)"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "Email describes a collision while changing lanes that damaged the policyholder's own car ('hit the car next to me... quoted €2,400 to repair my car'); C2 'Collision damage - damage to the insured vehicle after a collision' is listed in the Policy Schedule coverages",
+        "match": true,
+        "evidence": "Customer email body; Policy Schedule coverages C1/C2/C3; contract Article 2 coverage table (2630#10414, page 1)"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-14",
+        "sources_say": "Email: 'an accident that happened on 14 October 2026'",
+        "match": true,
+        "evidence": "Customer email, first paragraph"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-15",
+        "sources_say": "Email header: received on 2026-10-15, one calendar day after the incident, within the 5-day reporting deadline of contract Article 4.1",
+        "match": true,
+        "evidence": "Customer email header 'received on 2026-10-15'; contract Article 4.1 (2630#10414, page 2)"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": 2400,
+        "sources_say": "Email: 'The garage quoted €2,400 to repair my car'; contract Article 1 defines repair cost as the total incl. VAT on the quote. The quote PDF itself is stored by the mailroom and cannot be opened, so the incl.-VAT line cannot be re-verified, but no source contradicts €2,400",
+        "match": true,
+        "evidence": "Customer email ('€2,400'); contract Article 1 repair-cost definition (2630#10414, page 1); repair_quote.pdf counted as received per mailroom note but not openable"
+      },
+      {
+        "field": "at_fault",
+        "recorded": true,
+        "sources_say": "Email: 'It was my fault.' — the policyholder states he misjudged the distance while changing lanes",
+        "match": true,
+        "evidence": "Customer email, second paragraph"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": true,
+        "sources_say": "Email: 'hit the car next to me... The other driver, Ms. Laurent, and I signed the accident report' — a third party was involved",
+        "match": true,
+        "evidence": "Customer email, second paragraph"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": true,
+        "sources_say": "Email names the other driver, Ms. Laurent, and states the accident report was signed by both drivers; accident_report_signed.pdf is counted as received by the mailroom (not openable, contents not verifiable, but no source contradicts)",
+        "match": true,
+        "evidence": "Customer email ('The other driver, Ms. Laurent, and I signed the accident report'); mailroom note listing accident_report_signed.pdf as received"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote",
+          "accident_report"
+        ],
+        "sources_say": "Email lists attachments damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf; the mailroom confirms all three were received (not openable). These are exactly the three documents required for C2 under contract Article 4.3 (photos, repair quote, accident report signed by both drivers when a third party is involved). Contents cannot be opened to confirm they belong to Lucas Bernard / the Renault Clio, but no source contradicts that",
+        "match": true,
+        "evidence": "Customer email attachment list; mailroom note; contract Article 4.3 C2 required-documents table (2630#10414, page 2)"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "No exclusion is stated anywhere: the email describes a misjudged lane change (not intentional damage, Art. 3.4), on a public ring road (not racing/track, Art. 3.3), with no mention of alcohol/drugs (Art. 3.1) or mechanical failure/wear (Art. 3.5); the Policy Schedule shows a licence date of 2024-09-02, so the driver held a valid licence on 2026-10-14 (Art. 3.2 not triggered)",
+        "match": true,
+        "evidence": "Customer email (no exclusion mentioned); contract Article 3 exclusions list (2630#10414, page 2); Policy Schedule licence_date 2024-09-02"
+      }
+    ],
+    "summary": "Every recorded fact matches the customer email, the mailroom-confirmed attachments, the Policy Schedule and the Veridia contract; the claim was reported within 5 days, falls under covered C2, has all required documents, no exclusion, and the commercial-vehicle playbook referral rule is not triggered, so the staged payment (deductible €700, payout €1,700, assessor booked) should be approved.",
+    "unreadable": false
+  }
+}

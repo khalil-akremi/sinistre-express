@@ -1,0 +1,140 @@
+{
+  "review_id": "R-12",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1001\",\n      \"sources_say\": \"Customer email states 'Policy number: VER-1001'; Policy Schedule policy_id is VER-1001 with holder Claire Martin.\",\n      \"match\": true,\n      \"evidence\": \"Customer email signature block; Policy Schedule in claims system.\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C4\",\n      \"sources_say\": \"The incident is a whole-vehicle theft (police receipt: 'RECEIPT OF A THEFT COMPLAINT (vehicle theft)'), which is coverage C4 'Theft — theft of the whole insured vehicle'; C4 is listed in the Policy Schedule coverages for VER-1001.\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf (complaint type 'vehicle theft'); contract.pdf page 2 coverage table C4; Policy Schedule coverages include C4.\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-29\",\n      \"sources_say\": \"Police receipt states 'Date of the theft: 29/10/2026, between 21:00 and 23:45'.\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf, 'Date of the theft' line.\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-30\",\n      \"sources_say\": \"Customer email received 2026-10-30 ('I filed a complaint at the police station this morning'); police receipt 'Complaint filed on: 30/10/2026 at 09:25'.\",\n      \"match\": true,\n      \"evidence\": \"Customer email header and body; police_report.pdf 'Complaint filed on' line.\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"0\",\n      \"sources_say\": \"No repair quote or invoice exists in the email or attachments because the whole vehicle was stolen, not damaged; under the contract 'For theft (C4), the amount of the claim is the market value of the vehicle' (Policy Schedule market value €14,000), so a repair cost of 0 is consistent and no source states any repair cost.\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf (theft of whole vehicle, no repair quote attached); contract.pdf page 2: 'For theft (C4), the amount of the claim is the market value of the vehicle'; Article 1 repair-cost definition requires a repair quote, which does not exist here.\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": \"false\",\n      \"sources_say\": \"The email and police receipt describe a theft by unknown persons; the policyholder is the victim, not at fault. No source indicates fault by Claire Martin.\",\n      \"match\": true,\n      \"evidence\": \"Customer email ('My car was stolen'); police_report.pdf (complainant declares theft; both keys kept by complainant).\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": \"false\",\n      \"sources_say\": \"No third party is mentioned anywhere: the email describes a street theft and the police receipt lists only the complainant; the playbook's referral rule (commercial vehicle of another driver) has no triggering facts.\",\n      \"match\": true,\n      \"evidence\": \"Customer email; police_report.pdf (no other party named); handler playbook rule requires 'the other driver' being a commercial vehicle, which the sources do not state.\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": \"false\",\n      \"sources_say\": \"No third party is identified in the email or the police receipt; the thief is unknown ('entered in the register of stolen vehicles').\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf (no suspect/other party named); customer email.\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"police_report\"],\n      \"sources_say\": \"The only attachment is police_report.pdf, and it belongs to this policyholder and vehicle: complainant 'Claire Martin', vehicle 'Peugeot 208 (2021)', matching the Policy Schedule holder and vehicle. For C4 theft the contract requires exactly one document: 'Police report'.\",\n      \"match\": true,\n      \"evidence\": \"police_report.pdf header/complainant/vehicle lines; Policy Schedule (holder Claire Martin, Peugeot 208 2021); contract.pdf page 2 required-documents table, C4 Theft row: 'Police report'.\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": \"null\",\n      \"sources_say\": \"None of the Article 3 exclusions is present: no alcohol/drugs, the policyholder holds a licence since 2012-05-14 (valid), no racing, no intentional damage by the policyholder (she is the victim of theft), no wear/mechanical failure. The receipt even notes both keys kept by the complainant and signs of break-in.\",\n      \"match\": true,\n      \"evidence\": \"contract.pdf page 2 Article 3 exclusion list; police_report.pdf ('Keys: both keys kept by the complainant', 'Signs of break-in reported'); Policy Schedule licence_date 2012-05-14.\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"Deadline: theft on 2026-10-29 reported 2026-10-30, within the 2-day theft deadline of Article 4.1 (contract.pdf page 2). Coverage: C4 Theft is in the Policy Schedule, so Article 2 is satisfied and no Article 7(3) referral applies. Exclusions: none of the Article 3 exclusions appears in the email or police report, so no Article 7(2) referral. Required documents: C4 requires only the police report (contract.pdf page 2), which was provided and matches the policyholder/vehicle. Playbook: the only playbook rule refers claims where the other driver is a commercial vehicle; no third party is involved per the email and receipt, so the rule is not triggered and no referral is required. Claim amount for C4 is the market value €14,000 per contract page 2, consistent with the staged deductible €1,400 (10%, min €500) and payout €12,600.\"\n  },\n  \"summary\": \"All recorded facts match the customer email and police_report.pdf, C4 theft is covered in the Policy Schedule, the claim was reported within the 2-day theft deadline, the required police report was provided and belongs to this policyholder and vehicle, no exclusion or playbook referral rule applies, so the staged payment should be approved.\"\n}\n```",
+  "questions": [],
+  "thread_id": "88798b87-b641-46c0-bfb1-e1f42b999010",
+  "cost": {
+    "failed": false,
+    "input_tokens": 38319,
+    "cached_tokens": 30720,
+    "output_tokens": 2329,
+    "input_cost": "0.00595212",
+    "output_cost": "0.00478128",
+    "total": "0.01073340"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 46.9,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1001",
+        "sources_say": "Customer email states 'Policy number: VER-1001'; Policy Schedule policy_id is VER-1001 with holder Claire Martin.",
+        "match": true,
+        "evidence": "Customer email signature block; Policy Schedule in claims system."
+      },
+      {
+        "field": "coverage",
+        "recorded": "C4",
+        "sources_say": "The incident is a whole-vehicle theft (police receipt: 'RECEIPT OF A THEFT COMPLAINT (vehicle theft)'), which is coverage C4 'Theft — theft of the whole insured vehicle'; C4 is listed in the Policy Schedule coverages for VER-1001.",
+        "match": true,
+        "evidence": "police_report.pdf (complaint type 'vehicle theft'); contract.pdf page 2 coverage table C4; Policy Schedule coverages include C4."
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-29",
+        "sources_say": "Police receipt states 'Date of the theft: 29/10/2026, between 21:00 and 23:45'.",
+        "match": true,
+        "evidence": "police_report.pdf, 'Date of the theft' line."
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-30",
+        "sources_say": "Customer email received 2026-10-30 ('I filed a complaint at the police station this morning'); police receipt 'Complaint filed on: 30/10/2026 at 09:25'.",
+        "match": true,
+        "evidence": "Customer email header and body; police_report.pdf 'Complaint filed on' line."
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "0",
+        "sources_say": "No repair quote or invoice exists in the email or attachments because the whole vehicle was stolen, not damaged; under the contract 'For theft (C4), the amount of the claim is the market value of the vehicle' (Policy Schedule market value €14,000), so a repair cost of 0 is consistent and no source states any repair cost.",
+        "match": true,
+        "evidence": "police_report.pdf (theft of whole vehicle, no repair quote attached); contract.pdf page 2: 'For theft (C4), the amount of the claim is the market value of the vehicle'; Article 1 repair-cost definition requires a repair quote, which does not exist here."
+      },
+      {
+        "field": "at_fault",
+        "recorded": "false",
+        "sources_say": "The email and police receipt describe a theft by unknown persons; the policyholder is the victim, not at fault. No source indicates fault by Claire Martin.",
+        "match": true,
+        "evidence": "Customer email ('My car was stolen'); police_report.pdf (complainant declares theft; both keys kept by complainant)."
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": "false",
+        "sources_say": "No third party is mentioned anywhere: the email describes a street theft and the police receipt lists only the complainant; the playbook's referral rule (commercial vehicle of another driver) has no triggering facts.",
+        "match": true,
+        "evidence": "Customer email; police_report.pdf (no other party named); handler playbook rule requires 'the other driver' being a commercial vehicle, which the sources do not state."
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": "false",
+        "sources_say": "No third party is identified in the email or the police receipt; the thief is unknown ('entered in the register of stolen vehicles').",
+        "match": true,
+        "evidence": "police_report.pdf (no suspect/other party named); customer email."
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "police_report"
+        ],
+        "sources_say": "The only attachment is police_report.pdf, and it belongs to this policyholder and vehicle: complainant 'Claire Martin', vehicle 'Peugeot 208 (2021)', matching the Policy Schedule holder and vehicle. For C4 theft the contract requires exactly one document: 'Police report'.",
+        "match": true,
+        "evidence": "police_report.pdf header/complainant/vehicle lines; Policy Schedule (holder Claire Martin, Peugeot 208 2021); contract.pdf page 2 required-documents table, C4 Theft row: 'Police report'."
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": "null",
+        "sources_say": "None of the Article 3 exclusions is present: no alcohol/drugs, the policyholder holds a licence since 2012-05-14 (valid), no racing, no intentional damage by the policyholder (she is the victim of theft), no wear/mechanical failure. The receipt even notes both keys kept by the complainant and signs of break-in.",
+        "match": true,
+        "evidence": "contract.pdf page 2 Article 3 exclusion list; police_report.pdf ('Keys: both keys kept by the complainant', 'Signs of break-in reported'); Policy Schedule licence_date 2012-05-14."
+      }
+    ],
+    "summary": "All recorded facts match the customer email and police_report.pdf, C4 theft is covered in the Policy Schedule, the claim was reported within the 2-day theft deadline, the required police report was provided and belongs to this policyholder and vehicle, no exclusion or playbook referral rule applies, so the staged payment should be approved.",
+    "unreadable": false
+  }
+}

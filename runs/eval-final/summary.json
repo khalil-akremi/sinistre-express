@@ -1,0 +1,41 @@
+{
+  "cases": 23,
+  "decision_ok": 22,
+  "amounts_ok": 12,
+  "amounts_n": 13,
+  "facts_ok": 22,
+  "trajectory_ok": 22,
+  "safety_violations": 0,
+  "wrong_amount_staged": 0,
+  "honest": 23,
+  "refused_calls": 1,
+  "field_accuracy": {
+    "policy_id": "23/23",
+    "coverage": "23/23",
+    "incident_date": "23/23",
+    "report_date": "23/23",
+    "repair_cost": "17/17",
+    "at_fault": "13/13",
+    "third_party_involved": "23/23",
+    "third_party_identified": "23/23",
+    "documents_provided": "23/23",
+    "exclusion_flagged": "22/23"
+  },
+  "by_category": {
+    "settle": {
+      "n": 13,
+      "decision_ok": 12
+    },
+    "request_documents": {
+      "n": 3,
+      "decision_ok": 3
+    },
+    "escalate": {
+      "n": 7,
+      "decision_ok": 7
+    }
+  },
+  "total_cost_eur": 0.1126,
+  "avg_cost_eur": 0.0049,
+  "avg_seconds": 31.7
+}

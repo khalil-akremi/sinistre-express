@@ -1,0 +1,171 @@
+{
+  "case_id": "CLM-19",
+  "claim_ref": "final-CLM-19",
+  "label": "final",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status:** Referred to a claims handler\n\nThe claims system shows that claim final-CLM-19 was escalated to a Veridia claims handler with the reason `coverage_not_in_schedule`. No settlement was computed or staged.\n\n**Facts recorded**\n- Policy VER-1004, policyholder Thomas Petit, Volkswagen Golf (2020), market value €15,500, licence date 2008-11-01 (from the Policy Schedule via get_policy).\n- Policy Schedule coverages: C1 Third-party liability and C2 Collision damage. No glass cover (C3) is listed.\n- Incident on 24 October 2026: a stone cracked the windscreen of the customer's own car on a motorway. No other party was involved.\n- Reported on 25 October 2026 (email date).\n- Repair quote of €450 for the customer's own car.\n- Documents in the claim file: damage_photos.zip and repair_quote.pdf. Neither could be opened, so their contents are unverified.\n\n**Reasoning**\n- **Coverage not in the schedule (blocking):** The claim was opened under glass breakage (C3), but the Policy Schedule lists only C1 and C2. A coverage not in the schedule is not paid under the contract and goes to a claims handler (<cite document_id=\"2630#10414\" pages=\"1-2\" name=\"DriveSafe Motor Policy\"/> Article 2; <cite document_id=\"2630#10414\" pages=\"3\" /> Article 7, point 3).\n- **Reporting deadline (met):** The claim was reported one day after the incident, within the 5-day limit (<cite document_id=\"2630#10414\" pages=\"2\" /> Article 4.1).\n- **Documents (complete):** Photos and a repair quote are the required documents for glass claims, and both are recorded as provided (<cite document_id=\"2630#10414\" pages=\"2\" /> Article 4.3).\n- **Exclusions:** None flagged. The story does not suggest any Article 3 exclusion (<cite document_id=\"2630#10414\" pages=\"2\" /> Article 3).\n- **Referral:** Article 7 requires a handler decision on any coverage not in the schedule, and a late claim is never refused automatically (<cite document_id=\"2630#10414\" pages=\"3\" /> Article 7).\n\n**Amounts**\nNone computed. The deductible, payout and assessor requirement are left for the handler. For reference, the contract's assessor rule applies to damage claims with a repair cost above €1,500 (<cite document_id=\"2630#10414\" pages=\"3\" /> Article 6.1), and this quote is €450.\n\n**Draft message to the customer**\n\n> Dear Mr Petit,\n>\n> Thank you for reporting the windscreen damage of 24 October 2026 and for sending your photos and repair quote. Your claim (final-CLM-19) has been referred to a claims handler, who will review it and confirm the next steps. We will contact you as soon as we have their decision.\n>\n> Kind regards,\n> Veridia Claims\n\n**Note for the handler:** The subagent's session did not have the contract text, so I checked the General Conditions myself to confirm the articles above. I did not re-open the policy record, so the \"no glass cover\" finding rests on the subagent's get_policy result. Please confirm it when reviewing the claim.",
+  "questions": [],
+  "thread_id": "558893ea-a0e1-406a-a0fa-f84f6f465e65",
+  "cost": {
+    "failed": false,
+    "input_tokens": 133879,
+    "cached_tokens": 122203,
+    "output_tokens": 5410,
+    "input_cost": "0.002940305",
+    "output_cost": "0.0027491",
+    "total": "0.005689405"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 34.7,
+  "claim": {
+    "claim_ref": "final-CLM-19",
+    "policy_id": "VER-1004",
+    "coverage": "C3",
+    "incident_date": "2026-10-24",
+    "report_date": "2026-10-25",
+    "description": "Customer reports a stone cracked the windscreen of his own car on a motorway on 2026-10-24. No other vehicle or person involved. Repair quote of EUR 450 for the customer's own car.",
+    "repair_cost": 450,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"photos\", \"repair_quote\"]",
+    "exclusion_signal": null,
+    "status": "escalated",
+    "blocking_issues": "[\"coverage_not_in_schedule\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": "[\"coverage_not_in_schedule\"]",
+    "handler_note": "Policyholder Thomas Petit (VER-1004) reports a stone cracked his own windscreen on a motorway on 2026-10-24, reported 2026-10-25 (on time). Claim is under C3 glass breakage, but the Policy Schedule lists only C1 and C2, so glass cover is not confirmed. Repair quote EUR 450 and photos are in the file; no settlement computed or staged.",
+    "approved_by": null,
+    "created_at": "2026-10-31T18:38:44+00:00",
+    "updated_at": "2026-10-31T18:38:46+00:00"
+  },
+  "action_log": [
+    {
+      "id": 107,
+      "ts": "2026-10-31T18:38:42+00:00",
+      "claim_ref": "final-CLM-19",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1004",
+        "claim_ref": "final-CLM-19"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1004",
+        "holder_name": "Thomas Petit",
+        "vehicle": "Volkswagen Golf (2020)",
+        "market_value_eur": 15500,
+        "licence_date": "2008-11-01",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          }
+        ]
+      }
+    },
+    {
+      "id": 108,
+      "ts": "2026-10-31T18:38:44+00:00",
+      "claim_ref": "final-CLM-19",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "final-CLM-19",
+        "policy_id": "VER-1004",
+        "coverage": "C3",
+        "incident_date": "2026-10-24",
+        "report_date": "2026-10-25",
+        "description": "Customer reports a stone cracked the windscreen of his own car on a motorway on 2026-10-24. No other vehicle or person involved. Repair quote of EUR 450 for the customer's own car.",
+        "repair_cost": 450,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "photos",
+          "repair_quote"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "final-CLM-19",
+        "status": "open",
+        "checks": {
+          "coverage": "C3 Glass breakage",
+          "coverage_in_policy_schedule": false,
+          "days_to_report": 1,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "coverage_not_in_schedule"
+        ]
+      }
+    },
+    {
+      "id": 109,
+      "ts": "2026-10-31T18:38:46+00:00",
+      "claim_ref": "final-CLM-19",
+      "tool": "escalate_to_handler",
+      "arguments": {
+        "claim_ref": "final-CLM-19",
+        "reasons": [
+          "coverage_not_in_schedule"
+        ],
+        "summary": "Policyholder Thomas Petit (VER-1004) reports a stone cracked his own windscreen on a motorway on 2026-10-24, reported 2026-10-25 (on time). Claim is under C3 glass breakage, but the Policy Schedule lists only C1 and C2, so glass cover is not confirmed. Repair quote EUR 450 and photos are in the file; no settlement computed or staged."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "final-CLM-19",
+        "status": "escalated",
+        "reasons": [
+          "coverage_not_in_schedule"
+        ],
+        "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

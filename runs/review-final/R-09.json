@@ -1,0 +1,147 @@
+{
+  "review_id": "R-09",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1002\",\n      \"sources_say\": \"VER-1002\",\n      \"match\": true,\n      \"evidence\": \"Customer email states 'Policy number: VER-1002'; accident_report_signed.pdf Vehicle A shows POLICY NO. VER-1002 (Lucas Bernard, Veridia Insurance); repair_quote.pdf shows 'Insurer: Veridia Insurance, policy VER-1002'; matches Policy Schedule policy_id VER-1002.\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"C2 (Collision damage) is in the Policy Schedule and fits a collision with another car\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule for VER-1002 lists coverages C1, C2 (Collision damage) and C3; email and accident report describe a collision between two cars, which is C2 'Damage to the insured vehicle after a collision' (contract Article 2, document 2630#10414 page 1).\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-14\",\n      \"sources_say\": \"14/10/2026\",\n      \"match\": true,\n      \"evidence\": \"Customer email: 'I had a collision ... on 14 October 2026'; accident_report_signed.pdf section 1: 'Date of accident: 14/10/2026 Time: 08:40'.\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-15\",\n      \"sources_say\": \"2026-10-15\",\n      \"match\": true,\n      \"evidence\": \"Customer email header: 'Customer email received on 2026-10-15'; repair quote issued 15/10/2026 is consistent. Within the 5-day reporting deadline of contract Article 4.1 (document 2630#10414 page 2).\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"2400\",\n      \"sources_say\": \"2 400,00 € total incl. VAT\",\n      \"match\": true,\n      \"evidence\": \"repair_quote.pdf: Total excl. VAT 2 000,00 €, VAT 20% 400,00 €, 'TOTAL INCL. VAT 2 400,00 €'; contract Article 1 defines repair cost as the total including VAT on the quote (document 2630#10414 page 1).\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": true,\n      \"sources_say\": \"Policyholder at fault\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf section 14, Driver A (Lucas Bernard): 'I moved into the left lane without seeing vehicle B in my blind spot. I accept that the accident is my fault.' Both 'changing lanes' boxes ticked in section 12.\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": true,\n      \"sources_say\": \"A third party (Vehicle B) was involved\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf Vehicle B: policyholder Julie Laurent, insurer Assurances Rhône Mutuelle, Renault Mégane, registration FB-127-QX, driver Ms. Julie Laurent; email: 'I had a collision with another car'.\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": true,\n      \"sources_say\": \"Third party identified by name, insurer and registration\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf Vehicle B block names Julie Laurent, Assurances Rhône Mutuelle, policy 'see insurer certificate', registration FB-127-QX — the third party is identified.\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\", \"accident_report\"],\n      \"sources_say\": \"Email attachments: accident_report_signed.pdf, repair_quote.pdf, damage_photos.zip — all three required C2 documents\",\n      \"match\": true,\n      \"evidence\": \"Customer email 'Attached: accident_report_signed.pdf, repair_quote.pdf, damage_photos.zip'; damage_photos.zip is stored by the mailroom and cannot be opened, so it is counted as received per the review instructions. accident_report_signed.pdf and repair_quote.pdf both belong to this policyholder and vehicle (Lucas Bernard, VER-1002, Renault Clio 2023, GK-904-TR). Contract Article 4.3 requires for C2: photos of the damage, repair quote, and accident report signed by both drivers when a third party is involved (document 2630#10414 page 2); the report's section 15 shows signatures of Driver A and Driver B.\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"No exclusion indicated\",\n      \"match\": true,\n      \"evidence\": \"Neither the email nor the accident report or quote mentions alcohol/drugs, invalid licence, racing, intentional damage, or wear/mechanical failure (contract Article 3, document 2630#10414 page 2). Policy Schedule shows licence date 2024-09-02, i.e. a valid licence held on the incident date, and the report states no injuries and only collision damage.\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"Deadline: incident 2026-10-14, reported 2026-10-15 — within the 5 calendar days of contract Article 4.1 (document 2630#10414 page 2), so no Article 7.1 referral. Exclusions: none of the Article 3 exclusions appear in the email or documents, so no Article 7.2 referral. Coverage: C2 Collision damage is listed in the Policy Schedule for VER-1002 (contract Article 2), so no Article 7.3 referral. Documents: all C2-required documents (photos, repair quote, joint signed accident report) are provided per Article 4.3. Playbook: the referral rule applies only when the other driver is a commercial vehicle (van, truck, lorry, delivery vehicle); accident_report_signed.pdf Vehicle B is a Renault Mégane with VEHICLE TYPE 'Car', so the rule is not triggered and no handler referral is required. Article 6.1 requires an independent assessor above €1,500 repair cost, and the system shows assessor required: yes, booked 2026-10-18, consistent with the contract. The claim is payable (compensation = repair cost capped at market value minus deductible, Article 6.2; amounts computed by the claims system).\"\n  },\n  \"summary\": \"All recorded facts match the customer email, the signed accident report and the repair quote, the claim was reported within the 5-day deadline, C2 coverage is in the Policy Schedule, all required documents were provided, no exclusion applies and the playbook's commercial-vehicle referral rule does not trigger (the other vehicle is a private car), so the staged payment can be approved.\"\n}\n```",
+  "questions": [],
+  "thread_id": "a336126a-423f-4f66-83d0-81da9e96f0c7",
+  "cost": {
+    "failed": false,
+    "input_tokens": 52724,
+    "cached_tokens": 42240,
+    "output_tokens": 2751,
+    "input_cost": "0.00851008",
+    "output_cost": "0.00566148",
+    "total": "0.01417156"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 36.6,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1002",
+        "sources_say": "VER-1002",
+        "match": true,
+        "evidence": "Customer email states 'Policy number: VER-1002'; accident_report_signed.pdf Vehicle A shows POLICY NO. VER-1002 (Lucas Bernard, Veridia Insurance); repair_quote.pdf shows 'Insurer: Veridia Insurance, policy VER-1002'; matches Policy Schedule policy_id VER-1002."
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "C2 (Collision damage) is in the Policy Schedule and fits a collision with another car",
+        "match": true,
+        "evidence": "Policy Schedule for VER-1002 lists coverages C1, C2 (Collision damage) and C3; email and accident report describe a collision between two cars, which is C2 'Damage to the insured vehicle after a collision' (contract Article 2, document 2630#10414 page 1)."
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-14",
+        "sources_say": "14/10/2026",
+        "match": true,
+        "evidence": "Customer email: 'I had a collision ... on 14 October 2026'; accident_report_signed.pdf section 1: 'Date of accident: 14/10/2026 Time: 08:40'."
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-15",
+        "sources_say": "2026-10-15",
+        "match": true,
+        "evidence": "Customer email header: 'Customer email received on 2026-10-15'; repair quote issued 15/10/2026 is consistent. Within the 5-day reporting deadline of contract Article 4.1 (document 2630#10414 page 2)."
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "2400",
+        "sources_say": "2 400,00 € total incl. VAT",
+        "match": true,
+        "evidence": "repair_quote.pdf: Total excl. VAT 2 000,00 €, VAT 20% 400,00 €, 'TOTAL INCL. VAT 2 400,00 €'; contract Article 1 defines repair cost as the total including VAT on the quote (document 2630#10414 page 1)."
+      },
+      {
+        "field": "at_fault",
+        "recorded": true,
+        "sources_say": "Policyholder at fault",
+        "match": true,
+        "evidence": "accident_report_signed.pdf section 14, Driver A (Lucas Bernard): 'I moved into the left lane without seeing vehicle B in my blind spot. I accept that the accident is my fault.' Both 'changing lanes' boxes ticked in section 12."
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": true,
+        "sources_say": "A third party (Vehicle B) was involved",
+        "match": true,
+        "evidence": "accident_report_signed.pdf Vehicle B: policyholder Julie Laurent, insurer Assurances Rhône Mutuelle, Renault Mégane, registration FB-127-QX, driver Ms. Julie Laurent; email: 'I had a collision with another car'."
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": true,
+        "sources_say": "Third party identified by name, insurer and registration",
+        "match": true,
+        "evidence": "accident_report_signed.pdf Vehicle B block names Julie Laurent, Assurances Rhône Mutuelle, policy 'see insurer certificate', registration FB-127-QX — the third party is identified."
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote",
+          "accident_report"
+        ],
+        "sources_say": "Email attachments: accident_report_signed.pdf, repair_quote.pdf, damage_photos.zip — all three required C2 documents",
+        "match": true,
+        "evidence": "Customer email 'Attached: accident_report_signed.pdf, repair_quote.pdf, damage_photos.zip'; damage_photos.zip is stored by the mailroom and cannot be opened, so it is counted as received per the review instructions. accident_report_signed.pdf and repair_quote.pdf both belong to this policyholder and vehicle (Lucas Bernard, VER-1002, Renault Clio 2023, GK-904-TR). Contract Article 4.3 requires for C2: photos of the damage, repair quote, and accident report signed by both drivers when a third party is involved (document 2630#10414 page 2); the report's section 15 shows signatures of Driver A and Driver B."
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "No exclusion indicated",
+        "match": true,
+        "evidence": "Neither the email nor the accident report or quote mentions alcohol/drugs, invalid licence, racing, intentional damage, or wear/mechanical failure (contract Article 3, document 2630#10414 page 2). Policy Schedule shows licence date 2024-09-02, i.e. a valid licence held on the incident date, and the report states no injuries and only collision damage."
+      }
+    ],
+    "summary": "All recorded facts match the customer email, the signed accident report and the repair quote, the claim was reported within the 5-day deadline, C2 coverage is in the Policy Schedule, all required documents were provided, no exclusion applies and the playbook's commercial-vehicle referral rule does not trigger (the other vehicle is a private car), so the staged payment can be approved.",
+    "unreadable": false
+  }
+}

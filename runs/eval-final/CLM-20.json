@@ -1,0 +1,163 @@
+{
+  "case_id": "CLM-20",
+  "claim_ref": "final-CLM-20",
+  "label": "final",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status:** Referred to a claims handler. The claims system shows claim final-CLM-20 as `escalated` with the note \"Do not settle this claim.\" Nothing has been settled or staged, and no settlement was computed.\n\n**Facts recorded**\n- Claim reference: final-CLM-20. Policy: VER-1006. Policyholder: Yanis Moreau.\n- Vehicle: Dacia Sandero (2022), market value €11,000, licence held since 2025-01-15.\n- Coverage claimed: C4 Theft (theft of the whole insured vehicle). C4 is listed in the Policy Schedule.\n- Incident (theft) date: 2026-10-25. Report date (email date): 2026-10-28.\n- Documents: police_report.pdf was received and stored. I could not open it, so its contents are unverified.\n- No third party, no repair quote (not needed for theft), no driver information given, and no exclusion signal in the email.\n\n**Reasoning**\n- **Coverage:** Theft (C4) is in the Policy Schedule, so it is not referred for coverage reasons. <cite document_id=\"2630#10414\" pages=\"1-2\" name=\"Veridia Contract\"/>\n- **Reporting deadline:** A theft must be reported within 2 days of its discovery. The customer says the car was stolen on 25 October and reported on 28 October, which is 3 days later. The claim is therefore late, and under the contract it must be referred to a claims handler. A late claim is never refused automatically. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia Contract\"/> <cite document_id=\"2630#10414\" pages=\"3\" name=\"Veridia Contract\"/>\n- **Required documents:** For C4 Theft, the police report is required. It was provided, so no document request is needed. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia Contract\"/>\n- **Exclusions:** None indicated. The email does not mention alcohol, licence issues, racing, intent, or wear. Article 3 says exclusions are never applied automatically. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia Contract\"/>\n\n**Amounts:** Not computed. The claim is blocked by the late report, so compute_settlement and stage_settlement were not run. No assessor was booked.\n\n**Note for the handler:** The claims sub-agent reported that it could not find the contract and gave the deadline and document checks as system outputs. I checked the contract directly in company documents, and its Articles 2, 3, 4, and 7 confirm the outcome above.\n\n**Draft message to the customer**\n\nDear Mr Moreau,\n\nThank you for reporting the theft of your Dacia Sandero (policy VER-1006, claim final-CLM-20) and for attaching the police report.\n\nYour claim has been referred to a Veridia claims handler. Our records show the theft was reported three days after it occurred, and our reporting deadline for theft is two days from discovery. The handler will review the timing and contact you with the outcome. No payment has been made or approved at this stage.\n\nIf you can tell us when you first discovered the theft, or anything else about the delay, please send it to us so the handler can take it into account.\n\nKind regards,\nVeridia Claims Desk",
+  "questions": [],
+  "thread_id": "34dfec5b-4f3d-406e-8ff9-900dc4a9d73f",
+  "cost": {
+    "failed": false,
+    "input_tokens": 134595,
+    "cached_tokens": 124153,
+    "output_tokens": 5200,
+    "input_cost": "0.002671955",
+    "output_cost": "0.0026287",
+    "total": "0.005300655"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 35.8,
+  "claim": {
+    "claim_ref": "final-CLM-20",
+    "policy_id": "VER-1006",
+    "coverage": "C4",
+    "incident_date": "2026-10-25",
+    "report_date": "2026-10-28",
+    "description": "Customer reports theft of the insured Dacia Sandero on 2026-10-25. Police report filed the day before the email and attached; no repair quote, no third party, no driver information given.",
+    "repair_cost": 0,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"police_report\"]",
+    "exclusion_signal": null,
+    "status": "escalated",
+    "blocking_issues": "[\"late_report\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": "[\"late_report\"]",
+    "handler_note": "Theft of insured Dacia Sandero (policy VER-1006, C4 in schedule) on 2026-10-25, reported 2026-10-28: 3 days against a 2-day reporting deadline. Police report attached; no repair quote needed for theft; no exclusion signal and no third party. Human decision needed on the late report before any settlement.",
+    "approved_by": null,
+    "created_at": "2026-10-31T18:39:24+00:00",
+    "updated_at": "2026-10-31T18:39:26+00:00"
+  },
+  "action_log": [
+    {
+      "id": 110,
+      "ts": "2026-10-31T18:39:16+00:00",
+      "claim_ref": "final-CLM-20",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1006",
+        "claim_ref": "final-CLM-20"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1006",
+        "holder_name": "Yanis Moreau",
+        "vehicle": "Dacia Sandero (2022)",
+        "market_value_eur": 11000,
+        "licence_date": "2025-01-15",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 111,
+      "ts": "2026-10-31T18:39:24+00:00",
+      "claim_ref": "final-CLM-20",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "final-CLM-20",
+        "policy_id": "VER-1006",
+        "coverage": "C4",
+        "incident_date": "2026-10-25",
+        "report_date": "2026-10-28",
+        "description": "Customer reports theft of the insured Dacia Sandero on 2026-10-25. Police report filed the day before the email and attached; no repair quote, no third party, no driver information given.",
+        "repair_cost": 0,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "police_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "final-CLM-20",
+        "status": "open",
+        "checks": {
+          "coverage": "C4 Theft",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 3,
+          "reporting_deadline_days": 2,
+          "reported_on_time": false,
+          "required_documents": [
+            "police_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "late_report"
+        ]
+      }
+    },
+    {
+      "id": 112,
+      "ts": "2026-10-31T18:39:26+00:00",
+      "claim_ref": "final-CLM-20",
+      "tool": "escalate_to_handler",
+      "arguments": {
+        "claim_ref": "final-CLM-20",
+        "reasons": [
+          "late_report"
+        ],
+        "summary": "Theft of insured Dacia Sandero (policy VER-1006, C4 in schedule) on 2026-10-25, reported 2026-10-28: 3 days against a 2-day reporting deadline. Police report attached; no repair quote needed for theft; no exclusion signal and no third party. Human decision needed on the late report before any settlement."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "final-CLM-20",
+        "status": "escalated",
+        "reasons": [
+          "late_report"
+        ],
+        "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

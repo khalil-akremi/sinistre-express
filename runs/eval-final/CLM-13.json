@@ -1,0 +1,185 @@
+{
+  "case_id": "CLM-13",
+  "claim_ref": "final-CLM-13",
+  "label": "final",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Waiting for documents**\n\nClaim final-CLM-13 is open in the Veridia claims system and is waiting for the repair quote. No settlement was calculated or staged, and nothing was referred to a handler.\n\n**Facts recorded**\n- Claimant: Claire Martin, policy VER-1001. Vehicle: Peugeot 208 (2021), market value €14,000. Driving licence date: 14 May 2012.\n- Incident: 19 October 2026 (windscreen cracked, \"cold night\"). Reported: 20 October 2026 (the email date).\n- Coverage claimed: C3 Glass breakage (windscreen). C3 is listed in the Policy Schedule.\n- Documents: damage_photos.zip received (not opened, counted as provided). No repair quote attached.\n- Place of incident: not stated in the email.\n- Third party: none mentioned.\n\n**Reasoning**\n- **Coverage:** C3 covers windscreen and side windows, and it is in the Policy Schedule (Article 2).\n- **Timeliness:** Reported one day after the incident, within the 5-day limit (Article 4.1). Not a late claim (Article 7.1).\n- **Exclusions:** None is suggested by the email. The \"cold night\" description points to no exclusion in Article 3.\n- **Documents:** C3 requires photos of the damage and a repair quote (Article 4.3). Photos are provided. The repair quote is missing, so it has been requested from the policyholder. A missing document does not lead to refusal (Article 4, final paragraph).\n- **Place of incident:** Article 4.2 requires the place. It is missing from the email. The system's document request only accepts the four standard document types, so the place was requested in the customer message rather than in the claim record. A handler should confirm it is recorded.\n- **Deductible and payout:** Not calculated. The standard C3 deductible is €50 (Article 2). The repair cost is needed before compensation can be worked out (Article 6.2).\n- **Assessor:** Not yet known. An independent assessor is required only if the repair cost is above €1,500 (Article 6.1).\n\n**Amounts**\nNone computed. The repair cost is not yet known.\n\n**Draft message to the customer**\n> Dear Ms Martin,\n>\n> Thank you for reporting the windscreen damage on policy VER-1001 (claim final-CLM-13). To continue, please send us the repair quote from your garage. Could you also tell us where the incident took place?\n>\n> Kind regards,\n> Veridia Claims",
+  "questions": [],
+  "thread_id": "d97d862d-36b7-4341-8370-9024ea0d5bd5",
+  "cost": {
+    "failed": false,
+    "input_tokens": 145295,
+    "cached_tokens": 133338,
+    "output_tokens": 4377,
+    "input_cost": "0.003117355",
+    "output_cost": "0.0022375",
+    "total": "0.005354855"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 33.0,
+  "claim": {
+    "claim_ref": "final-CLM-13",
+    "policy_id": "VER-1001",
+    "coverage": "C3",
+    "incident_date": "2026-10-19",
+    "report_date": "2026-10-20",
+    "description": "Policyholder reports that the windscreen cracked during a cold night on 19 October 2026. Place of the incident not stated. Repair quote to follow from the garage.",
+    "repair_cost": 0,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"photos\"]",
+    "exclusion_signal": null,
+    "status": "awaiting_documents",
+    "blocking_issues": "[\"missing_document:repair_quote\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": "[\"repair_quote\"]",
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T18:36:08+00:00",
+    "updated_at": "2026-10-31T18:36:10+00:00"
+  },
+  "action_log": [
+    {
+      "id": 89,
+      "ts": "2026-10-31T18:36:07+00:00",
+      "claim_ref": "final-CLM-13",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1001",
+        "claim_ref": "final-CLM-13"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1001",
+        "holder_name": "Claire Martin",
+        "vehicle": "Peugeot 208 (2021)",
+        "market_value_eur": 14000,
+        "licence_date": "2012-05-14",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 90,
+      "ts": "2026-10-31T18:36:08+00:00",
+      "claim_ref": "final-CLM-13",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "final-CLM-13",
+        "policy_id": "VER-1001",
+        "coverage": "C3",
+        "incident_date": "2026-10-19",
+        "report_date": "2026-10-20",
+        "description": "Policyholder reports that the windscreen cracked during a cold night on 19 October 2026. Place of the incident not stated. Repair quote to follow from the garage.",
+        "repair_cost": 0,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "photos"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "final-CLM-13",
+        "status": "open",
+        "checks": {
+          "coverage": "C3 Glass breakage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote"
+          ],
+          "missing_documents": [
+            "repair_quote"
+          ],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "missing_document:repair_quote"
+        ]
+      }
+    },
+    {
+      "id": 91,
+      "ts": "2026-10-31T18:36:10+00:00",
+      "claim_ref": "final-CLM-13",
+      "tool": "request_documents",
+      "arguments": {
+        "claim_ref": "final-CLM-13",
+        "documents": [
+          "repair_quote"
+        ],
+        "message_to_customer": "Dear Ms Martin, thank you for reporting the windscreen damage on policy VER-1001 (claim final-CLM-13). To continue, please send us the repair quote from your garage. Could you also tell us the place where the incident occurred? Kind regards, Veridia Claims."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "final-CLM-13",
+        "status": "awaiting_documents",
+        "documents_requested": [
+          "repair_quote"
+        ],
+        "message_recorded": "Dear Ms Martin, thank you for reporting the windscreen damage on policy VER-1001 (claim final-CLM-13). To continue, please send us the repair quote from your garage. Could you also tell us the place where the incident occurred? Kind regards, Veridia Claims."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

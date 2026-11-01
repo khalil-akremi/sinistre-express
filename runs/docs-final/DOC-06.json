@@ -1,0 +1,219 @@
+{
+  "case_id": "DOC-06",
+  "claim_ref": "DOCS-final-DOC-06",
+  "memory": true,
+  "status": "MessageStatus.success",
+  "reply": "**Status:** Settlement prepared for human approval\n\nThe claims system shows claim DOCS-final-DOC-06 as open and the settlement as `pending_approval` (€12,600 payout). Nothing has been paid.\n\n**Facts recorded**\n- Policyholder: Claire Martin, policy VER-1001.\n- Vehicle: Peugeot 208 (2021), registration FG-218-LM (from the police receipt).\n- Theft: 29/10/2026 between 21:00 and 23:45, in front of 37 rue des Tilleuls, District 11. Both keys were kept by the policyholder. The driver's door glass was found on the ground, a sign of break-in.\n- Reported: 30/10/2026, one day after the theft. Police complaint no. 2026/011/48213, filed 30/10/2026 at 09:25.\n- No third party involved.\n- Document provided: police complaint receipt (police_report.pdf).\n- Coverage claimed: C4 Theft (whole vehicle).\n\n**Reasoning**\n- **Coverage (Art. 2):** C4 Theft is listed in the Policy Schedule, so it applies.\n- **Reporting (Art. 4.1):** A theft must be reported within 2 days of discovery. It was reported the day after the theft, so the claim is on time.\n- **Documents (Art. 4.3):** C4 requires a police report. One was provided and none is missing.\n- **Exclusions (Art. 3):** None indicated. The email and receipt show no alcohol, licence issue, racing or intentional act. The policyholder is the driver.\n- **Amount (Art. 6.2):** Compensation is market value minus deductible. Market value is €14,000 (Policy Schedule).\n- **Deductible (Art. 2 table):** C4 deductible is 10% of the claim, minimum €500. Here that is €1,400.\n- **Referral (Art. 7):** No referral condition is met.\n- **Playbook:** The commercial-vehicle rule does not apply, because no other vehicle is involved in a theft.\n- **Customer history:** The earlier claim on this policy (DOCS-final-DOC-02) was referred for a commercial-van playbook rule. That is background only and is not a reason to refer this claim.\n\n**Amounts (computed by the claims system)**\n- Deductible: €1,400\n- Payout: €12,600\n- Assessor required: No (Art. 6.1 applies only to C2 and C3 damage claims)\n\n**Open points for the handler**\n- The Policy Schedule has no registration number, so FG-218-LM could not be matched to the policy. The holder name, model and year match. Please confirm the registration against the vehicle record before approving payment.\n- The claims system did not open the police receipt itself. I read it directly, and its details are what I recorded above.\n\n**Draft message to the customer**\n\nDear Ms Martin,\n\nThank you for reporting the theft of your Peugeot 208 and for sending the police complaint receipt. We have received your claim (reference DOCS-final-DOC-06) and it is now with a Veridia claims handler, who will review it before any decision is made. We may contact you if we need anything further. We are sorry to hear about your vehicle and thank you for your patience.\n\nKind regards,\nVeridia Insurance Claims Team\n\nI also updated the customer file for VER-1001 with a dated line for this claim.",
+  "questions": [],
+  "thread_id": "8fa03bbb-95b0-414d-805d-7b4f6d4c6e51",
+  "cost": {
+    "failed": false,
+    "input_tokens": 234259,
+    "cached_tokens": 200545,
+    "output_tokens": 6253,
+    "input_cost": "0.006646825",
+    "output_cost": "0.0032133",
+    "total": "0.009860125"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_memory",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_memory",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "edit_memory",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 43.9,
+  "claim": {
+    "claim_ref": "DOCS-final-DOC-06",
+    "policy_id": "VER-1001",
+    "coverage": "C4",
+    "incident_date": "2026-10-29",
+    "report_date": "2026-10-30",
+    "description": "Theft of whole vehicle (Peugeot 208, FG-218-LM) from in front of 37 rue des Tilleuls, District 11, between 21:00 and 23:45 on 29/10/2026. See police complaint 2026/011/48213.",
+    "repair_cost": 0,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"police_report\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 1400,
+    "payout": 12600,
+    "assessor_required": 0,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T18:44:26+00:00",
+    "updated_at": "2026-10-31T18:44:28+00:00"
+  },
+  "action_log": [
+    {
+      "id": 135,
+      "ts": "2026-10-31T18:44:24+00:00",
+      "claim_ref": "DOCS-final-DOC-06",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1001",
+        "claim_ref": "DOCS-final-DOC-06"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1001",
+        "holder_name": "Claire Martin",
+        "vehicle": "Peugeot 208 (2021)",
+        "market_value_eur": 14000,
+        "licence_date": "2012-05-14",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 136,
+      "ts": "2026-10-31T18:44:26+00:00",
+      "claim_ref": "DOCS-final-DOC-06",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "DOCS-final-DOC-06",
+        "policy_id": "VER-1001",
+        "coverage": "C4",
+        "incident_date": "2026-10-29",
+        "report_date": "2026-10-30",
+        "description": "Theft of whole vehicle (Peugeot 208, FG-218-LM) from in front of 37 rue des Tilleuls, District 11, between 21:00 and 23:45 on 29/10/2026. See police complaint 2026/011/48213.",
+        "repair_cost": 0,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "police_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "DOCS-final-DOC-06",
+        "status": "open",
+        "checks": {
+          "coverage": "C4 Theft",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 1,
+          "reporting_deadline_days": 2,
+          "reported_on_time": true,
+          "required_documents": [
+            "police_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 137,
+      "ts": "2026-10-31T18:44:27+00:00",
+      "claim_ref": "DOCS-final-DOC-06",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "DOCS-final-DOC-06"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "DOCS-final-DOC-06",
+        "deductible_eur": 1400,
+        "payout_eur": 12600,
+        "assessor_required": false,
+        "years_licensed_on_incident_date": 14,
+        "calculation": [
+          "Art. 2 theft: claim = market value €14000; deductible = max(10%, €500) = €1400",
+          "Art. 6.2 payout = €14000 - €1400 = €12600"
+        ]
+      }
+    },
+    {
+      "id": 138,
+      "ts": "2026-10-31T18:44:28+00:00",
+      "claim_ref": "DOCS-final-DOC-06",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "DOCS-final-DOC-06"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "DOCS-final-DOC-06",
+        "status": "pending_approval",
+        "payout_eur": 12600,
+        "deductible_eur": 1400,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

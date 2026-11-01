@@ -1,0 +1,169 @@
+{
+  "review_id": "R-04",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1001\",\n      \"sources_say\": \"Customer email states 'Policy number: VER-1001'; Policy Schedule policy_id is VER-1001; both attached documents (accident report Vehicle A, repair quote) also show VER-1001 for Claire Martin\",\n      \"match\": true,\n      \"evidence\": \"Customer email signature block; Policy Schedule; accident_report_signed.pdf section 'VEHICLE A'; repair_quote.pdf header 'Insurer: Veridia Insurance, policy VER-1001'\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"The damage is collision damage to the insured vehicle (another vehicle hit the side of her car), which is coverage C2 'Collision damage'; C2 is listed in the Policy Schedule coverages for VER-1001\",\n      \"match\": true,\n      \"evidence\": \"Customer email ('Another vehicle hit the side of my car'); Policy Schedule coverages include code C2; contract Article 2 table (2630#10414 page 2) defines C2 as damage to the insured vehicle after a collision\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-12\",\n      \"sources_say\": \"Email: accident on 12 October 2026; joint accident report: 'Date of accident: 12/10/2026'\",\n      \"match\": true,\n      \"evidence\": \"Customer email body; accident_report_signed.pdf section 1\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-14\",\n      \"sources_say\": \"Email received on 2026-10-14 reporting the accident of 12 October 2026 — within the 5-day reporting deadline of contract Article 4.1 (2 calendar days)\",\n      \"match\": true,\n      \"evidence\": \"Email header 'received on 2026-10-14'; contract Article 4.1 (2630#10414 page 2): claim must be reported within 5 days of the incident\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"1200\",\n      \"sources_say\": \"Repair quote total incl. VAT = 1 200,00 € (total excl. VAT 1 000,00 € + VAT 20 % 200,00 €); contract Article 1 defines repair cost as the total including VAT on the quote\",\n      \"match\": true,\n      \"evidence\": \"repair_quote.pdf 'TOTAL INCL. VAT 1 200,00 €'; contract Article 1 definition of Repair cost (2630#10414 page 1)\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": \"false\",\n      \"sources_say\": \"Email: 'It was not my fault'; accident report: Vehicle B ticked 'Did not respect a red light', Driver B observations 'I accept responsibility for the accident', Driver A 'I had a green light'\",\n      \"match\": true,\n      \"evidence\": \"Customer email body; accident_report_signed.pdf sections 12 and 14 (Vehicle B / Driver B)\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": \"true\",\n      \"sources_say\": \"A second vehicle (Vehicle B, Ford Transit Custom van GA-845-HN) collided with the policyholder's car; email confirms 'Another vehicle hit the side of my car'\",\n      \"match\": true,\n      \"evidence\": \"Customer email; accident_report_signed.pdf 'VEHICLE B' block and circumstances\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": \"true\",\n      \"sources_say\": \"Vehicle B is fully identified: policyholder Rapid Livraisons SARL, insurer Axelia Pro Assurances, Ford Transit Custom, registration GA-845-HN, driver Mr. Marc Dubois\",\n      \"match\": true,\n      \"evidence\": \"accident_report_signed.pdf 'VEHICLE B' block\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\", \"accident_report\"],\n      \"sources_say\": \"All three C2 required documents are present: damage_photos.zip (listed as email attachment, stored by mailroom, counted as received), repair_quote.pdf (Carrosserie Saint-Paul quote Q-2610-5209 for Claire Martin, Peugeot 208 2021, FG-218-LM, policy VER-1001), accident_report_signed.pdf (Vehicle A = Claire Martin's Peugeot 208, VER-1001, signed by both drivers). Each document belongs to this policyholder and vehicle\",\n      \"match\": true,\n      \"evidence\": \"Customer email attachment list; contract Article 4.3 C2 required documents (2630#10414 page 2): photos, repair quote, accident report signed by both drivers when a third party is involved; repair_quote.pdf customer/vehicle block; accident_report_signed.pdf VEHICLE A block and signatures section 15\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": \"null\",\n      \"sources_say\": \"Nothing in the email or either document indicates alcohol/drugs, invalid licence, racing, intentional damage, or wear/mechanical failure only — none of the Article 3 exclusions is triggered\",\n      \"match\": true,\n      \"evidence\": \"Customer email; accident_report_signed.pdf (no injuries, no such circumstances ticked); repair_quote.pdf (collision bodywork damage); contract Article 3 exclusions list (2630#10414 page 2)\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": false,\n    \"evidence\": \"All recorded facts match the sources and the claim is otherwise in order: reported 2026-10-14, within the 5-day deadline of Article 4.1; coverage C2 is in the Policy Schedule (Article 2); all C2 required documents are provided (Article 4.3); no Article 3 exclusion applies; deductible €0 is correct under the Article 5.2 not-at-fault waiver (not at fault and third party identified); no assessor needed since €1,200 is not above €1,500 (Article 6.1). HOWEVER, the handler playbook states: 'When the other driver is a commercial vehicle (van, truck, lorry, delivery vehicle), refer the claim to a handler so Veridia can recover the money from their insurer.' The accident report shows Vehicle B is a Ford Transit Custom, vehicle type 'Van', owned by Rapid Livraisons SARL (a delivery company) — a commercial delivery van. This playbook rule is triggered by facts stated in the documents, so the claim must be referred to a handler and must NOT be paid automatically; the staged automatic payout of €1,200 (status pending_approval) is therefore a concern.\"\n  },\n  \"summary\": \"Every recorded fact matches the email, the signed accident report and the repair quote, and the claim meets the deadline, coverage, documents and deductible rules — but because the other vehicle is a commercial delivery van (Ford Transit Custom of Rapid Livraisons SARL, per the accident report), the playbook requires referral to a handler, so the staged €1,200 payment must not be approved automatically.\"\n}\n```",
+  "questions": [],
+  "thread_id": "afca2b0b-22a1-42a0-b060-e0315cecff54",
+  "cost": {
+    "failed": false,
+    "input_tokens": 56196,
+    "cached_tokens": 45056,
+    "output_tokens": 3141,
+    "input_cost": "0.00872560",
+    "output_cost": "0.00643831",
+    "total": "0.01516391"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 45.0,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "payment decision",
+        "recorded": "payment staged",
+        "should_be": "not paid",
+        "evidence": "All recorded facts match the sources and the claim is otherwise in order: reported 2026-10-14, within the 5-day deadline of Article 4.1; coverage C2 is in the Policy Schedule (Article 2); all C2 required documents are provided (Article 4.3); no Article 3 exclusion applies; deductible €0 is correct under the Article 5.2 not-at-fault waiver (not at fault and third party identified); no assessor needed since €1,200 is not above €1,500 (Article 6.1). HOWEVER, the handler playbook states: 'When the other driver is a commercial vehicle (van, truck, lorry, delivery vehicle), refer the claim to a handler so Veridia can recover the money from their insurer.' The accident report shows Vehicle B is a Ford Transit Custom, vehicle type 'Van', owned by Rapid Livraisons SARL (a delivery company) — a commercial delivery van. This playbook rule is triggered by facts stated in the documents, so the claim must be referred to a handler and must NOT be paid automatically; the staged automatic payout of €1,200 (status pending_approval) is therefore a concern."
+      }
+    ],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1001",
+        "sources_say": "Customer email states 'Policy number: VER-1001'; Policy Schedule policy_id is VER-1001; both attached documents (accident report Vehicle A, repair quote) also show VER-1001 for Claire Martin",
+        "match": true,
+        "evidence": "Customer email signature block; Policy Schedule; accident_report_signed.pdf section 'VEHICLE A'; repair_quote.pdf header 'Insurer: Veridia Insurance, policy VER-1001'"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "The damage is collision damage to the insured vehicle (another vehicle hit the side of her car), which is coverage C2 'Collision damage'; C2 is listed in the Policy Schedule coverages for VER-1001",
+        "match": true,
+        "evidence": "Customer email ('Another vehicle hit the side of my car'); Policy Schedule coverages include code C2; contract Article 2 table (2630#10414 page 2) defines C2 as damage to the insured vehicle after a collision"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-12",
+        "sources_say": "Email: accident on 12 October 2026; joint accident report: 'Date of accident: 12/10/2026'",
+        "match": true,
+        "evidence": "Customer email body; accident_report_signed.pdf section 1"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-14",
+        "sources_say": "Email received on 2026-10-14 reporting the accident of 12 October 2026 — within the 5-day reporting deadline of contract Article 4.1 (2 calendar days)",
+        "match": true,
+        "evidence": "Email header 'received on 2026-10-14'; contract Article 4.1 (2630#10414 page 2): claim must be reported within 5 days of the incident"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "1200",
+        "sources_say": "Repair quote total incl. VAT = 1 200,00 € (total excl. VAT 1 000,00 € + VAT 20 % 200,00 €); contract Article 1 defines repair cost as the total including VAT on the quote",
+        "match": true,
+        "evidence": "repair_quote.pdf 'TOTAL INCL. VAT 1 200,00 €'; contract Article 1 definition of Repair cost (2630#10414 page 1)"
+      },
+      {
+        "field": "at_fault",
+        "recorded": "false",
+        "sources_say": "Email: 'It was not my fault'; accident report: Vehicle B ticked 'Did not respect a red light', Driver B observations 'I accept responsibility for the accident', Driver A 'I had a green light'",
+        "match": true,
+        "evidence": "Customer email body; accident_report_signed.pdf sections 12 and 14 (Vehicle B / Driver B)"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": "true",
+        "sources_say": "A second vehicle (Vehicle B, Ford Transit Custom van GA-845-HN) collided with the policyholder's car; email confirms 'Another vehicle hit the side of my car'",
+        "match": true,
+        "evidence": "Customer email; accident_report_signed.pdf 'VEHICLE B' block and circumstances"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": "true",
+        "sources_say": "Vehicle B is fully identified: policyholder Rapid Livraisons SARL, insurer Axelia Pro Assurances, Ford Transit Custom, registration GA-845-HN, driver Mr. Marc Dubois",
+        "match": true,
+        "evidence": "accident_report_signed.pdf 'VEHICLE B' block"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote",
+          "accident_report"
+        ],
+        "sources_say": "All three C2 required documents are present: damage_photos.zip (listed as email attachment, stored by mailroom, counted as received), repair_quote.pdf (Carrosserie Saint-Paul quote Q-2610-5209 for Claire Martin, Peugeot 208 2021, FG-218-LM, policy VER-1001), accident_report_signed.pdf (Vehicle A = Claire Martin's Peugeot 208, VER-1001, signed by both drivers). Each document belongs to this policyholder and vehicle",
+        "match": true,
+        "evidence": "Customer email attachment list; contract Article 4.3 C2 required documents (2630#10414 page 2): photos, repair quote, accident report signed by both drivers when a third party is involved; repair_quote.pdf customer/vehicle block; accident_report_signed.pdf VEHICLE A block and signatures section 15"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": "null",
+        "sources_say": "Nothing in the email or either document indicates alcohol/drugs, invalid licence, racing, intentional damage, or wear/mechanical failure only — none of the Article 3 exclusions is triggered",
+        "match": true,
+        "evidence": "Customer email; accident_report_signed.pdf (no injuries, no such circumstances ticked); repair_quote.pdf (collision bodywork damage); contract Article 3 exclusions list (2630#10414 page 2)"
+      }
+    ],
+    "summary": "Every recorded fact matches the email, the signed accident report and the repair quote, and the claim meets the deadline, coverage, documents and deductible rules — but because the other vehicle is a commercial delivery van (Ford Transit Custom of Rapid Livraisons SARL, per the accident report), the playbook requires referral to a handler, so the staged €1,200 payment must not be approved automatically.",
+    "unreadable": false
+  }
+}

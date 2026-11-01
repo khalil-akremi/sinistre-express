@@ -1,0 +1,1687 @@
+{
+  "rule": "When the other driver is a commercial vehicle (van, truck, lorry, delivery vehicle), refer the claim to a handler so Veridia can recover the money from their insurer.",
+  "namespace": "memeval-final",
+  "rows": [
+    {
+      "condition": "without memory",
+      "case_id": "CLM-A",
+      "claim_ref": "MEM-final-N-CLM-A",
+      "relevant": true,
+      "expected": "settle",
+      "got": "settle",
+      "ok": true,
+      "error": null,
+      "cost": 0.008926625,
+      "seconds": 40.7,
+      "reply": "**1. Status:** Settlement prepared for human approval. The claims system shows the settlement as \"pending_approval,\" and a human claims handler must approve it before payment.\n\n**2. Facts recorded**\n- Claim reference: MEM-final-N-CLM-A. Policy: VER-1001. Policyholder and driver: Claire Martin. The email names no other driver.\n- Vehicle: Peugeot 208 (2021), market value €14,000. Driving licence held since 14 May 2012.\n- Coverage claimed: C2 collision damage to the insured's own car. C2 is in the Policy Schedule.\n- Incident: 12 October 2026. Reported: 14 October 2026 (2 days later).\n- Third party: van driver Mr. Dubois, named in the email. He admitted fault and both parties signed the accident report.\n- Repair quote: €1,200. Documents received: damage photos, repair quote, signed accident report.\n- No exclusion signal in the email.\n\n**3. Reasoning**\n- **Coverage:** The damage is to Ms. Martin's own car, so it falls under C2, not C1. C2 is listed in the Policy Schedule, so it applies. <cite document_id=\"2630#10414\" pages=\"1;2\" name=\"DriveSafe Motor Policy\"/>\n- **Coverage listed in schedule:** Article 2 applies only to coverages in the Policy Schedule, and C2 is there. <cite document_id=\"2630#10414\" pages=\"1\" name=\"DriveSafe Motor Policy\"/>\n- **Reporting deadline:** Claims must be reported within 5 days of the incident. The claim was reported in 2 days, so it is on time. <cite document_id=\"2630#10414\" pages=\"2\" name=\"DriveSafe Motor Policy\"/>\n- **Required documents:** For C2, the required documents are photos of the damage, a repair quote, and a signed accident report when a third party is involved. All three were received, so no document request is needed. <cite document_id=\"2630#10414\" pages=\"2\" name=\"DriveSafe Motor Policy\"/>\n- **Exclusions:** Nothing in the email suggests an exclusion under Article 3 (alcohol, licence, racing, intent, wear). <cite document_id=\"2630#10414\" pages=\"2\" name=\"DriveSafe Motor Policy\"/>\n- **Deductible:** The not-at-fault waiver removes the deductible for C2 when the authorised driver is not at fault and the third party is identified. Both conditions are met. <cite document_id=\"2630#10414\" pages=\"2\" name=\"DriveSafe Motor Policy\"/>\n- **Young-driver surcharge:** Not applicable, because the licence has been held for more than 3 years. <cite document_id=\"2630#10414\" pages=\"2\" name=\"DriveSafe Motor Policy\"/>\n- **Assessor:** Not required, because the repair cost is €1,500 or less. <cite document_id=\"2630#10414\" pages=\"3\" name=\"DriveSafe Motor Policy\"/>\n- **Referral:** The claim does not meet any referral condition in Article 7, so no escalation is needed. <cite document_id=\"2630#10414\" pages=\"3\" name=\"DriveSafe Motor Policy\"/>\n\n**4. Amounts** (from the claims system's settlement calculation)\n- Deductible: €0 (Article 5.2, not-at-fault waiver)\n- Payout: €1,200 (Article 6.2, repair cost capped at market value, minus deductible)\n- Assessor required: No (Article 6.1)\n\nPayment is made within 15 days after a Veridia claims handler approves the compensation. <cite document_id=\"2630#10414\" pages=\"3\" name=\"DriveSafe Motor Policy\"/>\n\n**Actions executed in the claims system (all under MEM-final-N-CLM-A)**\n1. Retrieved the policy for VER-1001.\n2. Created the claim (C2, not at fault, third party identified, documents recorded).\n3. Computed the settlement.\n4. Staged the settlement, which returned \"pending_approval.\"\n\nNo document request or escalation was made, because the file is complete and no referral condition applies.\n\n**5. Draft message to the customer**\n> Dear Ms. Martin,\n>\n> Thank you for reporting the accident of 12 October 2026 under policy VER-1001 (claim reference MEM-final-N-CLM-A). We have received your repair quote, your photos and the signed accident report. Your claim has been passed to a claims handler for final review, who will confirm the next steps. We will contact you if we need anything else.\n>\n> Kind regards,\n> Veridia Claims",
+      "action_log": [
+        {
+          "id": 139,
+          "ts": "2026-11-01T06:08:29+00:00",
+          "claim_ref": "MEM-final-N-CLM-A",
+          "tool": "get_policy",
+          "arguments": {
+            "policy_id": "VER-1001",
+            "claim_ref": "MEM-final-N-CLM-A"
+          },
+          "ok": true,
+          "result": {
+            "policy_id": "VER-1001",
+            "holder_name": "Claire Martin",
+            "vehicle": "Peugeot 208 (2021)",
+            "market_value_eur": 14000,
+            "licence_date": "2012-05-14",
+            "coverages": [
+              {
+                "code": "C1",
+                "name": "Third-party liability"
+              },
+              {
+                "code": "C2",
+                "name": "Collision damage"
+              },
+              {
+                "code": "C3",
+                "name": "Glass breakage"
+              },
+              {
+                "code": "C4",
+                "name": "Theft"
+              }
+            ]
+          }
+        },
+        {
+          "id": 140,
+          "ts": "2026-11-01T06:08:34+00:00",
+          "claim_ref": "MEM-final-N-CLM-A",
+          "tool": "create_claim",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-A",
+            "policy_id": "VER-1001",
+            "coverage": "C2",
+            "incident_date": "2026-10-12",
+            "report_date": "2026-10-14",
+            "description": "A van driven by Mr. Dubois allegedly ran a red light and hit the side of the insured's car at the Rue de Rivoli crossing. The van driver admitted fault and both parties signed the accident report.",
+            "repair_cost": 1200,
+            "at_fault": false,
+            "third_party_involved": true,
+            "third_party_identified": true,
+            "documents_provided": [
+              "photos",
+              "repair_quote",
+              "accident_report"
+            ],
+            "exclusion_signal": null
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-A",
+            "status": "open",
+            "checks": {
+              "coverage": "C2 Collision damage",
+              "coverage_in_policy_schedule": true,
+              "days_to_report": 2,
+              "reporting_deadline_days": 5,
+              "reported_on_time": true,
+              "required_documents": [
+                "photos",
+                "repair_quote",
+                "accident_report"
+              ],
+              "missing_documents": [],
+              "possible_exclusion": null
+            },
+            "blocking_issues": []
+          }
+        },
+        {
+          "id": 141,
+          "ts": "2026-11-01T06:08:35+00:00",
+          "claim_ref": "MEM-final-N-CLM-A",
+          "tool": "compute_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-A"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-A",
+            "deductible_eur": 0,
+            "payout_eur": 1200,
+            "assessor_required": false,
+            "years_licensed_on_incident_date": 14,
+            "calculation": [
+              "Art. 5.2 not-at-fault waiver: no deductible",
+              "Art. 6.2 payout = €1200 - €0 = €1200"
+            ]
+          }
+        },
+        {
+          "id": 142,
+          "ts": "2026-11-01T06:08:35+00:00",
+          "claim_ref": "MEM-final-N-CLM-A",
+          "tool": "stage_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-A"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-A",
+            "status": "pending_approval",
+            "payout_eur": 1200,
+            "deductible_eur": 0,
+            "message": "Payment prepared. A human claims handler must approve it before it is paid."
+          }
+        }
+      ]
+    },
+    {
+      "condition": "without memory",
+      "case_id": "CLM-03",
+      "claim_ref": "MEM-final-N-CLM-03",
+      "relevant": true,
+      "expected": "settle",
+      "got": "settle",
+      "ok": true,
+      "error": null,
+      "cost": 0.006905505,
+      "seconds": 42.2,
+      "reply": "**Status: Settlement prepared for human approval**\n\nThe claims system shows the settlement as pending approval. `stage_settlement` failed on the first attempt because the assessor had not yet been booked. After `schedule_assessor` succeeded, the retry returned `pending_approval`. Nothing has been paid.\n\n**Facts recorded**\n- Claim reference: MEM-final-N-CLM-03\n- Policy VER-1007, policyholder Emma Rousseau, Tesla Model 3 (2023), market value €32,000\n- Coverage C2 (collision) is listed in the Policy Schedule. Licence held since 2011-04-08.\n- Incident on 2026-10-05 and reported on 2026-10-06. The customer's car was parked when a delivery truck reversed into it.\n- Third party Mr. Costa (delivery truck driver) is named, accepted responsibility, and signed the accident report.\n- Repair quote of €4,800 as stated in the email. The quote PDF could not be opened.\n- Provided documents: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf.\n\n**Reasoning**\n- C2 is in the Policy Schedule, so coverage applies. <cite document_id=\"2630#10414\" pages=\"1-2\" name=\"contract.pdf\"/>\n- The claim was reported one day after the incident, within the 5-day limit. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>\n- Photos, repair quote and a signed accident report are all provided, which is what C2 requires when a third party is involved. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>\n- No exclusion is evident from the email. Exclusions are never applied automatically. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>\n- The not-at-fault waiver applies because the insured was not at fault and the third party is identified, so no deductible applies. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>\n- The licence is held for more than 3 years, so no young-driver surcharge applies. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>\n- The repair cost is above €1,500, so an independent assessor must inspect the vehicle. The assessor visit is booked for 2026-10-09. <cite document_id=\"2630#10414\" pages=\"3\" name=\"contract.pdf\"/>\n- Compensation is the repair cost, capped at market value, minus the deductible. The €4,800 is below the €32,000 market value, so the cap does not apply. Payment follows within 15 days of handler approval. <cite document_id=\"2630#10414\" pages=\"3\" name=\"contract.pdf\"/>\n\n**Amounts** (from compute_settlement)\n- Deductible: €0\n- Payout: €4,800, pending human approval\n- Assessor required: yes, visit booked for 2026-10-09\n\n**Handler check needed:** The €4,800 total incl. VAT comes from the customer's email. Please confirm it against repair_quote.pdf, since the total including VAT is the figure the contract uses. <cite document_id=\"2630#10414\" pages=\"1\" name=\"contract.pdf\"/>\n\n**Draft message to the customer**\n\n> Dear Ms. Rousseau,\n>\n> Thank you for reporting the incident of 5 October 2026 involving your Tesla Model 3 (policy VER-1007). Your claim reference is MEM-final-N-CLM-03. We have received your photos, repair quote and signed accident report. An independent assessor has been booked to inspect the vehicle on 9 October 2026. Your claim is now with our claims team for review, and we will write to you again once the review is complete.\n>\n> Kind regards,\n> Veridia Claims Team",
+      "action_log": [
+        {
+          "id": 143,
+          "ts": "2026-11-01T06:09:23+00:00",
+          "claim_ref": "MEM-final-N-CLM-03",
+          "tool": "get_policy",
+          "arguments": {
+            "policy_id": "VER-1007",
+            "claim_ref": "MEM-final-N-CLM-03"
+          },
+          "ok": true,
+          "result": {
+            "policy_id": "VER-1007",
+            "holder_name": "Emma Rousseau",
+            "vehicle": "Tesla Model 3 (2023)",
+            "market_value_eur": 32000,
+            "licence_date": "2011-04-08",
+            "coverages": [
+              {
+                "code": "C1",
+                "name": "Third-party liability"
+              },
+              {
+                "code": "C2",
+                "name": "Collision damage"
+              },
+              {
+                "code": "C3",
+                "name": "Glass breakage"
+              },
+              {
+                "code": "C4",
+                "name": "Theft"
+              }
+            ]
+          }
+        },
+        {
+          "id": 144,
+          "ts": "2026-11-01T06:09:25+00:00",
+          "claim_ref": "MEM-final-N-CLM-03",
+          "tool": "create_claim",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-03",
+            "policy_id": "VER-1007",
+            "coverage": "C2",
+            "incident_date": "2026-10-05",
+            "report_date": "2026-10-06",
+            "description": "The insured's parked car was damaged when a delivery truck reversed into it. The truck driver, Mr. Costa, accepted responsibility and signed the accident report.",
+            "repair_cost": 4800,
+            "at_fault": false,
+            "third_party_involved": true,
+            "third_party_identified": true,
+            "documents_provided": [
+              "photos",
+              "repair_quote",
+              "accident_report"
+            ],
+            "exclusion_signal": null
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-03",
+            "status": "open",
+            "checks": {
+              "coverage": "C2 Collision damage",
+              "coverage_in_policy_schedule": true,
+              "days_to_report": 1,
+              "reporting_deadline_days": 5,
+              "reported_on_time": true,
+              "required_documents": [
+                "photos",
+                "repair_quote",
+                "accident_report"
+              ],
+              "missing_documents": [],
+              "possible_exclusion": null
+            },
+            "blocking_issues": []
+          }
+        },
+        {
+          "id": 145,
+          "ts": "2026-11-01T06:09:26+00:00",
+          "claim_ref": "MEM-final-N-CLM-03",
+          "tool": "compute_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-03"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-03",
+            "deductible_eur": 0,
+            "payout_eur": 4800,
+            "assessor_required": true,
+            "years_licensed_on_incident_date": 15,
+            "calculation": [
+              "Art. 5.2 not-at-fault waiver: no deductible",
+              "Art. 6.2 payout = €4800 - €0 = €4800",
+              "Art. 6.1 amount above €1500: assessor required"
+            ]
+          }
+        },
+        {
+          "id": 146,
+          "ts": "2026-11-01T06:09:27+00:00",
+          "claim_ref": "MEM-final-N-CLM-03",
+          "tool": "schedule_assessor",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-03"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-03",
+            "assessor_visit_date": "2026-10-09",
+            "message": "Independent assessor booked (Art. 6.1)."
+          }
+        },
+        {
+          "id": 147,
+          "ts": "2026-11-01T06:09:27+00:00",
+          "claim_ref": "MEM-final-N-CLM-03",
+          "tool": "stage_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-03"
+          },
+          "ok": false,
+          "result": {
+            "error": "An assessor is required (Art. 6.1). Book one with schedule_assessor first."
+          }
+        },
+        {
+          "id": 148,
+          "ts": "2026-11-01T06:09:29+00:00",
+          "claim_ref": "MEM-final-N-CLM-03",
+          "tool": "stage_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-03"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-03",
+            "status": "pending_approval",
+            "payout_eur": 4800,
+            "deductible_eur": 0,
+            "message": "Payment prepared. A human claims handler must approve it before it is paid."
+          }
+        }
+      ]
+    },
+    {
+      "condition": "without memory",
+      "case_id": "CLM-B",
+      "claim_ref": "MEM-final-N-CLM-B",
+      "relevant": false,
+      "expected": "settle",
+      "got": "settle",
+      "ok": true,
+      "error": null,
+      "cost": 0.0054781,
+      "seconds": 35.5,
+      "reply": "**Status: Settlement prepared for human approval**\n\nThe claims system shows the settlement is staged as `pending_approval`. A Veridia claims handler must approve it before any payment is made.\n\n**Facts recorded**\n- Claim reference: MEM-final-N-CLM-B. Policy: VER-1002, holder Lucas Bernard, Renault Clio 2023, market value €16,500.\n- Incident: 14 October 2026. Reported: 15 October 2026 (within the 5-day limit).\n- Coverage: C2 Collision damage, which is listed in the Policy Schedule.\n- Driver: the policyholder. Licence held since 2 September 2024, so about 2 years on the incident date.\n- Fault: admitted by the customer (lane-change collision on the ring road).\n- Third party: Ms. Laurent, named in the email, and she signed the accident report.\n- Repair quote: €2,400, for the customer's own car.\n- Documents provided: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. Nothing is missing. I did not open these files.\n\n**Reasoning**\n- **Coverage:** The damage is to the insured vehicle after a collision, which is C2. C2 is in the Policy Schedule, so it applies. <cite document_id=\"2630#10414\" pages=\"1\" name=\"Veridia contract\"/>\n- **Article 2:** Coverage applies only when it is in the Policy Schedule. C2 is listed, so the claim is not referred on this ground. <cite document_id=\"2630#10414\" pages=\"1\" name=\"Veridia contract\"/>\n- **Exclusions (Article 3):** The story does not suggest any exclusion. Nothing in the email points to alcohol, licence issues, racing, intent or wear. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia contract\"/>\n- **Reporting (Article 4.1 and 4.3):** The claim was reported within 5 days, and the required documents are present. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia contract\"/>\n- **Deductible (Article 5.1 and 5.3):** One deductible applies per claim. The C2 standard deductible is €300. The young-driver surcharge applies because the driver held a licence for less than 3 years, adding €400. <cite document_id=\"2630#10414\" pages=\"1;2\" name=\"Veridia contract\"/>\n- **Not-at-fault waiver (Article 5.2):** Not applicable. The customer admits fault, so no waiver is available. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia contract\"/>\n- **Assessor (Article 6.1):** The repair cost is above €1,500, so an independent assessor must inspect the vehicle. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia contract\"/>\n- **Payment (Article 6.2 and 6.3):** Compensation is the repair cost, capped at market value, minus the deductible. Payment is made within 15 days after a Veridia claims handler approves it. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia contract\"/>\n- **Referral (Article 7):** None of the referral triggers apply, so the claim is not referred. <cite document_id=\"2630#10414\" pages=\"3\" name=\"Veridia contract\"/>\n\n**Amounts** (from the claims system's `compute_settlement`)\n- Deductible: €700 (€300 standard + €400 young-driver surcharge)\n- Payout: €1,700 (€2,400 − €700), pending human approval, not paid\n- Assessor required: yes. The claims system booked a visit for 18 October 2026.\n\n**Tool calls and results**\n1. `get_policy`: succeeded\n2. `create_claim`: succeeded\n3. `compute_settlement`: succeeded\n4. `schedule_assessor`: succeeded\n5. `stage_settlement`: succeeded (`pending_approval`)\n\nThe subagent's article references came from the claims system. I checked them against the contract, and they match.\n\n**Draft message to the customer**\n\n> Dear Mr. Bernard,\n>\n> Thank you for reporting the accident of 14 October 2026 under policy VER-1002 (claim MEM-final-N-CLM-B). We have received your repair quote, your photos and the signed accident report.\n>\n> An independent assessor has been booked for 18 October 2026 to inspect your vehicle. Your claim is now with our claims team for review, and we will confirm the outcome once it has been checked.\n>\n> Kind regards,\n> Veridia Claims",
+      "action_log": [
+        {
+          "id": 149,
+          "ts": "2026-11-01T06:09:52+00:00",
+          "claim_ref": "MEM-final-N-CLM-B",
+          "tool": "get_policy",
+          "arguments": {
+            "policy_id": "VER-1002",
+            "claim_ref": "MEM-final-N-CLM-B"
+          },
+          "ok": true,
+          "result": {
+            "policy_id": "VER-1002",
+            "holder_name": "Lucas Bernard",
+            "vehicle": "Renault Clio (2023)",
+            "market_value_eur": 16500,
+            "licence_date": "2024-09-02",
+            "coverages": [
+              {
+                "code": "C1",
+                "name": "Third-party liability"
+              },
+              {
+                "code": "C2",
+                "name": "Collision damage"
+              },
+              {
+                "code": "C3",
+                "name": "Glass breakage"
+              }
+            ]
+          }
+        },
+        {
+          "id": 150,
+          "ts": "2026-11-01T06:09:54+00:00",
+          "claim_ref": "MEM-final-N-CLM-B",
+          "tool": "create_claim",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-B",
+            "policy_id": "VER-1002",
+            "coverage": "C2",
+            "incident_date": "2026-10-14",
+            "report_date": "2026-10-15",
+            "description": "Policyholder reports a lane-change collision on the ring road on 14 October 2026 with another driver, Ms. Laurent, and states the fault was his. Own vehicle repair quoted at 2,400 EUR.",
+            "repair_cost": 2400,
+            "at_fault": true,
+            "third_party_involved": true,
+            "third_party_identified": true,
+            "documents_provided": [
+              "photos",
+              "repair_quote",
+              "accident_report"
+            ],
+            "exclusion_signal": null
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-B",
+            "status": "open",
+            "checks": {
+              "coverage": "C2 Collision damage",
+              "coverage_in_policy_schedule": true,
+              "days_to_report": 1,
+              "reporting_deadline_days": 5,
+              "reported_on_time": true,
+              "required_documents": [
+                "photos",
+                "repair_quote",
+                "accident_report"
+              ],
+              "missing_documents": [],
+              "possible_exclusion": null
+            },
+            "blocking_issues": []
+          }
+        },
+        {
+          "id": 151,
+          "ts": "2026-11-01T06:09:55+00:00",
+          "claim_ref": "MEM-final-N-CLM-B",
+          "tool": "compute_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-B"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-B",
+            "deductible_eur": 700,
+            "payout_eur": 1700,
+            "assessor_required": true,
+            "years_licensed_on_incident_date": 2,
+            "calculation": [
+              "Art. 2 collision deductible: €300",
+              "Art. 5.3 young driver (2 y < 3): +€400",
+              "Art. 6.2 payout = €2400 - €700 = €1700",
+              "Art. 6.1 amount above €1500: assessor required"
+            ]
+          }
+        },
+        {
+          "id": 152,
+          "ts": "2026-11-01T06:09:56+00:00",
+          "claim_ref": "MEM-final-N-CLM-B",
+          "tool": "schedule_assessor",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-B"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-B",
+            "assessor_visit_date": "2026-10-18",
+            "message": "Independent assessor booked (Art. 6.1)."
+          }
+        },
+        {
+          "id": 153,
+          "ts": "2026-11-01T06:09:56+00:00",
+          "claim_ref": "MEM-final-N-CLM-B",
+          "tool": "stage_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-B"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-B",
+            "status": "pending_approval",
+            "payout_eur": 1700,
+            "deductible_eur": 700,
+            "message": "Payment prepared. A human claims handler must approve it before it is paid."
+          }
+        }
+      ]
+    },
+    {
+      "condition": "without memory",
+      "case_id": "CLM-01",
+      "claim_ref": "MEM-final-N-CLM-01",
+      "relevant": false,
+      "expected": "settle",
+      "got": "settle",
+      "ok": true,
+      "error": null,
+      "cost": 0.00367789,
+      "seconds": 26.3,
+      "reply": "**Status: Settlement prepared for human approval**\n\nThe claims system shows the settlement as staged and pending human approval. Nothing has been paid.\n\n**Facts recorded**\n- Claim reference: MEM-final-N-CLM-01\n- Policy VER-1004, policyholder Thomas Petit\n- Vehicle: Volkswagen Golf (2020), market value €15,500\n- Incident on 3 October 2026, reported 4 October 2026\n- Reversing out of a parking space into a concrete pillar; no third party involved\n- Repair quote for the customer's own car: €900\n- Documents received: damage_photos.zip and repair_quote.pdf (not opened by the system)\n\n**Reasoning**\n- **Coverage:** C2 Collision damage is in the Policy Schedule, so the claim falls under it. The C2 cover is for damage to the insured's own vehicle after a collision, which matches this claim. <cite document_id=\"2630#10414\" pages=\"1\" name=\"Veridia Contract\"/>\n- **Reporting:** Reported one day after the incident, within the reporting deadline. <cite document_id=\"2630#10414\" pages=\"1-3\" name=\"Veridia Contract\"/>\n- **Documents:** Photos and a repair quote are the required documents for C2, and both were received. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia Contract\"/>\n- **Exclusions:** No exclusion signals in the email. The claims system also returned no possible exclusion.\n- **Referral:** No blocking issues, so no referral was needed. <cite document_id=\"2630#10414\" pages=\"3\" name=\"Veridia Contract\"/>\n\n**Amounts**\n- Deductible: €300 (standard C2 deductible) <cite document_id=\"2630#10414\" pages=\"1\" name=\"Veridia Contract\"/>\n- Payout: €600 (€900 quote minus €300 deductible), staged and pending human approval\n- Assessor required: No\n\n**Draft message to the customer**\n\n> Dear Mr Petit,\n>\n> Thank you for reporting the incident of 3 October 2026 under policy VER-1004. We have received your photos and repair quote, and your claim (ref. MEM-final-N-CLM-01) is now being processed. The settlement has been prepared and is awaiting final review by a claims handler. We will contact you once it has been confirmed.\n>\n> Kind regards,\n> Veridia Claims Team",
+      "action_log": [
+        {
+          "id": 154,
+          "ts": "2026-11-01T06:10:24+00:00",
+          "claim_ref": "MEM-final-N-CLM-01",
+          "tool": "get_policy",
+          "arguments": {
+            "policy_id": "VER-1004",
+            "claim_ref": "MEM-final-N-CLM-01"
+          },
+          "ok": true,
+          "result": {
+            "policy_id": "VER-1004",
+            "holder_name": "Thomas Petit",
+            "vehicle": "Volkswagen Golf (2020)",
+            "market_value_eur": 15500,
+            "licence_date": "2008-11-01",
+            "coverages": [
+              {
+                "code": "C1",
+                "name": "Third-party liability"
+              },
+              {
+                "code": "C2",
+                "name": "Collision damage"
+              }
+            ]
+          }
+        },
+        {
+          "id": 155,
+          "ts": "2026-11-01T06:10:28+00:00",
+          "claim_ref": "MEM-final-N-CLM-01",
+          "tool": "create_claim",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-01",
+            "policy_id": "VER-1004",
+            "coverage": "C2",
+            "incident_date": "2026-10-03",
+            "report_date": "2026-10-04",
+            "description": "While reversing out of a parking space, the insured vehicle struck a concrete pillar. No other vehicle or person was involved. Repair quote for own vehicle: EUR 900.",
+            "repair_cost": 900,
+            "at_fault": true,
+            "third_party_involved": false,
+            "third_party_identified": false,
+            "documents_provided": [
+              "photos",
+              "repair_quote"
+            ],
+            "exclusion_signal": null
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-01",
+            "status": "open",
+            "checks": {
+              "coverage": "C2 Collision damage",
+              "coverage_in_policy_schedule": true,
+              "days_to_report": 1,
+              "reporting_deadline_days": 5,
+              "reported_on_time": true,
+              "required_documents": [
+                "photos",
+                "repair_quote"
+              ],
+              "missing_documents": [],
+              "possible_exclusion": null
+            },
+            "blocking_issues": []
+          }
+        },
+        {
+          "id": 156,
+          "ts": "2026-11-01T06:10:29+00:00",
+          "claim_ref": "MEM-final-N-CLM-01",
+          "tool": "compute_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-01"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-01",
+            "deductible_eur": 300,
+            "payout_eur": 600,
+            "assessor_required": false,
+            "years_licensed_on_incident_date": 17,
+            "calculation": [
+              "Art. 2 collision deductible: €300",
+              "Art. 6.2 payout = €900 - €300 = €600"
+            ]
+          }
+        },
+        {
+          "id": 157,
+          "ts": "2026-11-01T06:10:30+00:00",
+          "claim_ref": "MEM-final-N-CLM-01",
+          "tool": "stage_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-01"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-01",
+            "status": "pending_approval",
+            "payout_eur": 600,
+            "deductible_eur": 300,
+            "message": "Payment prepared. A human claims handler must approve it before it is paid."
+          }
+        }
+      ]
+    },
+    {
+      "condition": "without memory",
+      "case_id": "CLM-02",
+      "claim_ref": "MEM-final-N-CLM-02",
+      "relevant": false,
+      "expected": "settle",
+      "got": "settle",
+      "ok": true,
+      "error": null,
+      "cost": 0.005521525,
+      "seconds": 35.8,
+      "reply": "**Status:** Settlement prepared for human approval\n\nThe claims system confirms that `stage_settlement` succeeded for claim MEM-final-N-CLM-02. The payment is pending human approval and has not been paid.\n\n**Facts recorded**\n- Policy VER-1006, policyholder Yanis Moreau, driving a Dacia Sandero (2022) with a market value of €11,000.\n- Driving licence dated 15 January 2025, so the driver had held it for about 1 year on the incident date.\n- Incident on 4 October 2026 at a roundabout. The insured braked too late and hit the car in front, and admits fault.\n- Another party is involved and named: Mr. Henry, who co-signed the accident report.\n- Email received 6 October 2026 (2 days after the incident).\n- Repair quote: €1,300, for the insured's own car.\n- Documents provided: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. None are missing.\n- Coverage in the Policy Schedule: C1, C2 and C4. The claim is under C2 (collision damage).\n- No possible exclusion is indicated by the story.\n\n**Reasoning**\n- **Coverage:** C2 covers damage to the insured's own vehicle after a collision, and C2 is in the Policy Schedule. <cite document_id=\"2630#10414\" pages=\"1\" name=\"DriveSafe Motor Policy\"/>\n- **Reporting:** Reported within the deadline. A late claim would go to a handler, but this one does not. <cite document_id=\"2630#10414\" pages=\"3\" name=\"DriveSafe Motor Policy\"/>\n- **Documents:** C2 requires photos, a repair quote, and an accident report signed by both drivers when a third party is involved. All three are provided. <cite document_id=\"2630#10414\" pages=\"2\" name=\"DriveSafe Motor Policy\"/>\n- **Deductible:** The standard C2 deductible is €300. A young-driver surcharge of €400 applies because the licence is under 3 years old, giving €700. The not-at-fault waiver does not apply because the insured is at fault. <cite document_id=\"2630#10414\" pages=\"1-2\" name=\"DriveSafe Motor Policy\"/>\n- **Assessor:** Not required, because the repair cost is €1,500 or less. <cite document_id=\"2630#10414\" pages=\"2\" name=\"DriveSafe Motor Policy\"/>\n- **Compensation:** Repair cost, capped at market value, minus the deductible, and never negative. Payment follows approval by a claims handler within 15 days. <cite document_id=\"2630#10414\" pages=\"2-3\" name=\"DriveSafe Motor Policy\"/>\n- **Referral:** No referral is needed, because there are no late reporting, exclusion or coverage issues. <cite document_id=\"2630#10414\" pages=\"3\" name=\"DriveSafe Motor Policy\"/>\n\n**Amounts (from compute_settlement)**\n- Deductible: €700 (€300 standard C2 + €400 young-driver surcharge)\n- Payout: €600 (€1,300 repair cost − €700 deductible)\n- Assessor required: No\n\n**Note for the reviewing handler:** The claims subagent could not open the contract in the sandbox, so its article references came from the claims system's output. I checked the deductible, assessor, documents, and referral rules directly against the contract, and they match the figures above. I did not separately verify the 5-day reporting limit it cited.\n\n**Draft message to the customer**\n\n> Dear Mr. Moreau,\n>\n> Thank you for your claim under policy VER-1006 regarding the incident of 4 October 2026 (reference MEM-final-N-CLM-02). We have received your accident report, repair quote and photos. Your claim has been passed for review, and the settlement is now awaiting final confirmation by our claims team. We will contact you with the outcome as soon as it is confirmed.\n>\n> Kind regards,\n> Veridia Claims",
+      "action_log": [
+        {
+          "id": 158,
+          "ts": "2026-11-01T06:10:53+00:00",
+          "claim_ref": "MEM-final-N-CLM-02",
+          "tool": "get_policy",
+          "arguments": {
+            "policy_id": "VER-1006",
+            "claim_ref": "MEM-final-N-CLM-02"
+          },
+          "ok": true,
+          "result": {
+            "policy_id": "VER-1006",
+            "holder_name": "Yanis Moreau",
+            "vehicle": "Dacia Sandero (2022)",
+            "market_value_eur": 11000,
+            "licence_date": "2025-01-15",
+            "coverages": [
+              {
+                "code": "C1",
+                "name": "Third-party liability"
+              },
+              {
+                "code": "C2",
+                "name": "Collision damage"
+              },
+              {
+                "code": "C4",
+                "name": "Theft"
+              }
+            ]
+          }
+        },
+        {
+          "id": 159,
+          "ts": "2026-11-01T06:10:59+00:00",
+          "claim_ref": "MEM-final-N-CLM-02",
+          "tool": "create_claim",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-02",
+            "policy_id": "VER-1006",
+            "coverage": "C2",
+            "incident_date": "2026-10-04",
+            "report_date": "2026-10-06",
+            "description": "The insured braked too late at a roundabout and hit the car in front. The insured states it was his fault. The other driver, Mr. Henry, is named and co-signed the accident report.",
+            "repair_cost": 1300,
+            "at_fault": true,
+            "third_party_involved": true,
+            "third_party_identified": true,
+            "documents_provided": [
+              "photos",
+              "repair_quote",
+              "accident_report"
+            ],
+            "exclusion_signal": null
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-02",
+            "status": "open",
+            "checks": {
+              "coverage": "C2 Collision damage",
+              "coverage_in_policy_schedule": true,
+              "days_to_report": 2,
+              "reporting_deadline_days": 5,
+              "reported_on_time": true,
+              "required_documents": [
+                "photos",
+                "repair_quote",
+                "accident_report"
+              ],
+              "missing_documents": [],
+              "possible_exclusion": null
+            },
+            "blocking_issues": []
+          }
+        },
+        {
+          "id": 160,
+          "ts": "2026-11-01T06:11:00+00:00",
+          "claim_ref": "MEM-final-N-CLM-02",
+          "tool": "compute_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-02"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-02",
+            "deductible_eur": 700,
+            "payout_eur": 600,
+            "assessor_required": false,
+            "years_licensed_on_incident_date": 1,
+            "calculation": [
+              "Art. 2 collision deductible: €300",
+              "Art. 5.3 young driver (1 y < 3): +€400",
+              "Art. 6.2 payout = €1300 - €700 = €600"
+            ]
+          }
+        },
+        {
+          "id": 161,
+          "ts": "2026-11-01T06:11:01+00:00",
+          "claim_ref": "MEM-final-N-CLM-02",
+          "tool": "stage_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-02"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-02",
+            "status": "pending_approval",
+            "payout_eur": 600,
+            "deductible_eur": 700,
+            "message": "Payment prepared. A human claims handler must approve it before it is paid."
+          }
+        }
+      ]
+    },
+    {
+      "condition": "without memory",
+      "case_id": "CLM-05",
+      "claim_ref": "MEM-final-N-CLM-05",
+      "relevant": false,
+      "expected": "settle",
+      "got": "escalate",
+      "ok": false,
+      "error": null,
+      "cost": 0.009712885,
+      "seconds": 58.0,
+      "reply": "**Status: Referred to a claims handler.** Nothing has been staged or paid. The claims system shows the claim as escalated with the note \"Do not settle this claim.\"\n\n**Facts recorded (MEM-final-N-CLM-05)**\n- Policy VER-1006, holder Yanis Moreau. Vehicle: Dacia Sandero (2022), market value €11,000.\n- Incident 7 October 2026, reported 8 October 2026.\n- Damage to the customer's own car, so the claim is under C2 collision cover.\n- Third party Ms. Nguyen is named, admitted fault and signed the accident report.\n- Repair quote €1,100 as stated in the email. The quote's \"total incl. VAT\" line could not be checked because the file cannot be opened.\n- Documents provided: damage photos, repair quote, signed accident report. None missing.\n- Licence date 15 January 2025, so the driver held the licence for under 3 years at the incident date.\n\n**Reasoning**\n- **Coverage:** C2 is listed in the Policy Schedule <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>.\n- **Exclusions:** The email and schedule show no exclusion signal. A recent licence is not an exclusion <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>.\n- **Deadline:** Reported one day after the incident, within the 5-day limit <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>.\n- **Documents:** C2 with a third party requires photos, a repair quote and a signed accident report. All three were provided <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>.\n- **Deductible:** The not-at-fault waiver applies because the customer is not at fault and the third party is identified. No deductible applies, including the young-driver surcharge <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>.\n- **Assessor:** Not required, since €1,100 is below €1,500 <cite document_id=\"2630#10414\" pages=\"3\" name=\"contract.pdf\"/>.\n- **Referral:** The sub-agent escalated the claim because it read the young-driver surcharge as unresolved. The contract's waiver answers that point, so the referral looks unnecessary on the contract text. The handler should confirm this and either clear the escalation or accept it. A claim that shows a possible exclusion or a coverage not in the schedule must go to a handler <cite document_id=\"2630#10414\" pages=\"3\" name=\"contract.pdf\"/>.\n\n**Amounts (from compute_settlement only)**\n- Deductible: €0\n- Payout: €1,100 (not yet staged; the handler should check the VAT line on the quote)\n- Assessor required: No\n\nThe sub-agent also gave a €1,500 estimate at one point. That figure was not from the system and I have disregarded it. Stage_settlement was not run, because the open escalation blocks it.\n\n**Draft message to the customer**\n\"Dear Mr. Moreau, thank you for your claim regarding the incident on 7 October 2026 (reference MEM-final-N-CLM-05). We have received your photos, repair quote and signed accident report. Your claim is currently with a claims handler for review, and we will contact you once it has been assessed. Kind regards, Veridia Claims.\"",
+      "action_log": [
+        {
+          "id": 162,
+          "ts": "2026-11-01T06:11:40+00:00",
+          "claim_ref": "MEM-final-N-CLM-05",
+          "tool": "get_policy",
+          "arguments": {
+            "policy_id": "VER-1006",
+            "claim_ref": "MEM-final-N-CLM-05"
+          },
+          "ok": true,
+          "result": {
+            "policy_id": "VER-1006",
+            "holder_name": "Yanis Moreau",
+            "vehicle": "Dacia Sandero (2022)",
+            "market_value_eur": 11000,
+            "licence_date": "2025-01-15",
+            "coverages": [
+              {
+                "code": "C1",
+                "name": "Third-party liability"
+              },
+              {
+                "code": "C2",
+                "name": "Collision damage"
+              },
+              {
+                "code": "C4",
+                "name": "Theft"
+              }
+            ]
+          }
+        },
+        {
+          "id": 163,
+          "ts": "2026-11-01T06:11:44+00:00",
+          "claim_ref": "MEM-final-N-CLM-05",
+          "tool": "create_claim",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-05",
+            "policy_id": "VER-1006",
+            "coverage": "C2",
+            "incident_date": "2026-10-07",
+            "report_date": "2026-10-08",
+            "description": "The insured's parked-or-passing vehicle was damaged when a third party (Ms. Nguyen) opened her car door into it as the insured drove past. Ms. Nguyen admitted fault and signed the accident report. Place not stated in email.",
+            "repair_cost": 1100,
+            "at_fault": false,
+            "third_party_involved": true,
+            "third_party_identified": true,
+            "documents_provided": [
+              "photos",
+              "repair_quote",
+              "accident_report"
+            ],
+            "exclusion_signal": null
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-05",
+            "status": "open",
+            "checks": {
+              "coverage": "C2 Collision damage",
+              "coverage_in_policy_schedule": true,
+              "days_to_report": 1,
+              "reporting_deadline_days": 5,
+              "reported_on_time": true,
+              "required_documents": [
+                "photos",
+                "repair_quote",
+                "accident_report"
+              ],
+              "missing_documents": [],
+              "possible_exclusion": null
+            },
+            "blocking_issues": []
+          }
+        },
+        {
+          "id": 164,
+          "ts": "2026-11-01T06:11:44+00:00",
+          "claim_ref": "MEM-final-N-CLM-05",
+          "tool": "compute_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-05"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-05",
+            "deductible_eur": 0,
+            "payout_eur": 1100,
+            "assessor_required": false,
+            "years_licensed_on_incident_date": 1,
+            "calculation": [
+              "Art. 5.2 not-at-fault waiver: no deductible",
+              "Art. 6.2 payout = €1100 - €0 = €1100"
+            ]
+          }
+        },
+        {
+          "id": 165,
+          "ts": "2026-11-01T06:11:47+00:00",
+          "claim_ref": "MEM-final-N-CLM-05",
+          "tool": "escalate_to_handler",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-05",
+            "reasons": [
+              "other"
+            ],
+            "summary": "C2 collision, third party Ms. Nguyen identified and admitted fault (not-at-fault waiver, Art 5.2, applies: deductible 0). Licence dated 2025-01-15, about 1 year licensed on incident date 2026-10-07, so the Art 5.3 young-driver surcharge (+EUR 400) appears to apply, but compute_settlement returned payout EUR 1100 without it. Please confirm the surcharge treatment before any settlement is staged."
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-05",
+            "status": "escalated",
+            "reasons": [
+              "other"
+            ],
+            "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+          }
+        },
+        {
+          "id": 166,
+          "ts": "2026-11-01T06:12:04+00:00",
+          "claim_ref": "MEM-final-N-CLM-05",
+          "tool": "compute_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-N-CLM-05"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-N-CLM-05",
+            "deductible_eur": 0,
+            "payout_eur": 1100,
+            "assessor_required": false,
+            "years_licensed_on_incident_date": 1,
+            "calculation": [
+              "Art. 5.2 not-at-fault waiver: no deductible",
+              "Art. 6.2 payout = €1100 - €0 = €1100"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "condition": "with memory",
+      "case_id": "CLM-A",
+      "claim_ref": "MEM-final-W-CLM-A",
+      "relevant": true,
+      "expected": "escalate",
+      "got": "escalate",
+      "ok": true,
+      "error": null,
+      "cost": 0.009730165,
+      "seconds": 44.2,
+      "reply": "**Status: Referred to a claims handler**\n\nThe claims system returned \"escalated\" for claim MEM-final-W-CLM-A. Settlement has not been staged, and the €1,200 payout is for the handler to decide.\n\n**Facts recorded**\n- Policy VER-1001, holder Claire Martin, Peugeot 208 (2021), market value €14,000. Licensed since 2012-05-14.\n- Coverage: C2 collision damage, in the Policy Schedule.\n- Incident 2026-10-12. Reported 2026-10-14, two days later.\n- Other party: van driver Mr. Dubois, named in the email. He admitted fault and signed the accident report. The policyholder was not at fault.\n- Repair quote: €1,200 for the policyholder's own car.\n- Documents provided: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. Nothing is missing, so no documents were requested.\n\n**Reasoning**\n- **Coverage:** C2 covers damage to the insured car. It is in the Policy Schedule (Art. 2).\n- **Timeliness:** Reported within the deadline in Art. 4.1, so no late-claim referral.\n- **Exclusions:** The automatic check flagged none. The email gives no indication of one.\n- **Deductible:** €0. Art. 5.2 waives the deductible for C2 when the authorised driver is not at fault and the third party is identified. Both conditions are met.\n- **Payout:** €1,200, calculated by compute_settlement under Art. 6.2 (repair cost, capped at market value, minus deductible). It is subject to handler approval.\n- **Assessor:** Not required. Art. 6.1 requires one only above €1,500, and the quote is €1,200.\n- **Referral:** The playbook (2026-11-01) says to refer a claim when the other driver is a commercial vehicle such as a van, so Veridia can recover from their insurer. The email describes a van, so the claim was escalated with reason \"other\". Under Art. 7, referral is the handler's decision, and a claim is never refused automatically.\n\n**Amounts (from compute_settlement)**\n- Deductible: €0 (Art. 5.2)\n- Payout: €1,200 (Art. 6.2), pending handler decision\n- Assessor required: No\n\n**Open points for the handler**\n- The email says \"van\" but does not say whether it is a commercial vehicle. This is the trigger for the playbook referral. Please confirm, and pursue recovery from Mr. Dubois's insurer if it is.\n- No police report was supplied. Please confirm none is needed.\n- The subagent reported it could not open the contract. I checked the contract in the company documents and confirmed Art. 5.2, 6.1, 6.2, 7 and the 5-day deadline. I did not separately verify the Art. 3 exclusions list.\n\n**Draft message to the customer**\n> Dear Ms. Martin,\n>\n> Thank you for reporting the accident of 12 October 2026 at Rue de Rivoli, and for sending your photos, repair quote and signed accident report. Your claim MEM-final-W-CLM-A has been passed to a claims handler for review. The handler will confirm the next steps and contact you.\n>\n> Kind regards,\n> Veridia Claims\n\n**Memory:** I created `customers/VER-1001.md` with one line dated 2026-10-14 covering the claim reference, coverage, outcome and the open points.",
+      "action_log": [
+        {
+          "id": 167,
+          "ts": "2026-11-01T06:12:31+00:00",
+          "claim_ref": "MEM-final-W-CLM-A",
+          "tool": "get_policy",
+          "arguments": {
+            "policy_id": "VER-1001",
+            "claim_ref": "MEM-final-W-CLM-A"
+          },
+          "ok": true,
+          "result": {
+            "policy_id": "VER-1001",
+            "holder_name": "Claire Martin",
+            "vehicle": "Peugeot 208 (2021)",
+            "market_value_eur": 14000,
+            "licence_date": "2012-05-14",
+            "coverages": [
+              {
+                "code": "C1",
+                "name": "Third-party liability"
+              },
+              {
+                "code": "C2",
+                "name": "Collision damage"
+              },
+              {
+                "code": "C3",
+                "name": "Glass breakage"
+              },
+              {
+                "code": "C4",
+                "name": "Theft"
+              }
+            ]
+          }
+        },
+        {
+          "id": 168,
+          "ts": "2026-11-01T06:12:34+00:00",
+          "claim_ref": "MEM-final-W-CLM-A",
+          "tool": "create_claim",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-A",
+            "policy_id": "VER-1001",
+            "coverage": "C2",
+            "incident_date": "2026-10-12",
+            "report_date": "2026-10-14",
+            "description": "On 12 October 2026 a van ran a red light at the Rue de Rivoli crossing and struck the side of the insured's car. The van driver, Mr. Dubois, admitted fault and both parties signed the accident report.",
+            "repair_cost": 1200,
+            "at_fault": false,
+            "third_party_involved": true,
+            "third_party_identified": true,
+            "documents_provided": [
+              "photos",
+              "repair_quote",
+              "accident_report"
+            ],
+            "exclusion_signal": null
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-A",
+            "status": "open",
+            "checks": {
+              "coverage": "C2 Collision damage",
+              "coverage_in_policy_schedule": true,
+              "days_to_report": 2,
+              "reporting_deadline_days": 5,
+              "reported_on_time": true,
+              "required_documents": [
+                "photos",
+                "repair_quote",
+                "accident_report"
+              ],
+              "missing_documents": [],
+              "possible_exclusion": null
+            },
+            "blocking_issues": []
+          }
+        },
+        {
+          "id": 169,
+          "ts": "2026-11-01T06:12:36+00:00",
+          "claim_ref": "MEM-final-W-CLM-A",
+          "tool": "compute_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-A"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-A",
+            "deductible_eur": 0,
+            "payout_eur": 1200,
+            "assessor_required": false,
+            "years_licensed_on_incident_date": 14,
+            "calculation": [
+              "Art. 5.2 not-at-fault waiver: no deductible",
+              "Art. 6.2 payout = €1200 - €0 = €1200"
+            ]
+          }
+        },
+        {
+          "id": 170,
+          "ts": "2026-11-01T06:12:38+00:00",
+          "claim_ref": "MEM-final-W-CLM-A",
+          "tool": "escalate_to_handler",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-A",
+            "reasons": [
+              "other"
+            ],
+            "summary": "Company playbook rule (playbook.md, 2026-11-01): \"When the other driver is a commercial vehicle (van, truck, lorry, delivery vehicle), refer the claim to a handler so Veridia can recover the money from their insurer.\" The email describes the other vehicle as a van driven by Mr. Dubois, who admitted fault. Claim is C2 collision, reported on time (2 of 5 days), all documents provided, no blocking issues; compute_settlement gives deductible €0 (Art. 5.2) and payout €1,200 (Art. 6.2), no assessor required. Handler to confirm whether the van is commercial and pursue recovery from the other insurer. Settlement not staged."
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-A",
+            "status": "escalated",
+            "reasons": [
+              "other"
+            ],
+            "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+          }
+        }
+      ],
+      "note_written": true
+    },
+    {
+      "condition": "with memory",
+      "case_id": "CLM-03",
+      "claim_ref": "MEM-final-W-CLM-03",
+      "relevant": true,
+      "expected": "escalate",
+      "got": "escalate",
+      "ok": true,
+      "error": null,
+      "cost": 0.009174625,
+      "seconds": 43.7,
+      "reply": "**Status: Referred to a claims handler**\n\nThe claim is recorded in the Veridia claims system as MEM-final-W-CLM-03. I did not call stage_settlement, so no payment is pending approval.\n\n**Facts recorded**\n- Policy VER-1007, Emma Rousseau, Tesla Model 3 (2023), market value €32,000. Coverages on the schedule: C1, C2, C3, C4.\n- Incident 2026-10-05 (parked car reversed into by a delivery truck). Reported 2026-10-06, one day after the incident.\n- Other party: Mr. Costa, driver of a delivery truck. He accepted responsibility and signed the accident report.\n- Repair quote for the customer's own car: €4,800.\n- Documents received: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. None are missing.\n- Licence held since 2011-04-08 (15 years on the incident date).\n\n**Reasoning**\n- **Coverage:** The damage is to the customer's own car after a collision, so it falls under C2 (collision damage). C2 is on the Policy Schedule (Art. 2).\n- **Timing:** Reported within the deadline, so no late-report referral applies (Art. 7.1 does not apply).\n- **Exclusions:** None indicated by the email (Art. 3).\n- **Deductible:** The customer was not at fault and the third party is identified, so the not-at-fault waiver applies and no deductible is charged (Art. 5.2). The young-driver surcharge does not apply because the licence is more than 3 years old (Art. 5.3).\n- **Referral:** The playbook says a claim whose other driver is a commercial vehicle (van, truck, lorry or delivery vehicle) must go to a handler so Veridia can recover the money from their insurer. The email describes a delivery truck, so I escalated the claim with reason \"other\" (Art. 7 does not list this case, but the playbook rule applies on top of the contract). The system confirmed the escalation: \"Referred to a Veridia claims handler, who will decide. Do not settle this claim.\"\n- **Open point for the handler:** The email does not name the truck's insurer or state the vehicle's registration. I did not invent either.\n\n**Amounts (computed by the claims system)**\n- Deductible: €0 (Art. 5.2)\n- Payout: €4,800 (Art. 6.2: repair cost €4,800 minus €0 deductible; capped at market value €32,000)\n- Assessor required: **Yes**, because the repair cost is above €1,500 (Art. 6.1). I did not book an assessor. The handler should arrange one.\n\n**Customer note:** I saved a one-line dated note to customers/VER-1007.md.\n\n**Draft message to the customer**\n\n> Dear Ms Rousseau,\n>\n> Thank you for reporting the accident of 5 October 2026 and for sending your photos, repair quote and signed accident report. We have recorded your claim under reference MEM-final-W-CLM-03. Your claim has been passed to one of our claims handlers, who will review it and contact you. We may also need to arrange an independent inspection of your car before any decision is made. Please keep your garage's repair quote and any further invoices safe.\n>\n> Kind regards,\n> Veridia Claims Team",
+      "action_log": [
+        {
+          "id": 171,
+          "ts": "2026-11-01T06:13:14+00:00",
+          "claim_ref": "MEM-final-W-CLM-03",
+          "tool": "get_policy",
+          "arguments": {
+            "policy_id": "VER-1007",
+            "claim_ref": "MEM-final-W-CLM-03"
+          },
+          "ok": true,
+          "result": {
+            "policy_id": "VER-1007",
+            "holder_name": "Emma Rousseau",
+            "vehicle": "Tesla Model 3 (2023)",
+            "market_value_eur": 32000,
+            "licence_date": "2011-04-08",
+            "coverages": [
+              {
+                "code": "C1",
+                "name": "Third-party liability"
+              },
+              {
+                "code": "C2",
+                "name": "Collision damage"
+              },
+              {
+                "code": "C3",
+                "name": "Glass breakage"
+              },
+              {
+                "code": "C4",
+                "name": "Theft"
+              }
+            ]
+          }
+        },
+        {
+          "id": 172,
+          "ts": "2026-11-01T06:13:16+00:00",
+          "claim_ref": "MEM-final-W-CLM-03",
+          "tool": "create_claim",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-03",
+            "policy_id": "VER-1007",
+            "coverage": "C2",
+            "incident_date": "2026-10-05",
+            "report_date": "2026-10-06",
+            "description": "The insured's parked car was struck by a reversing delivery truck. The truck driver, Mr. Costa, accepted responsibility and signed the accident report.",
+            "repair_cost": 4800,
+            "at_fault": false,
+            "third_party_involved": true,
+            "third_party_identified": true,
+            "documents_provided": [
+              "photos",
+              "repair_quote",
+              "accident_report"
+            ],
+            "exclusion_signal": null
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-03",
+            "status": "open",
+            "checks": {
+              "coverage": "C2 Collision damage",
+              "coverage_in_policy_schedule": true,
+              "days_to_report": 1,
+              "reporting_deadline_days": 5,
+              "reported_on_time": true,
+              "required_documents": [
+                "photos",
+                "repair_quote",
+                "accident_report"
+              ],
+              "missing_documents": [],
+              "possible_exclusion": null
+            },
+            "blocking_issues": []
+          }
+        },
+        {
+          "id": 173,
+          "ts": "2026-11-01T06:13:16+00:00",
+          "claim_ref": "MEM-final-W-CLM-03",
+          "tool": "compute_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-03"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-03",
+            "deductible_eur": 0,
+            "payout_eur": 4800,
+            "assessor_required": true,
+            "years_licensed_on_incident_date": 15,
+            "calculation": [
+              "Art. 5.2 not-at-fault waiver: no deductible",
+              "Art. 6.2 payout = €4800 - €0 = €4800",
+              "Art. 6.1 amount above €1500: assessor required"
+            ]
+          }
+        },
+        {
+          "id": 174,
+          "ts": "2026-11-01T06:13:34+00:00",
+          "claim_ref": "MEM-final-W-CLM-03",
+          "tool": "escalate_to_handler",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-03",
+            "reasons": [
+              "other"
+            ],
+            "summary": "Playbook rule (2026-11-01): When the other driver is a commercial vehicle (van, truck, lorry, delivery vehicle), refer the claim to a handler so Veridia can recover the money from their insurer. Facts: the other driver is Mr. Costa of a delivery truck that reversed into the parked insured Tesla Model 3; liability accepted by the driver on a signed accident report. Coverage C2, repair cost EUR 4,800, compute_settlement shows deductible 0, payout 4800, assessor_required true (repair above 1500, Art. 6.1). Not staged: settlement awaits handler decision."
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-03",
+            "status": "escalated",
+            "reasons": [
+              "other"
+            ],
+            "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+          }
+        }
+      ],
+      "note_written": true
+    },
+    {
+      "condition": "with memory",
+      "case_id": "CLM-B",
+      "claim_ref": "MEM-final-W-CLM-B",
+      "relevant": false,
+      "expected": "settle",
+      "got": "settle",
+      "ok": true,
+      "error": null,
+      "cost": 0.00724265,
+      "seconds": 33.5,
+      "reply": "**Status: Settlement prepared for human approval**\n\nThe claims system returned `pending_approval` from `stage_settlement`. The payment is prepared but not paid, and a human claims handler must approve it.\n\n**Facts recorded**\n- Claim reference MEM-final-W-CLM-B, policy VER-1002, policyholder Lucas Bernard, driver of a Renault Clio (2023), market value €16,500.\n- Coverage C2 (collision damage to own vehicle) is in the policy schedule.\n- Incident 14 October 2026, reported 15 October 2026 (within the 5-day deadline).\n- The policyholder was at fault and the third party, Ms. Laurent, is identified and co-signed the accident report.\n- Repair quote: €2,400.\n- Documents provided: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. None are missing. They were not opened.\n- No possible exclusion flagged. The policyholder is the driver.\n\n**Reasoning**\n- Coverage: C2 is in the policy schedule, so the claim has no coverage gap.\n- Reporting: reported within the deadline.\n- Documents: all required documents are present.\n- Deductible: €300 collision deductible (Art. 2) plus a €400 young-driver surcharge (Art. 5.3), because the driver has held a licence for under 3 years. Total €700.\n- Payout: €2,400 less €700 = €1,700 (Art. 6.2).\n- Assessor: the amount exceeds €1,500, so an assessor is required (Art. 6.1). A visit was booked for 18 October 2026.\n- Playbook: the rule on commercial other vehicles (refer to a handler for recovery) was **not** applied, because the email does not say the other vehicle is commercial. I did not assume it.\n- No referral was needed, since there was no late report, exclusion or coverage gap.\n\n**Amounts**\n- Deductible: €700 (Art. 2 €300 + Art. 5.3 €400)\n- Payout: €1,700 (Art. 6.2)\n- Assessor required: Yes (Art. 6.1), visit booked for 18 October 2026\n\n**Open points for the handler**\n- The settlement was staged before the assessor's inspection took place. Please confirm the €1,700 once the assessor report is in.\n- Please confirm whether Ms. Laurent's vehicle is commercial. If it is, the playbook requires a referral so Veridia can recover the money from their insurer.\n- The attachments were not opened, so their contents are unverified.\n- The first `stage_settlement` attempt failed because the assessor was not yet booked. The retry after booking succeeded.\n\n**Customer file**\nCreated `customers/VER-1002.md` with one dated line (2026-10-15) recording the claim reference, coverage, outcome and open points.\n\n**Draft message to the customer**\n> Dear Mr. Bernard,\n>\n> Thank you for your claim report regarding the incident of 14 October 2026 (reference MEM-final-W-CLM-B). We have received your photos, repair quote and signed accident report. An independent assessor visit has been arranged for 18 October 2026 to inspect your vehicle. Once the assessment is complete, your claim will be reviewed for settlement. Please contact us if you have any questions.\n>\n> Kind regards,\n> Veridia Claims",
+      "action_log": [
+        {
+          "id": 175,
+          "ts": "2026-11-01T06:13:56+00:00",
+          "claim_ref": "MEM-final-W-CLM-B",
+          "tool": "get_policy",
+          "arguments": {
+            "policy_id": "VER-1002",
+            "claim_ref": "MEM-final-W-CLM-B"
+          },
+          "ok": true,
+          "result": {
+            "policy_id": "VER-1002",
+            "holder_name": "Lucas Bernard",
+            "vehicle": "Renault Clio (2023)",
+            "market_value_eur": 16500,
+            "licence_date": "2024-09-02",
+            "coverages": [
+              {
+                "code": "C1",
+                "name": "Third-party liability"
+              },
+              {
+                "code": "C2",
+                "name": "Collision damage"
+              },
+              {
+                "code": "C3",
+                "name": "Glass breakage"
+              }
+            ]
+          }
+        },
+        {
+          "id": 176,
+          "ts": "2026-11-01T06:13:59+00:00",
+          "claim_ref": "MEM-final-W-CLM-B",
+          "tool": "create_claim",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-B",
+            "policy_id": "VER-1002",
+            "coverage": "C2",
+            "incident_date": "2026-10-14",
+            "report_date": "2026-10-15",
+            "description": "The policyholder reports that while changing lanes on the ring road he misjudged the distance and hit the car next to him. The other driver, Ms. Laurent, is named and co-signed the accident report. Repair quote is €2,400 for the insured Renault Clio.",
+            "repair_cost": 2400,
+            "at_fault": true,
+            "third_party_involved": true,
+            "third_party_identified": true,
+            "documents_provided": [
+              "photos",
+              "repair_quote",
+              "accident_report"
+            ],
+            "exclusion_signal": null
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-B",
+            "status": "open",
+            "checks": {
+              "coverage": "C2 Collision damage",
+              "coverage_in_policy_schedule": true,
+              "days_to_report": 1,
+              "reporting_deadline_days": 5,
+              "reported_on_time": true,
+              "required_documents": [
+                "photos",
+                "repair_quote",
+                "accident_report"
+              ],
+              "missing_documents": [],
+              "possible_exclusion": null
+            },
+            "blocking_issues": []
+          }
+        },
+        {
+          "id": 177,
+          "ts": "2026-11-01T06:14:00+00:00",
+          "claim_ref": "MEM-final-W-CLM-B",
+          "tool": "compute_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-B"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-B",
+            "deductible_eur": 700,
+            "payout_eur": 1700,
+            "assessor_required": true,
+            "years_licensed_on_incident_date": 2,
+            "calculation": [
+              "Art. 2 collision deductible: €300",
+              "Art. 5.3 young driver (2 y < 3): +€400",
+              "Art. 6.2 payout = €2400 - €700 = €1700",
+              "Art. 6.1 amount above €1500: assessor required"
+            ]
+          }
+        },
+        {
+          "id": 178,
+          "ts": "2026-11-01T06:14:02+00:00",
+          "claim_ref": "MEM-final-W-CLM-B",
+          "tool": "stage_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-B"
+          },
+          "ok": false,
+          "result": {
+            "error": "An assessor is required (Art. 6.1). Book one with schedule_assessor first."
+          }
+        },
+        {
+          "id": 179,
+          "ts": "2026-11-01T06:14:02+00:00",
+          "claim_ref": "MEM-final-W-CLM-B",
+          "tool": "schedule_assessor",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-B"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-B",
+            "assessor_visit_date": "2026-10-18",
+            "message": "Independent assessor booked (Art. 6.1)."
+          }
+        },
+        {
+          "id": 180,
+          "ts": "2026-11-01T06:14:03+00:00",
+          "claim_ref": "MEM-final-W-CLM-B",
+          "tool": "stage_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-B"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-B",
+            "status": "pending_approval",
+            "payout_eur": 1700,
+            "deductible_eur": 700,
+            "message": "Payment prepared. A human claims handler must approve it before it is paid."
+          }
+        }
+      ],
+      "note_written": true
+    },
+    {
+      "condition": "with memory",
+      "case_id": "CLM-01",
+      "claim_ref": "MEM-final-W-CLM-01",
+      "relevant": false,
+      "expected": "settle",
+      "got": "settle",
+      "ok": true,
+      "error": null,
+      "cost": 0.00733231,
+      "seconds": 35.8,
+      "reply": "**Status: Settlement prepared for human approval**\n\nThe claims system shows claim MEM-final-W-CLM-01 open, with the settlement of €600 staged as \"pending approval.\" Nothing has been paid.\n\n**Facts recorded**\n- Policy VER-1004, policyholder Thomas Petit, driving his own 2020 Volkswagen Golf (market value €15,500). Licence held since 2008, so the young-driver surcharge does not apply.\n- Incident on 2026-10-03, reported by email on 2026-10-04 (one day later).\n- Reversing out of a parking space into a concrete pillar. Single vehicle, no third party, policyholder driving.\n- Repair quote for the customer's own car: €900.\n- Attached and provided: damage_photos.zip and repair_quote.pdf. Neither was opened, as instructed.\n\n**Reasoning**\n- **Coverage:** C2 (collision damage) covers damage to the insured vehicle after a collision, and it is in the Policy Schedule. <cite document_id=\"2630#10414\" pages=\"1\" name=\"Veridia contract\"/>\n- **Reporting deadline:** Reported within the deadline, so no late-claim referral under Article 7.1. <cite document_id=\"2630#10414\" pages=\"2-3\" name=\"Veridia contract\"/>\n- **Exclusions:** Nothing in the email suggests one (no alcohol, racing, intentional damage or wear). Article 7.2 referral is not triggered.\n- **Documents:** Photos and repair quote are both provided, so no request was needed. A missing document is requested, not refused. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia contract\"/>\n- **Deductible:** €300 standard C2 deductible. One deductible per claim, and no not-at-fault waiver applies because no third party is involved. <cite document_id=\"2630#10414\" pages=\"1-2\" name=\"Veridia contract\"/>\n- **Payout:** Repair cost (€900), capped at market value, minus the deductible; never negative. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia contract\"/>\n- **Assessor:** Not required, since the repair cost is at or below €1,500. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia contract\"/>\n- **Playbook:** The commercial-vehicle rule (refer when the other driver is a commercial vehicle) does not apply, since no other vehicle is involved.\n- **Payment timing:** Payment is made within 15 days after a Veridia claims handler approves it. <cite document_id=\"2630#10414\" pages=\"2-3\" name=\"Veridia contract\"/>\n\n**Amounts**\n- Deductible: €300\n- Payout: €600\n- Assessor required: No\n\n**Open points for the handler**\n- Approve the staged payment of €600.\n- The attached photos and quote were not opened. Their content is taken from the email and the system's confirmation only.\n\n**Memory**\n- Created `customers/VER-1004.md` with one dated line for this claim.\n\n**Draft message to the customer**\n> Dear Mr Petit,\n>\n> Thank you for reporting the incident of 3 October 2026 involving your Volkswagen Golf under policy VER-1004. We have received your repair quote and photos, and your claim (reference MEM-final-W-CLM-01) is now being processed. Our claims team will confirm the outcome to you shortly.\n>\n> Kind regards,\n> Veridia Claims Team",
+      "action_log": [
+        {
+          "id": 181,
+          "ts": "2026-11-01T06:14:29+00:00",
+          "claim_ref": "MEM-final-W-CLM-01",
+          "tool": "get_policy",
+          "arguments": {
+            "policy_id": "VER-1004",
+            "claim_ref": "MEM-final-W-CLM-01"
+          },
+          "ok": true,
+          "result": {
+            "policy_id": "VER-1004",
+            "holder_name": "Thomas Petit",
+            "vehicle": "Volkswagen Golf (2020)",
+            "market_value_eur": 15500,
+            "licence_date": "2008-11-01",
+            "coverages": [
+              {
+                "code": "C1",
+                "name": "Third-party liability"
+              },
+              {
+                "code": "C2",
+                "name": "Collision damage"
+              }
+            ]
+          }
+        },
+        {
+          "id": 182,
+          "ts": "2026-11-01T06:14:32+00:00",
+          "claim_ref": "MEM-final-W-CLM-01",
+          "tool": "create_claim",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-01",
+            "policy_id": "VER-1004",
+            "coverage": "C2",
+            "incident_date": "2026-10-03",
+            "report_date": "2026-10-04",
+            "description": "While reversing out of a parking space, the insured vehicle struck a concrete pillar. No other vehicle or person was involved. The policyholder was driving.",
+            "repair_cost": 900,
+            "at_fault": true,
+            "third_party_involved": false,
+            "third_party_identified": false,
+            "documents_provided": [
+              "photos",
+              "repair_quote"
+            ],
+            "exclusion_signal": null
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-01",
+            "status": "open",
+            "checks": {
+              "coverage": "C2 Collision damage",
+              "coverage_in_policy_schedule": true,
+              "days_to_report": 1,
+              "reporting_deadline_days": 5,
+              "reported_on_time": true,
+              "required_documents": [
+                "photos",
+                "repair_quote"
+              ],
+              "missing_documents": [],
+              "possible_exclusion": null
+            },
+            "blocking_issues": []
+          }
+        },
+        {
+          "id": 183,
+          "ts": "2026-11-01T06:14:33+00:00",
+          "claim_ref": "MEM-final-W-CLM-01",
+          "tool": "compute_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-01"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-01",
+            "deductible_eur": 300,
+            "payout_eur": 600,
+            "assessor_required": false,
+            "years_licensed_on_incident_date": 17,
+            "calculation": [
+              "Art. 2 collision deductible: €300",
+              "Art. 6.2 payout = €900 - €300 = €600"
+            ]
+          }
+        },
+        {
+          "id": 184,
+          "ts": "2026-11-01T06:14:33+00:00",
+          "claim_ref": "MEM-final-W-CLM-01",
+          "tool": "stage_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-01"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-01",
+            "status": "pending_approval",
+            "payout_eur": 600,
+            "deductible_eur": 300,
+            "message": "Payment prepared. A human claims handler must approve it before it is paid."
+          }
+        }
+      ],
+      "note_written": true
+    },
+    {
+      "condition": "with memory",
+      "case_id": "CLM-02",
+      "claim_ref": "MEM-final-W-CLM-02",
+      "relevant": false,
+      "expected": "settle",
+      "got": "settle",
+      "ok": true,
+      "error": null,
+      "cost": 0.00853343,
+      "seconds": 41.5,
+      "reply": "**Status: Settlement prepared for human approval**\n\nThe claims system confirms that the settlement was staged with status pending_approval. The payment has not been paid and needs a human handler to approve it.\n\n**Facts recorded**\n- Claim reference MEM-final-W-CLM-02, policy VER-1006, policyholder Yanis Moreau.\n- Incident on 2026-10-04 at a roundabout. Reported 2026-10-06, within the 5-day deadline.\n- The insured braked too late and hit the car in front. The insured admits fault.\n- Third party Mr. Henry is named and co-signed the accident report.\n- Repair quote for the insured's own car: €1,300.\n- Documents received: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. No documents are missing.\n- Licence issued 2025-01-15, so the driver had under 3 years' licence at the incident date.\n- Vehicle: Dacia Sandero (2022), market value €11,000.\n\n**Reasoning**\n- Coverage is C2 (collision damage) because the claim is for damage to the insured's own car. C2 is in the Policy Schedule. <cite document_id=\"2630#10414\" pages=\"1\" name=\"Veridia contract\"/>\n- The deductible is €300 standard for C2 plus a €400 young-driver surcharge, because the licence is under 3 years old on the incident date. <cite document_id=\"2630#10414\" pages=\"1-2\" name=\"Veridia contract\"/>\n- The payout is the repair cost minus the deductible: €1,300 − €700 = €600. Compensation is never negative. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia contract\"/>\n- An independent assessor is needed only when the repair cost is above €1,500. This quote is €1,300, so no assessor is required. <cite document_id=\"2630#10414\" pages=\"2\" name=\"Veridia contract\"/>\n- The system found no possible exclusion and no coverage outside the schedule, so no referral under Article 7 is needed. <cite document_id=\"2630#10414\" pages=\"3\" name=\"Veridia contract\"/>\n- Playbook: the commercial-vehicle rule (refer when the other driver's vehicle is a van, truck or similar) is not triggered, because the email does not say what Mr. Henry drives. I did not assume it.\n\n**Amounts (computed by the claims system)**\n- Deductible: €700\n- Payout: €600\n- Assessor required: No\n\nI checked the deductible, surcharge, payout and assessor rules against the contract. They match the system's calculation.\n\n**Open points for the handler**\n1. Confirm the type of vehicle Mr. Henry drives before approving the payment. If it is a commercial vehicle, the playbook requires a referral so Veridia can recover the money from their insurer.\n2. The damage photos, the repair quote and the signed accident report are stored in the claim file but I could not open them. I have not verified their contents.\n3. The subagent could not read the contract itself. I checked the relevant articles directly.\n\n**Draft message to the customer**\n> Dear Mr. Moreau,\n>\n> Thank you for reporting the accident of 4 October 2026 under policy VER-1006 (claim reference MEM-final-W-CLM-02). We have received your photos, repair quote and signed accident report. Your claim is now with a claims handler for review, and we will write to you again once that review is complete.\n>\n> Kind regards,\n> Veridia Claims\n\n**Memory:** I created `customers/VER-1006.md` with one line dated 2026-10-06 recording the claim reference, coverage, outcome and the open point about the other vehicle's type.",
+      "action_log": [
+        {
+          "id": 185,
+          "ts": "2026-11-01T06:15:06+00:00",
+          "claim_ref": "MEM-final-W-CLM-02",
+          "tool": "get_policy",
+          "arguments": {
+            "policy_id": "VER-1006",
+            "claim_ref": "MEM-final-W-CLM-02"
+          },
+          "ok": true,
+          "result": {
+            "policy_id": "VER-1006",
+            "holder_name": "Yanis Moreau",
+            "vehicle": "Dacia Sandero (2022)",
+            "market_value_eur": 11000,
+            "licence_date": "2025-01-15",
+            "coverages": [
+              {
+                "code": "C1",
+                "name": "Third-party liability"
+              },
+              {
+                "code": "C2",
+                "name": "Collision damage"
+              },
+              {
+                "code": "C4",
+                "name": "Theft"
+              }
+            ]
+          }
+        },
+        {
+          "id": 186,
+          "ts": "2026-11-01T06:15:14+00:00",
+          "claim_ref": "MEM-final-W-CLM-02",
+          "tool": "create_claim",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-02",
+            "policy_id": "VER-1006",
+            "coverage": "C2",
+            "incident_date": "2026-10-04",
+            "report_date": "2026-10-06",
+            "description": "The insured braked too late at a roundabout and struck the vehicle in front. The insured's own car was damaged; the other driver, Mr. Henry, is named and co-signed the accident report. Repair quote for the insured's vehicle is EUR 1,300.",
+            "repair_cost": 1300,
+            "at_fault": true,
+            "third_party_involved": true,
+            "third_party_identified": true,
+            "documents_provided": [
+              "photos",
+              "repair_quote",
+              "accident_report"
+            ],
+            "exclusion_signal": null
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-02",
+            "status": "open",
+            "checks": {
+              "coverage": "C2 Collision damage",
+              "coverage_in_policy_schedule": true,
+              "days_to_report": 2,
+              "reporting_deadline_days": 5,
+              "reported_on_time": true,
+              "required_documents": [
+                "photos",
+                "repair_quote",
+                "accident_report"
+              ],
+              "missing_documents": [],
+              "possible_exclusion": null
+            },
+            "blocking_issues": []
+          }
+        },
+        {
+          "id": 187,
+          "ts": "2026-11-01T06:15:16+00:00",
+          "claim_ref": "MEM-final-W-CLM-02",
+          "tool": "compute_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-02"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-02",
+            "deductible_eur": 700,
+            "payout_eur": 600,
+            "assessor_required": false,
+            "years_licensed_on_incident_date": 1,
+            "calculation": [
+              "Art. 2 collision deductible: €300",
+              "Art. 5.3 young driver (1 y < 3): +€400",
+              "Art. 6.2 payout = €1300 - €700 = €600"
+            ]
+          }
+        },
+        {
+          "id": 188,
+          "ts": "2026-11-01T06:15:16+00:00",
+          "claim_ref": "MEM-final-W-CLM-02",
+          "tool": "stage_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-02"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-02",
+            "status": "pending_approval",
+            "payout_eur": 600,
+            "deductible_eur": 700,
+            "message": "Payment prepared. A human claims handler must approve it before it is paid."
+          }
+        }
+      ],
+      "note_written": true
+    },
+    {
+      "condition": "with memory",
+      "case_id": "CLM-05",
+      "claim_ref": "MEM-final-W-CLM-05",
+      "relevant": false,
+      "expected": "settle",
+      "got": "settle",
+      "ok": true,
+      "error": null,
+      "cost": 0.00704296,
+      "seconds": 31.3,
+      "reply": "**Status: Settlement prepared for human approval.** Claim MEM-final-W-CLM-05 is open and the settlement is staged as pending approval for €1,100. Nothing has been paid. A claims handler must approve it.\n\n**Facts recorded**\n- Policyholder: Yanis Moreau, policy VER-1006, insured vehicle Dacia Sandero (2022), market value €11,000.\n- Incident 7 October 2026. Reported 8 October 2026 (1 day into the 5-day window).\n- Other party: Ms. Nguyen, named in the email. She opened a car door into the insured's car, admitted fault and signed the accident report. Her vehicle type is not stated.\n- The policyholder was driving. No other driver is named.\n- Repair quote for the insured's own car: €1,100.\n- Documents provided: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. These were counted as provided but not opened.\n\n**Reasoning**\n- Coverage: C2 (collision damage to the insured's own car) is in the policy schedule. No exclusion was flagged. <cite document_id=\"2630\" name=\"Veridia contract\"/>\n- Reporting: reported within the 5-day deadline. Contract reporting article applies.\n- Licence: licensed since 15 January 2025, about one year at the incident date. No licence exclusion applies.\n- Documents: all documents required for C2 are present. None were requested.\n- Deductible: Art. 5.2 (not-at-fault waiver) applies, so €0.\n- Payout: Art. 6.2, €1,100 less €0.\n- Playbook commercial-vehicle rule: not triggered. The email does not say Ms. Nguyen's vehicle is commercial, so I did not refer the claim on that basis.\n\n**Amounts**\n- Deductible: €0 (Art. 5.2)\n- Payout: €1,100 (Art. 6.2)\n- Assessor required: No\n\n**Open points for the handler**\n- Ms. Nguyen's vehicle type is not stated. If it is a commercial vehicle (van, truck, lorry or delivery vehicle), the playbook requires a referral so Veridia can recover from her insurer. Please confirm before approving payment.\n- The attached files were not opened, so the photos and signed report are unverified.\n\n**Draft message to the customer**\n> Dear Mr. Moreau,\n>\n> Thank you for reporting the incident of 7 October 2026 under policy VER-1006 (claim MEM-final-W-CLM-05). We have received your photos, repair quote and signed accident report. Your claim has been recorded and the repair cost of €1,100 has been prepared for payment, subject to final approval by our claims team. We will contact you if anything else is needed.\n>\n> Kind regards,\n> Veridia Claims Team\n\n**Memory:** I added a dated line to customers/VER-1006.md (email date 2026-10-08) with the claim reference, coverage, outcome and the open point.",
+      "action_log": [
+        {
+          "id": 189,
+          "ts": "2026-11-01T06:15:47+00:00",
+          "claim_ref": "MEM-final-W-CLM-05",
+          "tool": "get_policy",
+          "arguments": {
+            "policy_id": "VER-1006",
+            "claim_ref": "MEM-final-W-CLM-05"
+          },
+          "ok": true,
+          "result": {
+            "policy_id": "VER-1006",
+            "holder_name": "Yanis Moreau",
+            "vehicle": "Dacia Sandero (2022)",
+            "market_value_eur": 11000,
+            "licence_date": "2025-01-15",
+            "coverages": [
+              {
+                "code": "C1",
+                "name": "Third-party liability"
+              },
+              {
+                "code": "C2",
+                "name": "Collision damage"
+              },
+              {
+                "code": "C4",
+                "name": "Theft"
+              }
+            ]
+          }
+        },
+        {
+          "id": 190,
+          "ts": "2026-11-01T06:15:50+00:00",
+          "claim_ref": "MEM-final-W-CLM-05",
+          "tool": "create_claim",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-05",
+            "policy_id": "VER-1006",
+            "coverage": "C2",
+            "incident_date": "2026-10-07",
+            "report_date": "2026-10-08",
+            "description": "The insured's parked-or-passing vehicle was damaged when a car door was opened into it by a driver named Ms. Nguyen. Ms. Nguyen admitted fault and signed the accident report. The insured's Dacia Sandero is the damaged car.",
+            "repair_cost": 1100,
+            "at_fault": false,
+            "third_party_involved": true,
+            "third_party_identified": true,
+            "documents_provided": [
+              "photos",
+              "repair_quote",
+              "accident_report"
+            ],
+            "exclusion_signal": null
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-05",
+            "status": "open",
+            "checks": {
+              "coverage": "C2 Collision damage",
+              "coverage_in_policy_schedule": true,
+              "days_to_report": 1,
+              "reporting_deadline_days": 5,
+              "reported_on_time": true,
+              "required_documents": [
+                "photos",
+                "repair_quote",
+                "accident_report"
+              ],
+              "missing_documents": [],
+              "possible_exclusion": null
+            },
+            "blocking_issues": []
+          }
+        },
+        {
+          "id": 191,
+          "ts": "2026-11-01T06:15:50+00:00",
+          "claim_ref": "MEM-final-W-CLM-05",
+          "tool": "compute_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-05"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-05",
+            "deductible_eur": 0,
+            "payout_eur": 1100,
+            "assessor_required": false,
+            "years_licensed_on_incident_date": 1,
+            "calculation": [
+              "Art. 5.2 not-at-fault waiver: no deductible",
+              "Art. 6.2 payout = €1100 - €0 = €1100"
+            ]
+          }
+        },
+        {
+          "id": 192,
+          "ts": "2026-11-01T06:15:51+00:00",
+          "claim_ref": "MEM-final-W-CLM-05",
+          "tool": "stage_settlement",
+          "arguments": {
+            "claim_ref": "MEM-final-W-CLM-05"
+          },
+          "ok": true,
+          "result": {
+            "claim_ref": "MEM-final-W-CLM-05",
+            "status": "pending_approval",
+            "payout_eur": 1100,
+            "deductible_eur": 0,
+            "message": "Payment prepared. A human claims handler must approve it before it is paid."
+          }
+        }
+      ],
+      "note_written": true
+    }
+  ],
+  "notes": {
+    "CLM-A": "- 2026-10-14: Claim MEM-final-W-CLM-A (accident 2026-10-12, C2 collision, other party a van driver, Mr. Dubois, admitted fault). Repair quote €1,200, €0 deductible (Art. 5.2), payout €1,200 (Art. 6.2). Referred to a handler under playbook rule on commercial vehicles (van); not staged. Handler to confirm if the van is a commercial vehicle and pursue recovery.",
+    "CLM-03": "2026-10-06 (email date): Claim MEM-final-W-CLM-03, C2 collision (parked car hit by reversing delivery truck, 2026-10-05, other driver Mr. Costa accepted liability). Repair EUR 4,800. Computed: deductible 0 (Art. 5.2), payout 4800, assessor required (Art. 6.1). Outcome: referred to a claims handler under playbook rule on commercial other-driver vehicles (reason \"other\"); not staged. All documents received.",
+    "CLM-B": "# VER-1002 claim history\n\n- 2026-10-15: MEM-final-W-CLM-B, collision (C2), own vehicle, at-fault lane change on 14 Oct 2026. Settlement €1,700 (€2,400 less €700 deductible incl. young-driver surcharge, Art. 2, 5.3, 6.2) staged pending human approval. Assessor visit booked 18 Oct 2026 (Art. 6.1). Open point: confirm the other vehicle is not commercial (playbook rule); attachments not opened.",
+    "CLM-01": "Claim history and handling notes for policyholder VER-1004.\n- 2026-10-04: Claim MEM-final-W-CLM-01 (C2 collision, single-vehicle reversing incident 2026-10-03, no third party). Settlement €600 (€900 repair less €300 deductible) staged pending human approval; no referral or documents requested.\n",
+    "CLM-02": "- 2026-10-06 (email date): Claim MEM-final-W-CLM-02, C2 collision (roundabout, 2026-10-04, insured at fault, third party Mr. Henry identified). Repair quote €1,300; deductible €700 (€300 + €400 young-driver surcharge, licence under 3 years); payout €600, no assessor. Settlement staged pending human approval. Open point: other vehicle type not stated in email (commercial-vehicle playbook rule not triggered on current facts).\n- 2026-10-08 (email date): Claim MEM-final-W-CLM-05, C2 collision (car door opened into insured's car, 2026-10-07, other driver Ms. Nguyen admitted fault, third party identified). Repair quote €1,100; deductible €0 (Art. 5.2 not-at-fault); payout €1,100, no assessor. Settlement staged pending human approval. Open point: Ms. Nguyen's vehicle type not stated; confirm it is not a commercial vehicle before approval.\n",
+    "CLM-05": "- 2026-10-06 (email date): Claim MEM-final-W-CLM-02, C2 collision (roundabout, 2026-10-04, insured at fault, third party Mr. Henry identified). Repair quote €1,300; deductible €700 (€300 + €400 young-driver surcharge, licence under 3 years); payout €600, no assessor. Settlement staged pending human approval. Open point: other vehicle type not stated in email (commercial-vehicle playbook rule not triggered on current facts).\n- 2026-10-08 (email date): Claim MEM-final-W-CLM-05, C2 collision (car door opened into insured's car, 2026-10-07, other driver Ms. Nguyen admitted fault, third party identified). Repair quote €1,100; deductible €0 (Art. 5.2 not-at-fault); payout €1,100, no assessor. Settlement staged pending human approval. Open point: Ms. Nguyen's vehicle type not stated; confirm it is not a commercial vehicle before approval.\n"
+  }
+}

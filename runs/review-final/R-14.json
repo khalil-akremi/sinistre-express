@@ -1,0 +1,156 @@
+{
+  "review_id": "R-14",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1008\",\n      \"sources_say\": \"Customer email states 'Policy number: VER-1008' and the Policy Schedule shows policy_id VER-1008 for holder Hugo Garcia\",\n      \"match\": true,\n      \"evidence\": \"Customer email signature block; Policy Schedule in the claims system\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C3\",\n      \"sources_say\": \"Rear side window smashed = glass breakage, covered by C3; Policy Schedule lists coverage C3 'Glass breakage' for VER-1008\",\n      \"match\": true,\n      \"evidence\": \"Customer email ('My rear side window was smashed'); Policy Schedule coverages [C1, C3]; contract Article 2 table (C3 Glass breakage: windscreen, side windows)\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-10\",\n      \"sources_say\": \"Email: 'a broken glass that happened on 10 October 2026'\",\n      \"match\": true,\n      \"evidence\": \"Customer email body\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-12\",\n      \"sources_say\": \"Email received on 2026-10-12 reporting the 2026-10-10 incident (2 calendar days, within the 5-day deadline of contract Article 4.1)\",\n      \"match\": true,\n      \"evidence\": \"Customer email header 'received on 2026-10-12'; contract Article 4.1 (report within 5 days)\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": 320,\n      \"sources_say\": \"Email: 'The garage quoted €320 to repair my car.' Contract Article 1 defines repair cost as the total incl. VAT on the quote; repair_quote.pdf is stored by the mailroom and cannot be opened, but counts as received, and no source contradicts €320\",\n      \"match\": true,\n      \"evidence\": \"Customer email ('quoted €320'); contract Article 1 repair-cost definition; mailroom list confirms repair_quote.pdf received\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": false,\n      \"sources_say\": \"Email describes an overnight smashed window with nothing taken; no statement that the policyholder caused the damage; no source indicates fault\",\n      \"match\": true,\n      \"evidence\": \"Customer email ('smashed overnight. Nothing was taken from the car.')\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": false,\n      \"sources_say\": \"Email describes no other driver or vehicle involved; the playbook referral rule (commercial vehicle third party) is not triggered because the email states no third party was involved\",\n      \"match\": true,\n      \"evidence\": \"Customer email (no third party mentioned); handler playbook referral rule\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": false,\n      \"sources_say\": \"Consistent with no third party involved; email names no third party\",\n      \"match\": true,\n      \"evidence\": \"Customer email\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\"],\n      \"sources_say\": \"Email attaches damage_photos.zip and repair_quote.pdf; mailroom confirms both received; contract Article 4.3 requires exactly 'Photos of the damage; repair quote' for C3. The files cannot be opened (mailroom), so their belonging to this policyholder/vehicle cannot be verified inside them, but they are counted as received and no source contradicts them\",\n      \"match\": true,\n      \"evidence\": \"Customer email attachment list; mailroom storage note; contract Article 4.3 C3 required-documents table\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"No exclusion applies per Article 3: no alcohol/drugs, no invalid licence, no racing, damage not intentional by policyholder, and smashed glass is not wear/mechanical failure; nothing in the email signals an exclusion\",\n      \"match\": true,\n      \"evidence\": \"Customer email; contract Article 3 exclusions list\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"Deadline: incident 2026-10-10, reported 2026-10-12 = 2 days, within the 5-day limit of contract Article 4.1, so no Article 7.1 referral. Coverage: C3 Glass breakage is listed in the Policy Schedule (Article 2), so no Article 7.3 referral. Exclusions: none indicated (Article 3), so no Article 7.2 referral. Documents: C3 requires photos + repair quote (Article 4.3); both attached and counted as received. Playbook: the commercial-vehicle third-party referral rule is not triggered because the email states no third party was involved. Assessor: Article 6.1 requires one only above €1,500; €320 does not, matching 'assessor required: no'. Deductible €50 matches the C3 standard deductible in Article 2; payout €270 = €320 − €50 per Article 6.2 (below the €6,500 market value cap).\"\n  },\n  \"summary\": \"All recorded facts match the customer email, the Policy Schedule and the Veridia contract; the claim was reported within 5 days, C3 glass coverage applies, the required photos and quote were provided, no exclusion or playbook referral rule is triggered, so the staged payment of €270 (€320 minus the €50 C3 deductible) should be approved.\"\n}\n```",
+  "questions": [],
+  "thread_id": "163708a0-e340-425a-ba6b-57536b634d8f",
+  "cost": {
+    "failed": false,
+    "input_tokens": 108862,
+    "cached_tokens": 94720,
+    "output_tokens": 3158,
+    "input_cost": "0.01425880",
+    "output_cost": "0.00646583",
+    "total": "0.02072463"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 72.5,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1008",
+        "sources_say": "Customer email states 'Policy number: VER-1008' and the Policy Schedule shows policy_id VER-1008 for holder Hugo Garcia",
+        "match": true,
+        "evidence": "Customer email signature block; Policy Schedule in the claims system"
+      },
+      {
+        "field": "coverage",
+        "recorded": "C3",
+        "sources_say": "Rear side window smashed = glass breakage, covered by C3; Policy Schedule lists coverage C3 'Glass breakage' for VER-1008",
+        "match": true,
+        "evidence": "Customer email ('My rear side window was smashed'); Policy Schedule coverages [C1, C3]; contract Article 2 table (C3 Glass breakage: windscreen, side windows)"
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-10",
+        "sources_say": "Email: 'a broken glass that happened on 10 October 2026'",
+        "match": true,
+        "evidence": "Customer email body"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-12",
+        "sources_say": "Email received on 2026-10-12 reporting the 2026-10-10 incident (2 calendar days, within the 5-day deadline of contract Article 4.1)",
+        "match": true,
+        "evidence": "Customer email header 'received on 2026-10-12'; contract Article 4.1 (report within 5 days)"
+      },
+      {
+        "field": "repair_cost",
+        "recorded": 320,
+        "sources_say": "Email: 'The garage quoted €320 to repair my car.' Contract Article 1 defines repair cost as the total incl. VAT on the quote; repair_quote.pdf is stored by the mailroom and cannot be opened, but counts as received, and no source contradicts €320",
+        "match": true,
+        "evidence": "Customer email ('quoted €320'); contract Article 1 repair-cost definition; mailroom list confirms repair_quote.pdf received"
+      },
+      {
+        "field": "at_fault",
+        "recorded": false,
+        "sources_say": "Email describes an overnight smashed window with nothing taken; no statement that the policyholder caused the damage; no source indicates fault",
+        "match": true,
+        "evidence": "Customer email ('smashed overnight. Nothing was taken from the car.')"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": false,
+        "sources_say": "Email describes no other driver or vehicle involved; the playbook referral rule (commercial vehicle third party) is not triggered because the email states no third party was involved",
+        "match": true,
+        "evidence": "Customer email (no third party mentioned); handler playbook referral rule"
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": false,
+        "sources_say": "Consistent with no third party involved; email names no third party",
+        "match": true,
+        "evidence": "Customer email"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "sources_say": "Email attaches damage_photos.zip and repair_quote.pdf; mailroom confirms both received; contract Article 4.3 requires exactly 'Photos of the damage; repair quote' for C3. The files cannot be opened (mailroom), so their belonging to this policyholder/vehicle cannot be verified inside them, but they are counted as received and no source contradicts them",
+        "match": true,
+        "evidence": "Customer email attachment list; mailroom storage note; contract Article 4.3 C3 required-documents table"
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "No exclusion applies per Article 3: no alcohol/drugs, no invalid licence, no racing, damage not intentional by policyholder, and smashed glass is not wear/mechanical failure; nothing in the email signals an exclusion",
+        "match": true,
+        "evidence": "Customer email; contract Article 3 exclusions list"
+      }
+    ],
+    "summary": "All recorded facts match the customer email, the Policy Schedule and the Veridia contract; the claim was reported within 5 days, C3 glass coverage applies, the required photos and quote were provided, no exclusion or playbook referral rule is triggered, so the staged payment of €270 (€320 minus the €50 C3 deductible) should be approved.",
+    "unreadable": false
+  }
+}

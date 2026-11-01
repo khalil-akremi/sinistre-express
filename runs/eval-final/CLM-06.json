@@ -1,0 +1,187 @@
+{
+  "case_id": "CLM-06",
+  "claim_ref": "final-CLM-06",
+  "label": "final",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status:** Settlement prepared for human approval\n\nThe claims system confirms this. `stage_settlement` returned \"pending_approval\" for €1,200. A human claims handler still needs to approve it before anything is paid.\n\n**Facts recorded**\n- Claim reference: final-CLM-06. Policy VER-1004, Thomas Petit, Volkswagen Golf (2020), market value €15,500.\n- Coverage: C2 collision damage (his own car). The quote is for his own vehicle, so this is not a C1 claim.\n- Incident 8 October 2026. Reported 10 October 2026 (2 days later).\n- The policyholder states the accident was his fault. A third party, Mr. Blanc, is involved and the accident report was signed by both drivers.\n- Repair cost on the quote: €1,500.\n- Provided documents: damage_photos.zip, repair_quote.pdf, accident_report_signed.pdf. These were counted as provided but could not be opened.\n- Driving licence dated 1 November 2008, so the licence is well over 3 years old.\n\n**Reasoning**\n- C2 is listed in the Policy Schedule, so the claim does not need referral for coverage. <cite document_id=\"2630#10414\" pages=\"1-2\" name=\"contract.pdf\"/>\n- No exclusion signal in the email. No alcohol, licence, racing, intentional damage or wear issue is mentioned. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>\n- Reported within 5 days of the incident. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>\n- For C2 the required documents are photos, a repair quote, and an accident report signed by both drivers when a third party is involved. All three were provided, so no document request is needed. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>\n- The not-at-fault waiver does not apply because the policyholder is at fault. The standard C2 deductible of €300 applies. <cite document_id=\"2630#10414\" pages=\"1-2\" name=\"contract.pdf\"/>\n- The young-driver surcharge does not apply, since the licence is more than 3 years old. <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>\n- The repair cost of exactly €1,500 is not above the €1,500 threshold, so no independent assessor is required. <cite document_id=\"2630#10414\" pages=\"3\" name=\"contract.pdf\"/>\n- Compensation is the repair cost, capped at market value, minus the deductible. The cap of €15,500 does not limit this claim. <cite document_id=\"2630#10414\" pages=\"3\" name=\"contract.pdf\"/>\n- No referral criteria are met (late report, possible exclusion, or coverage not in the schedule). <cite document_id=\"2630#10414\" pages=\"3\" name=\"contract.pdf\"/>\n\n**Amounts (computed by the claims system)**\n- Deductible: €300\n- Payout: €1,200 (€1,500 minus €300)\n- Independent assessor required: No\n\n**Draft message to the customer**\n\n> Dear Mr. Petit,\n>\n> Thank you for reporting the accident of 8 October 2026 under policy VER-1004. We have received your photos, repair quote and signed accident report. Your claim (final-CLM-06) has been checked and a settlement has been prepared for review by a claims handler. After the standard €300 deductible, the proposed amount is €1,200. You will be contacted once the review is complete.\n>\n> Kind regards,\n> Veridia Claims Team\n\n**Notes for the handler**\n- The email names the third party only as \"Mr. Blanc\". This does not change the outcome, because the policyholder is at fault.\n- The claims system records were created under reference final-CLM-06. The tool calls were `get_policy`, `create_claim`, `compute_settlement` and `stage_settlement`, and all completed without errors.",
+  "questions": [],
+  "thread_id": "57f0ae21-9a79-477d-866b-1f1af9736f26",
+  "cost": {
+    "failed": false,
+    "input_tokens": 143035,
+    "cached_tokens": 130454,
+    "output_tokens": 5730,
+    "input_cost": "0.003157540",
+    "output_cost": "0.0029077",
+    "total": "0.006065240"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 34.7,
+  "claim": {
+    "claim_ref": "final-CLM-06",
+    "policy_id": "VER-1004",
+    "coverage": "C2",
+    "incident_date": "2026-10-08",
+    "report_date": "2026-10-10",
+    "description": "Policyholder's insured car was damaged when it hit the vehicle in front in a traffic jam. The policyholder states the accident is their fault. Mr. Blanc (third party) is involved and signed the accident report.",
+    "repair_cost": 1500,
+    "at_fault": 1,
+    "third_party_involved": 1,
+    "third_party_identified": 1,
+    "documents_provided": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 300,
+    "payout": 1200,
+    "assessor_required": 0,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T18:32:33+00:00",
+    "updated_at": "2026-10-31T18:32:34+00:00"
+  },
+  "action_log": [
+    {
+      "id": 63,
+      "ts": "2026-10-31T18:32:30+00:00",
+      "claim_ref": "final-CLM-06",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1004",
+        "claim_ref": "final-CLM-06"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1004",
+        "holder_name": "Thomas Petit",
+        "vehicle": "Volkswagen Golf (2020)",
+        "market_value_eur": 15500,
+        "licence_date": "2008-11-01",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          }
+        ]
+      }
+    },
+    {
+      "id": 64,
+      "ts": "2026-10-31T18:32:33+00:00",
+      "claim_ref": "final-CLM-06",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "final-CLM-06",
+        "policy_id": "VER-1004",
+        "coverage": "C2",
+        "incident_date": "2026-10-08",
+        "report_date": "2026-10-10",
+        "description": "Policyholder's insured car was damaged when it hit the vehicle in front in a traffic jam. The policyholder states the accident is their fault. Mr. Blanc (third party) is involved and signed the accident report.",
+        "repair_cost": 1500,
+        "at_fault": true,
+        "third_party_involved": true,
+        "third_party_identified": true,
+        "documents_provided": [
+          "photos",
+          "repair_quote",
+          "accident_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "final-CLM-06",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 2,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote",
+            "accident_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 65,
+      "ts": "2026-10-31T18:32:34+00:00",
+      "claim_ref": "final-CLM-06",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "final-CLM-06"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "final-CLM-06",
+        "deductible_eur": 300,
+        "payout_eur": 1200,
+        "assessor_required": false,
+        "years_licensed_on_incident_date": 17,
+        "calculation": [
+          "Art. 2 collision deductible: €300",
+          "Art. 6.2 payout = €1500 - €300 = €1200"
+        ]
+      }
+    },
+    {
+      "id": 66,
+      "ts": "2026-10-31T18:32:34+00:00",
+      "claim_ref": "final-CLM-06",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "final-CLM-06"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "final-CLM-06",
+        "status": "pending_approval",
+        "payout_eur": 1200,
+        "deductible_eur": 300,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

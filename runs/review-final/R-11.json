@@ -1,0 +1,166 @@
+{
+  "review_id": "R-11",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1004\",\n      \"sources_say\": \"VER-1004\",\n      \"match\": true,\n      \"evidence\": \"Customer email footer 'Policy number: VER-1004'; Policy Schedule policy_id VER-1004, holder Thomas Petit; repair_quote.pdf header 'Insurer: Veridia Insurance, policy VER-1004'.\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"C2 (Collision damage) is in the Policy Schedule and fits a collision damaging the insured vehicle\",\n      \"match\": true,\n      \"evidence\": \"Policy Schedule coverages include code C2 'Collision damage'; contract Article 2 table: C2 covers 'Damage to the insured vehicle after a collision'; email describes hitting a post in a car park, damaging his own car.\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-27\",\n      \"sources_say\": \"27 October 2026\",\n      \"match\": true,\n      \"evidence\": \"Customer email: 'I hit a post in an underground car park on 27 October 2026.'\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-28\",\n      \"sources_say\": \"2026-10-28\",\n      \"match\": true,\n      \"evidence\": \"Email header 'Customer email received on 2026-10-28'; quote issued 28/10/2026, consistent.\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"1640\",\n      \"sources_say\": \"1 640,00 EUR total incl. VAT\",\n      \"match\": true,\n      \"evidence\": \"repair_quote.pdf (quote Q-2610-5283): 'TOTAL INCL. VAT 1 640,00 €'; contract Article 1 defines repair cost as the total including VAT on the quote. The ~€900 in the email was only a phone estimate; the written quote is the source document.\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": true,\n      \"sources_say\": \"Policyholder at fault (single-vehicle collision with a fixed object)\",\n      \"match\": true,\n      \"evidence\": \"Email: 'I hit a post... Nobody else was involved' — no other driver, so the authorised driver is at fault; the not-at-fault waiver (Article 5.2) therefore does not apply.\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": false,\n      \"sources_say\": \"No third party involved\",\n      \"match\": true,\n      \"evidence\": \"Email: 'Nobody else was involved.' Contract Article 1 defines third party as any person other than the authorised driver; a post is not a person.\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": false,\n      \"sources_say\": \"No third party to identify\",\n      \"match\": true,\n      \"evidence\": \"Email states nobody else was involved, so there is no third party; consistent with third_party_involved=false and with Article 5.2 waiver being inapplicable.\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\"],\n      \"sources_say\": \"C2 requires photos of the damage and the repair quote; both received and both belong to this policyholder/vehicle\",\n      \"match\": true,\n      \"evidence\": \"Contract Article 4.3 table: C2 requires 'Photos of the damage; repair quote' (accident report signed by both drivers only 'when a third party is involved' — none here). repair_quote.pdf is made out to Thomas Petit, policy VER-1004, Volkswagen Golf (2020), reg. FD-371-WS; damage_photos.zip is listed as an attachment of the email and, being mailroom-stored, counts as received per the review instructions.\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"No exclusion triggered\",\n      \"match\": true,\n      \"evidence\": \"Contract Article 3 exclusions (alcohol/drugs, invalid licence, racing, intentional damage, wear/mechanical failure only): the email and quote describe a single-vehicle collision with a post — none of the exclusion facts is stated anywhere, so no exclusion signal is correct.\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": true,\n    \"evidence\": \"Deadline: incident 2026-10-27, reported 2026-10-28 — within the 5-day limit of Article 4.1, so no Article 7.1 referral. Exclusions: none indicated (Article 3), so no Article 7.2 referral. Coverage: C2 is listed in the Policy Schedule (Article 2), so no Article 7.3 referral. Documents: photos and repair quote provided as required for C2 (Article 4.3); no accident report needed since no third party. Playbook: the only referral rule concerns a commercial third-party vehicle; the email states nobody else was involved, so the rule is not triggered and the claim must not be withheld for handler referral. Article 6.1 requires an assessor above €1,500 — repair cost €1,640, assessor booked 2026-10-31, consistent. Deductible €300 (C2 standard; at fault so no 5.2 waiver; licence since 2008 so no 5.3 surcharge) and payout €1,340 is below the €15,500 market value cap (Article 6.2).\"\n  },\n  \"summary\": \"All recorded facts match the email, the repair quote and the Veridia contract, the claim was reported within 5 days under an in-schedule C2 coverage with the required documents and no exclusion or playbook referral trigger, so the staged payment of €1,340 (assessor already booked) should be approved.\"\n}\n```",
+  "questions": [],
+  "thread_id": "532c81e3-8fa1-4009-aacf-8c3b02053328",
+  "cost": {
+    "failed": false,
+    "input_tokens": 78477,
+    "cached_tokens": 64512,
+    "output_tokens": 3285,
+    "input_cost": "0.01171956",
+    "output_cost": "0.00671702",
+    "total": "0.01843658"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 87.2,
+  "verdict": {
+    "verdict": "approve",
+    "issues": [],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1004",
+        "sources_say": "VER-1004",
+        "match": true,
+        "evidence": "Customer email footer 'Policy number: VER-1004'; Policy Schedule policy_id VER-1004, holder Thomas Petit; repair_quote.pdf header 'Insurer: Veridia Insurance, policy VER-1004'."
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "C2 (Collision damage) is in the Policy Schedule and fits a collision damaging the insured vehicle",
+        "match": true,
+        "evidence": "Policy Schedule coverages include code C2 'Collision damage'; contract Article 2 table: C2 covers 'Damage to the insured vehicle after a collision'; email describes hitting a post in a car park, damaging his own car."
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-27",
+        "sources_say": "27 October 2026",
+        "match": true,
+        "evidence": "Customer email: 'I hit a post in an underground car park on 27 October 2026.'"
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-28",
+        "sources_say": "2026-10-28",
+        "match": true,
+        "evidence": "Email header 'Customer email received on 2026-10-28'; quote issued 28/10/2026, consistent."
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "1640",
+        "sources_say": "1 640,00 EUR total incl. VAT",
+        "match": true,
+        "evidence": "repair_quote.pdf (quote Q-2610-5283): 'TOTAL INCL. VAT 1 640,00 €'; contract Article 1 defines repair cost as the total including VAT on the quote. The ~€900 in the email was only a phone estimate; the written quote is the source document."
+      },
+      {
+        "field": "at_fault",
+        "recorded": true,
+        "sources_say": "Policyholder at fault (single-vehicle collision with a fixed object)",
+        "match": true,
+        "evidence": "Email: 'I hit a post... Nobody else was involved' — no other driver, so the authorised driver is at fault; the not-at-fault waiver (Article 5.2) therefore does not apply."
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": false,
+        "sources_say": "No third party involved",
+        "match": true,
+        "evidence": "Email: 'Nobody else was involved.' Contract Article 1 defines third party as any person other than the authorised driver; a post is not a person."
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": false,
+        "sources_say": "No third party to identify",
+        "match": true,
+        "evidence": "Email states nobody else was involved, so there is no third party; consistent with third_party_involved=false and with Article 5.2 waiver being inapplicable."
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "sources_say": "C2 requires photos of the damage and the repair quote; both received and both belong to this policyholder/vehicle",
+        "match": true,
+        "evidence": "Contract Article 4.3 table: C2 requires 'Photos of the damage; repair quote' (accident report signed by both drivers only 'when a third party is involved' — none here). repair_quote.pdf is made out to Thomas Petit, policy VER-1004, Volkswagen Golf (2020), reg. FD-371-WS; damage_photos.zip is listed as an attachment of the email and, being mailroom-stored, counts as received per the review instructions."
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "No exclusion triggered",
+        "match": true,
+        "evidence": "Contract Article 3 exclusions (alcohol/drugs, invalid licence, racing, intentional damage, wear/mechanical failure only): the email and quote describe a single-vehicle collision with a post — none of the exclusion facts is stated anywhere, so no exclusion signal is correct."
+      }
+    ],
+    "summary": "All recorded facts match the email, the repair quote and the Veridia contract, the claim was reported within 5 days under an in-schedule C2 coverage with the required documents and no exclusion or playbook referral trigger, so the staged payment of €1,340 (assessor already booked) should be approved.",
+    "unreadable": false
+  }
+}

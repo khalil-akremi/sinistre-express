@@ -136,7 +136,13 @@ def compute_settlement(
         claim_amount = repair_cost
         if not at_fault and third_party_identified:
             deductible = 0
-            breakdown.append("Art. 5.2 not-at-fault waiver: no deductible")
+            if years_licensed < YOUNG_DRIVER_YEARS:
+                # Said explicitly: in the final evaluation the agent saw "no deductible" for a
+                # driver licensed 1 year, thought the surcharge was forgotten and referred the claim.
+                breakdown.append(f"Art. 5.2 not-at-fault waiver: no deductible at all, including the Art. 5.3 "
+                                 f"young-driver surcharge (licence held {years_licensed} y)")
+            else:
+                breakdown.append("Art. 5.2 not-at-fault waiver: no deductible")
         else:
             deductible = COLLISION_DEDUCTIBLE
             breakdown.append(f"Art. 2 collision deductible: €{COLLISION_DEDUCTIBLE}")

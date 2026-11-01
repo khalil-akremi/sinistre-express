@@ -1,0 +1,153 @@
+{
+  "case_id": "CLM-18",
+  "claim_ref": "final-CLM-18",
+  "label": "final",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Referred to a claims handler.** The claim was escalated in the Veridia claims system. No settlement was prepared or staged.\n\n**Facts recorded**\n- Customer: Lucas Bernard, policy VER-1002, Renault Clio (2023), market value €16,500, licence date 2024-09-02.\n- Coverages on the Policy Schedule: C1 (third-party liability), C2 (collision), C3 (glass). **C4 (theft) is not listed.**\n- Incident: theft of the whole car from a train station car park on 23 October 2026.\n- Reported 24 October 2026, one day after the incident.\n- Documents: police_report.pdf was received. I could not open it, so its contents have not been reviewed.\n- No repair cost stated, no third party involved, and no possible exclusion flagged by the system.\n\n**Reasoning**\n- The claim is for theft, which falls under C4. The Policy Schedule does not include C4, so the system raised the blocking issue `coverage_not_in_schedule`. Coverages not in the Policy Schedule must go to a human handler, so I did not decide the claim. (Custom rules: escalation for coverage not in schedule.)\n- The report was on time. It was made one day after the incident, within the 2-day reporting deadline confirmed by the system. (Reporting deadline per contract; the system confirmed the timing.)\n- The police report is attached, so no document request was needed.\n- I did not identify a possible exclusion from the story itself. The handler should still check the police report.\n- No amounts were computed, because settlement does not apply while the claim is blocked.\n\n**Amounts:** None computed. Deductible, payout and assessor requirement are not applicable at this stage.\n\n**System actions performed**\n- `get_policy` for VER-1002 (final-CLM-18): returned C1, C2 and C3 only.\n- `create_claim` for final-CLM-18: theft (C4), incident 2026-10-23, reported 2026-10-24, repair cost 0, police report recorded. Open, reported on time, no missing documents, blocking issue `coverage_not_in_schedule`.\n- `escalate_to_handler` for final-CLM-18: escalated to a Veridia claims handler with instruction not to settle.\n- Not performed: `request_documents` (no documents missing), `compute_settlement`, `schedule_assessor`, `stage_settlement`.\n\n**Draft message to the customer**\n\n> Dear Mr Bernard,\n>\n> Thank you for reporting the theft of your car on 23 October 2026 and for providing the police report. Your claim reference is final-CLM-18. Your claim has been passed to a Veridia claims handler, who will review it and contact you with next steps. Thank you for your patience.\n>\n> Kind regards,\n> Veridia Claims",
+  "questions": [],
+  "thread_id": "f2ae371f-11f1-46a6-9583-5620d1672bfe",
+  "cost": {
+    "failed": false,
+    "input_tokens": 71291,
+    "cached_tokens": 65402,
+    "output_tokens": 3622,
+    "input_cost": "0.001465645",
+    "output_cost": "0.0018229",
+    "total": "0.003288545"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 21.1,
+  "claim": {
+    "claim_ref": "final-CLM-18",
+    "policy_id": "VER-1002",
+    "coverage": "C4",
+    "incident_date": "2026-10-23",
+    "report_date": "2026-10-24",
+    "description": "The insured reports that their car was stolen from the train station car park on 23 October 2026. A police report was filed.",
+    "repair_cost": 0,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"police_report\"]",
+    "exclusion_signal": null,
+    "status": "escalated",
+    "blocking_issues": "[\"coverage_not_in_schedule\"]",
+    "deductible": null,
+    "payout": null,
+    "assessor_required": null,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": "[\"coverage_not_in_schedule\"]",
+    "handler_note": "Insured Lucas Bernard (VER-1002) reports theft of the whole car (C4) from a train station car park on 23 Oct 2026, reported 24 Oct 2026. The Policy Schedule lists only C1, C2 and C3; C4 theft is not in the schedule. Police report received (contents not reviewed by the agent). Please decide coverage.",
+    "approved_by": null,
+    "created_at": "2026-10-31T18:38:21+00:00",
+    "updated_at": "2026-10-31T18:38:22+00:00"
+  },
+  "action_log": [
+    {
+      "id": 104,
+      "ts": "2026-10-31T18:38:19+00:00",
+      "claim_ref": "final-CLM-18",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1002",
+        "claim_ref": "final-CLM-18"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1002",
+        "holder_name": "Lucas Bernard",
+        "vehicle": "Renault Clio (2023)",
+        "market_value_eur": 16500,
+        "licence_date": "2024-09-02",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          }
+        ]
+      }
+    },
+    {
+      "id": 105,
+      "ts": "2026-10-31T18:38:21+00:00",
+      "claim_ref": "final-CLM-18",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "final-CLM-18",
+        "policy_id": "VER-1002",
+        "coverage": "C4",
+        "incident_date": "2026-10-23",
+        "report_date": "2026-10-24",
+        "description": "The insured reports that their car was stolen from the train station car park on 23 October 2026. A police report was filed.",
+        "repair_cost": 0,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "police_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "final-CLM-18",
+        "status": "open",
+        "checks": {
+          "coverage": "C4 Theft",
+          "coverage_in_policy_schedule": false,
+          "days_to_report": 1,
+          "reporting_deadline_days": 2,
+          "reported_on_time": true,
+          "required_documents": [
+            "police_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": [
+          "coverage_not_in_schedule"
+        ]
+      }
+    },
+    {
+      "id": 106,
+      "ts": "2026-10-31T18:38:22+00:00",
+      "claim_ref": "final-CLM-18",
+      "tool": "escalate_to_handler",
+      "arguments": {
+        "claim_ref": "final-CLM-18",
+        "reasons": [
+          "coverage_not_in_schedule"
+        ],
+        "summary": "Insured Lucas Bernard (VER-1002) reports theft of the whole car (C4) from a train station car park on 23 Oct 2026, reported 24 Oct 2026. The Policy Schedule lists only C1, C2 and C3; C4 theft is not in the schedule. Police report received (contents not reviewed by the agent). Please decide coverage."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "final-CLM-18",
+        "status": "escalated",
+        "reasons": [
+          "coverage_not_in_schedule"
+        ],
+        "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

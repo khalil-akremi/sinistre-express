@@ -1,0 +1,174 @@
+{
+  "review_id": "R-06",
+  "agent_id": "C0LWxLW9TfZW",
+  "status": "MessageStatus.success",
+  "reply": "```json\n{\n  \"checks\": [\n    {\n      \"field\": \"policy_id\",\n      \"recorded\": \"VER-1001\",\n      \"sources_say\": \"Email signed 'Policy number: VER-1001' from Claire Martin; Policy Schedule policy_id is VER-1001 with holder Claire Martin.\",\n      \"match\": true,\n      \"evidence\": \"Customer email ('Policy number: VER-1001') and Policy Schedule in the claims system both give VER-1001.\"\n    },\n    {\n      \"field\": \"coverage\",\n      \"recorded\": \"C2\",\n      \"sources_say\": \"Email describes hitting a bollard while parking, i.e. damage to the insured vehicle after a collision; C2 'Collision damage' is listed in the Policy Schedule coverages.\",\n      \"match\": true,\n      \"evidence\": \"Customer email ('I hit a bollard while parking'); Policy Schedule coverages include C2; contract Article 2 table defines C2 as 'Damage to the insured vehicle after a collision' <cite document_id=\\\"2630#10414\\\" pages=\\\"1-2\\\" name=\\\"contract.pdf\\\"/>.\"\n    },\n    {\n      \"field\": \"incident_date\",\n      \"recorded\": \"2026-10-02\",\n      \"sources_say\": \"Email: 'an accident that happened on 02 October 2026'.\",\n      \"match\": true,\n      \"evidence\": \"Customer email states 02 October 2026 = 2026-10-02.\"\n    },\n    {\n      \"field\": \"report_date\",\n      \"recorded\": \"2026-10-03\",\n      \"sources_say\": \"The customer email was received on 2026-10-11 and contains no earlier report date; the email itself is the claim report ('I am writing to report an accident').\",\n      \"match\": false,\n      \"evidence\": \"Email header: 'Customer email received on 2026-10-11'. No source shows any report on 2026-10-03; the only report date in evidence is 2026-10-11.\"\n    },\n    {\n      \"field\": \"repair_cost\",\n      \"recorded\": \"650\",\n      \"sources_say\": \"Email: 'The garage quoted €650 to repair my car.' Article 1 defines repair cost as the total incl. VAT on the quote; the quote file (repair_quote.pdf) is mailroom-stored and cannot be opened, so the VAT total cannot be independently verified, but no source contradicts €650.\",\n      \"match\": true,\n      \"evidence\": \"Customer email states €650; contract Article 1 repair-cost definition <cite document_id=\\\"2630#10414\\\" pages=\\\"1\\\" name=\\\"contract.pdf\\\"/>; repair_quote.pdf cannot be opened (mailroom) per the review instructions.\"\n    },\n    {\n      \"field\": \"at_fault\",\n      \"recorded\": true,\n      \"sources_say\": \"Email: 'I hit a bollard while parking' — the policyholder caused the damage herself.\",\n      \"match\": true,\n      \"evidence\": \"Customer email: 'I hit a bollard while parking. Nobody else was involved.'\"\n    },\n    {\n      \"field\": \"third_party_involved\",\n      \"recorded\": false,\n      \"sources_say\": \"Email: 'Nobody else was involved.' A bollard is not a person; Article 1 defines third party as any person other than the authorised driver.\",\n      \"match\": true,\n      \"evidence\": \"Customer email: 'Nobody else was involved'; contract Article 1 third-party definition <cite document_id=\\\"2630#10414\\\" pages=\\\"1\\\" name=\\\"contract.pdf\\\"/>.\"\n    },\n    {\n      \"field\": \"third_party_identified\",\n      \"recorded\": false,\n      \"sources_say\": \"No third party was involved, so there is no third party to identify; nothing in the email or documents identifies any other party.\",\n      \"match\": true,\n      \"evidence\": \"Customer email: 'Nobody else was involved.'\"\n    },\n    {\n      \"field\": \"documents_provided\",\n      \"recorded\": [\"photos\", \"repair_quote\"],\n      \"sources_say\": \"Email attachments: damage_photos.zip, repair_quote.pdf, both also stored by the mailroom and counted as received; both are attached by the policyholder (Claire Martin, VER-1001) for this claim. Article 4.3 requires for C2: photos of the damage and repair quote (accident report only when a third party is involved — none here). The files cannot be opened, so their internal contents (policyholder/vehicle match) cannot be verified, but no source contradicts them.\",\n      \"match\": true,\n      \"evidence\": \"Customer email 'Attached: damage_photos.zip, repair_quote.pdf'; mailroom note 'cannot be opened, count as received'; contract Article 4.3 required-documents table for C2 <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>.\"\n    },\n    {\n      \"field\": \"exclusion_signal\",\n      \"recorded\": null,\n      \"sources_say\": \"No exclusion is stated or implied: no alcohol/drugs, licence held since 2012-05-14 (valid), no racing/track day, damage was accidental (bollard while parking, not intentional), and it is collision damage not wear/mechanical failure.\",\n      \"match\": true,\n      \"evidence\": \"Customer email describes an accidental parking collision; Policy Schedule licence_date 2012-05-14; contract Article 3 exclusion list <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/> — none triggered.\"\n    }\n  ],\n  \"payment\": {\n    \"should_be_paid\": false,\n    \"evidence\": \"The recorded report_date 2026-10-03 is wrong: the email was received on 2026-10-11, 9 calendar days after the 2026-10-02 incident. Article 4.1 requires reporting within 5 days of the incident <cite document_id=\\\"2630#10414\\\" pages=\\\"2\\\" name=\\\"contract.pdf\\\"/>, so this is a late claim. Article 7.1 states a claim reported after the Article 4.1 deadline must be referred to a Veridia claims handler, and 'a late claim is never refused automatically' — i.e. it must not be paid automatically <cite document_id=\\\"2630#10414\\\" pages=\\\"3\\\" name=\\\"contract.pdf\\\"/>. Coverage is fine (C2 collision is in the Policy Schedule), no exclusion applies, and the C2 documents (photos + repair quote) were provided, but the late report triggers mandatory handler referral, so the staged automatic payment (payout €350, assessor no) must not be approved as-is. The handler playbook's commercial-vehicle referral rule does not apply: the email states no third party was involved, so no commercial vehicle exists. (For completeness: had the report been timely, C2 at-fault with licence since 2012 would mean the standard €300 deductible and no assessor since €650 ≤ €1,500 per Articles 5-6 <cite document_id=\\\"2630#10414\\\" pages=\\\"2-3\\\" name=\\\"contract.pdf\\\"/>, but the lateness overrides automatic payment.)\",\n    \"summary\": \"Do not approve the staged payment: the claim was actually reported on 2026-10-11, nine days after the 2026-10-02 incident, beyond the 5-day deadline in Article 4.1, so under Article 7.1 it must be referred to a claims handler rather than paid automatically, even though coverage (C2), documents and fault facts all check out.\"\n  }\n}\n```",
+  "questions": [],
+  "thread_id": "76aed38c-f41d-4c07-9c32-582ad1626bde",
+  "cost": {
+    "failed": false,
+    "input_tokens": 86976,
+    "cached_tokens": 71936,
+    "output_tokens": 4744,
+    "input_cost": "0.01314736",
+    "output_cost": "0.00979036",
+    "total": "0.02293772"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "company_doc_find_by_name",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "execute",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_read_full_text",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 55.2,
+  "verdict": {
+    "verdict": "concerns",
+    "issues": [
+      {
+        "field": "report_date",
+        "recorded": "2026-10-03",
+        "should_be": "The customer email was received on 2026-10-11 and contains no earlier report date; the email itself is the claim report ('I am writing to report an accident').",
+        "evidence": "Email header: 'Customer email received on 2026-10-11'. No source shows any report on 2026-10-03; the only report date in evidence is 2026-10-11."
+      },
+      {
+        "field": "payment decision",
+        "recorded": "payment staged",
+        "should_be": "not paid",
+        "evidence": "The recorded report_date 2026-10-03 is wrong: the email was received on 2026-10-11, 9 calendar days after the 2026-10-02 incident. Article 4.1 requires reporting within 5 days of the incident <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>, so this is a late claim. Article 7.1 states a claim reported after the Article 4.1 deadline must be referred to a Veridia claims handler, and 'a late claim is never refused automatically' — i.e. it must not be paid automatically <cite document_id=\"2630#10414\" pages=\"3\" name=\"contract.pdf\"/>. Coverage is fine (C2 collision is in the Policy Schedule), no exclusion applies, and the C2 documents (photos + repair quote) were provided, but the late report triggers mandatory handler referral, so the staged automatic payment (payout €350, assessor no) must not be approved as-is. The handler playbook's commercial-vehicle referral rule does not apply: the email states no third party was involved, so no commercial vehicle exists. (For completeness: had the report been timely, C2 at-fault with licence since 2012 would mean the standard €300 deductible and no assessor since €650 ≤ €1,500 per Articles 5-6 <cite document_id=\"2630#10414\" pages=\"2-3\" name=\"contract.pdf\"/>, but the lateness overrides automatic payment.)"
+      }
+    ],
+    "checks": [
+      {
+        "field": "policy_id",
+        "recorded": "VER-1001",
+        "sources_say": "Email signed 'Policy number: VER-1001' from Claire Martin; Policy Schedule policy_id is VER-1001 with holder Claire Martin.",
+        "match": true,
+        "evidence": "Customer email ('Policy number: VER-1001') and Policy Schedule in the claims system both give VER-1001."
+      },
+      {
+        "field": "coverage",
+        "recorded": "C2",
+        "sources_say": "Email describes hitting a bollard while parking, i.e. damage to the insured vehicle after a collision; C2 'Collision damage' is listed in the Policy Schedule coverages.",
+        "match": true,
+        "evidence": "Customer email ('I hit a bollard while parking'); Policy Schedule coverages include C2; contract Article 2 table defines C2 as 'Damage to the insured vehicle after a collision' <cite document_id=\"2630#10414\" pages=\"1-2\" name=\"contract.pdf\"/>."
+      },
+      {
+        "field": "incident_date",
+        "recorded": "2026-10-02",
+        "sources_say": "Email: 'an accident that happened on 02 October 2026'.",
+        "match": true,
+        "evidence": "Customer email states 02 October 2026 = 2026-10-02."
+      },
+      {
+        "field": "report_date",
+        "recorded": "2026-10-03",
+        "sources_say": "The customer email was received on 2026-10-11 and contains no earlier report date; the email itself is the claim report ('I am writing to report an accident').",
+        "match": false,
+        "evidence": "Email header: 'Customer email received on 2026-10-11'. No source shows any report on 2026-10-03; the only report date in evidence is 2026-10-11."
+      },
+      {
+        "field": "repair_cost",
+        "recorded": "650",
+        "sources_say": "Email: 'The garage quoted €650 to repair my car.' Article 1 defines repair cost as the total incl. VAT on the quote; the quote file (repair_quote.pdf) is mailroom-stored and cannot be opened, so the VAT total cannot be independently verified, but no source contradicts €650.",
+        "match": true,
+        "evidence": "Customer email states €650; contract Article 1 repair-cost definition <cite document_id=\"2630#10414\" pages=\"1\" name=\"contract.pdf\"/>; repair_quote.pdf cannot be opened (mailroom) per the review instructions."
+      },
+      {
+        "field": "at_fault",
+        "recorded": true,
+        "sources_say": "Email: 'I hit a bollard while parking' — the policyholder caused the damage herself.",
+        "match": true,
+        "evidence": "Customer email: 'I hit a bollard while parking. Nobody else was involved.'"
+      },
+      {
+        "field": "third_party_involved",
+        "recorded": false,
+        "sources_say": "Email: 'Nobody else was involved.' A bollard is not a person; Article 1 defines third party as any person other than the authorised driver.",
+        "match": true,
+        "evidence": "Customer email: 'Nobody else was involved'; contract Article 1 third-party definition <cite document_id=\"2630#10414\" pages=\"1\" name=\"contract.pdf\"/>."
+      },
+      {
+        "field": "third_party_identified",
+        "recorded": false,
+        "sources_say": "No third party was involved, so there is no third party to identify; nothing in the email or documents identifies any other party.",
+        "match": true,
+        "evidence": "Customer email: 'Nobody else was involved.'"
+      },
+      {
+        "field": "documents_provided",
+        "recorded": [
+          "photos",
+          "repair_quote"
+        ],
+        "sources_say": "Email attachments: damage_photos.zip, repair_quote.pdf, both also stored by the mailroom and counted as received; both are attached by the policyholder (Claire Martin, VER-1001) for this claim. Article 4.3 requires for C2: photos of the damage and repair quote (accident report only when a third party is involved — none here). The files cannot be opened, so their internal contents (policyholder/vehicle match) cannot be verified, but no source contradicts them.",
+        "match": true,
+        "evidence": "Customer email 'Attached: damage_photos.zip, repair_quote.pdf'; mailroom note 'cannot be opened, count as received'; contract Article 4.3 required-documents table for C2 <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/>."
+      },
+      {
+        "field": "exclusion_signal",
+        "recorded": null,
+        "sources_say": "No exclusion is stated or implied: no alcohol/drugs, licence held since 2012-05-14 (valid), no racing/track day, damage was accidental (bollard while parking, not intentional), and it is collision damage not wear/mechanical failure.",
+        "match": true,
+        "evidence": "Customer email describes an accidental parking collision; Policy Schedule licence_date 2012-05-14; contract Article 3 exclusion list <cite document_id=\"2630#10414\" pages=\"2\" name=\"contract.pdf\"/> — none triggered."
+      }
+    ],
+    "summary": "",
+    "unreadable": false
+  }
+}

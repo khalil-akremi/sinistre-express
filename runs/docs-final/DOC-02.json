@@ -1,0 +1,208 @@
+{
+  "case_id": "DOC-02",
+  "claim_ref": "DOCS-final-DOC-02",
+  "memory": true,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Referred to a claims handler**\n\nThe claim has been escalated to a human handler with reason \"other\". Nothing has been approved, staged or paid. The escalation returned no separate reference number.\n\n**Facts recorded**\n- Policyholder: Claire Martin, policy VER-1001, Peugeot 208 (2021), registration FG-218-LM. Licensed since 2012-05-14.\n- Coverage: C2 collision damage (damage to her own car). C2 is in the Policy Schedule.\n- Incident: 12 October 2026 at 17:15, Rue de Rivoli / Rue du Renard crossing, Paris. Reported 14 October 2026. No injuries and no other objects damaged.\n- Other vehicle: Ford Transit Custom van, GA-845-HN, a company vehicle of Rapid Livraisons SARL, insured with Axelia Pro Assurances. Driver: Marc Dubois. The email only said \"another vehicle\", so the van details come from the accident report.\n- Circumstances: Ms. Martin was going straight on at the crossing and had a green light. Mr. Dubois says he did not see the light turn red and accepts responsibility.\n- Repair quote Q-2610-5209 (Carrosserie Saint-Paul, 13 October 2026): 1,200.00 EUR incl. VAT (1,000.00 EUR excl. VAT). The quote says any additional damage found during repair will be quoted separately.\n- Documents: accident_report_signed.pdf, repair_quote.pdf and damage_photos.zip. All belong to VER-1001 and vehicle FG-218-LM, so all count as provided. Nothing is missing, so no documents were requested.\n- The email and the accident report agree on the date and location. The report says Vehicle B came from the right, while the email does not say which side.\n\n**Reasoning**\n- Coverage: C2 covers damage to the insured vehicle, and the schedule includes it. <cite document_id=\"2630#10414\" pages=\"1\"/>\n- Not-at-fault waiver: no deductible applies when the insured is not at fault and the third party is identified. Both apply here. <cite document_id=\"2630#10414\" pages=\"2\"/>\n- Payout: compensation is the repair cost, capped at market value, minus the deductible. <cite document_id=\"2630#10414\" pages=\"2\"/>\n- Assessor: not required, because the repair cost is not above 1,500 EUR. <cite document_id=\"2630#10414\" pages=\"2\"/>\n- Referral: the playbook says a claim with a commercial other-party vehicle (van, truck, lorry or delivery vehicle) goes to a handler so Veridia can recover from the other insurer. The accident report states a van owned by a delivery company, so this rule applies. The contract's referral article (Article 7) does not list this case, so the referral rests on the playbook.\n- Possible exclusions: none found. The story shows no alcohol, licence, racing or wear issues.\n- Reporting: reported two days after the incident. The system marked it as on time.\n\n**Amounts (from compute_settlement)**\n- Deductible: €0.00 (not-at-fault waiver)\n- Payout: €1,200.00 (before any handler decision)\n- Assessor required: No\n\n**Open points for the handler**\n- The signature fields in the accident report text show no visible names. The email says the other driver signed, so please confirm the signatures.\n- The other insurer's policy number is given only as \"see insurer certificate\". It will be needed for the recovery claim from Axelia Pro Assurances.\n- Additional damage found during repair may need a supplementary quote.\n\n**Draft message to the customer**\n> Dear Ms. Martin,\n> Thank you for your claim about the accident of 12 October 2026 (policy VER-1001, reference DOCS-final-DOC-02). We have received your accident report, repair quote and photos. Your claim has been passed to a claims handler, who will review it and contact you about the next steps. If the repair finds more damage, please send us the supplementary quote.\n> Kind regards,\n> Veridia Claims\n\n**Memory:** I created `customers/VER-1001.md` with one dated line for the email date (2026-10-14) recording the claim reference, coverage, the referral and the open points.",
+  "questions": [],
+  "thread_id": "bfc116ac-39d9-4024-a40f-0857c0fa640d",
+  "cost": {
+    "failed": false,
+    "input_tokens": 233322,
+    "cached_tokens": 194955,
+    "output_tokens": 8438,
+    "input_cost": "0.007086750",
+    "output_cost": "0.0042743",
+    "total": "0.011361050"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "read_memory",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_memory",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "read_file",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "write_memory",
+      "status": "success",
+      "error": null
+    },
+    {
+      "name": "company_doc_content_search",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 68.2,
+  "claim": {
+    "claim_ref": "DOCS-final-DOC-02",
+    "policy_id": "VER-1001",
+    "coverage": "C2",
+    "incident_date": "2026-10-12",
+    "report_date": "2026-10-14",
+    "description": "Insured Peugeot 208 (FG-218-LM) was hit on the front left side at the Rue de Rivoli / Rue du Renard crossing, Paris, on 12 October 2026. The other vehicle, a Ford Transit Custom company van (GA-845-HN, Rapid Livraisons SARL), was driven by Mr. Marc Dubois, who accepted responsibility on the signed joint accident report.",
+    "repair_cost": 1200,
+    "at_fault": 0,
+    "third_party_involved": 1,
+    "third_party_identified": 1,
+    "documents_provided": "[\"photos\", \"repair_quote\", \"accident_report\"]",
+    "exclusion_signal": null,
+    "status": "escalated",
+    "blocking_issues": "[]",
+    "deductible": 0,
+    "payout": 1200,
+    "assessor_required": 0,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": "[\"other\"]",
+    "handler_note": "Playbook rule (2026-10-31): when the other driver is a commercial vehicle (van, truck, lorry, delivery vehicle), refer the claim to a handler so Veridia can recover the money from their insurer. The other vehicle is a Ford Transit Custom van (GA-845-HN), company vehicle of Rapid Livraisons SARL, insured by Axelia Pro Assurances (policy 'see insurer certificate'), driver Marc Dubois, who accepted responsibility on the signed joint report. Own-damage claim C2 under VER-1001, no blocking issues, repair quote 1,200.00 EUR incl. VAT, computed deductible 0 and payout 1,200.00 EUR, no assessor required. Not staged or paid.",
+    "approved_by": null,
+    "created_at": "2026-10-31T18:41:31+00:00",
+    "updated_at": "2026-10-31T18:41:35+00:00"
+  },
+  "action_log": [
+    {
+      "id": 119,
+      "ts": "2026-10-31T18:41:20+00:00",
+      "claim_ref": "DOCS-final-DOC-02",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1001",
+        "claim_ref": "DOCS-final-DOC-02"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1001",
+        "holder_name": "Claire Martin",
+        "vehicle": "Peugeot 208 (2021)",
+        "market_value_eur": 14000,
+        "licence_date": "2012-05-14",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 120,
+      "ts": "2026-10-31T18:41:31+00:00",
+      "claim_ref": "DOCS-final-DOC-02",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "DOCS-final-DOC-02",
+        "policy_id": "VER-1001",
+        "coverage": "C2",
+        "incident_date": "2026-10-12",
+        "report_date": "2026-10-14",
+        "description": "Insured Peugeot 208 (FG-218-LM) was hit on the front left side at the Rue de Rivoli / Rue du Renard crossing, Paris, on 12 October 2026. The other vehicle, a Ford Transit Custom company van (GA-845-HN, Rapid Livraisons SARL), was driven by Mr. Marc Dubois, who accepted responsibility on the signed joint accident report.",
+        "repair_cost": 1200,
+        "at_fault": false,
+        "third_party_involved": true,
+        "third_party_identified": true,
+        "documents_provided": [
+          "photos",
+          "repair_quote",
+          "accident_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "DOCS-final-DOC-02",
+        "status": "open",
+        "checks": {
+          "coverage": "C2 Collision damage",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 2,
+          "reporting_deadline_days": 5,
+          "reported_on_time": true,
+          "required_documents": [
+            "photos",
+            "repair_quote",
+            "accident_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 121,
+      "ts": "2026-10-31T18:41:33+00:00",
+      "claim_ref": "DOCS-final-DOC-02",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "DOCS-final-DOC-02"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "DOCS-final-DOC-02",
+        "deductible_eur": 0,
+        "payout_eur": 1200,
+        "assessor_required": false,
+        "years_licensed_on_incident_date": 14,
+        "calculation": [
+          "Art. 5.2 not-at-fault waiver: no deductible",
+          "Art. 6.2 payout = €1200 - €0 = €1200"
+        ]
+      }
+    },
+    {
+      "id": 122,
+      "ts": "2026-10-31T18:41:35+00:00",
+      "claim_ref": "DOCS-final-DOC-02",
+      "tool": "escalate_to_handler",
+      "arguments": {
+        "claim_ref": "DOCS-final-DOC-02",
+        "reasons": [
+          "other"
+        ],
+        "summary": "Playbook rule (2026-10-31): when the other driver is a commercial vehicle (van, truck, lorry, delivery vehicle), refer the claim to a handler so Veridia can recover the money from their insurer. The other vehicle is a Ford Transit Custom van (GA-845-HN), company vehicle of Rapid Livraisons SARL, insured by Axelia Pro Assurances (policy 'see insurer certificate'), driver Marc Dubois, who accepted responsibility on the signed joint report. Own-damage claim C2 under VER-1001, no blocking issues, repair quote 1,200.00 EUR incl. VAT, computed deductible 0 and payout 1,200.00 EUR, no assessor required. Not staged or paid."
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "DOCS-final-DOC-02",
+        "status": "escalated",
+        "reasons": [
+          "other"
+        ],
+        "message": "Referred to a Veridia claims handler, who will decide. Do not settle this claim."
+      }
+    }
+  ],
+  "snapshot_error": null
+}

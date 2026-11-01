@@ -420,7 +420,7 @@
         "payout": 1100,
         "assessor_required": false,
         "breakdown": [
-          "Art. 5.2 not-at-fault waiver: no deductible",
+          "Art. 5.2 not-at-fault waiver: no deductible at all, including the Art. 5.3 young-driver surcharge (licence held 1 y)",
           "Art. 6.2 payout = €1100 - €0 = €1100"
         ]
       }

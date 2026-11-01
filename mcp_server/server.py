@@ -86,9 +86,10 @@ def build_server(system: ClaimsSystem, admin_secret: str = "local") -> MCPServer
         documents_provided: Annotated[list[DocumentType], Field(description=(
             "Documents actually attached to the email. Never include a document that is not attached."))],
         exclusion_signal: Annotated[str | None, Field(description=(
-            "If the story suggests a possible exclusion (alcohol or drugs, no valid licence, racing "
-            "or track day, intentional damage, wear only), one word naming it, e.g. 'alcohol'. "
-            "Otherwise leave empty."))] = None,
+            "If the story suggests a possible exclusion (contract Article 3: alcohol or drugs, no valid "
+            "licence, racing or track day, damage caused intentionally BY THE POLICYHOLDER, wear only), "
+            "one word naming it, e.g. 'alcohol'. Damage done by someone else (vandalism, a thief, another "
+            "driver) is not an exclusion. Otherwise leave empty."))] = None,
     ) -> dict:
         """Open a claim with the facts you read in the customer's email. Returns the
         automatic checks (deadline, coverage, required and missing documents) and the

@@ -1,0 +1,171 @@
+{
+  "case_id": "CLM-11",
+  "claim_ref": "final-CLM-11",
+  "label": "final",
+  "agent_id": "nzAeZNNFr7yq",
+  "max_steps": 25,
+  "status": "MessageStatus.success",
+  "reply": "**Status: Settlement prepared for human approval**\n\nThe claim is staged as pending approval. A human claims handler must approve it before any payment is made.\n\n**Facts recorded**\n- Claim reference: final-CLM-11. Policy: VER-1005. Policyholder: Sarah Lefebvre.\n- Vehicle: Citroen C3 (2014), market value €2,200. Licence held since 30 June 2010.\n- Coverage: C4 Theft, which is listed in the Policy Schedule.\n- Incident: 17 October 2026, theft from the street. Reported: 19 October 2026.\n- Documents: police_report.pdf was received. It could not be opened, so its contents were not verified.\n- No third party was involved and no possible exclusion was flagged.\n\n**Reasoning**\n- The theft is covered under C4, which is in the Policy Schedule.\n- The claim was reported two days after the incident, within the reporting limit.\n- No documents are missing, so no document request was needed.\n- No blocking issues were raised, so the claim was treated as clean.\n\n**Amounts**\n- Deductible: €500 (the greater of 10% of value or €500, Art. 2).\n- Payout: €1,700 (€2,200 minus €500, Art. 6.2).\n- Assessor required: No.\n\n**Points for the approving handler**\n- The email says \"my old car\". Please confirm that the stolen vehicle is the insured vehicle on the policy.\n- The police report was not opened, so its contents were not checked.\n- I did not independently open the contract. The article references above come from the claims subagent's run, so please verify them against the contract before approving.\n\n**Draft message to the customer**\n\nDear Ms Lefebvre,\n\nThank you for reporting the theft of your Citroen C3 on 17 October 2026 and for providing the police report. We have recorded your claim (reference final-CLM-11), and it is now with our team for review. We will write to you again once a decision has been made.\n\nKind regards,\nVeridia Claims Team",
+  "questions": [],
+  "thread_id": "fe5576c0-eaa6-4f1d-a1ea-187f6f9b584d",
+  "cost": {
+    "failed": false,
+    "input_tokens": 80807,
+    "cached_tokens": 75243,
+    "output_tokens": 3245,
+    "input_cost": "0.001518880",
+    "output_cost": "0.0016337",
+    "total": "0.003152580"
+  },
+  "cominty_tool_events": [
+    {
+      "name": "subagent",
+      "status": "success",
+      "error": null
+    }
+  ],
+  "seconds": 23.0,
+  "claim": {
+    "claim_ref": "final-CLM-11",
+    "policy_id": "VER-1005",
+    "coverage": "C4",
+    "incident_date": "2026-10-17",
+    "report_date": "2026-10-19",
+    "description": "The insured's old car (Citroen C3, 2014) was stolen from the street on 17 October 2026. The police report was attached.",
+    "repair_cost": 0,
+    "at_fault": 0,
+    "third_party_involved": 0,
+    "third_party_identified": 0,
+    "documents_provided": "[\"police_report\"]",
+    "exclusion_signal": null,
+    "status": "pending_approval",
+    "blocking_issues": "[]",
+    "deductible": 500,
+    "payout": 1700,
+    "assessor_required": 0,
+    "assessor_date": null,
+    "requested_documents": null,
+    "escalation_reasons": null,
+    "handler_note": null,
+    "approved_by": null,
+    "created_at": "2026-10-31T18:35:08+00:00",
+    "updated_at": "2026-10-31T18:35:10+00:00"
+  },
+  "action_log": [
+    {
+      "id": 82,
+      "ts": "2026-10-31T18:35:06+00:00",
+      "claim_ref": "final-CLM-11",
+      "tool": "get_policy",
+      "arguments": {
+        "policy_id": "VER-1005",
+        "claim_ref": "final-CLM-11"
+      },
+      "ok": true,
+      "result": {
+        "policy_id": "VER-1005",
+        "holder_name": "Sarah Lefebvre",
+        "vehicle": "Citroen C3 (2014)",
+        "market_value_eur": 2200,
+        "licence_date": "2010-06-30",
+        "coverages": [
+          {
+            "code": "C1",
+            "name": "Third-party liability"
+          },
+          {
+            "code": "C2",
+            "name": "Collision damage"
+          },
+          {
+            "code": "C3",
+            "name": "Glass breakage"
+          },
+          {
+            "code": "C4",
+            "name": "Theft"
+          }
+        ]
+      }
+    },
+    {
+      "id": 83,
+      "ts": "2026-10-31T18:35:08+00:00",
+      "claim_ref": "final-CLM-11",
+      "tool": "create_claim",
+      "arguments": {
+        "claim_ref": "final-CLM-11",
+        "policy_id": "VER-1005",
+        "coverage": "C4",
+        "incident_date": "2026-10-17",
+        "report_date": "2026-10-19",
+        "description": "The insured's old car (Citroen C3, 2014) was stolen from the street on 17 October 2026. The police report was attached.",
+        "repair_cost": 0,
+        "at_fault": false,
+        "third_party_involved": false,
+        "third_party_identified": false,
+        "documents_provided": [
+          "police_report"
+        ],
+        "exclusion_signal": null
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "final-CLM-11",
+        "status": "open",
+        "checks": {
+          "coverage": "C4 Theft",
+          "coverage_in_policy_schedule": true,
+          "days_to_report": 2,
+          "reporting_deadline_days": 2,
+          "reported_on_time": true,
+          "required_documents": [
+            "police_report"
+          ],
+          "missing_documents": [],
+          "possible_exclusion": null
+        },
+        "blocking_issues": []
+      }
+    },
+    {
+      "id": 84,
+      "ts": "2026-10-31T18:35:10+00:00",
+      "claim_ref": "final-CLM-11",
+      "tool": "compute_settlement",
+      "arguments": {
+        "claim_ref": "final-CLM-11"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "final-CLM-11",
+        "deductible_eur": 500,
+        "payout_eur": 1700,
+        "assessor_required": false,
+        "years_licensed_on_incident_date": 16,
+        "calculation": [
+          "Art. 2 theft: claim = market value €2200; deductible = max(10%, €500) = €500",
+          "Art. 6.2 payout = €2200 - €500 = €1700"
+        ]
+      }
+    },
+    {
+      "id": 85,
+      "ts": "2026-10-31T18:35:10+00:00",
+      "claim_ref": "final-CLM-11",
+      "tool": "stage_settlement",
+      "arguments": {
+        "claim_ref": "final-CLM-11"
+      },
+      "ok": true,
+      "result": {
+        "claim_ref": "final-CLM-11",
+        "status": "pending_approval",
+        "payout_eur": 1700,
+        "deductible_eur": 500,
+        "message": "Payment prepared. A human claims handler must approve it before it is paid."
+      }
+    }
+  ],
+  "snapshot_error": null
+}
