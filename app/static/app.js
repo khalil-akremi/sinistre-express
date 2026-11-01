@@ -10,11 +10,41 @@ let cases = [];
 let clockTimer = null;
 
 const STATUS = {
-  pending_approval: { cls: "settle", text: "Settlement prepared for human approval" },
-  approved: { cls: "settle", text: "Payment approved by a claims handler" },
-  awaiting_documents: { cls: "request_documents", text: "Waiting for documents from the customer" },
-  escalated: { cls: "escalate", text: "Referred to a claims handler" },
+  pending_approval: { cls: "settle", icon: "pen", text: "Payment prepared, waiting for your approval" },
+  approved: { cls: "approved", icon: "check", text: "Payment approved by a claims handler" },
+  awaiting_documents: { cls: "request_documents", icon: "doc", text: "Waiting for documents from the customer" },
+  escalated: { cls: "escalate", icon: "handoff", text: "Referred to a claims handler" },
 };
+const icon = (name) => `<svg class="icon" aria-hidden="true"><use href="#i-${name}"/></svg>`;
+
+// Which drawn icon a step gets (the server's events carry emoji; the page draws its own set).
+function iconFor(step) {
+  const t = (step.text || "").toLowerCase();
+  if (step.source === "system") {
+    if (step.ok === false) return "block";
+    if (t.startsWith("approve_settlement")) return "pen";
+    if (t.startsWith("workbook checked")) return "check";
+    return "check";
+  }
+  if (step.source === "reviewer") {
+    if (t.includes("raised concerns")) return "alert";
+    if (t.includes("agrees")) return "check";
+    if (t.includes("reading")) return "file";
+    return "eye";
+  }
+  if (step.icon === "⚠️") return "alert";
+  if (t.includes("contract")) return "doc";
+  if (t.includes("sub-agent")) return "handoff";
+  if (t.includes("sandbox")) return "box";
+  if (t.startsWith("attaching")) return "upload";
+  if (t.includes("attached document") || t.includes("reading a file")) return "file";
+  if (t.includes("memory")) return "note";
+  if (t.includes("skill") || t.includes("running code")) return "tool";
+  if (t.includes("starting")) return "clock";
+  if (t.includes("question")) return "alert";
+  if (step.icon === "💬") return "message";
+  return "dot";
+}
 const euro = (n) => `€${Number(n).toLocaleString("en-GB")}`;
 
 function escapeHtml(text) {
@@ -78,6 +108,7 @@ function fillCase(caseId) {
   loadMemory(c.policy_id);
   els.head.innerHTML = `<strong>${escapeHtml(c.from)}</strong>, ${escapeHtml(c.date)}<br>${escapeHtml(c.subject)}`;
   els.body.value = c.body;
+  fitEmail();
   const fileNames = c.files.map((f) => f.name);
   document.querySelectorAll(".docs input").forEach((box) => {
     box.checked = c.documents.includes(box.value);
@@ -94,27 +125,59 @@ function fillCase(caseId) {
   $("skill").textContent = c.skill ? `Tests whether the agent can ${c.skill}.` : "";
 }
 
+// The email box grows to its text (up to a cap), so no line is cut in half.
+function fitEmail() {
+  els.body.style.height = "auto";
+  // On a desktop the Send button must stay in the first viewport: cap lower, scroll the rest.
+  // The cap is a whole number of lines, so a scrolled box never shows half a line.
+  // Scrolled text also shows inside the bottom padding, so an overflowing box drops it.
+  els.body.style.paddingBottom = "";
+  const style = getComputedStyle(els.body);
+  const line = parseFloat(style.lineHeight);
+  const top = parseFloat(style.paddingTop);
+  const lines = window.matchMedia("(min-width: 861px)").matches ? 11 : 26;
+  const cap = Math.round(line * lines + top + 2);
+  const overflows = els.body.scrollHeight + 2 > cap + parseFloat(style.paddingBottom);
+  els.body.style.paddingBottom = overflows ? "0px" : "";
+  els.body.style.height = `${overflows ? cap : els.body.scrollHeight + 2}px`;
+}
+els.body.addEventListener("input", fitEmail);
+
+// The Send bar casts a shadow only while it is pinned over the form (its sentinel is off screen).
+if ("IntersectionObserver" in window) {
+  const bar = document.querySelector(".send-bar");
+  new IntersectionObserver(([entry]) => bar.classList.toggle("stuck", !entry.isIntersecting))
+    .observe(document.querySelector(".send-sentinel"));
+}
+
 const DOC_FILE = { photos: "damage_photos.zip", repair_quote: "repair_quote.pdf",
   accident_report: "accident_report_signed.pdf", police_report: "police_report.pdf" };
 
 function showQuota(left, error) {
   els.quota.classList.toggle("error", Boolean(error));
-  els.quota.textContent = error || `${left} agent runs left today on this public demo.`;
+  els.quota.textContent = error || `${left} runs left today`;
 }
 
 // ---------------------------------------------------------------- ledger
 function resetLedger() {
   els.ledger.innerHTML = "";
+  els.ledger.classList.remove("is-empty");
   els.file.innerHTML = `<p class="empty">The agent is working on this claim…</p>`;
 }
 
+// Each step lands in its party's lane: A (agent) left, B (claims system) right,
+// the Reviewer and the person across both, refusals in red in lane B.
 function addStep(step) {
   const li = document.createElement("li");
   const refused = step.source === "system" && step.ok === false;
-  li.className = refused ? "refused" : `src-${step.source}`;
-  const text = step.source === "system" && !refused ? `${step.icon} ${step.text}` : `${step.icon} ${step.text}`;
-  li.innerHTML = `<span class="step-text">${escapeHtml(text)}</span>` +
-    (step.detail ? `<span class="step-detail">${escapeHtml(step.detail)}</span>` : "");
+  const human = step.source === "system" && (step.text || "").startsWith("approve_settlement");
+  const lane = human ? "lane-full lane-you" : step.source === "reviewer" ? "lane-full lane-r"
+    : step.source === "system" ? (refused ? "lane-b lane-refused" : "lane-b") : "lane-a";
+  const tag = human ? "You" : step.source === "reviewer" ? "Observations" : refused ? "Refused" : "";
+  li.className = lane;
+  li.innerHTML = `<div class="cell"><span class="step-text">${icon(iconFor(step))}<span>${escapeHtml(step.text)}</span>` +
+    (tag ? `<span class="step-tag">${tag}</span>` : "") + `</span>` +
+    (step.detail ? `<span class="step-detail">${escapeHtml(step.detail)}</span>` : "") + `</div>`;
   els.ledger.appendChild(li);
   li.scrollIntoView({ block: "nearest", behavior: "smooth" });
 }
@@ -135,13 +198,14 @@ function renderFile(data, { landing = false } = {}) {
   const claim = data.claim;
   const status = claim ? STATUS[claim.status] : null;
   const statusCls = status ? status.cls : "other";
+  const statusIcon = status ? status.icon : "alert";
   const statusText = status ? status.text : (claim ? `Stopped at: ${claim.status}` : "No claim was opened");
   const staged = claim && ["pending_approval", "approved"].includes(claim.status);
   const figures = claim && claim.payout !== null && claim.payout !== undefined ? `
     <dl class="figures">
       <dt>Deductible paid by the customer</dt><dd>${euro(claim.deductible)}</dd>
       <dt>Assessor visit</dt><dd>${claim.assessor_required ? (claim.assessor_date || "required") : "not needed"}</dd>
-      <dt>${staged ? "Payout" : "Payout computed for the handler (not staged)"}</dt><dd class="${staged ? "big" : ""}">${euro(claim.payout)}</dd>
+      <dt>${staged ? "Payout" : "Payout computed for the handler, not staged"}</dt><dd class="${staged ? "big" : ""}">${euro(claim.payout)}</dd>
     </dl>` : "";
   const reviewCost = data.review && data.review.cost ? Number(data.review.cost.total) : null;
   const cost = (data.cost ? `€${Number(data.cost.total).toFixed(4)}` : "n/a") +
@@ -152,8 +216,8 @@ function renderFile(data, { landing = false } = {}) {
   const concerns = review && review.verdict === "concerns";
   const reviewBox = review ? `
     <section class="review ${concerns ? "review-concerns" : "review-ok"}" aria-label="Second agent's review">
-      <p class="review-head">${concerns ? "Reviewer raised concerns" : "Reviewer agrees"}
-        <span>second agent, different model, read-only</span></p>
+      <p class="review-head">${icon(concerns ? "alert" : "check")} ${concerns ? "Reviewer raised concerns" : "Reviewer agrees"}</p>
+      <span class="review-by">Second agent, another model provider, read-only</span>
       ${review.summary ? `<p class="review-summary">${escapeHtml(review.summary)}</p>` : ""}
       ${(review.issues || []).length ? `<ul class="review-issues">${review.issues.map((i) => `
         <li><strong>${escapeHtml(i.field || "issue")}</strong>: recorded ${escapeHtml(String(i.recorded ?? "?"))},
@@ -161,19 +225,29 @@ function renderFile(data, { landing = false } = {}) {
           ${i.evidence ? `<span>${escapeHtml(i.evidence)}</span>` : ""}</li>`).join("")}</ul>` : ""}
     </section>` : "";
 
+  const signature = canApprove ? `
+      <div class="signature">
+        <p class="field">Signature of the claims handler</p>
+        <button class="btn approve${concerns ? " override" : ""}" id="approve" type="button">${icon("pen")} ${concerns ? "Approve anyway" : "Approve payment of"} ${euro(claim.payout)}</button>
+        <p class="signature-note">Only a person can sign. The agent has no tool for it${concerns ? "; approving over the Reviewer's concerns is recorded in the audit log" : ""}.</p>
+      </div>` : approved ? `
+      <div class="signature signed${landing ? " landing" : ""}">
+        <p class="field">Signature of the claims handler</p>
+        <p class="signed-line">${icon("check")} Approved by a claims handler</p>
+        <p class="signed-by">${escapeHtml(claim.approved_by || "Demo claims handler")}</p>
+      </div>` : "";
+
   els.file.innerHTML = `
     <div class="file-sheet">
-      <p class="status-line status-${statusCls}">${escapeHtml(statusText)}</p>
+      <p class="status status-${statusCls}">${icon(statusIcon)}<span>${escapeHtml(statusText)}</span></p>
       <p class="ref">Claim ${escapeHtml(data.claim_ref)}</p>
       ${figures}
-      ${approved ? `<div class="stamp${landing ? " landing" : ""}" role="img" aria-label="Approved by a claims handler">Approved<small>by a claims handler</small></div>` : ""}
-      <p class="run-meta">Agent run: ${data.seconds ?? "?"} s, cost ${cost}.</p>
-      ${data.reply ? `<details class="letter" open><summary>Agent report and draft letter</summary>
-        <div class="reply">${renderReply(data.reply)}</div></details>` : ""}
-      ${data.error ? `<p class="error-box">${escapeHtml(data.error)}</p>` : ""}
       ${canApprove ? reviewBox : ""}
-      ${canApprove ? `<button class="approve${concerns ? " override" : ""}" id="approve" type="button">${concerns ? "Approve anyway" : "Approve payment of"} ${euro(claim.payout)}</button>
-        <p class="approve-note">Only a person can approve. The agent has no tool for it.</p>` : ""}
+      ${signature}
+      <p class="run-meta">Agent run ${data.seconds ?? "?"} s · cost ${cost}</p>
+      ${data.error ? `<p class="error-box">${escapeHtml(data.error)}</p>` : ""}
+      ${data.reply ? `<details class="letter" open><summary>${icon("chevron")}Agent report and draft letter</summary>
+        <div class="reply">${renderReply(data.reply)}</div></details>` : ""}
     </div>`;
   if (canApprove) $("approve").addEventListener("click", () => approve(data.claim_ref, concerns));
 }
@@ -186,7 +260,7 @@ async function approve(ref, override = false) {
   });
   const data = await res.json();
   if (!res.ok) { button.disabled = false; showQuota(null, data.error); return; }
-  addStep({ source: "system", icon: "🖊️", text: "approve_settlement (human)", detail: "approved by Demo claims handler", ok: true });
+  addStep({ source: "system", text: "approve_settlement (signed by a person)", detail: override ? "approved over the Reviewer's concerns" : "approved by Demo claims handler", ok: true });
   renderFile(data, { landing: true });
 }
 
@@ -296,16 +370,16 @@ async function makeReport() {
     const rep = await r.json();
     if (!r.ok) { button.disabled = false; $("report-msg").textContent = rep.error; return; }
     $("report-steps").innerHTML = rep.events.map((e) =>
-      `<li>${escapeHtml(`${e.icon} ${e.text}`)}</li>`).join("");
+      `<li>${icon(iconFor(e))}<span>${escapeHtml(e.text)}</span></li>`).join("");
     if (!rep.done) { setTimeout(poll, 2000); return; }
     button.disabled = false;
     $("report-msg").textContent = `${rep.claims} claims, ${rep.seconds} s` +
       (rep.cost ? `, cost €${Number(rep.cost.total).toFixed(4)}` : "") + ".";
     const checks = rep.checks ? `<ul class="checks">${rep.checks.checks.map((c) =>
-      `<li class="${c.ok ? "ok" : "ko"}">${c.ok ? "✅" : "❌"} ${escapeHtml(c.name)}${c.detail && !c.ok ? ` <span>${escapeHtml(c.detail)}</span>` : ""}</li>`).join("")}</ul>` : "";
+      `<li class="${c.ok ? "ok" : "ko"}">${icon(c.ok ? "check" : "cross")}<span>${escapeHtml(c.name)}${c.detail && !c.ok ? `<span class="detail">${escapeHtml(c.detail)}</span>` : ""}</span></li>`).join("")}</ul>` : "";
     $("report-result").innerHTML =
       (rep.error ? `<p class="error-box">${escapeHtml(rep.error)}</p>` : "") +
-      (rep.file_url ? `<a class="download" href="${rep.file_url}">Download ${escapeHtml(rep.file_name || "the report")}</a>` : "") +
+      (rep.file_url ? `<a class="download" href="${rep.file_url}">${icon("download")} Download ${escapeHtml(rep.file_name || "the report")}</a>` : "") +
       (rep.checks ? `<h3>Checked against the claims system: ${rep.checks.passed}/${rep.checks.total}</h3>${checks}` : "") +
       (rep.briefing ? `<h3>Briefing for the claims manager</h3><p class="hint">Written by the AI. Amounts and claim references are checked against the claims system; the sentences are not.</p><div class="reply">${renderReply(rep.briefing)}</div>` : "");
   };

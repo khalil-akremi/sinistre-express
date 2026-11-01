@@ -1,0 +1,443 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-01T07:03:14+00:00",
+  "title": "Design System: Sinistre Express",
+  "extensions": {
+    "colorMeta": {
+      "constat-blue": {
+        "role": "primary",
+        "displayName": "Constat Blue",
+        "canonical": "oklch(48.1% 0.149 258)",
+        "tonalRamp": [
+          "#00052F",
+          "#002151",
+          "#043C83",
+          "#1D5BB0",
+          "#487DCA",
+          "#71A0E4",
+          "#A1C6FC",
+          "#E5EFFE"
+        ]
+      },
+      "constat-yellow": {
+        "role": "secondary",
+        "displayName": "Constat Yellow",
+        "canonical": "oklch(80.8% 0.162 90)",
+        "tonalRamp": [
+          "#120900",
+          "#2E2200",
+          "#503D00",
+          "#735A07",
+          "#987917",
+          "#C19900",
+          "#ECBE23",
+          "#FEEEC2"
+        ]
+      },
+      "refusal-red": {
+        "role": "tertiary",
+        "displayName": "Refusal Red",
+        "canonical": "oklch(50.0% 0.182 30)",
+        "tonalRamp": [
+          "#220000",
+          "#4B0201",
+          "#7A0B05",
+          "#AB1E13",
+          "#CC4E3F",
+          "#E97969",
+          "#FEAC9E",
+          "#FEE9E5"
+        ]
+      },
+      "approval-green": {
+        "role": "tertiary",
+        "displayName": "Approval Green",
+        "canonical": "oklch(49.4% 0.107 156)",
+        "tonalRamp": [
+          "#001104",
+          "#012D17",
+          "#074D2C",
+          "#196F44",
+          "#488E65",
+          "#73AE89",
+          "#A0D2B2",
+          "#D3FAE0"
+        ]
+      },
+      "concerns-amber": {
+        "role": "tertiary",
+        "displayName": "Concerns Amber",
+        "canonical": "oklch(46.4% 0.116 51)",
+        "tonalRamp": [
+          "#1D0200",
+          "#3D1800",
+          "#662D00",
+          "#8E4713",
+          "#AC6B43",
+          "#CA8F6D",
+          "#EAB89B",
+          "#FFEADE"
+        ]
+      },
+      "ink-navy": {
+        "role": "neutral",
+        "displayName": "Ink Navy",
+        "canonical": "oklch(25.3% 0.051 261)",
+        "tonalRamp": [
+          "#020A1E",
+          "#16243D",
+          "#324058",
+          "#515E74",
+          "#737E91",
+          "#959FAF",
+          "#BDC5D1",
+          "#EAEFF7"
+        ]
+      },
+      "desk-grey": {
+        "role": "neutral",
+        "displayName": "Desk Grey",
+        "canonical": "oklch(93.8% 0.008 254)",
+        "tonalRamp": [
+          "#090B0F",
+          "#212428",
+          "#3D4044",
+          "#5B5E62",
+          "#7A7E82",
+          "#9B9FA3",
+          "#C1C4C9",
+          "#EBEFF4"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "oklch(100.0% 0.000 90)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#7D7D7D",
+          "#9E9E9E",
+          "#C4C4C4",
+          "#EEEEEE"
+        ]
+      },
+      "reviewer-tint": {
+        "role": "neutral",
+        "displayName": "Reviewer Tint",
+        "canonical": "oklch(95.5% 0.006 265)",
+        "tonalRamp": [
+          "#0A0B0E",
+          "#232427",
+          "#3E4043",
+          "#5C5E61",
+          "#7B7D81",
+          "#9C9EA2",
+          "#C2C4C8",
+          "#ECEEF2"
+        ]
+      },
+      "constat-blue-deep": {
+        "role": "primary",
+        "displayName": "Constat Blue Deep"
+      },
+      "constat-blue-tint": {
+        "role": "primary",
+        "displayName": "Constat Blue Tint"
+      },
+      "constat-blue-line": {
+        "role": "primary",
+        "displayName": "Constat Blue Line"
+      },
+      "constat-yellow-deep": {
+        "role": "secondary",
+        "displayName": "Constat Olive"
+      },
+      "constat-yellow-tint": {
+        "role": "secondary",
+        "displayName": "Constat Yellow Tint"
+      },
+      "constat-yellow-line": {
+        "role": "secondary",
+        "displayName": "Constat Yellow Line"
+      },
+      "ink-slate": {
+        "role": "neutral",
+        "displayName": "Ink Slate"
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Ink Muted"
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule"
+      },
+      "rule-soft": {
+        "role": "neutral",
+        "displayName": "Rule Soft"
+      },
+      "reviewer-line": {
+        "role": "neutral",
+        "displayName": "Reviewer Line"
+      },
+      "refusal-red-deep": {
+        "role": "tertiary",
+        "displayName": "Refusal Red Deep"
+      },
+      "refusal-red-tint": {
+        "role": "tertiary",
+        "displayName": "Refusal Red Tint"
+      },
+      "refusal-red-line": {
+        "role": "tertiary",
+        "displayName": "Refusal Red Line"
+      },
+      "approval-green-deep": {
+        "role": "tertiary",
+        "displayName": "Approval Green Deep"
+      },
+      "approval-green-tint": {
+        "role": "tertiary",
+        "displayName": "Approval Green Tint"
+      },
+      "approval-green-line": {
+        "role": "tertiary",
+        "displayName": "Approval Green Line"
+      },
+      "concerns-amber-deep": {
+        "role": "tertiary",
+        "displayName": "Concerns Amber Deep"
+      },
+      "concerns-amber-tint": {
+        "role": "tertiary",
+        "displayName": "Concerns Amber Tint"
+      },
+      "concerns-amber-line": {
+        "role": "tertiary",
+        "displayName": "Concerns Amber Line"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Wordmark",
+        "purpose": "The Sinistre Express wordmark in the top bar only."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "The staged payout in the claim file; the one big number."
+      },
+      "headline": {
+        "displayName": "Panel Title",
+        "purpose": "Panel titles; the claim status line shares the size at 700."
+      },
+      "title": {
+        "displayName": "Step Title",
+        "purpose": "Step text in lane cells, sub-headings, reviewer and report headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default text and inputs, tabular figures on."
+      },
+      "body-small": {
+        "displayName": "Body Small",
+        "purpose": "Hints, metadata, step details, colophon."
+      },
+      "label": {
+        "displayName": "Constat Label",
+        "purpose": "Condensed uppercase field labels, lane headers, table headers, letter summary."
+      }
+    },
+    "shadows": [
+      {
+        "name": "panel",
+        "value": "0 1px 2px rgba(20, 34, 59, .06), 0 4px 12px -6px rgba(20, 34, 59, .10)",
+        "purpose": "Every paper panel on the desk; the only resting elevation."
+      },
+      {
+        "name": "send-bar-stuck",
+        "value": "0 -8px 16px -10px rgba(20, 34, 59, .28)",
+        "purpose": "The intake send bar while pinned over scrolling content."
+      },
+      {
+        "name": "signature-landing",
+        "value": "0 0 0 6px rgba(28, 115, 71, .18) to 0 0 0 0 rgba(28, 115, 71, 0), 0.5s",
+        "purpose": "One-off stamp when a person approves."
+      },
+      {
+        "name": "input-focus",
+        "value": "0 0 0 3px #E4EDFA",
+        "purpose": "Focus ring on inputs, paired with a constat-blue border."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "All authored motion: step landing, sticky shadow, chevron rotation, signature stamp."
+      },
+      {
+        "name": "step-land",
+        "value": "translateX(±8px) to none, 0.26s",
+        "purpose": "Each step slides in from its own party's side from an already-visible state."
+      },
+      {
+        "name": "state-transition",
+        "value": "0.15s",
+        "purpose": "Button and input colour, border and shadow changes."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animations off, transitions none",
+        "purpose": "prefers-reduced-motion: reduce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "desk-3col",
+        "value": "> 1240px"
+      },
+      {
+        "name": "desk-2col",
+        "value": "860px–1240px"
+      },
+      {
+        "name": "single-column",
+        "value": "<= 860px"
+      },
+      {
+        "name": "narrow",
+        "value": "<= 420px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one primary action per panel; 'Send to the agent' in the intake send bar.",
+      "html": "<button class=\"ds-btn-primary\">Send to the agent</button>",
+      "css": ":host{--a:#1D5BB0;--a-deep:#133F7E;--a-tint:#E4EDFA;--a-line:#B9CEEC;--b:#E9BA12;--b-deep:#6A5000;--b-tint:#FDF4D0;--b-line:#EED67F;--ink:#14223B;--ink-2:#46556D;--ink-3:#56637A;--rule:#CDD5DF;--rule-2:#E3E8EE;--paper:#FFFFFF;--desk:#E7EBF0;--r-tint:#EEF0F4;--r-line:#C3CAD5;--red:#B42318;--red-tint:#FDECEA;--red-line:#F2B8B2;--green:#1C7347;--green-deep:#155C38;--green-tint:#E5F3EB;--green-line:#A9D6BC;--ease:cubic-bezier(.16,1,.3,1)} .ds-btn-primary{font-family:Archivo,system-ui,sans-serif;font-weight:650;font-size:15px;border-radius:4px;cursor:pointer;border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:background-color .15s,border-color .15s,color .15s;background:var(--a);color:#fff;padding:12px 16px;min-width:240px} .ds-btn-primary:hover{background:var(--a-deep)} .ds-btn-primary:focus-visible{outline:2px solid var(--a);outline-offset:2px} .ds-btn-primary:disabled{background:var(--rule-2);color:var(--ink-3);cursor:not-allowed}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Secondary actions in lower panels: teach a rule, generate the report.",
+      "html": "<button class=\"ds-btn-secondary\">Add to the playbook</button>",
+      "css": ":host{--a:#1D5BB0;--a-deep:#133F7E;--a-tint:#E4EDFA;--a-line:#B9CEEC;--b:#E9BA12;--b-deep:#6A5000;--b-tint:#FDF4D0;--b-line:#EED67F;--ink:#14223B;--ink-2:#46556D;--ink-3:#56637A;--rule:#CDD5DF;--rule-2:#E3E8EE;--paper:#FFFFFF;--desk:#E7EBF0;--r-tint:#EEF0F4;--r-line:#C3CAD5;--red:#B42318;--red-tint:#FDECEA;--red-line:#F2B8B2;--green:#1C7347;--green-deep:#155C38;--green-tint:#E5F3EB;--green-line:#A9D6BC;--ease:cubic-bezier(.16,1,.3,1)} .ds-btn-secondary{font-family:Archivo,system-ui,sans-serif;font-weight:650;font-size:15px;border-radius:4px;cursor:pointer;border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:background-color .15s,border-color .15s,color .15s;background:var(--paper);color:var(--a-deep);border-color:var(--a-line);padding:10px 16px} .ds-btn-secondary:hover{background:var(--a-tint);border-color:var(--a)} .ds-btn-secondary:focus-visible{outline:2px solid var(--a);outline-offset:2px}"
+    },
+    {
+      "name": "Approve Button",
+      "kind": "button",
+      "refersTo": "button-approve",
+      "description": "Only a person signs: green, full width, names the exact amount. Turns amber ('Approve anyway') over Reviewer concerns.",
+      "html": "<div class=\"ds-sig\"><p class=\"ds-sig-label\">Signature of the claims handler</p><button class=\"ds-approve\"><svg class=\"ds-icon\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M11 2l3 3-8.5 8.5L2 14l.5-3.5z M9.5 3.5l3 3\"/></svg> Approve payment of €1,700</button><button class=\"ds-approve ds-override\"><svg class=\"ds-icon\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M11 2l3 3-8.5 8.5L2 14l.5-3.5z M9.5 3.5l3 3\"/></svg> Approve anyway €1,700</button></div>",
+      "css": ":host{--a:#1D5BB0;--a-deep:#133F7E;--a-tint:#E4EDFA;--a-line:#B9CEEC;--b:#E9BA12;--b-deep:#6A5000;--b-tint:#FDF4D0;--b-line:#EED67F;--ink:#14223B;--ink-2:#46556D;--ink-3:#56637A;--rule:#CDD5DF;--rule-2:#E3E8EE;--paper:#FFFFFF;--desk:#E7EBF0;--r-tint:#EEF0F4;--r-line:#C3CAD5;--red:#B42318;--red-tint:#FDECEA;--red-line:#F2B8B2;--green:#1C7347;--green-deep:#155C38;--green-tint:#E5F3EB;--green-line:#A9D6BC;--ease:cubic-bezier(.16,1,.3,1)} .ds-icon{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round} .ds-sig{font-family:Archivo,system-ui,sans-serif;border:1px dashed var(--ink-3);border-radius:4px;padding:12px 14px 14px;display:grid;gap:8px;max-width:340px} .ds-sig-label{margin:0 0 2px;font-size:12px;font-weight:650;font-stretch:78%;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)} .ds-approve{font-family:Archivo,system-ui,sans-serif;font-weight:650;font-size:15px;border-radius:4px;cursor:pointer;border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:background-color .15s,border-color .15s,color .15s;width:100%;background:var(--green);color:#fff;padding:12px 16px} .ds-approve:hover{background:var(--green-deep)} .ds-approve:focus-visible{outline:2px solid var(--a);outline-offset:2px} .ds-override{background:#8A4208} .ds-override:hover{background:#6E3506}"
+    },
+    {
+      "name": "Constat Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Form input labelled as a constat field: boxed number plus condensed uppercase label.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-label\"><span class=\"ds-n\">2</span> Customer email</span><textarea class=\"ds-input\" rows=\"3\">Hello Veridia, I am writing to report an accident…</textarea></label>",
+      "css": ":host{--a:#1D5BB0;--a-deep:#133F7E;--a-tint:#E4EDFA;--a-line:#B9CEEC;--b:#E9BA12;--b-deep:#6A5000;--b-tint:#FDF4D0;--b-line:#EED67F;--ink:#14223B;--ink-2:#46556D;--ink-3:#56637A;--rule:#CDD5DF;--rule-2:#E3E8EE;--paper:#FFFFFF;--desk:#E7EBF0;--r-tint:#EEF0F4;--r-line:#C3CAD5;--red:#B42318;--red-tint:#FDECEA;--red-line:#F2B8B2;--green:#1C7347;--green-deep:#155C38;--green-tint:#E5F3EB;--green-line:#A9D6BC;--ease:cubic-bezier(.16,1,.3,1)} .ds-field{font-family:Archivo,system-ui,sans-serif;display:grid;gap:6px;max-width:340px;color:var(--ink)} .ds-label{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:650;font-stretch:78%;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)} .ds-n{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border:1px solid var(--ink-2);border-radius:3px;font-size:11px;letter-spacing:0;color:var(--ink)} .ds-input{font:inherit;font-size:14px;line-height:1.5;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:9px 11px;caret-color:var(--a);transition:border-color .15s,box-shadow .15s;resize:vertical} .ds-input:hover{border-color:#AEB9C7} .ds-input:focus{outline:none;border-color:var(--a);box-shadow:0 0 0 3px var(--a-tint)}"
+    },
+    {
+      "name": "Top Bar",
+      "kind": "nav",
+      "refersTo": "topbar",
+      "description": "Ink-navy bar with wordmark, fictional tagline, section links, closed by the half-blue half-yellow constat stripe.",
+      "html": "<header class=\"ds-top\"><div><p class=\"ds-word\">Sinistre Express</p><p class=\"ds-tag\">Veridia Insurance claims desk · fictional company, synthetic data</p></div><nav class=\"ds-links\"><a href=\"#\">Claim desk</a><a href=\"#\">Memory</a><a href=\"#\">Daily report</a></nav></header>",
+      "css": ":host{--a:#1D5BB0;--a-deep:#133F7E;--a-tint:#E4EDFA;--a-line:#B9CEEC;--b:#E9BA12;--b-deep:#6A5000;--b-tint:#FDF4D0;--b-line:#EED67F;--ink:#14223B;--ink-2:#46556D;--ink-3:#56637A;--rule:#CDD5DF;--rule-2:#E3E8EE;--paper:#FFFFFF;--desk:#E7EBF0;--r-tint:#EEF0F4;--r-line:#C3CAD5;--red:#B42318;--red-tint:#FDECEA;--red-line:#F2B8B2;--green:#1C7347;--green-deep:#155C38;--green-tint:#E5F3EB;--green-line:#A9D6BC;--ease:cubic-bezier(.16,1,.3,1)} .ds-top{font-family:Archivo,system-ui,sans-serif;position:relative;display:flex;align-items:center;gap:28px;padding:14px 28px;background:var(--ink);color:#fff} .ds-top::after{content:'';position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,var(--a) 50%,var(--b) 50%)} .ds-top p{margin:0} .ds-word{font-size:21px;font-weight:800;font-stretch:118%;letter-spacing:-.01em;line-height:1.1} .ds-tag{font-size:13px;color:#C9D3E3} .ds-links{display:flex;gap:4px;margin-left:auto} .ds-links a{color:#E4EAF3;text-decoration:none;font-size:14px;font-weight:550;padding:7px 11px;border-radius:4px} .ds-links a:hover{background:rgba(255,255,255,.1);color:#fff} .ds-links a:focus-visible{outline:2px solid var(--b);outline-offset:2px}"
+    },
+    {
+      "name": "Party Marks",
+      "kind": "chip",
+      "refersTo": "lane-head-a",
+      "description": "The two-party identity: blue A, yellow B (ink text), Reviewer grey, You green.",
+      "html": "<div class=\"ds-parties\"><span class=\"ds-mark ds-a\">A</span><span class=\"ds-mark ds-b\">B</span><span class=\"ds-mark ds-r\"><svg class=\"ds-icon\" viewBox=\"0 0 16 16\"><path d=\"M1 8s2.6-5 7-5 7 5 7 5-2.6 5-7 5-7-5-7-5z M8 5.8a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4z\"/></svg></span><span class=\"ds-mark ds-you\"><svg class=\"ds-icon\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M11 2l3 3-8.5 8.5L2 14l.5-3.5z M9.5 3.5l3 3\"/></svg></span></div>",
+      "css": ":host{--a:#1D5BB0;--a-deep:#133F7E;--a-tint:#E4EDFA;--a-line:#B9CEEC;--b:#E9BA12;--b-deep:#6A5000;--b-tint:#FDF4D0;--b-line:#EED67F;--ink:#14223B;--ink-2:#46556D;--ink-3:#56637A;--rule:#CDD5DF;--rule-2:#E3E8EE;--paper:#FFFFFF;--desk:#E7EBF0;--r-tint:#EEF0F4;--r-line:#C3CAD5;--red:#B42318;--red-tint:#FDECEA;--red-line:#F2B8B2;--green:#1C7347;--green-deep:#155C38;--green-tint:#E5F3EB;--green-line:#A9D6BC;--ease:cubic-bezier(.16,1,.3,1)} .ds-icon{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round} .ds-parties{display:flex;gap:12px} .ds-mark{font-family:Archivo,system-ui,sans-serif;width:28px;height:28px;display:grid;place-items:center;border-radius:4px;font-weight:750;font-stretch:80%;font-size:15px} .ds-a{background:var(--a);color:#fff} .ds-b{background:var(--b);color:var(--ink)} .ds-r{background:var(--r-tint);color:var(--ink);box-shadow:inset 0 0 0 1px var(--r-line)} .ds-you{background:var(--green-tint);color:var(--green-deep);box-shadow:inset 0 0 0 1px var(--green-line)}"
+    },
+    {
+      "name": "Two-Lane Ledger",
+      "kind": "custom",
+      "refersTo": "step-cell",
+      "description": "Signature component: steps land in their party's lane beside the shared numbered spine; refusals land red in lane B.",
+      "html": "<div class=\"ds-ledger\"><div class=\"ds-heads\"><span class=\"ds-h ds-ha\">A · Cominty agent</span><span class=\"ds-h ds-hb\">B · Claims system</span></div><ol class=\"ds-lanes\"><li class=\"ds-la\"><div class=\"ds-cell\"><span class=\"ds-st\"><svg class=\"ds-icon\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M4 1.5h5.5L12.5 4.5v10h-8.5z M9.5 1.5v3h3 M6 8h4.5 M6 10.5h4.5\"/></svg>Searching the contract</span></div></li><li class=\"ds-lb\"><div class=\"ds-cell\"><span class=\"ds-st\"><svg class=\"ds-icon\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M2.5 8.5l3.5 3.5 7.5-8\"/></svg>compute_settlement</span><span class=\"ds-sd\">Art. 2 deductible €300</span></div></li><li class=\"ds-lb ds-ref\"><div class=\"ds-cell\"><span class=\"ds-st\"><svg class=\"ds-icon\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13z M3.4 3.4l9.2 9.2\"/></svg>stage_settlement refused<em>Refused</em></span><span class=\"ds-sd\">An assessor is required (Art. 6.1).</span></div></li></ol></div>",
+      "css": ":host{--a:#1D5BB0;--a-deep:#133F7E;--a-tint:#E4EDFA;--a-line:#B9CEEC;--b:#E9BA12;--b-deep:#6A5000;--b-tint:#FDF4D0;--b-line:#EED67F;--ink:#14223B;--ink-2:#46556D;--ink-3:#56637A;--rule:#CDD5DF;--rule-2:#E3E8EE;--paper:#FFFFFF;--desk:#E7EBF0;--r-tint:#EEF0F4;--r-line:#C3CAD5;--red:#B42318;--red-tint:#FDECEA;--red-line:#F2B8B2;--green:#1C7347;--green-deep:#155C38;--green-tint:#E5F3EB;--green-line:#A9D6BC;--ease:cubic-bezier(.16,1,.3,1)} .ds-icon{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round} .ds-ledger{font-family:Archivo,system-ui,sans-serif;color:var(--ink);max-width:620px} .ds-heads,.ds-lanes>li{display:grid;grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr)} .ds-h{font-size:12px;font-weight:700;font-stretch:78%;letter-spacing:.07em;text-transform:uppercase;padding:6px 10px;border-radius:4px 4px 0 0} .ds-ha{grid-column:1;background:var(--a);color:#fff} .ds-hb{grid-column:3;background:var(--b);color:var(--ink)} .ds-lanes{list-style:none;margin:0;padding:0 0 4px;counter-reset:step;background:linear-gradient(var(--a-tint),var(--a-tint)) left top/calc(50% - 20px) 100% no-repeat,linear-gradient(var(--b-tint),var(--b-tint)) right top/calc(50% - 20px) 100% no-repeat,linear-gradient(var(--rule),var(--rule)) center top/1px 100% no-repeat} .ds-lanes>li{counter-increment:step} .ds-lanes>li::before{content:counter(step);grid-column:2;grid-row:1;justify-self:center;align-self:start;margin-top:9px;min-width:24px;height:22px;display:grid;place-items:center;background:var(--paper);border:1px solid var(--ink-2);border-radius:3px;font-size:12px;font-weight:650;font-variant-numeric:tabular-nums} .ds-cell{grid-row:1;margin:5px 8px;padding:8px 10px;border-radius:4px;background:var(--paper);border:1px solid var(--a-line);animation:ds-land .26s var(--ease)} .ds-la .ds-cell{grid-column:1;--from:-8px} .ds-lb .ds-cell{grid-column:3;border-color:var(--b-line);--from:8px} .ds-st{display:flex;gap:8px;align-items:flex-start;font-size:14px;font-weight:600;line-height:1.35} .ds-st .ds-icon{margin-top:1px;color:var(--a)} .ds-lb .ds-st .ds-icon{color:var(--b-deep)} .ds-st em{margin-left:auto;font-style:normal;font-size:11px;font-weight:700;font-stretch:78%;letter-spacing:.06em;text-transform:uppercase} .ds-sd{display:block;margin:3px 0 0 24px;font-size:13px;color:var(--ink-2)} .ds-ref .ds-cell{background:var(--red-tint);border-color:var(--red-line)} .ds-ref .ds-st,.ds-ref .ds-st .ds-icon,.ds-ref em{color:var(--red)} .ds-ref .ds-sd{color:#7E1D14} @keyframes ds-land{from{transform:translateX(var(--from,0))}to{transform:none}} @media (prefers-reduced-motion:reduce){.ds-cell{animation:none}}"
+    },
+    {
+      "name": "Claim File Figures",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Paper panel with a meaning-tinted status line and ruled tabular figures; the payout at Figure size.",
+      "html": "<section class=\"ds-panel\"><h2 class=\"ds-title\">Claim file</h2><p class=\"ds-status\"><svg class=\"ds-icon\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M11 2l3 3-8.5 8.5L2 14l.5-3.5z M9.5 3.5l3 3\"/></svg>Payment prepared, waiting for your approval</p><dl class=\"ds-fig\"><dt>Deductible paid by the customer</dt><dd>€700</dd><dt>Payout</dt><dd class=\"ds-big\">€1,700</dd></dl><p class=\"ds-cite-line\">Deductible <span class=\"ds-cite\">contract p.4</span></p></section>",
+      "css": ":host{--a:#1D5BB0;--a-deep:#133F7E;--a-tint:#E4EDFA;--a-line:#B9CEEC;--b:#E9BA12;--b-deep:#6A5000;--b-tint:#FDF4D0;--b-line:#EED67F;--ink:#14223B;--ink-2:#46556D;--ink-3:#56637A;--rule:#CDD5DF;--rule-2:#E3E8EE;--paper:#FFFFFF;--desk:#E7EBF0;--r-tint:#EEF0F4;--r-line:#C3CAD5;--red:#B42318;--red-tint:#FDECEA;--red-line:#F2B8B2;--green:#1C7347;--green-deep:#155C38;--green-tint:#E5F3EB;--green-line:#A9D6BC;--ease:cubic-bezier(.16,1,.3,1)} .ds-icon{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round} .ds-panel{font-family:Archivo,system-ui,sans-serif;background:var(--paper);border:1px solid var(--rule);border-radius:6px;box-shadow:0 1px 2px rgba(20,34,59,.06),0 4px 12px -6px rgba(20,34,59,.10);padding:18px 20px 20px;max-width:380px;color:var(--ink);font-variant-numeric:tabular-nums} .ds-title{margin:0 0 14px;font-size:17px;font-weight:750;font-stretch:112%;letter-spacing:-.005em} .ds-status{display:flex;gap:10px;align-items:flex-start;margin:0;padding:12px 14px;border-radius:4px;background:var(--a-tint);color:var(--a-deep);font-size:17px;font-weight:700;line-height:1.3} .ds-status .ds-icon{width:18px;height:18px;margin-top:2px} .ds-fig{margin:16px 0 0;display:grid;grid-template-columns:1fr auto;border-top:1px solid var(--rule-2)} .ds-fig dt,.ds-fig dd{margin:0;padding:9px 0;border-bottom:1px solid var(--rule-2)} .ds-fig dt{font-size:14px;color:var(--ink-2)} .ds-fig dd{text-align:right;font-weight:650;font-size:15px} .ds-fig .ds-big{font-size:26px;font-weight:750;font-stretch:92%;letter-spacing:-.01em;line-height:1.1} .ds-cite-line{font-size:14px;margin:12px 0 0} .ds-cite{font-size:11px;font-weight:650;font-stretch:80%;letter-spacing:.04em;text-transform:uppercase;color:var(--a-deep);background:var(--a-tint);border-radius:3px;padding:1px 5px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Constat Amiable",
+    "overview": "The whole desk is drawn from the European joint accident report: white paper on a cool grey desk, two parties identified by two committed colours, and one shared numbered spine that both parties write against. Party A, constat blue, is the Cominty agent. Party B, constat yellow, is the Veridia claims system. The Reviewer is a neutral grey observer whose notes span both lanes, and the person at the desk is the only actor allowed green, because green means a signature on money.\n\nDensity is that of a working form, not a marketing page: three panels side by side at desktop width, condensed uppercase field labels with small boxed field numbers, tabular figures everywhere, and plain ink-navy text. Colour is structural, never decorative. A lane tint tells you who acted; red tells you something was refused; green tells you a person signed. The form's own devices (numbered fields, boxed markers, a dashed signature box, a header split half blue and half yellow) are the ornament; nothing is added on top of them.\n\nThe world rejects the category default of a grey activity feed with one accent colour and generic cards. Every step on screen belongs to a party and lands in that party's lane.",
+    "keyCharacteristics": [
+      "Two-party colour coding (blue A, yellow B) carried by lane tints, lane headers and party marks.",
+      "A shared numbered spine between the lanes; numbers sit in small bordered boxes, like constat fields.",
+      "Archivo variable at several widths: wide for the wordmark and panel titles, condensed for field labels, tabular figures throughout.",
+      "White paper panels on a cool grey desk, 1px rules, one soft ambient shadow.",
+      "Semantic colours with exclusive meanings: red for refusals and failures, green for a person's approval, amber for approving over the Reviewer's concerns.",
+      "Self-drawn 16px stroke icons (1.5px stroke, round caps), never glyphs or emoji."
+    ],
+    "rules": [
+      {
+        "name": "The Two Parties Rule",
+        "body": "Blue is always party A and yellow is always party B. Neither colour is ever used as a generic accent, a highlight, or for a third actor.",
+        "section": "colors"
+      },
+      {
+        "name": "The Exclusive Meaning Rule",
+        "body": "Red means refused or failed, green means a person approved, amber means approved over concerns. If an element does not carry that meaning, it does not get that colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ink On Yellow Rule",
+        "body": "Text on constat yellow is ink-navy; on the yellow tint, icons and status text use the deep olive shade. White never sits on yellow.",
+        "section": "colors"
+      },
+      {
+        "name": "The Width Axis Rule",
+        "body": "Hierarchy comes from Archivo's width and weight, not from new families: wide for names and titles, condensed for labels, normal for reading.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Rule",
+        "body": "Figures are tabular everywhere. Amounts are right-aligned and weighted 650 or heavier.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Layer Rule",
+        "body": "Paper sits on the desk; nothing sits on paper. Inside a panel, depth is a rule, a tint or a dashed border, never another shadow. The only exception is the send bar while it is stuck over scrolling content.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** assign every new actor-bound element to a party: constat blue for the agent (A), constat yellow for the claims system (B), reviewer grey for the Reviewer, green only for the person.",
+      "**Do** label form inputs as constat fields: condensed uppercase Archivo (12px, 650, 0.06em, width 78%) with a 3px boxed field number.",
+      "**Do** keep text on constat yellow ink-navy, and use the deep olive shade for icons and text on the yellow tint.",
+      "**Do** keep figures tabular and amounts right-aligned, with the contract article beside the number when one applies.",
+      "**Do** draw icons from the inline SVG set: 16px, 1.5px stroke, round caps and joins, currentColor.",
+      "**Do** theme browser surfaces from the palette: yellow-line selection, constat-blue caret and focus ring, thin rule-coloured scrollbars, 3px underline offset.",
+      "**Do** keep motion to the step landing and the signature stamp, and drop both under reduced motion."
+    ],
+    "donts": [
+      "**Don't** use constat blue or yellow as a generic accent, highlight or decoration on anything that is not party A or party B.",
+      "**Don't** use red for anything but a refusal, a failure or a destructive hover, or green for anything but a person's approval and passed checks.",
+      "**Don't** stack shadows inside a panel (the stuck send bar excepted); separate with 1px rules, tints and dashed borders instead.",
+      "**Don't** render emoji or Unicode glyphs as icons, even when a payload carries them.",
+      "**Don't** put a label above a panel title; the title stands alone, and condensed caps belong to fields, lane headers and table headers.",
+      "**Don't** introduce another typeface; reach for Archivo's width axis instead."
+    ]
+  }
+}

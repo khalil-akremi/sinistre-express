@@ -4,38 +4,84 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sinistre Express · Veridia claims desk</title>
-  <meta name="description" content="A Cominty agent prepares motor insurance claims; a person approves them.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <meta name="description" content="A Cominty agent prepares motor insurance claims, a second agent reviews payments, and a person approves every payment. Fictional data.">
+  <link rel="preload" href="/static/archivo-var.woff" as="font" type="font/woff" crossorigin>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <header class="masthead">
+  <svg width="0" height="0" class="sprite" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-doc" viewBox="0 0 16 16"><path d="M4 1.5h5.5L12.5 4.5v10h-8.5z M9.5 1.5v3h3 M6 8h4.5 M6 10.5h4.5"/></symbol>
+      <symbol id="i-handoff" viewBox="0 0 16 16"><path d="M2 5.5h9.5 M9 3l2.5 2.5L9 8 M14 10.5H4.5 M7 8l-2.5 2.5L7 13"/></symbol>
+      <symbol id="i-box" viewBox="0 0 16 16"><path d="M2 5l6-3 6 3v6l-6 3-6-3z M2 5l6 3 6-3 M8 8v6"/></symbol>
+      <symbol id="i-file" viewBox="0 0 16 16"><path d="M10.5 4.5L6 9a1.4 1.4 0 0 0 2 2l5-5a2.8 2.8 0 0 0-4-4L3.8 7.2a4.2 4.2 0 0 0 6 6L13 10"/></symbol>
+      <symbol id="i-upload" viewBox="0 0 16 16"><path d="M8 11V2.5 M4.5 6L8 2.5 11.5 6 M2.5 11v2.5h11V11"/></symbol>
+      <symbol id="i-note" viewBox="0 0 16 16"><path d="M3.5 1.5h9v13l-4.5-3-4.5 3z"/></symbol>
+      <symbol id="i-tool" viewBox="0 0 16 16"><path d="M10.5 1.8a3.5 3.5 0 0 0-3.9 4.7L2 11.1 4.9 14l4.6-4.6a3.5 3.5 0 0 0 4.7-3.9l-2 2-2.3-.4-.4-2.3z"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 16 16"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13z M8 4.5V8l2.5 1.5"/></symbol>
+      <symbol id="i-message" viewBox="0 0 16 16"><path d="M2 3h12v8H7l-3.5 2.5V11H2z"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 16 16"><path d="M8 1.8L15 14H1z M8 6v3.5 M8 11.5v.5"/></symbol>
+      <symbol id="i-check" viewBox="0 0 16 16"><path d="M2.5 8.5l3.5 3.5 7.5-8"/></symbol>
+      <symbol id="i-block" viewBox="0 0 16 16"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13z M3.4 3.4l9.2 9.2"/></symbol>
+      <symbol id="i-eye" viewBox="0 0 16 16"><path d="M1 8s2.6-5 7-5 7 5 7 5-2.6 5-7 5-7-5-7-5z M8 5.8a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4z"/></symbol>
+      <symbol id="i-pen" viewBox="0 0 16 16"><path d="M11 2l3 3-8.5 8.5L2 14l.5-3.5z M9.5 3.5l3 3"/></symbol>
+      <symbol id="i-cross" viewBox="0 0 16 16"><path d="M3.5 3.5l9 9 M12.5 3.5l-9 9"/></symbol>
+      <symbol id="i-download" viewBox="0 0 16 16"><path d="M8 2v8.5 M4.5 7L8 10.5 11.5 7 M2.5 13.5h11"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 16 16"><path d="M6 3.5L10.5 8 6 12.5"/></symbol>
+      <symbol id="i-dot" viewBox="0 0 16 16"><path d="M8 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="topbar">
     <div class="brand">
-      <h1>Sinistre Express</h1>
-      <p>A Cominty agent prepares motor insurance claims for Veridia Insurance. A person approves every payment.</p>
+      <p class="wordmark">Sinistre Express</p>
+      <p class="tagline">Veridia Insurance claims desk<span>fictional company, synthetic data</span></p>
     </div>
-    <p class="fiction">Veridia is a fictional insurer. All customers and claims are synthetic.</p>
+    <nav class="sections" aria-label="Sections">
+      <a href="#desk">Claim desk</a>
+      <a href="#memory">Memory</a>
+      <a href="#report">Daily report</a>
+      <a href="#evaluation">Evaluation</a>
+    </nav>
+    <p class="runs" id="quota" aria-live="polite"></p>
   </header>
 
-  <main class="desk">
-    <!-- Column 1: the claim -->
-    <section class="panel intake" aria-labelledby="intake-title">
-      <h2 id="intake-title">Incoming claim</h2>
+  <section class="parties" aria-label="Who does what">
+    <div class="party party-a">
+      <span class="party-mark">A</span>
+      <p><strong>Cominty agent</strong> reads the email and documents, checks the contract, decides, drafts the letter.</p>
+    </div>
+    <div class="party party-b">
+      <span class="party-mark">B</span>
+      <p><strong>Veridia claims system</strong> (MCP) applies the rules, computes every euro, refuses unsafe actions.</p>
+    </div>
+    <div class="party party-r">
+      <span class="party-mark"><svg class="icon"><use href="#i-eye"/></svg></span>
+      <p><strong>Reviewer agent</strong> (Mistral) checks every payment fact by fact, read-only.</p>
+    </div>
+    <div class="party party-you">
+      <span class="party-mark"><svg class="icon"><use href="#i-pen"/></svg></span>
+      <p><strong>You</strong> are the only one who can approve money.</p>
+    </div>
+  </section>
 
-      <label class="field-label" for="case-select">Sample claim</label>
+  <main class="desk" id="desk">
+    <!-- 1. The claim -->
+    <section class="panel intake" aria-labelledby="intake-title">
+      <h2 id="intake-title" class="panel-title">Incoming claim</h2>
+
+      <label class="field" for="case-select"><span class="n">1</span> Sample claim</label>
       <select id="case-select"></select>
       <p class="skill" id="skill" hidden></p>
 
       <div class="email-head" id="email-head"></div>
 
-      <label class="field-label" for="email-body">Customer email</label>
-      <textarea id="email-body" rows="11" maxlength="2000" spellcheck="false"></textarea>
+      <label class="field" for="email-body"><span class="n">2</span> Customer email</label>
+      <textarea id="email-body" rows="10" maxlength="2000" spellcheck="false"></textarea>
       <p class="hint">Edit anything. Try adding “I had a few drinks before driving”.</p>
 
       <fieldset class="docs">
-        <legend class="field-label" id="docs-legend">Documents received</legend>
+        <legend class="field"><span class="n">3</span> <span id="docs-legend">Documents received</span></legend>
         <label><input type="checkbox" value="photos"> Damage photos</label>
         <label><input type="checkbox" value="repair_quote"> Repair quote</label>
         <label><input type="checkbox" value="accident_report"> Signed accident report</label>
@@ -43,81 +89,104 @@
       </fieldset>
 
       <fieldset class="files" id="files-box" hidden>
-        <legend class="field-label">Documents the agent will open</legend>
+        <legend class="field"><span class="n">4</span> Documents the agent opens</legend>
         <div id="files"></div>
-        <p class="hint">Real PDFs, uploaded with the email. Scans have no text layer: the agent reads them with OCR.</p>
+        <p class="hint">Real PDFs uploaded with the email. Scans have no text layer: the agent reads them with OCR.</p>
       </fieldset>
 
-      <button id="send" class="primary" type="button">Send to the agent</button>
-      <p class="quota" id="quota" aria-live="polite"></p>
-    </section>
-
-    <!-- Column 2: the agent at work -->
-    <section class="panel work" aria-labelledby="work-title">
-      <div class="work-head">
-        <h2 id="work-title">The agent at work</h2>
-        <span class="clock" id="clock" aria-live="off"></span>
+      <div class="send-bar">
+        <button id="send" class="btn btn-primary" type="button">Send to the agent</button>
       </div>
-      <ol class="ledger" id="ledger" aria-live="polite">
-        <li class="empty">Pick a claim and send it. Each step the agent takes will appear here, including any action the claims system refuses.</li>
-      </ol>
-      <p class="legend">
-        <span class="key key-agent"></span> Agent on Cominty
-        <span class="key key-system"></span> Veridia claims system (MCP)
-        <span class="key key-reviewer"></span> Reviewer (second agent)
-      </p>
+      <div class="send-sentinel" aria-hidden="true"></div>
     </section>
 
-    <!-- Column 3: the decision file -->
+    <!-- 2. Both parties at work -->
+    <section class="panel work" aria-labelledby="work-title">
+      <div class="panel-head">
+        <h2 id="work-title" class="panel-title">Steps</h2>
+        <span class="clock" id="clock" aria-live="off">Pick a claim and send it</span>
+      </div>
+      <div class="lane-heads" aria-hidden="true">
+        <span class="lane-head lane-head-a">A · Cominty agent</span>
+        <span class="lane-head lane-head-b">B · Claims system</span>
+      </div>
+      <ol class="lanes is-empty" id="ledger" aria-live="polite">
+        <li class="ghost lane-a"><div class="cell">The agent’s steps land in lane A: reading memory, searching the contract, handing work to the claims system.</div></li>
+        <li class="ghost lane-b"><div class="cell">The claims system’s tool calls land in lane B, with their result. A refused action lands here in red.</div></li>
+        <li class="ghost lane-full lane-r"><div class="cell">When a payment is prepared, the Reviewer’s observations span both lanes.</div></li>
+      </ol>
+    </section>
+
+    <!-- 3. The decision -->
     <section class="panel file" aria-labelledby="file-title">
-      <h2 id="file-title">Claim file</h2>
+      <h2 id="file-title" class="panel-title">Claim file</h2>
       <div id="file-body" class="file-body">
-        <p class="empty">The decision, amounts and draft letter will appear here.</p>
+        <p class="empty">The decision, the amounts, the Reviewer’s verdict and the draft letter will appear here.</p>
       </div>
     </section>
   </main>
 
-  <section class="memory" id="memory" hidden aria-labelledby="memory-title">
-    <div class="memory-head">
-      <h2 id="memory-title">What the agent remembers</h2>
-      <p>Cominty memory, kept between claims. Handlers teach rules; the agent reads them before every claim and writes a note about each customer.</p>
-    </div>
-    <div class="memory-grid">
-      <div class="memory-col">
-        <h3>Handler playbook <span class="scope">shared by all claims</span></h3>
-        <ol class="rules" id="rules"></ol>
-        <label class="field-label" for="rule">Teach the agent a rule</label>
-        <textarea id="rule" rows="3" maxlength="300" placeholder="When the other driver is a commercial vehicle (van, truck), refer the claim to a handler so we can recover the money from their insurer."></textarea>
-        <div class="memory-actions">
-          <button id="teach" class="secondary" type="button">Add to the playbook</button>
-          <button id="reset-memory" class="link" type="button">Clear memory</button>
+  <div class="lower">
+    <section class="panel memory" id="memory" hidden aria-labelledby="memory-title">
+      <div class="section-head">
+        <h2 id="memory-title" class="panel-title">What the agent remembers</h2>
+        <p>Cominty memory, kept between claims. Handlers teach rules; the agent reads them before every claim and writes a note on each customer.</p>
+      </div>
+      <div class="memory-grid">
+        <div>
+          <h3 class="sub">Handler playbook <span>shared by all claims</span></h3>
+          <ol class="rules" id="rules"></ol>
+          <label class="field" for="rule">Teach the agent a rule</label>
+          <textarea id="rule" rows="3" maxlength="300" placeholder="When the other driver is a commercial vehicle (van, truck), refer the claim to a handler so we can recover the money from their insurer."></textarea>
+          <div class="actions">
+            <button id="teach" class="btn btn-secondary" type="button">Add to the playbook</button>
+            <button id="reset-memory" class="btn btn-quiet" type="button">Clear memory</button>
+          </div>
+          <p class="hint" id="memory-msg" aria-live="polite"></p>
         </div>
-        <p class="hint" id="memory-msg" aria-live="polite"></p>
+        <div>
+          <h3 class="sub">Customer note <span id="note-scope"></span></h3>
+          <div class="note" id="customer-note"></div>
+        </div>
       </div>
-      <div class="memory-col">
-        <h3>Customer note <span class="scope" id="note-scope"></span></h3>
-        <div class="note" id="customer-note"></div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="report" id="report" aria-labelledby="report-title">
-    <div class="memory-head">
-      <h2 id="report-title">Daily claims report</h2>
-      <p>Our system computes the day's figures; a built-in Cominty agent (Chat, with the Spreadsheet skill and no access to the claims system) builds the Excel report and a briefing; our system then checks the workbook against the claims database.</p>
-    </div>
-    <div class="report-grid">
-      <div>
-        <button id="make-report" class="secondary" type="button">Generate today's report</button>
-        <p class="hint" id="report-msg" aria-live="polite"></p>
-        <ol class="report-steps" id="report-steps"></ol>
+    <section class="panel report" id="report" aria-labelledby="report-title">
+      <div class="section-head">
+        <h2 id="report-title" class="panel-title">Daily claims report</h2>
+        <p>Our code computes the day’s figures. A built-in Cominty agent (Chat with the Spreadsheet skill, no access to the claims system) builds the Excel report and a briefing. Our code then checks the workbook against the database.</p>
       </div>
-      <div id="report-result" class="report-result"></div>
-    </div>
-  </section>
+      <div class="report-grid">
+        <div>
+          <button id="make-report" class="btn btn-secondary" type="button">Generate today’s report</button>
+          <p class="hint" id="report-msg" aria-live="polite"></p>
+          <ol class="report-steps" id="report-steps"></ol>
+        </div>
+        <div id="report-result" class="report-result"></div>
+      </div>
+    </section>
+
+    <section class="panel evaluation" id="evaluation" aria-labelledby="eval-title">
+      <div class="section-head">
+        <h2 id="eval-title" class="panel-title">How it is measured</h2>
+        <p>Every feature was evaluated against answer keys generated from the same rules code as the product. Final runs, after the fixes each evaluation led to. Small samples: they find problems, they are not precise rates.</p>
+      </div>
+      <table class="results">
+        <thead><tr><th scope="col">Evaluation</th><th scope="col">What it checks</th><th scope="col" class="num">Result</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Main claims</th><td>Decision, amounts, every recorded fact, tool order, safety, honesty of the status line</td><td class="num">23/23 · 0 safety violations</td></tr>
+          <tr><th scope="row">Real documents</th><td>Facts that exist only in typed and scanned PDFs (OCR), a wrong document, an email that contradicts the quote</td><td class="num">6/6 · 56/56 facts</td></tr>
+          <tr><th scope="row">Reviewer</th><td>8 prepared payments with a planted mistake, 8 correct ones</td><td class="num">8/8 caught · 0/8 false alarms</td></tr>
+          <tr><th scope="row">Memory</th><td>A rule taught by a handler, with and without memory</td><td class="num">2/2 followed · 0/4 false triggers</td></tr>
+          <tr><th scope="row">Robustness</th><td>The same claims written 4 ways; the same claims run 5 times</td><td class="num">24/24 · 20/20</td></tr>
+          <tr><th scope="row">Daily report</th><td>Workbook checked against the database; amounts and claims in the briefing</td><td class="num">7 checks per report</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
 
   <footer class="colophon">
-    <p>Built on Cominty Managed Agents: a custom agent with the Veridia contract as knowledge, and the claims system connected over MCP. Amounts come from tested business rules, never from the model.</p>
+    <p>Built on Cominty Managed Agents: a Handler agent with the Veridia contract as knowledge and the claims system connected over MCP, a Reviewer agent on another model provider, and a built-in agent for reports. Amounts come from tested business rules, never from a model. Veridia Insurance, its customers and its documents are fictional.</p>
   </footer>
 
   <script src="/static/app.js"></script>
