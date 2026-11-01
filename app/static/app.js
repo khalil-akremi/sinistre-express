@@ -162,12 +162,53 @@ function showQuota(left, error) {
 function resetLedger() {
   els.ledger.innerHTML = "";
   els.ledger.classList.remove("is-empty");
+  lastStep = null;
+  reviewWork = null;
   els.file.innerHTML = `<p class="empty">The agent is working on this claim…</p>`;
 }
 
 // Each step lands in its party's lane: A (agent) left, B (claims system) right,
 // the Reviewer and the person across both, refusals in red in lane B.
+let lastStep = null;     // {key, li, count}: the same step twice in a row becomes one row "×2"
+let reviewWork = null;   // the one row that gathers the Reviewer's own steps
+
+const REVIEW_WORK = [["contract", "contract"], ["code", "code run"], ["sandbox", "sandbox"],
+  ["document", "document read"], ["memory", "memory"], ["skill", "skill"]];
+
+function addReviewerWork(step) {
+  const t = (step.text || "").toLowerCase();
+  const label = (REVIEW_WORK.find(([k]) => t.includes(k)) || [null, null])[1];
+  if (!label || t.includes("starting")) return;   // "starting" adds nothing a reader needs
+  if (!reviewWork) {
+    const li = document.createElement("li");
+    li.className = "lane-full lane-r";
+    li.innerHTML = `<div class="cell"><span class="step-text">${icon("eye")}<span>The Reviewer is checking the sources</span>` +
+      `<span class="step-tag">Observations</span></span><span class="step-detail"></span></div>`;
+    els.ledger.appendChild(li);
+    reviewWork = { li, counts: {} };
+    lastStep = null;
+  }
+  reviewWork.counts[label] = (reviewWork.counts[label] || 0) + 1;
+  reviewWork.li.querySelector(".step-detail").textContent = Object.entries(reviewWork.counts)
+    .map(([k, n]) => `${k}${n > 1 ? ` ×${n}` : ""}`).join(" · ");
+}
+
 function addStep(step) {
+  const t = (step.text || "").toLowerCase();
+  const reviewerStart = t.startsWith("a second agent"), reviewerVerdict = t.includes("reviewer agrees") || t.includes("raised concerns");
+  if (step.source === "reviewer" && !reviewerStart && !reviewerVerdict) { addReviewerWork(step); return; }
+  const key = `${step.source}|${step.text}|${step.ok}`;
+  if (lastStep && lastStep.key === key && !step.detail) {
+    lastStep.count += 1;
+    let badge = lastStep.li.querySelector(".step-count");
+    if (!badge) {
+      badge = document.createElement("span");
+      badge.className = "step-count";
+      lastStep.li.querySelector(".step-text > span").after(badge);
+    }
+    badge.textContent = `×${lastStep.count}`;
+    return;
+  }
   const li = document.createElement("li");
   const refused = step.source === "system" && step.ok === false;
   const human = step.source === "system" && (step.text || "").startsWith("approve_settlement");
@@ -179,6 +220,7 @@ function addStep(step) {
     (tag ? `<span class="step-tag">${tag}</span>` : "") + `</span>` +
     (step.detail ? `<span class="step-detail">${escapeHtml(step.detail)}</span>` : "") + `</div>`;
   els.ledger.appendChild(li);
+  lastStep = { key, li, count: 1 };
   li.scrollIntoView({ block: "nearest", behavior: "smooth" });
 }
 

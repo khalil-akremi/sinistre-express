@@ -50,13 +50,18 @@ def tool_label(name: str) -> tuple[str, str]:
 def agent_event(kind: str, status: str, name: str | None = None, text: str | None = None) -> dict | None:
     """One Cominty progress event -> one timeline item (or None to skip it)."""
     if kind == "tool_call":
-        if status == "running":
-            return None  # show each tool once, when it finishes
+        # Each tool is shown once, when it finishes, except the hand-off to the claims sub-agent:
+        # it finishes after all the tool calls it makes, so it is shown when it starts.
+        handoff = name == "subagent"
+        if (status == "running") != handoff and status != "error":
+            return None
         icon, label = tool_label(name or "")
         return {"source": "agent", "icon": "⚠️" if status == "error" else icon, "text": label}
     if kind == "update" and text:
         return {"source": "agent", "icon": "💬", "text": text}
     if kind == "sandbox":
+        if status != "running":
+            return None  # once, when it starts
         return {"source": "agent", "icon": "📦", "text": "Preparing the agent's sandbox"}
     if kind == "start":
         return {"source": "agent", "icon": "⏳", "text": "The agent is starting"}

@@ -296,3 +296,17 @@ def test_unknown_files_are_refused(desk):
     res = client.post("/api/claims", json={"case_id": "DOC-02", "body": "x", "documents": [],
                                             "files": ["../../.env"]})
     assert res.status_code == 400 and "Unknown file" in res.json()["error"]
+
+
+def test_timeline_shows_the_handoff_when_it_starts_and_other_tools_when_they_finish():
+    """Live run: the hand-off to the claims sub-agent finishes after the tool calls it makes,
+    so it appeared after them. It is now shown when it starts; the sandbox only once."""
+    from app.agent import agent_event
+
+    assert agent_event("tool_call", "running", name="subagent")["text"].startswith("Handing work")
+    assert agent_event("tool_call", "success", name="subagent") is None
+    assert agent_event("tool_call", "running", name="company_doc_content_search") is None
+    assert agent_event("tool_call", "success", name="company_doc_content_search")["text"] == "Searching the contract (RAG)"
+    assert agent_event("tool_call", "error", name="subagent")["icon"] == "⚠️"
+    assert agent_event("sandbox", "running")["text"] == "Preparing the agent's sandbox"
+    assert agent_event("sandbox", "success") is None
